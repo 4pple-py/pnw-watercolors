@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 33 — Web Season</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(230,50,37,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(106,80,48,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(46,139,192,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(230,50,37,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #c83a2a; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 33 &mdash; PNW Watercolor Series</div>
+    <h1>Web Season</h1>
+    <p class="mood">Cross orbweaver spiders have strung every trail gap with silk &mdash; you walk face-first into September. Vine maple drops its first scarlet leaves like warnings. Bioluminescence gutters out. Squirrels bomb the trail with green fir cones. Summer is packing, autumn is at the door with boxes.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e63225 0%, #c82a20 100%);"></div>
+        <div class="trio-info"><h3>Pyrrol Scarlet</h3><p>Vine maple&rsquo;s opening statement, the first leaves to go red while everything else is still deliberating; opaque and bold</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #6a5030 0%, #584428 100%);"></div>
+        <div class="trio-info"><h3>Raw Umber</h3><p>Bark anchor-points where silk meets wood, trail dust, duff, the infrastructure of the forest; transparent and workmanlike</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2e8bc0 0%, #2478a8 100%);"></div>
+        <div class="trio-info"><h3>Cerulean Blue</h3><p>September sky sharpened by dropping humidity, bluer and harder than August&rsquo;s hazy dome; granulates and settles</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#e63225;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
+      <div class="swatch" style="background:#6a5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#2e8bc0;"><span class="label" style="color:#fff;">Cerulean Blue</span></div>
+      <div class="swatch" style="background:#006856;"><span class="label" style="color:#fff;">Phthalo Green BS</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c8a030;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#b0522a;"><span class="label" style="color:#fff;">Tr. Red Oxide</span></div>
+      <div class="swatch" style="background:#6b9e6b;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e63225;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Primary &mdash; vine maple&rsquo;s opening statement, first scarlet leaves</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; orbweaver silk catching side-angle sun</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#6a5030;"></div><div><div class="name">Raw Umber</div><div class="role">Primary &mdash; bark anchor-points for silk, trail infrastructure</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c8a030;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Warm Accent &mdash; understory beginning to shift, hesitant gold</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#2e8bc0;"></div><div><div class="name">Cerulean Blue</div><div class="role">Primary &mdash; September sky, sharper and bluer than August</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; shadow web against shadow, visible only by geometry</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#006856;"></div><div><div class="name">Phthalo Green BS</div><div class="role">Atmospheric &mdash; last trace of bioluminescence, barely there</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#b0522a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Earth &mdash; trail dust, September dry and iron-rich</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; fir cone still green when dropped by squirrels</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#6b9e6b;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; final glow memory in shallows, the last echo</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #f5e6c8, #b8d4e0);"></div>
+        <div><h3>Silk Line</h3><span class="ratio">2 Buff Titanium : 1 Cerulean Blue</span></div>
+      </div>
+      <p class="mix-description">Single orbweaver strand lit by side-angle sun &mdash; invisible from most angles, then suddenly a wire of light across the trail.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#2e8bc0; color:#fff;">Cerulean Blue</div>
+      </div>
+      <div class="mix-notes">Rigger brush, single stroke. Buff Titanium&rsquo;s opacity is essential &mdash; silk catches light the way opaque pigments do, reflecting rather than transmitting. The Cerulean Blue tint shifts it cool, mimicking the way backlit silk reads silver-blue rather than white. Practice the stroke off-paper first. One chance, one line, no corrections. Spiders don&rsquo;t correct either.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e63225, #c8a030);"></div>
+        <div><h3>Vine Warning</h3><span class="ratio">2 Pyrrol Scarlet : 1 Quinacridone Gold</span></div>
+      </div>
+      <p class="mix-description">Scarlet leaf with gold margin, not yet fallen &mdash; still attached, still technically part of summer, already advertising autumn.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#e63225; color:#fff;">Pyrrol Scarlet</div>
+        <div class="mix-bar" style="flex:1; background:#c8a030; color:#fff;">Quin. Gold</div>
+      </div>
+      <div class="mix-notes">Paint the gold margin first, let it dry to damp, then lay Pyrrol Scarlet into the center. The opaque scarlet will push into the transparent gold at the border, creating a hard-to-soft transition that mirrors the actual pigmentation pattern of a turning vine maple leaf. The gold must come first. Autumn shows its edges before its center.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #507d2a, #5a6038);"></div>
+        <div><h3>Cone Drop</h3><span class="ratio">2 Sap Green : 1 Raw Umber</span></div>
+      </div>
+      <p class="mix-description">Green fir cone freshly gnawed free by a Douglas squirrel &mdash; still resinous, still intact, bouncing off your shoulder on the trail.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#6a5030; color:#fff;">Raw Umber</div>
+      </div>
+      <div class="mix-notes">These cones are green because they&rsquo;re not ripe &mdash; the squirrels don&rsquo;t care. Mix Sap Green and Raw Umber thoroughly for the outer scales, then touch pure Sap Green into the highlights while wet for the resin-bright spots. Small format. These are detail objects, not landscape elements. A Size 4 round at most.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>September&rsquo;s palette registers a phase change. The bioluminescence pigments &mdash; Phthalo Green BS and Cascade Green &mdash; are present but vestigial, a courtesy nod to what&rsquo;s already gone. Pyrrol Scarlet takes over as the dominant chromatic accent, and its opacity marks a textural shift: summer&rsquo;s transparent glow gives way to autumn&rsquo;s opaque declarations. Cerulean Blue granulates on paper in a way that reads as September&rsquo;s clearer, particulate-free atmosphere after the smoke clears. Buff Titanium is deployed for one specific purpose &mdash; spider silk &mdash; and its opacity-among-transparents makes those silk lines pop the way real silk does against forest shadow. Raw Umber and Transparent Red Oxide hold the earth register, because September is when you start looking down at the trail more than up at the sky.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Orb Weaver&rsquo;s Morning Commission</h3>
+      <p class="subject"><strong>Subject:</strong> A complete orb weaver web strung across a trail gap, backlit by side-angle September sun, with dark forest behind and dew beads catching light along the radial lines.</p>
+      <p class="palette-fit">The Silk Line mix (Buff Titanium 2:Cerulean Blue 1) was designed for exactly one thing &mdash; spider silk. Buff Titanium&rsquo;s opacity mimics how silk reflects rather than transmits light. Payne&rsquo;s Gray behind the web creates the shadow that makes the geometry visible.</p>
+      <div class="tips"><ul>
+        <li>Paint the dark forest background first using Payne&rsquo;s Gray and Raw Umber, and let it dry completely &mdash; the web needs a dark stage</li>
+        <li>Use a rigger brush loaded with the Silk Line mix for the radial threads: single strokes, outward from center, no corrections</li>
+        <li>For the spiral threads, thin the mix further and work in arcs &mdash; these are finer than the radials</li>
+        <li>Dew beads are dots of Chinese White (not in the palette but reserving white paper works too) at thread intersections; don&rsquo;t overdo it &mdash; five or six beads sell the illusion, twenty kill it</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Vine Maple&rsquo;s First Red Leaf</h3>
+      <p class="subject"><strong>Subject:</strong> A single scarlet vine maple leaf with a gold margin, still attached to the branch, backlit against the sharper September sky &mdash; autumn&rsquo;s opening argument.</p>
+      <p class="palette-fit">The Vine Warning mix (Pyrrol Scarlet 2:Quinacridone Gold 1) layers opaque scarlet over transparent gold to create the hard-to-soft transition of a turning leaf. Cerulean Blue gives you the sky that&rsquo;s bluer and harder than August&rsquo;s haze.</p>
+      <div class="tips"><ul>
+        <li>Paint the Quinacridone Gold margin first and let it dry to damp &mdash; the gold must come first because autumn shows its edges before its center</li>
+        <li>Lay Pyrrol Scarlet into the center while the gold is still slightly damp; the opaque scarlet will push into the transparent gold at the border</li>
+        <li>Cerulean Blue for the sky behind: granulating, settling, the texture of September&rsquo;s clearer atmosphere</li>
+        <li>Leave the branch as a thin line of Raw Umber connecting the leaf to the tree &mdash; it&rsquo;s still attached, still technically summer</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Douglas Squirrel&rsquo;s Cone Stash</h3>
+      <p class="subject"><strong>Subject:</strong> Three or four freshly gnawed green fir cones scattered on a trail, still resinous and intact, with September duff and trail dust surrounding them.</p>
+      <p class="palette-fit">The Cone Drop mix (Sap Green 2:Raw Umber 1) gives you the green-that-shouldn&rsquo;t-be-green of unripe cones that squirrels cut loose. Transparent Red Oxide handles the iron-rich September trail dust.</p>
+      <div class="tips"><ul>
+        <li>Small format &mdash; these are detail objects, not landscapes; work at life size or close to it with a Size 4 round</li>
+        <li>Mix Sap Green and Raw Umber thoroughly for the outer scales, then touch pure Sap Green into the resin-bright highlights while wet</li>
+        <li>Transparent Red Oxide dry-brushed around the cones creates the dusty, dry September trail surface</li>
+        <li>Paint one cone in sharp focus and let the others soften &mdash; a shallow depth-of-field composition keeps it intimate</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Trail Through Web Season</h3>
+      <p class="subject"><strong>Subject:</strong> A forest trail disappearing into shadow, cross-hatched with visible silk lines at every gap between trees, September light cutting through at a low angle to illuminate what&rsquo;s normally invisible.</p>
+      <p class="palette-fit">The full palette works as a landscape here &mdash; Raw Umber and Transparent Red Oxide for the trail, Sap Green and Payne&rsquo;s Gray for the forest, Buff Titanium silk lines catching light against every dark surface.</p>
+      <div class="tips"><ul>
+        <li>Establish the trail and forest first: Raw Umber trail surface, Sap Green canopy, Payne&rsquo;s Gray shadows deepening toward the vanishing point</li>
+        <li>Add the silk lines last, after everything is bone dry &mdash; Buff Titanium on a rigger brush, crossing the trail at various angles and heights</li>
+        <li>Cerulean Blue sky visible through the canopy gaps; its granulation reads as particulate-free September atmosphere</li>
+        <li>Quinacridone Gold for a few understory leaves beginning to turn &mdash; hesitant, scattered, not yet a statement</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments confirmed Daniel Smith. Phthalo Green BS and Cascade Green are present here as the final trace of bioluminescence &mdash; if painting the glow&rsquo;s last appearance, keep it extremely dilute and apply on a pre-wet surface so it dissipates on the paper the way it&rsquo;s dissipating in the water. Cerulean Blue is the chromium version in Daniel Smith&rsquo;s line &mdash; true Cerulean, heavy, granulating, beautiful for skies when you want texture rather than smoothness. Buff Titanium: use it for silk and heat haze only. It deadens washes if overused.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

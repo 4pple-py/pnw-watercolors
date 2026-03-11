@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 23 — Rose Solstice</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(200,168,74,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(212,43,30,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(212,114,138,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(65,105,200,0.1) 0%, transparent 40%), linear-gradient(175deg, #f8f4ee 0%, #eef0f6 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #9a5a4a; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0eae6; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 23 &mdash; PNW Watercolor Series</div>
+    <h1>Rose Solstice</h1>
+    <p class="mood">Solstice proper &mdash; twilight nearly all night, cedar-scented air warm as breath. Wild roses pink along fences, tiger lilies open in meadow edges. The year's longest exhale. No tension left; everything simply open. The light lingers like someone who doesn't want to leave the party, and the flowers understand this is their moment.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a84a 0%, #b0943e 100%);"></div>
+        <div class="trio-info"><h3>Nickel Azo Yellow</h3><p>Grass seed heads at solstice, muted gold catching horizontal light; semi-transparent, gentle, never garish</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #d42b1e 0%, #b82018 100%);"></div>
+        <div class="trio-info"><h3>Pyrrol Scarlet</h3><p>Tiger lily petal, scarlet recurved and spotted; semi-opaque, fierce, the only loud thing in a quiet week</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #4169c8 0%, #2a52a8 100%);"></div>
+        <div class="trio-info"><h3>Cobalt Blue</h3><p>Twilight that never fully darkens, the blue of almost-night; granulating, luminous, holding the last light</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#c8a84a;"><span class="label" style="color:#fff;">Nickel Azo Yellow</span></div>
+      <div class="swatch" style="background:#d42b1e;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
+      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#a8ad00;"><span class="label" style="color:#fff;">Green Gold</span></div>
+      <div class="swatch" style="background:#1a2744;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#e8641b;"><span class="label" style="color:#fff;">Pyrrol Orange</span></div>
+      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#d4728a;"><span class="label" style="color:#fff;">Rose Madder Perm.</span></div>
+      <div class="swatch" style="background:#c8962a;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c8a84a;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Primary &mdash; grass seed heads at solstice, golden and unhurried</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Atmospheric &mdash; the almost-night that isn't, the sky at 11 PM</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#d42b1e;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Primary &mdash; tiger lily petal, the week's one shout</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e8641b;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Warm Accent &mdash; tiger lily throat, deeper than the petals</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Primary &mdash; twilight that never fully darkens, granulating patience</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; roadside ditch fern, cool green in shadow</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a8ad00;"></div><div><div class="name">Green Gold</div><div class="role">Earth &mdash; wild rose leaf, yellow-green and slightly glossy</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#d4728a;"></div><div><div class="name">Rose Madder Permanent</div><div class="role">Light &mdash; wild rose petal translucent, pink paper held to the sun</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2744;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; cedar grove interior at midnight, as dark as the week gets</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c8962a;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Earth &mdash; cedar-warmed evening air, the color of resinous warmth</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d84828, #c83818);"></div>
+        <div><h3>Tiger Lily Fire</h3><span class="ratio">2 Pyrrol Scarlet : 1 Transparent Pyrrol Orange : &frac14; Nickel Azo Yellow</span></div>
+      </div>
+      <p class="mix-description">Recurved petals spotted dark, hot against green &mdash; the meadow-edge exclamation point.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#d42b1e; color:#fff;">Pyrrol Scarlet</div>
+        <div class="mix-bar" style="flex:1; background:#e8641b; color:#fff;">Pyrrol Orange</div>
+        <div class="mix-bar" style="flex:0.25; background:#c8a84a; color:#fff;">Nickel Azo</div>
+      </div>
+      <div class="mix-notes">Pyrrol Scarlet gives the petal its core heat &mdash; semi-opaque, it sits with authority. Transparent Pyrrol Orange adds fire at the petal base where the spots concentrate. Nickel Azo Yellow at the petal tips catches the way tiger lilies fade toward gold at their extremities. Paint each petal as a single loaded stroke from base to curled tip. The spots go in last with concentrated Transparent Red Oxide or Burnt Sienna &mdash; a separate application, not part of this mix.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a2838, #101e2e);"></div>
+        <div><h3>Cedar Midnight</h3><span class="ratio">3 Indigo : 1 Payne's Gray : &frac12; Green Gold</span></div>
+      </div>
+      <p class="mix-description">Not-quite-dark under cedar boughs at the year's longest night &mdash; the darkness that never fully commits.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:3; background:#1a2744; color:#fff;">Indigo</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:0.5; background:#a8ad00; color:#fff;">Green Gold</div>
+      </div>
+      <div class="mix-notes">Indigo is the base &mdash; it's blue-black enough for midnight but still reads as color, not absence. Payne's Gray neutralizes just enough to suggest actual darkness rather than deep blue. Green Gold is the surprise ingredient: it keeps the dark alive, a trace of the cedar's living presence even when you can't see individual needles. This mix should feel like a forest you could still navigate. The solstice doesn't do true dark.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d08878, #c07868);"></div>
+        <div><h3>Wild Rose Fence</h3><span class="ratio">2 Rose Madder Permanent : 1 Quinacridone Gold : &frac14; Cobalt Blue</span></div>
+      </div>
+      <p class="mix-description">Single petals aging from pink to pale along split-rail &mdash; the fenceline's gentle claim to beauty.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#d4728a; color:#fff;">Rose Madder</div>
+        <div class="mix-bar" style="flex:1; background:#c8962a; color:#fff;">Quin. Gold</div>
+        <div class="mix-bar" style="flex:0.25; background:#4169c8; color:#fff;">Cobalt Blue</div>
+      </div>
+      <div class="mix-notes">Rose Madder Permanent is the softest pink available &mdash; non-staining, liftable, it fades on the paper the way wild rose petals fade on the branch. Quinacridone Gold warms the center where pollen-loaded stamens cluster. Cobalt Blue at the very edge cools the shadow-side petal, and its granulation adds the delicate texture of a thin, aging petal. Apply at high dilution. Wild roses are translucent; your paint should be too.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This is the most relaxed palette in the series, because the solstice itself is relaxed. Rose Madder Permanent replaces the usual strong red in the Light role &mdash; it's here for its ability to fade gracefully, which is what wild roses do. Pyrrol Scarlet provides the one moment of intensity (the tiger lily), and it earns its semi-opacity &mdash; the lily needs to punch through the soft-focus everything else. Cobalt Blue's granulation at twilight dilutions creates the grainy, uncertain quality of light that isn't night and isn't day. Quinacridone Gold granulates warmly, tying cedar air to grass seed heads to rose-center gold.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Split-Rail Rose Fence at Golden Hour</h3>
+      <p class="subject"><strong>Subject:</strong> A weathered split-rail fence draped with wild roses, caught in the endless horizontal light of the solstice evening. The roses are past-peak &mdash; some petals on the ground, some still holding.</p>
+      <p class="palette-fit">Rose Madder Permanent was born for this &mdash; its liftability lets you paint petals that are literally fading on the paper. Quinacridone Gold warms the fence rails and the rose centers. Cobalt Blue&rsquo;s granulation at high dilution gives you the twilight sky without any mixing.</p>
+      <div class="tips"><ul>
+        <li>Paint the roses with very dilute Rose Madder Permanent, then lift select petals with a damp brush while still wet &mdash; the pigment practically wants to leave, which is exactly how wild roses behave</li>
+        <li>Use the Wild Rose Fence mix (2:1:1/4 Rose Madder Permanent, Quinacridone Gold, Cobalt Blue) for the blooms, but vary the Quinacridone Gold ratio &mdash; more gold in the older flowers, less in the fresh ones</li>
+        <li>Lay Nickel Azo Yellow over dry fence rails with a dry-brush stroke to catch the solstice light on weathered wood grain</li>
+        <li>Drop Cascade Green wet-into-wet behind the fence for the dark foliage that makes the pink petals pop</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Tiger Lily Meadow Edge</h3>
+      <p class="subject"><strong>Subject:</strong> Three or four tiger lilies blazing at the border where mowed grass meets wild meadow, their recurved petals spotted dark against a soft-focus green background.</p>
+      <p class="palette-fit">The Tiger Lily Fire mix (Pyrrol Scarlet + Transparent Pyrrol Orange + Nickel Azo Yellow) gives you the full temperature range of those petals in a single loaded stroke. Green Gold and Cascade Green handle the background without competing.</p>
+      <div class="tips"><ul>
+        <li>Paint each petal as one stroke from base to curled tip &mdash; load the brush with Pyrrol Scarlet at the heel and Nickel Azo Yellow at the tip so the color shifts naturally as you pull</li>
+        <li>Spots go in last with concentrated Transparent Pyrrol Orange or Burnt Sienna on a fine brush, after the petal is fully dry</li>
+        <li>Soft-focus the background with a wet-into-wet wash of Green Gold and Cascade Green &mdash; the lilies need a quiet stage</li>
+        <li>Use Payne&rsquo;s Gray for the stamens&rsquo; anthers, applied with a rigger brush in single confident strokes</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Cedar Grove at 11 PM</h3>
+      <p class="subject"><strong>Subject:</strong> The interior of a cedar grove during the solstice almost-night &mdash; not dark, just deeply blue-green, with one patch of sky visible through the canopy showing the last glow.</p>
+      <p class="palette-fit">The Cedar Midnight mix (Indigo + Payne&rsquo;s Gray + Green Gold) does the heavy lifting, and it&rsquo;s designed to feel navigable, not oppressive. The sky gap uses dilute Cobalt Blue with its granulation doing the work of uncertain light.</p>
+      <div class="tips"><ul>
+        <li>Lay a full-sheet wash of dilute Cobalt Blue first and let it dry completely &mdash; this is your ambient twilight</li>
+        <li>Build the cedar canopy with the Cedar Midnight mix, working dark to light, leaving the sky gap as negative space</li>
+        <li>Add Green Gold to the lower canopy edges where foliage catches the last reflected light from the ground</li>
+        <li>The trunk silhouettes should be Indigo alone at near-full concentration &mdash; the darkest darks in this palette are still blue, never black</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Solstice Grass Seed Heads</h3>
+      <p class="subject"><strong>Subject:</strong> A close-up study of grass seed heads backlit by low golden light, with a few catching the breeze &mdash; the kind of subject that&rsquo;s everywhere in late June and nobody paints.</p>
+      <p class="palette-fit">Nickel Azo Yellow is exactly this color &mdash; muted gold that never goes garish. Quinacridone Gold adds depth where the seed heads cluster. Cobalt Blue in the background sky keeps the warmth honest.</p>
+      <div class="tips"><ul>
+        <li>Use a rigger brush for the stems &mdash; Sap Green mixed with a touch of Quinacridone Gold for the warm, drying stalks</li>
+        <li>The seed heads themselves are dry-brush Nickel Azo Yellow on rough paper, letting the texture do the detail work</li>
+        <li>Paint the backlight glow by leaving a halo of white paper around each seed head, then washing dilute Quinacridone Gold into the surrounding area</li>
+        <li>A single wash of very dilute Cobalt Blue behind everything anchors the warm foreground to the cool solstice sky</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Rose Madder Permanent lifts almost completely when rewet &mdash; use this property to create fading petals, but protect finished areas from accidental rewetting. Indigo is a convenience mix in some brands, but Daniel Smith's version is PB15/PBk6, a phthalo blue-carbon black blend that's very lightfast. Quinacridone Gold granulates more on cold-pressed paper &mdash; use this texture for the grass seed head effect.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

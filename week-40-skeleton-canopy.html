@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 40 — Skeleton Canopy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(200,160,48,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(106,80,48,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(80,125,42,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(200,160,48,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a08830; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 40 &mdash; PNW Watercolor Series</div>
+    <h1>Skeleton Canopy</h1>
+    <p class="mood">Late October, 5:45 PM. Alder branches claw a sulfur sky as the last light drains west. Licorice fern unfurls electric green on bark the rain just darkened. Decay feeds resurgence, and the forest is trading its ceiling for a floor.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a030 0%, #b89028 100%);"></div>
+        <div class="trio-info"><h3>Quinacridone Gold</h3><p>Last maple leaves catching low sun &mdash; transparent, warm, the final act before the branches go bare</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #6a5030 0%, #5a4020 100%);"></div>
+        <div class="trio-info"><h3>Raw Umber</h3><p>Wet branch skeleton against cloud &mdash; granulating, honest, the architecture revealed when leaves leave</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #507d2a 0%, #406a20 100%);"></div>
+        <div class="trio-info"><h3>Sap Green</h3><p>Fern colonies claiming bare limbs &mdash; licorice fern unfurling electric green on rain-darkened bark</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#c8a030;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#6a5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#484848;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#0088a0;"><span class="label" style="color:#fff;">Cerulean Blue Cr.</span></div>
+      <div class="swatch" style="background:#e06020;"><span class="label" style="color:#fff;">Trans. Pyrrol Orange</span></div>
+      <div class="swatch" style="background:#1a5c32;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c8a030;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Primary &mdash; last maple leaves catching low sun</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#0088a0;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Atmospheric &mdash; thin sky between naked branches</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#6a5030;"></div><div><div class="name">Raw Umber</div><div class="role">Primary &mdash; wet branch skeleton against cloud</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e06020;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Warm Accent &mdash; single vine maple still burning</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Primary &mdash; fern colonies claiming bare limbs</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#1a5c32;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Cool Accent &mdash; sword fern understory, stolid</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; decomposing leaf litter ankle-deep</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; overcast glow through thinning canopy</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#484848;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; 6 PM darkness arriving early</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; rain-darkened bark where lichen holds</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8a7848, #a09060);"></div>
+        <div><h3>Slug Trail</h3><span class="ratio">2 Raw Umber : 1 Buff Titanium : touch Sap Green</span></div>
+      </div>
+      <p class="mix-description">Silvered mucus line across dark duff &mdash; banana slug passage, glistening and deliberate.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#6a5030; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:1; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:0.15; background:#507d2a; color:#fff;">Sap Green</div>
+      </div>
+      <div class="mix-notes">Lay Raw Umber wet, drop Buff Titanium into the center while damp, barely touch one edge with Sap Green. Let it find its own borders. The Buff Titanium lifts the value just enough to read as silvered mucus against the dark forest floor. Don&rsquo;t overwork it &mdash; slug trails are single-pass events.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5a6038, #5a5830);"></div>
+        <div><h3>Fern Bark</h3><span class="ratio">1 Sap Green : 2 Raw Umber</span></div>
+      </div>
+      <p class="mix-description">Licorice fern rhizome fused to wet alder &mdash; where the plant and the tree stop being separate things.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:2; background:#6a5030; color:#fff;">Raw Umber</div>
+      </div>
+      <div class="mix-notes">Mix on palette first to a warm olive. Apply in a single confident stroke &mdash; the rhizome is one continuous line along the branch. Raw Umber&rsquo;s granulation gives bark-like texture without any additional technique. This is the junction where fern becomes tree becomes fern again.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a4858, #3a5868);"></div>
+        <div><h3>October Drain</h3><span class="ratio">2 Neutral Tint : 1 Cerulean Blue Chromium</span></div>
+      </div>
+      <p class="mix-description">Sky five minutes after useful light &mdash; the last color draining west, leaving only weight behind.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#484848; color:#fff;">Neutral Tint</div>
+        <div class="mix-bar" style="flex:1; background:#0088a0; color:#fff;">Cerulean Blue Cr.</div>
+      </div>
+      <div class="mix-notes">Cerulean Blue Chromium granulates heavily, settling into textured darks that read as clouds with internal structure. Apply wet and let it pool. The Neutral Tint kills the chroma enough that this reads as dusk rather than twilight &mdash; the distinction matters. Let the edges dry unevenly.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette is engineered around transparency and granulation &mdash; the two properties that matter most when painting bare architecture and the things growing on it. Quinacridone Gold and Sap Green are highly transparent stainers that layer without muddying, essential for the glazing this week&rsquo;s subjects demand. Raw Umber and Burnt Sienna granulate into the paper&rsquo;s texture, providing bark and leaf-litter effects without brushwork tricks. Neutral Tint provides depth without color bias &mdash; pure value, no opinion. Cerulean Blue Chromium&rsquo;s genuine opacity gives the thin sky between branches real physical presence against the transparent layers beneath. Buff Titanium lifts the overcast glow &mdash; warm enough to read as light, opaque enough to sit on top of dried washes.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Licorice Fern Colonnade</h3>
+      <p class="subject"><strong>Subject:</strong> Alder trunks with licorice ferns erupting from the bark, backlit by the last warm light filtering through the thinning canopy.</p>
+      <p class="palette-fit">The Fern Bark mix (Sap Green 1:Raw Umber 2) builds the junction where fern and tree merge, while Quinacridone Gold and Buff Titanium handle the backlit glow.</p>
+      <div class="tips"><ul>
+        <li>Graded wash of Quinacridone Gold fading to Buff Titanium for the backlit sky behind the trunks</li>
+        <li>Build trunks with Raw Umber &mdash; vertical, confident, letting granulation provide bark texture</li>
+        <li>Drop Sap Green wet-into-wet onto trunk shapes where ferns colonize</li>
+        <li>Cerulean Blue Chromium in negative spaces between branches for sky presence</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Leaf Litter Trail</h3>
+      <p class="subject"><strong>Subject:</strong> A muddy trail disappearing into a tunnel of bare branches, ankle-deep in decomposing leaves, one vine maple still burning orange.</p>
+      <p class="palette-fit">Quinacridone Gold, Burnt Sienna, and Raw Sienna dropped loosely onto wet paper build the leaf litter &mdash; Transparent Pyrrol Orange reserved for the one deliberate vine maple accent.</p>
+      <div class="tips"><ul>
+        <li>Wet paper, drop Quinacridone Gold, Burnt Sienna, Raw Sienna loosely &mdash; let them mingle</li>
+        <li>Neutral Tint with Raw Umber for branch architecture overhead</li>
+        <li>Save Transparent Pyrrol Orange for one deliberate leaf or vine maple &mdash; the accent that proves the rest is muted</li>
+        <li>Leave white paper showing through canopy gaps for sky</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Slug on Nurse Log</h3>
+      <p class="subject"><strong>Subject:</strong> A banana slug crossing a decomposing nurse log &mdash; moss textures, silvered trail, the slow commerce of the forest floor.</p>
+      <p class="palette-fit">The Slug Trail mix (Raw Umber 2:Buff Titanium 1:Sap Green touch) builds the mucus line, while the Fern Bark mix handles the log itself.</p>
+      <div class="tips"><ul>
+        <li>Paint the log first using Fern Bark mix &mdash; single confident stroke for the main form</li>
+        <li>Build moss textures by stippling Sap Green and Hooker&rsquo;s Green while the log is still damp</li>
+        <li>Paint the slug using Slug Trail mix &mdash; Buff Titanium center, Raw Umber edges</li>
+        <li>Add Quinacridone Gold as a thin glaze for sidelight catching the slug&rsquo;s wet surface</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Skeleton Canopy Against Dusk</h3>
+      <p class="subject"><strong>Subject:</strong> Looking straight up through bare branches into a transitioning sky &mdash; warm gold at the horizon draining to cold gray overhead, branch architecture in silhouette.</p>
+      <p class="palette-fit">The October Drain mix (Neutral Tint 2:Cerulean Blue Chromium 1) handles the cold upper sky, while Quinacridone Gold provides the warm lower glow &mdash; the graded wash is the painting.</p>
+      <div class="tips"><ul>
+        <li>Work sky first as graded wash: Quinacridone Gold at bottom transitioning to October Drain mix at top</li>
+        <li>Let sky dry completely before painting branches &mdash; patience is structural here</li>
+        <li>Raw Umber for thick limbs, Neutral Tint for the finest twigs</li>
+        <li>Resist adding leaves &mdash; the skeleton is the point, and any foliage undermines it</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith extra fine watercolors. Quinacridone Gold is discontinued in some lines &mdash; stock accordingly if you find it. Cerulean Blue Chromium is genuinely opaque and sits on top of dried layers rather than sinking in, which makes it ideal for painting sky gaps over established branch work. Neutral Tint is a convenience mix that darkens without shifting temperature &mdash; it goes where you point it without adding an opinion.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

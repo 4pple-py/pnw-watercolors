@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 13 — Cherry Camas Foam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f5f6f8;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(255,20,147,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 70%, rgba(0,71,171,0.16) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(168,173,0,0.12) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 80%, rgba(144,76,148,0.1) 0%, transparent 40%),
+      linear-gradient(175deg, #fdf5f8 0%, #eef0f8 100%);
+    filter: blur(20px);
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text .week-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #9e4a7a;
+    margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero-text .mood {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5a5a5a;
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* Primary Trio */
+  .trio-section {
+    margin-top: 48px;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .trio-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .trio-swatch {
+    height: 120px;
+    position: relative;
+  }
+
+  .trio-swatch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+  }
+
+  .trio-info {
+    padding: 16px 18px;
+  }
+
+  .trio-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .trio-info p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* Full Palette */
+  .palette-section {
+    margin-top: 56px;
+  }
+
+  .palette-strip {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 72px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+
+  .palette-strip .swatch {
+    flex: 1;
+    position: relative;
+    cursor: default;
+    transition: flex 0.3s ease;
+  }
+
+  .palette-strip .swatch:hover {
+    flex: 2.5;
+  }
+
+  .palette-strip .swatch .label {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .palette-strip .swatch:hover .label {
+    opacity: 1;
+  }
+
+  .palette-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 24px;
+  }
+
+  .palette-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ecedf0;
+  }
+
+  .palette-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .palette-item .name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .palette-item .role {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .palette-item .num {
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Mixes */
+  .mixes-section {
+    margin-top: 56px;
+  }
+
+  .mix-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .mix-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .mix-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .mix-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+  }
+
+  .mix-header .ratio {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+  }
+
+  .mix-description {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .mix-bars {
+    display: flex;
+    gap: 4px;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mix-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .mix-notes {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  /* Why Section */
+  .why-section {
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .why-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* Painting Prompts */
+  .prompts-section {
+    margin-top: 56px;
+  }
+
+  .prompt-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .prompt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .prompt-card .prompt-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .prompt-card .subject {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .prompt-card .subject strong {
+    color: #333;
+  }
+
+  .prompt-card .palette-fit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .prompt-card .tips {
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prompt-card .tips ul li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    padding: 4px 0;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+  }
+
+  .prompts-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* Painting Prompts */
+  .prompts-section {
+    margin-top: 56px;
+  }
+
+  .prompt-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .prompt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .prompt-card .prompt-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .prompt-card .subject {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .prompt-card .subject strong {
+    color: #333;
+  }
+
+  .prompt-card .palette-fit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .prompt-card .tips {
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prompt-card .tips ul li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    padding: 4px 0;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+  }
+
+  .prompts-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* Notes */
+  .notes-section {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: #f0e8ef;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  .notes-section strong {
+    color: #444;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #dde0e5;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 13 &mdash; PNW Watercolor Series</div>
+    <h1>Cherry Camas Foam</h1>
+    <p class="mood">Cherry trees detonate along Lake Washington, noon, petals already falling into gutter streams. Violet-green swallows cut through the foam. South Puget prairies blue with camas &mdash; a color this landscape earns once a year. The tension: peak bloom is already loss; the petals are falling the moment they open.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Primary Trio -->
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);"></div>
+        <div class="trio-info">
+          <h3>Opera Pink</h3>
+          <p>Cherry petal cluster at maximum; fluorescent, transparent, already leaving the branch</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #4169c8 0%, #2a52a8 100%);"></div>
+        <div class="trio-info">
+          <h3>Cobalt Blue</h3>
+          <p>Camas prairie sweep at distance; granulating, clean, the once-a-year blue</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a8ad00 0%, #8c9200 100%);"></div>
+        <div class="trio-info">
+          <h3>Green Gold</h3>
+          <p>New oak leaf at the prairie edge; transparent, chartreuse, the frame around the blue</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette -->
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#ff69b4;"><span class="label" style="color:#fff;">Opera Pink</span></div>
+      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#a8ad00;"><span class="label" style="color:#fff;">Green Gold</span></div>
+      <div class="swatch" style="background:#e63e62;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
+      <div class="swatch" style="background:#1b2f5e;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#b4a7d6;"><span class="label" style="color:#444;">Lavender</span></div>
+      <div class="swatch" style="background:#f2f0ee;"><span class="label" style="color:#888;">Chinese White</span></div>
+      <div class="swatch" style="background:#f5e14d;"><span class="label" style="color:#777;">Hansa Yellow Lt</span></div>
+      <div class="swatch" style="background:#904c94;"><span class="label" style="color:#fff;">Cobalt Violet</span></div>
+      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#ff69b4;"></div><div><div class="name">Opera Pink</div><div class="role">Accent &mdash; cherry petal cluster, full and falling</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#b4a7d6;"></div><div><div class="name">Lavender</div><div class="role">Atmospheric &mdash; petal-strewn gutter water, pale</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Anchor &mdash; camas prairie, blue horizon to horizon</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f2f0ee; border:1px solid #ddd;"></div><div><div class="name">Chinese White</div><div class="role">Light &mdash; cherry foam on the lake surface</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#a8ad00;"></div><div><div class="name">Green Gold</div><div class="role">Anchor &mdash; new oak leaf, prairie edge frame</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#f5e14d;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Warm Accent &mdash; spring sun unfiltered, full power</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#e63e62;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Earth &mdash; cherry bark stain, wet and pink</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#904c94;"></div><div><div class="name">Cobalt Violet</div><div class="role">Cool Accent &mdash; camas close-up, single bloom</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1b2f5e;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; swallow shadow crossing water surface</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; prairie grass between camas stems</div></div></div>
+    </div>
+  </div>
+
+  <!-- Mixes -->
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8a0c4, #d580b0);"></div>
+        <div>
+          <h3>Cherry Gutter</h3>
+          <span class="ratio">2 Opera Pink : 1 Lavender : trace Chinese White</span>
+        </div>
+      </div>
+      <p class="mix-description">Petals floating in runoff &mdash; the gutter stream carrying cherry blossoms toward the storm drain like a slow funeral in miniature.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#ff69b4; color:#fff;">Opera Pink</div>
+        <div class="mix-bar" style="flex:1; background:#b4a7d6; color:#444;">Lavender</div>
+        <div class="mix-bar" style="flex:0.3; background:#f2f0ee; color:#888; border: 1px solid #ddd;">White</div>
+      </div>
+      <div class="mix-notes">
+        The petals are Opera Pink; the water carrying them is Lavender; the foam where they collect is Chinese White. Layer in that order. Paint the gutter water first &mdash; Lavender, diluted, horizontal. Let it dry. Float the petals on top with Opera Pink &mdash; small, irregular oval shapes, clustered at the eddies, scattered in the current. While still damp, touch Chinese White where petals pile against a curb or grate. The Chinese White will bloom slightly, creating the foam effect. This is a painting about things moving downstream. Let the petals drift off-edge. Don't contain them. That's the whole point of this week.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5870b8, #4a5ca0);"></div>
+        <div>
+          <h3>Camas Field</h3>
+          <span class="ratio">2 Cobalt Blue : 1 Cobalt Violet</span>
+        </div>
+      </div>
+      <p class="mix-description">Prairie blue at middle distance &mdash; thousands of camas blooms resolved into a single impossible color field.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#4169c8; color:#fff;">Cobalt Blue</div>
+        <div class="mix-bar" style="flex:1; background:#904c94; color:#fff;">Cobalt Violet</div>
+      </div>
+      <div class="mix-notes">
+        Both pigments granulate, and together they produce a blue-violet field that shimmers with mineral texture &mdash; exactly the way a camas prairie looks at middle distance, where individual flowers blur into a color field. Apply to damp paper in broad horizontal strokes, letting the two pigments intermingle and separate. The granulation is doing the work of ten thousand individual blooms. For foreground camas (close-up, single stems), switch to pure Cobalt Violet and paint each bloom as a six-petaled star on a single stem. For background prairie, keep the mix blurry, horizontal, and confident. The camas blue is earned &mdash; don't dilute it with too much water. This prairie happens once a year. Make it count.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a5a40, #2a4830);"></div>
+        <div>
+          <h3>Swallow Cut</h3>
+          <span class="ratio">1 Indanthrone Blue : 1 Green Gold</span>
+        </div>
+      </div>
+      <p class="mix-description">Violet-green swallow banking through cherry blossoms &mdash; the dark-bright flash of a bird that is both colors of spring at once.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#1b2f5e; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#a8ad00; color:#fff;">Green Gold</div>
+      </div>
+      <div class="mix-notes">
+        Equal parts because the violet-green swallow is exactly that &mdash; equal parts dark and bright, blue-violet dorsal and green-gold ventral. Don't overmix on the palette; load one side of the brush with Indanthrone Blue and the other with Green Gold, then make the bird in a single stroke. The two colors will merge at the body's center and stay separated at the edges &mdash; dark back, bright belly. Use a rigger or small round. The bird is in motion; the stroke should be fast. For the forked tail, add a second stroke in pure Indanthrone Blue. These swallows cut through the cherry blossoms &mdash; paint the blossoms first, let them dry, then paint the birds over and through them. Speed against beauty. That's the composition.
+      </div>
+    </div>
+  </div>
+
+  <!-- Why These Colors -->
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This is the culmination palette &mdash; it borrows from the entire series and pushes everything toward peak saturation. Opera Pink returns from Weeks 7 and 9, but now it's falling, not budding. Cobalt Blue appears in its most expansive role yet, covering an entire prairie in camas. Green Gold frames the prairie with the new-leaf chartreuse that marks late March. Cobalt Violet granulates, giving individual camas blooms their mineral specificity at close range. Indanthrone Blue is the darkest staining pigment on the palette, reserved for the swallow shadows that cut across all that light. Chinese White and Lavender handle the ephemerality &mdash; foam, gutter water, things already dissolving. Quinacridone Rose as the bark-stain color is a deliberate choice: even the tree's skin is flushed pink during peak bloom. The palette's temperature runs warm, because this is the first week where spring sun is unquestioned. But the warmth is elegiac. Everything at peak is already falling.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Cherry Gutter Stream</h3>
+      <p class="subject"><strong>Subject:</strong> A close-up of a residential gutter stream in full cherry bloom &mdash; petals floating in shallow runoff, collecting against a storm drain grate, foam building where the water eddies. The curb edge frames one side, a strip of green grass the other.</p>
+      <p class="palette-fit">The Cherry Gutter mix was literally designed for this. Opera Pink petals float on Lavender water, and Chinese White blooms into foam where they pile up. Cascade Green handles the grass strip. The whole painting is about things moving downstream &mdash; and this palette&rsquo;s ephemerality pigments (Lavender, Chinese White) were chosen for exactly that.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the Lavender gutter water first as a dilute horizontal wash &mdash; let it dry completely before adding petals</li>
+          <li>Float Opera Pink petals on top: small irregular ovals, clustered at the eddies, scattered in the current &mdash; vary the sizes</li>
+          <li>Touch Chinese White into the still-damp petal clusters where they pile against the grate &mdash; it will bloom slightly, creating foam</li>
+          <li>Let petals drift off the paper&rsquo;s edge &mdash; don&rsquo;t contain the composition, the loss is the point</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Camas Prairie at Middle Distance</h3>
+      <p class="subject"><strong>Subject:</strong> A South Puget prairie seen from a gentle rise &mdash; the entire middle ground a sweep of blue camas, framed by Green Gold oak leaves at the edges, a few foreground camas blooms painted as individual six-petaled stars.</p>
+      <p class="palette-fit">The Camas Field mix (2 Cobalt Blue : 1 Cobalt Violet) produces a granulating blue-violet that shimmers like ten thousand individual blooms resolved into a color field. Green Gold at the prairie edges gives you the new-leaf chartreuse frame. Cobalt Violet alone handles the close-up foreground blooms where you can see each petal.</p>
+      <div class="tips">
+        <ul>
+          <li>Apply the Camas Field mix to damp paper in broad horizontal strokes &mdash; let the two cobalt pigments intermingle and granulate on their own</li>
+          <li>Don&rsquo;t dilute too much &mdash; this blue is earned once a year, so keep it confident and saturated</li>
+          <li>Foreground camas: switch to pure Cobalt Violet, paint each bloom as a six-petaled star on a single Cascade Green stem</li>
+          <li>Frame the prairie with Green Gold oak leaves at left and right edges &mdash; the warm chartreuse makes the cool blue prairie sing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Violet-Green Swallows Through Cherry Blossoms</h3>
+      <p class="subject"><strong>Subject:</strong> Three to four violet-green swallows banking through a canopy of cherry blossoms over Lake Washington &mdash; dark-bright birds slicing through pink, water glinting below.</p>
+      <p class="palette-fit">The Swallow Cut mix (1:1 Indanthrone Blue and Green Gold) captures the bird&rsquo;s split personality &mdash; dark violet-blue dorsal, bright green-gold ventral &mdash; in a single dual-loaded brush stroke. Opera Pink blossoms create the cloud the birds cut through. Indanthrone Blue shadows on the water surface anchor the bottom of the painting.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the cherry blossoms first: Opera Pink clusters on dry paper, let them dry completely before adding birds</li>
+          <li>Load one side of a rigger brush with Indanthrone Blue and the other with Green Gold &mdash; make each bird in a single fast stroke so the colors merge at center and separate at edges</li>
+          <li>The forked tail is a second stroke of pure Indanthrone Blue &mdash; quick, decisive, no fussing</li>
+          <li>Lake water below is Indanthrone Blue diluted to a mid-value, with Hansa Yellow Light glints where sun hits the surface</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Cherry Tree Trunk in the Rain</h3>
+      <p class="subject"><strong>Subject:</strong> A single cherry tree trunk &mdash; bark darkened and flushed pink from rain, petals plastered to the wet bark and pooling at the base, the canopy above a blur of Opera Pink against Lavender sky.</p>
+      <p class="palette-fit">Quinacridone Rose as bark stain is this palette&rsquo;s secret weapon &mdash; the tree&rsquo;s own skin flushes pink during peak bloom. Opera Pink handles the canopy and fallen petals. Lavender gives you the overcast sky that makes the pinks glow brighter. Indanthrone Blue deepens the wet bark shadows.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the trunk with Quinacridone Rose mixed with a touch of Indanthrone Blue for the wet bark &mdash; let it granulate for texture</li>
+          <li>While the trunk wash is still damp, press Opera Pink petals onto it &mdash; they&rsquo;ll partially merge with the bark, looking plastered by rain</li>
+          <li>The canopy above is a soft wet-into-wet cloud of Opera Pink on Lavender &mdash; no individual blossoms, just a pink haze</li>
+          <li>Pool water at the base: Lavender with floating Opera Pink petals and a touch of Chinese White for foam</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 5</div>
+      <h3>Camas and Cherry Split Composition</h3>
+      <p class="subject"><strong>Subject:</strong> A split-scene painting &mdash; left half is a cherry-lined Seattle street with petals falling into gutter streams, right half is a camas prairie in full blue bloom. The two halves share the same horizon line, connecting urban peak bloom with prairie peak bloom.</p>
+      <p class="palette-fit">This painting uses the full range of the culmination palette. Opera Pink and Lavender own the left (cherry) half. Cobalt Blue and Cobalt Violet own the right (camas) half. Green Gold bridges both sides as the new-leaf frame. Hansa Yellow Light unifies the composition as spring sun falling equally on city and prairie.</p>
+      <div class="tips">
+        <ul>
+          <li>Sketch a clean vertical division at center, but let the horizon line flow continuously across both halves</li>
+          <li>Left half: Opera Pink canopy above, Lavender gutter water below, Quinacridone Rose bark on the street trees</li>
+          <li>Right half: Camas Field mix (Cobalt Blue + Cobalt Violet) as a broad horizontal sweep, Green Gold oak leaves framing</li>
+          <li>Wash Hansa Yellow Light across both halves as a unifying glaze after everything dries &mdash; spring sun doesn&rsquo;t care about the urban-rural divide</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-section">
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. This is the widest-ranging palette in the series &mdash; from fluorescent Opera Pink to deep-staining Indanthrone Blue, from opaque Chinese White to transparent Green Gold. Temperature is warm-dominant with the blues providing structural cool. Cobalt Blue and Cobalt Violet both granulate and work beautifully together &mdash; they share the cobalt mineral base and harmonize on paper the way camas harmonizes with its own shadow. Opera Pink is fugitive in some brands; Daniel Smith's formulation holds better than most, but don't hang these paintings in direct sunlight. (The irony of a sun-loving pigment that can't handle sun is the kind of thing this week understands.) Chinese White is opaque by definition &mdash; use it only for the foam and petal highlights, never for mixing lighter values. This palette closes the winter-to-spring arc. Spend it generously. The next thirteen weeks are someone else's problem.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>52-Week PNW Watercolor Palette Series</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #faf8f5;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    padding: 80px 40px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 50%, rgba(42,82,190,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 30%, rgba(200,160,48,0.10) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 60%, rgba(26,92,50,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(138,90,170,0.08) 0%, transparent 40%),
+      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
+    filter: blur(30px);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero-content .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #6a6a6a;
+    line-height: 1.6;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #c8a030, #3a6848, #2841a0);
+    margin: 28px auto 0;
+    border-radius: 1px;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* Season sections */
+  .season {
+    margin-top: 56px;
+  }
+
+  .season-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e4de;
+  }
+
+  .season-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .season-header .season-range {
+    font-size: 13px;
+    font-weight: 300;
+    color: #999;
+    letter-spacing: 0.5px;
+  }
+
+  /* Season accent colors */
+  .season--winter .season-header { border-bottom-color: #536878; }
+  .season--spring .season-header { border-bottom-color: #4a8c3a; }
+  .season--summer .season-header { border-bottom-color: #c8a030; }
+  .season--fall .season-header { border-bottom-color: #a0522d; }
+
+  /* Card grid */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  /* Card */
+  .week-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block;
+  }
+
+  .week-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  }
+
+  .week-card:active {
+    transform: translateY(-1px);
+  }
+
+  .color-strip {
+    height: 48px;
+    display: flex;
+  }
+
+  .color-strip span {
+    flex: 1;
+  }
+
+  .card-body {
+    padding: 14px 16px 16px;
+  }
+
+  .card-body .week-num {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .card-body .palette-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #2a2a2a;
+    line-height: 1.3;
+  }
+
+  /* Coming Soon cards */
+  .week-card--placeholder {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  .week-card--placeholder:hover {
+    transform: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .week-card--placeholder .color-strip {
+    background: linear-gradient(135deg, #d8d4ce, #c8c4be);
+  }
+
+  .week-card--placeholder .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    background: #f0ece6;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e8e4de;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 56px 24px 44px;
+    }
+
+    .hero-content h1 {
+      font-size: 36px;
+    }
+
+    .hero-content .subtitle {
+      font-size: 16px;
+    }
+
+    .container {
+      padding: 0 20px 48px;
+    }
+
+    .season-header h2 {
+      font-size: 24px;
+    }
+
+    .week-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+
+    .card-body {
+      padding: 10px 12px 14px;
+    }
+
+    .card-body .palette-name {
+      font-size: 15px;
+    }
+
+    .color-strip {
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 44px 20px 36px;
+    }
+
+    .hero-content h1 {
+      font-size: 28px;
+    }
+
+    .week-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .card-body .palette-name {
+      font-size: 14px;
+    }
+
+    .color-strip {
+      height: 36px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>52-Week PNW Watercolor Palette Series</h1>
+    <p class="subtitle">A year of Pacific Northwest light in Daniel Smith pigments</p>
+    <div class="hero-divider"></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ============ WINTER ============ -->
+  <section class="season season--winter">
+    <div class="season-header">
+      <h2>Winter</h2>
+      <span class="season-range">Weeks 1&ndash;13 &middot; January&ndash;March</span>
+    </div>
+    <div class="week-grid">
+      <a class="week-card" href="week-01-pewter-eagle-light.html">
+        <div class="color-strip"><span style="background:#536878"></span><span style="background:#826644"></span><span style="background:#1a3a2a"></span></div>
+        <div class="card-body"><div class="week-num">Week 1</div><div class="palette-name">Pewter Eagle Light</div></div>
+      </a>
+      <a class="week-card" href="week-02-atmospheric-river-tea.html">
+        <div class="color-strip"><span style="background:#6b6080"></span><span style="background:#8b5e3c"></span><span style="background:#1b3a5c"></span></div>
+        <div class="card-body"><div class="week-num">Week 2</div><div class="palette-name">Atmospheric River Tea</div></div>
+      </a>
+      <a class="week-card" href="week-03-convergence-snow.html">
+        <div class="color-strip"><span style="background:#2a52be"></span><span style="background:#8b0033"></span><span style="background:#3d3d4a"></span></div>
+        <div class="card-body"><div class="week-num">Week 3</div><div class="palette-name">Convergence Snow</div></div>
+      </a>
+      <a class="week-card" href="week-04-frozen-mud-lantern.html">
+        <div class="color-strip"><span style="background:#e8b800"></span><span style="background:#5c3317"></span><span style="background:#536878"></span></div>
+        <div class="card-body"><div class="week-num">Week 4</div><div class="palette-name">Frozen Mud Lantern</div></div>
+      </a>
+      <a class="week-card" href="week-05-carbazole-dusk.html">
+        <div class="color-strip"><span style="background:#3a1659"></span><span style="background:#8b4513"></span><span style="background:#1b3a5c"></span></div>
+        <div class="card-body"><div class="week-num">Week 5</div><div class="palette-name">Carbazole Dusk</div></div>
+      </a>
+      <a class="week-card" href="week-06-rain-shadow-split.html">
+        <div class="color-strip"><span style="background:#3d59ab"></span><span style="background:#826644"></span><span style="background:#b8860b"></span></div>
+        <div class="card-body"><div class="week-num">Week 6</div><div class="palette-name">Rain Shadow Split</div></div>
+      </a>
+      <a class="week-card" href="week-07-boot-mud-pink.html">
+        <div class="color-strip"><span style="background:#ff5ec4"></span><span style="background:#a0522d"></span><span style="background:#536878"></span></div>
+        <div class="card-body"><div class="week-num">Week 7</div><div class="palette-name">Boot Mud Pink</div></div>
+      </a>
+      <a class="week-card" href="week-08-nettle-crocus-threshold.html">
+        <div class="color-strip"><span style="background:#7a4088"></span><span style="background:#507d2a"></span><span style="background:#5c3317"></span></div>
+        <div class="card-body"><div class="week-num">Week 8</div><div class="palette-name">Nettle Crocus Threshold</div></div>
+      </a>
+      <a class="week-card" href="week-09-neon-salmon-spring.html">
+        <div class="color-strip"><span style="background:#ff5ec4"></span><span style="background:#b8ad3a"></span><span style="background:#6b9e6b"></span></div>
+        <div class="card-body"><div class="week-num">Week 9</div><div class="palette-name">Neon Salmon Spring</div></div>
+      </a>
+      <a class="week-card" href="week-10-trillium-snowpack.html">
+        <div class="color-strip"><span style="background:#2b4f9e"></span><span style="background:#1e4a30"></span><span style="background:#555a66"></span></div>
+        <div class="card-body"><div class="week-num">Week 10</div><div class="palette-name">Trillium Snowpack</div></div>
+      </a>
+      <a class="week-card" href="week-11-equinox-tilt.html">
+        <div class="color-strip"><span style="background:#00827f"></span><span style="background:#507d2a"></span><span style="background:#6b4423"></span></div>
+        <div class="card-body"><div class="week-num">Week 11</div><div class="palette-name">Equinox Tilt</div></div>
+      </a>
+      <a class="week-card" href="week-12-fiddlehead-spawn.html">
+        <div class="color-strip"><span style="background:#5fa38e"></span><span style="background:#1e5b3a"></span><span style="background:#c8882a"></span></div>
+        <div class="card-body"><div class="week-num">Week 12</div><div class="palette-name">Fiddlehead Spawn</div></div>
+      </a>
+      <a class="week-card" href="week-13-cherry-camas-foam.html">
+        <div class="color-strip"><span style="background:#ff69b4"></span><span style="background:#4169c8"></span><span style="background:#a8ad00"></span></div>
+        <div class="card-body"><div class="week-num">Week 13</div><div class="palette-name">Cherry Camas Foam</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SPRING ============ -->
+  <section class="season season--spring">
+    <div class="season-header">
+      <h2>Spring</h2>
+      <span class="season-range">Weeks 14&ndash;26 &middot; April&ndash;June</span>
+    </div>
+    <div class="week-grid">
+      <a class="week-card" href="week-14-gold-dust-canopy.html">
+        <div class="color-strip"><span style="background:#e8a317"></span><span style="background:#e63e62"></span><span style="background:#4169c8"></span></div>
+        <div class="card-body"><div class="week-num">Week 14</div><div class="palette-name">Gold Dust Canopy</div></div>
+      </a>
+      <a class="week-card" href="week-15-tulip-field-burn.html">
+        <div class="color-strip"><span style="background:#f5e14d"></span><span style="background:#ff69b4"></span><span style="background:#5ba4cf"></span></div>
+        <div class="card-body"><div class="week-num">Week 15</div><div class="palette-name">Tulip Field Burn</div></div>
+      </a>
+      <a class="week-card" href="week-16-white-bract-morning.html">
+        <div class="color-strip"><span style="background:#c8a84a"></span><span style="background:#d4728a"></span><span style="background:#2b3d8e"></span></div>
+        <div class="card-body"><div class="week-num">Week 16</div><div class="palette-name">White Bract Morning</div></div>
+      </a>
+      <a class="week-card" href="week-17-camas-blue-hour.html">
+        <div class="color-strip"><span style="background:#e8b820"></span><span style="background:#d42b1e"></span><span style="background:#0a3c8c"></span></div>
+        <div class="card-body"><div class="week-num">Week 17</div><div class="palette-name">Camas Blue Hour</div></div>
+      </a>
+      <a class="week-card" href="week-18-rhododendron-shade.html">
+        <div class="color-strip"><span style="background:#e63e62"></span><span style="background:#c8a84a"></span><span style="background:#4169c8"></span></div>
+        <div class="card-body"><div class="week-num">Week 18</div><div class="palette-name">Rhododendron Shade</div></div>
+      </a>
+      <a class="week-card" href="week-19-marine-layer-noon.html">
+        <div class="color-strip"><span style="background:#f0c830"></span><span style="background:#b0264a"></span><span style="background:#5ba4cf"></span></div>
+        <div class="card-body"><div class="week-num">Week 19</div><div class="palette-name">Marine Layer Noon</div></div>
+      </a>
+      <a class="week-card" href="week-20-broom-fury-dusk.html">
+        <div class="color-strip"><span style="background:#e8b820"></span><span style="background:#904c94"></span><span style="background:#0a3c8c"></span></div>
+        <div class="card-body"><div class="week-num">Week 20</div><div class="palette-name">Broom Fury Dusk</div></div>
+      </a>
+      <a class="week-card" href="week-21-foxglove-column.html">
+        <div class="color-strip"><span style="background:#e63e62"></span><span style="background:#e8a820"></span><span style="background:#2b3d8e"></span></div>
+        <div class="card-body"><div class="week-num">Week 21</div><div class="palette-name">Foxglove Column</div></div>
+      </a>
+      <a class="week-card" href="week-22-solstice-ridge.html">
+        <div class="color-strip"><span style="background:#f5e14d"></span><span style="background:#b01830"></span><span style="background:#5ba4cf"></span></div>
+        <div class="card-body"><div class="week-num">Week 22</div><div class="palette-name">Solstice Ridge</div></div>
+      </a>
+      <a class="week-card" href="week-23-rose-solstice.html">
+        <div class="color-strip"><span style="background:#c8a84a"></span><span style="background:#d42b1e"></span><span style="background:#4169c8"></span></div>
+        <div class="card-body"><div class="week-num">Week 23</div><div class="palette-name">Rose Solstice</div></div>
+      </a>
+      <a class="week-card" href="week-24-orca-strait.html">
+        <div class="color-strip"><span style="background:#f0c830"></span><span style="background:#b0264a"></span><span style="background:#3a8ca0"></span></div>
+        <div class="card-body"><div class="week-num">Week 24</div><div class="palette-name">Orca Strait</div></div>
+      </a>
+      <a class="week-card" href="week-25-copper-madrone.html">
+        <div class="color-strip"><span style="background:#c87830"></span><span style="background:#e8641b"></span><span style="background:#3a8ca0"></span></div>
+        <div class="card-body"><div class="week-num">Week 25</div><div class="palette-name">Copper Madrone</div></div>
+      </a>
+      <a class="week-card" href="week-26-alpine-blaze.html">
+        <div class="color-strip"><span style="background:#f8e840"></span><span style="background:#d42b2b"></span><span style="background:#0a3d6b"></span></div>
+        <div class="card-body"><div class="week-num">Week 26</div><div class="palette-name">Alpine Blaze</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ SUMMER ============ -->
+  <section class="season season--summer">
+    <div class="season-header">
+      <h2>Summer</h2>
+      <span class="season-range">Weeks 27&ndash;39 &middot; July&ndash;September</span>
+    </div>
+    <div class="week-grid">
+      <a class="week-card" href="week-27-tinder-gold.html">
+        <div class="color-strip"><span style="background:#c8a030"></span><span style="background:#c8a060"></span><span style="background:#4a7a3a"></span></div>
+        <div class="card-body"><div class="week-num">Week 27</div><div class="palette-name">Tinder Gold</div></div>
+      </a>
+      <a class="week-card" href="week-28-heat-phosphor.html">
+        <div class="color-strip"><span style="background:#00695c"></span><span style="background:#0a3d6b"></span><span style="background:#c85028"></span></div>
+        <div class="card-body"><div class="week-num">Week 28</div><div class="palette-name">Heat Phosphor</div></div>
+      </a>
+      <a class="week-card" href="week-29-smoke-veil.html">
+        <div class="color-strip"><span style="background:#a04020"></span><span style="background:#5a6a2a"></span><span style="background:#0a3d6b"></span></div>
+        <div class="card-body"><div class="week-num">Week 29</div><div class="palette-name">Smoke Veil</div></div>
+      </a>
+      <a class="week-card" href="week-30-electric-tide.html">
+        <div class="color-strip"><span style="background:#00695c"></span><span style="background:#1a2a50"></span><span style="background:#e840a0"></span></div>
+        <div class="card-body"><div class="week-num">Week 30</div><div class="palette-name">Electric Tide</div></div>
+      </a>
+      <a class="week-card" href="week-31-blue-fire.html">
+        <div class="color-strip"><span style="background:#0a3d6b"></span><span style="background:#2a2a5a"></span><span style="background:#f0d848"></span></div>
+        <div class="card-body"><div class="week-num">Week 31</div><div class="palette-name">Blue Fire</div></div>
+      </a>
+      <a class="week-card" href="week-32-first-yellow.html">
+        <div class="color-strip"><span style="background:#c8a030"></span><span style="background:#1a5c32"></span><span style="background:#1a2a50"></span></div>
+        <div class="card-body"><div class="week-num">Week 32</div><div class="palette-name">First Yellow</div></div>
+      </a>
+      <a class="week-card" href="week-33-web-season.html">
+        <div class="color-strip"><span style="background:#e63225"></span><span style="background:#6a5030"></span><span style="background:#2e8bc0"></span></div>
+        <div class="card-body"><div class="week-num">Week 33</div><div class="palette-name">Web Season</div></div>
+      </a>
+      <a class="week-card" href="week-34-petrichor.html">
+        <div class="color-strip"><span style="background:#2841a0"></span><span style="background:#c06828"></span><span style="background:#2a4a30"></span></div>
+        <div class="card-body"><div class="week-num">Week 34</div><div class="palette-name">Petrichor</div></div>
+      </a>
+      <a class="week-card" href="week-35-equinox-tilt.html">
+        <div class="color-strip"><span style="background:#c8a030"></span><span style="background:#3a6848"></span><span style="background:#1a2a4a"></span></div>
+        <div class="card-body"><div class="week-num">Week 35</div><div class="palette-name">Equinox Tilt</div></div>
+      </a>
+      <a class="week-card" href="week-36-chanterelle-gold.html">
+        <div class="color-strip"><span style="background:#e8a820"></span><span style="background:#b0203a"></span><span style="background:#3a6848"></span></div>
+        <div class="card-body"><div class="week-num">Week 36</div><div class="palette-name">Chanterelle Gold</div></div>
+      </a>
+      <a class="week-card" href="week-37-full-spectrum.html">
+        <div class="color-strip"><span style="background:#e07830"></span><span style="background:#cc1830"></span><span style="background:#507d2a"></span></div>
+        <div class="card-body"><div class="week-num">Week 37</div><div class="palette-name">Full Spectrum</div></div>
+      </a>
+      <a class="week-card" href="week-38-river-return.html">
+        <div class="color-strip"><span style="background:#8a5aaa"></span><span style="background:#8a5a30"></span><span style="background:#e8c020"></span></div>
+        <div class="card-body"><div class="week-num">Week 38</div><div class="palette-name">River Return</div></div>
+      </a>
+      <a class="week-card" href="week-39-salmon-creek.html">
+        <div class="color-strip"><span style="background:#d02820"></span><span style="background:#1a5c32"></span><span style="background:#c8a030"></span></div>
+        <div class="card-body"><div class="week-num">Week 39</div><div class="palette-name">Salmon Creek</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ FALL ============ -->
+  <section class="season season--fall">
+    <div class="season-header">
+      <h2>Fall</h2>
+      <span class="season-range">Weeks 40&ndash;52 &middot; October&ndash;December</span>
+    </div>
+    <div class="week-grid">
+      <a class="week-card" href="week-40-skeleton-canopy.html">
+        <div class="color-strip"><span style="background:#c8a030"></span><span style="background:#6a5030"></span><span style="background:#507d2a"></span></div>
+        <div class="card-body"><div class="week-num">Week 40</div><div class="palette-name">Skeleton Canopy</div></div>
+      </a>
+      <a class="week-card" href="week-41-owl-dark.html">
+        <div class="color-strip"><span style="background:#536878"></span><span style="background:#2a4a30"></span><span style="background:#5c3317"></span></div>
+        <div class="card-body"><div class="week-num">Week 41</div><div class="palette-name">Owl Dark</div></div>
+      </a>
+      <a class="week-card" href="week-42-convergence-pour.html">
+        <div class="color-strip"><span style="background:#2841a0"></span><span style="background:#c88050"></span><span style="background:#5a6a2a"></span></div>
+        <div class="card-body"><div class="week-num">Week 42</div><div class="palette-name">Convergence Pour</div></div>
+      </a>
+      <a class="week-card" href="week-43-neon-moss.html">
+        <div class="color-strip"><span style="background:#1a5c32"></span><span style="background:#282828"></span><span style="background:#6a5030"></span></div>
+        <div class="card-body"><div class="week-num">Week 43</div><div class="palette-name">Neon Moss</div></div>
+      </a>
+      <a class="week-card" href="week-44-eagle-gray.html">
+        <div class="color-strip"><span style="background:#484848"></span><span style="background:#2a4a30"></span><span style="background:#8a5a30"></span></div>
+        <div class="card-body"><div class="week-num">Week 44</div><div class="palette-name">Eagle Gray</div></div>
+      </a>
+      <a class="week-card" href="week-45-rain-shadow-ache.html">
+        <div class="color-strip"><span style="background:#8a80a0"></span><span style="background:#ff5ec4"></span><span style="background:#1a2a50"></span></div>
+        <div class="card-body"><div class="week-num">Week 45</div><div class="palette-name">Rain Shadow Ache</div></div>
+      </a>
+      <a class="week-card" href="week-46-horizontal-gold.html">
+        <div class="color-strip"><span style="background:#c06828"></span><span style="background:#536878"></span><span style="background:#3d59ab"></span></div>
+        <div class="card-body"><div class="week-num">Week 46</div><div class="palette-name">Horizontal Gold</div></div>
+      </a>
+      <a class="week-card" href="week-47-solstice-held.html">
+        <div class="color-strip"><span style="background:#2a0a3a"></span><span style="background:#2841a0"></span><span style="background:#a0522d"></span></div>
+        <div class="card-body"><div class="week-num">Week 47</div><div class="palette-name">Solstice Held</div></div>
+      </a>
+      <a class="week-card" href="week-48-bone-alder.html">
+        <div class="color-strip"><span style="background:#1a1a1a"></span><span style="background:#008888"></span><span style="background:#6a5030"></span></div>
+        <div class="card-body"><div class="week-num">Week 48</div><div class="palette-name">Bone Alder</div></div>
+      </a>
+      <a class="week-card" href="week-49-years-last-breath.html">
+        <div class="color-strip"><span style="background:#8a80a0"></span><span style="background:#2a4a30"></span><span style="background:#c87888"></span></div>
+        <div class="card-body"><div class="week-num">Week 49</div><div class="palette-name">Year's Last Breath</div></div>
+      </a>
+      <div class="week-card week-card--placeholder">
+        <div class="color-strip"></div>
+        <div class="card-body"><div class="week-num">Week 50</div><div class="palette-name">Coming Soon</div><span class="badge">In Progress</span></div>
+      </div>
+      <div class="week-card week-card--placeholder">
+        <div class="color-strip"></div>
+        <div class="card-body"><div class="week-num">Week 51</div><div class="palette-name">Coming Soon</div><span class="badge">In Progress</span></div>
+      </div>
+      <div class="week-card week-card--placeholder">
+        <div class="color-strip"></div>
+        <div class="card-body"><div class="week-num">Week 52</div><div class="palette-name">Coming Soon</div><span class="badge">In Progress</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

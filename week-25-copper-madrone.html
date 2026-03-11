@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 25 — Copper Madrone</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(200,120,48,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(232,100,27,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(58,140,160,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(65,105,200,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #c87830; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 25 &mdash; PNW Watercolor Series</div>
+    <h1>Copper Madrone</h1>
+    <p class="mood">Madrone trunks glow copper-red in hard July light &mdash; the tree that looks like it's on fire and isn't. Ocean-spray cascades cream over roadside banks. Thimbleberries ripen soft as eyelids. Summer peaking with the confidence of something that knows it's temporary. The heat is real now, and the madrone wears it like jewelry.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c87830 0%, #b06828 100%);"></div>
+        <div class="trio-info"><h3>Aussie Red Gold</h3><p>Madrone trunk mid-tone, the copper-red that defines the species; semi-transparent, warm, slightly granulating</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8641b 0%, #d05418 100%);"></div>
+        <div class="trio-info"><h3>Transparent Pyrrol Orange</h3><p>Madrone bark at its hottest, where direct sun hits peeled wood; transparent, intense, the orange that reads as heat</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #3a8ca0 0%, #2a7c90 100%);"></div>
+        <div class="trio-info"><h3>Mayan Blue Genuine</h3><p>Strait water afternoon, the turquoise counterweight to all that copper; mineral pigment, granulating, irreplaceable</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#c87830;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
+      <div class="swatch" style="background:#e8641b;"><span class="label" style="color:#fff;">Pyrrol Orange</span></div>
+      <div class="swatch" style="background:#3a8ca0;"><span class="label" style="color:#fff;">Mayan Blue Gen.</span></div>
+      <div class="swatch" style="background:#1a5c32;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#5a3a20;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#d42b1e;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
+      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c88050;"><span class="label" style="color:#fff;">Burnt Sienna Lt</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c87830;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Primary &mdash; madrone trunk mid-tone, the tree's signature color</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Atmospheric &mdash; dry-season sky with marine influence, hazy and warm</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#e8641b;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Primary &mdash; madrone bark at hottest, sun-struck copper</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#d42b1e;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Warm Accent &mdash; thimbleberry ripe, red and impossibly soft</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#3a8ca0;"></div><div><div class="name">Mayan Blue Genuine</div><div class="role">Primary &mdash; strait water afternoon, turquoise balance</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; ocean-spray leaf, green infrastructure for white flowers</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#1a5c32;"></div><div><div class="name">Hooker's Green</div><div class="role">Earth &mdash; madrone leaf, dark and leathery, evergreen and tough</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; ocean-spray flower cascade, cream-white and abundant</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#5a3a20;"></div><div><div class="name">Burnt Umber</div><div class="role">Dark &mdash; madrone bark shadow-side, the cool dark of untouched trunk</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c88050;"></div><div><div class="name">Burnt Sienna Light</div><div class="role">Earth &mdash; trail dust in July, fine and golden-brown</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c87838, #b86828);"></div>
+        <div><h3>Madrone Glow</h3><span class="ratio">2 Aussie Red Gold : 1 Transparent Pyrrol Orange : &frac12; Burnt Sienna Light</span></div>
+      </div>
+      <p class="mix-description">The impossible copper-red of peeled bark in direct sun &mdash; the color that makes people stop their cars.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#c87830; color:#fff;">Aussie Red Gold</div>
+        <div class="mix-bar" style="flex:1; background:#e8641b; color:#fff;">Pyrrol Orange</div>
+        <div class="mix-bar" style="flex:0.5; background:#c88050; color:#fff;">Burnt Sienna Lt</div>
+      </div>
+      <div class="mix-notes">Aussie Red Gold is the madrone's truth &mdash; warm, semi-transparent, with a subtle granulation that mimics bark texture. Transparent Pyrrol Orange adds the fire where the sun hits directly, pushing the copper toward molten. Burnt Sienna Light grounds the shadow-side, keeping the trunk three-dimensional. Apply in vertical strokes following the trunk's curve. Let the Aussie Red Gold granulate on textured paper &mdash; it will build bark detail for you.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e0d0a8, #d4c498);"></div>
+        <div><h3>Ocean-Spray Cream</h3><span class="ratio">3 Buff Titanium : &frac12; Cascade Green : &frac14; Aussie Red Gold</span></div>
+      </div>
+      <p class="mix-description">Foam-white flower clusters cascading over roadside banks &mdash; cream waterfalls of tiny blooms.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:3; background:#e8d8b4; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:0.5; background:#5b8a72; color:#fff;">Cascade Green</div>
+        <div class="mix-bar" style="flex:0.25; background:#c87830; color:#fff;">Aussie Red Gold</div>
+      </div>
+      <div class="mix-notes">Buff Titanium in quantity &mdash; ocean-spray is cream, not white, and Buff Titanium's warm opacity is exactly that color. Cascade Green in the shadows between flower clusters, where leaf shows through. Aussie Red Gold barely there, just enough to warm the sun side. Apply with a dry-brush technique for the cascading effect &mdash; ocean-spray has that foamy, broken texture that dry brush captures. Let the paper's white show through as highlights.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c85040, #b84030);"></div>
+        <div><h3>Thimbleberry Soft</h3><span class="ratio">2 Pyrrol Scarlet : 1 Buff Titanium : &frac14; Cobalt Blue</span></div>
+      </div>
+      <p class="mix-description">Ripe fruit so soft it falls apart in your fingers &mdash; the berry you eat but can never carry home.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#d42b1e; color:#fff;">Pyrrol Scarlet</div>
+        <div class="mix-bar" style="flex:1; background:#e8d8b4; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:0.25; background:#4169c8; color:#fff;">Cobalt Blue</div>
+      </div>
+      <div class="mix-notes">Pyrrol Scarlet provides the ripe red &mdash; not the dark red of a blackberry but the soft, dusty scarlet of a thimbleberry. Buff Titanium adds the dusty bloom on the fruit's surface, the matte quality that separates thimbleberry from raspberry. Cobalt Blue cools the shadow hemisphere and adds granulation that mimics the drupelets' individual roundness. Apply lightly &mdash; heavy application would suggest a tough fruit, and the thimbleberry is anything but.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette invests heavily in the warm spectrum because the madrone demands it. Two orange-family primaries (Aussie Red Gold and Transparent Pyrrol Orange) is unusual, but the madrone's range from copper mid-tone to fire highlight justifies both. Mayan Blue Genuine provides the only blue strong enough to hold its own against that much warmth &mdash; its mineral granulation adds substance that a transparent blue would lack. Burnt Umber on the shadow-side keeps the madrone dimensional. Hooker's Green is the toughest green on the palette, appropriate for madrone's leathery evergreen leaves. Cobalt Blue in the atmospheric role means even the sky leans warm this week.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Madrone Portrait &mdash; Sun Side and Shadow Side</h3>
+      <p class="subject"><strong>Subject:</strong> A single madrone trunk filling most of the frame, peeling bark revealing smooth copper underneath. One side catches full July sun; the other falls into cool shadow.</p>
+      <p class="palette-fit">The Madrone Glow mix (Aussie Red Gold + Transparent Pyrrol Orange + Burnt Sienna Light) handles the sun-struck side, while Burnt Umber takes the shadow. Two primaries dedicated to the same tree is unusual, and this subject justifies every bit of it.</p>
+      <div class="tips"><ul>
+        <li>Paint the sunlit bark with the Madrone Glow mix using vertical strokes that follow the trunk&rsquo;s curve &mdash; the Aussie Red Gold will granulate on textured paper and build bark detail without you trying</li>
+        <li>Burnt Umber on the shadow side, applied while the sunlit side is still slightly damp at the edge so you get a soft transition &mdash; madrone trunks are round, not flat</li>
+        <li>Peeling bark curls are Transparent Pyrrol Orange at the edges where they catch light, Burnt Sienna Light where they curl away into shadow</li>
+        <li>Leave slivers of white paper where the freshly exposed wood is palest &mdash; the smoothest bark is almost white before it oxidizes to copper</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Ocean-Spray Cascading Over a Road Cut</h3>
+      <p class="subject"><strong>Subject:</strong> A roadside bank covered in ocean-spray (<em>holodiscus</em>), its cream-white flower clusters pouring downhill like foam. Dark evergreen behind, dusty gravel below.</p>
+      <p class="palette-fit">Buff Titanium is the exact cream of ocean-spray &mdash; not white, warmer and more opaque. The Ocean-Spray Cream mix (Buff Titanium + Cascade Green + Aussie Red Gold) was designed for exactly this. Hooker&rsquo;s Green handles the dark backdrop.</p>
+      <div class="tips"><ul>
+        <li>Use dry-brush technique for the flower clusters &mdash; load a flat brush with the Ocean-Spray Cream mix and drag it across rough paper so the texture breaks up the stroke into the foamy, cascading quality of the flowers</li>
+        <li>Hooker&rsquo;s Green behind the flowers, applied as a flat dark wash first, lets the cream flowers pop by contrast</li>
+        <li>Burnt Sienna Light at the bottom for the gravel road cut &mdash; dry brush again, lighter touch</li>
+        <li>Let the paper&rsquo;s white show through the dry-brush flowers as your brightest highlights &mdash; don&rsquo;t paint highlights, preserve them</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Thimbleberry Close-Up</h3>
+      <p class="subject"><strong>Subject:</strong> Two or three thimbleberries on the branch, one ripe red, one still green, with the large maple-shaped leaves behind them. The intimate scale of a trail-side discovery.</p>
+      <p class="palette-fit">The Thimbleberry Soft mix (Pyrrol Scarlet + Buff Titanium + Cobalt Blue) captures the dusty, matte quality that makes thimbleberries look different from every other red berry. Cascade Green and Hooker&rsquo;s Green split the leaf duties.</p>
+      <div class="tips"><ul>
+        <li>The ripe berry is Pyrrol Scarlet with Buff Titanium mixed in &mdash; this desaturates the red just enough to get the dusty bloom. Apply lightly; heavy paint would make the fruit look tough, and thimbleberries fall apart at a touch</li>
+        <li>Cobalt Blue on the shadow side of each drupelet adds granulation that mimics the individual bumps on the fruit surface</li>
+        <li>The unripe berry is Cascade Green with a whisper of Cobalt Blue &mdash; cool and hard where the ripe one is warm and soft</li>
+        <li>Big thimbleberry leaves are Hooker&rsquo;s Green with Cascade Green in the veins &mdash; paint the leaf as a single wash, then lift the veins with a damp brush while wet</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Island Shoreline at Low Tide</h3>
+      <p class="subject"><strong>Subject:</strong> A madrone-lined shore at low tide &mdash; copper trunks leaning over exposed rocks and tidal pools, with the strait turquoise beyond. The classic San Juan composition in July heat.</p>
+      <p class="palette-fit">Madrone Glow for the trees, Mayan Blue Genuine for the water, Cobalt Blue for the hazy sky &mdash; the full warm-to-cool range of this palette in one scene. Burnt Sienna Light handles the exposed tidal rocks.</p>
+      <div class="tips"><ul>
+        <li>Start with the sky: a graded wash of Cobalt Blue, heavier at the top, nearly nothing at the horizon where marine haze bleaches it</li>
+        <li>The strait is Mayan Blue Genuine applied to wet paper &mdash; let the mineral granulation settle and create the texture of moving water on its own</li>
+        <li>Madrone trunks are the Madrone Glow mix, but push the Transparent Pyrrol Orange harder on the trunks that face the water, where reflected light intensifies the copper</li>
+        <li>Tidal rocks are Burnt Sienna Light base with Burnt Umber shadows and touches of Cascade Green where seaweed clings</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Aussie Red Gold is a PrimaTek pigment with unique granulating properties &mdash; it settles into paper texture in a way that reads as bark naturally. Burnt Sienna Light is lighter and warmer than regular Burnt Sienna, better for July trail dust. Mayan Blue Genuine continues from Week 24 &mdash; if you have it on your palette, it's still relevant. Pyrrol Scarlet applied thinly reads very differently than applied thickly; test your dilution for thimbleberry.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

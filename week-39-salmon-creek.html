@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 39 — Salmon Creek</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(208,40,32,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(26,92,50,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(200,160,48,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(208,40,32,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #c02020; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 39 &mdash; PNW Watercolor Series</div>
+    <h1>Salmon Creek</h1>
+    <p class="mood">Dinner-plate maple leaves plaster every surface. Spawning salmon turn creeks into triptychs &mdash; red flanks, green heads, white fungal patches on the dying. Matsutake hide under shore pines, their smell sharp as cinnamon and dirt. Peak leaf fall means the forest is giving everything back.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #d02820 0%, #b82018 100%);"></div>
+        <div class="trio-info"><h3>Cadmium Red Medium Hue</h3><p>Spawning sockeye flank, semi-opaque and high-chroma; the fish are solid objects in solid color</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a5c32 0%, #104a28 100%);"></div>
+        <div class="trio-info"><h3>Hooker&rsquo;s Green</h3><p>Salmon head gone jade-dark, dense, cool-leaning; the other half of the spawning triptych</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a030 0%, #b89028 100%);"></div>
+        <div class="trio-info"><h3>Quinacridone Gold</h3><p>Fallen maple leaf the size of a dinner plate &mdash; transparent enough to transmit light, gold enough to own the ground</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#d02820;"><span class="label" style="color:#fff;">Cad. Red Med. Hue</span></div>
+      <div class="swatch" style="background:#1a5c32;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#c8a030;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#1a1a1a;"><span class="label" style="color:#fff;">Ivory Black</span></div>
+      <div class="swatch" style="background:#f0f0f0;"><span class="label" style="color:#777;">Chinese White</span></div>
+      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#8a80a0;"><span class="label" style="color:#fff;">Moonglow</span></div>
+      <div class="swatch" style="background:#b0522a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
+      <div class="swatch" style="background:#5a6a2a;"><span class="label" style="color:#fff;">Olive Green</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#d02820;"></div><div><div class="name">Cadmium Red Medium Hue</div><div class="role">Primary &mdash; spawning sockeye flank</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#f0f0f0;"></div><div><div class="name">Chinese White</div><div class="role">Light &mdash; fungal patch on dying salmon</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#1a5c32;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Primary &mdash; salmon head gone jade-dark</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Atmospheric &mdash; matsutake cap under pine duff</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#c8a030;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Primary &mdash; dinner-plate maple leaf</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#8a80a0;"></div><div><div class="name">Moonglow</div><div class="role">Cool Accent &mdash; overcast light on wet creek stones</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; creek gravel stained by tannin</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#b0522a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Warm Accent &mdash; decomposing leaf, gold gone rust</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a1a1a;"></div><div><div class="name">Ivory Black</div><div class="role">Dark &mdash; deep pool where salmon hold</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#5a6a2a;"></div><div><div class="name">Olive Green</div><div class="role">Earth &mdash; shore pine needle canopy</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d02820, #1a5c32);"></div>
+        <div><h3>Spawning Triptych</h3><span class="ratio">1 Cadmium Red Medium Hue : 1 Hooker&rsquo;s Green : touch Chinese White</span></div>
+      </div>
+      <p class="mix-description">Three colors of a salmon creek &mdash; red flank, jade head, white fungal patch, all on one body.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#d02820; color:#fff;">Cad. Red Med. Hue</div>
+        <div class="mix-bar" style="flex:1; background:#1a5c32; color:#fff;">Hooker's Green</div>
+        <div class="mix-bar" style="flex:0.15; background:#f0f0f0; color:#777;">Chinese White</div>
+      </div>
+      <div class="mix-notes">Three zones on wet paper. Let the red and green meet at the gill plate without pre-mixing &mdash; the boundary should be ragged and organic. The Chinese White should blob irregularly for fungal patches. Decay is not symmetrical. These are not stripes; they are territories.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #a08038, #7a7030);"></div>
+        <div><h3>Matsutake Earth</h3><span class="ratio">2 Raw Sienna : 1 Olive Green : touch Burnt Umber</span></div>
+      </div>
+      <p class="mix-description">Pine duff hiding the mushroom &mdash; the duff is the subject, the mushroom is negative space.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#c68030; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#5a6a2a; color:#fff;">Olive Green</div>
+        <div class="mix-bar" style="flex:0.15; background:#5c3317; color:#fff;">Burnt Umber</div>
+      </div>
+      <div class="mix-notes">The duff surrounds the mushroom; the mushroom is negative space. Leave the cap as untouched white paper &mdash; its pale dome emerging from the earth is revealed by what you don&rsquo;t paint. Raw Sienna and Olive Green mix to a warm forest-floor tone. Burnt Umber darkens the deepest shadows between needles.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c8a030, #b87028);"></div>
+        <div><h3>Plate Leaf</h3><span class="ratio">2 Quinacridone Gold : 1 Transparent Red Oxide</span></div>
+      </div>
+      <p class="mix-description">Bigleaf maple leaf dying big &mdash; gold center rusting from the margins inward, both pigments transparent enough to glow.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#c8a030; color:#fff;">Quin. Gold</div>
+        <div class="mix-bar" style="flex:1; background:#b0522a; color:#fff;">Trans. Red Oxide</div>
+      </div>
+      <div class="mix-notes">Start with a full leaf-shaped wash of Quinacridone Gold. While soaking wet, feed Transparent Red Oxide from margins inward. Both pigments are transparent, so overlapping zones glow rather than muddy. The gold center stays pure; the rust creeps. Let the paper do the work.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette is a creek in late October. Cadmium Red Medium Hue and Hooker&rsquo;s Green are chosen for their opacity &mdash; spawning salmon are solid objects in solid color, not atmospheric suggestions. Quinacridone Gold&rsquo;s transparency works for maple leaves that transmit light rather than blocking it. Chinese White does grim duty as fungal growth on dying fish &mdash; opaque, irregular, clinical. Ivory Black handles the deep pools where salmon hold before their final push. Moonglow is Daniel Smith&rsquo;s granulating convenience mix, perfect for the diffused overcast light on wet creek stones. Raw Sienna and Olive Green serve the matsutake passages. This is a palette of solid things: fish, leaves, stones, mushrooms. No atmosphere, all object.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Spawning Salmon Triptych</h3>
+      <p class="subject"><strong>Subject:</strong> A single spawning salmon &mdash; red flank, jade-green head, white fungal patches on the body, the whole life cycle in one fish.</p>
+      <p class="palette-fit">The Spawning Triptych approach (Cadmium Red Medium Hue 1:Hooker&rsquo;s Green 1:Chinese White touch) paints the fish as three territories meeting on wet paper &mdash; decay is not symmetrical.</p>
+      <div class="tips"><ul>
+        <li>Three zones on wet paper &mdash; red flank, green head, white patches &mdash; let them meet without pre-mixing</li>
+        <li>Chinese White applied irregularly for fungal patches, not uniform</li>
+        <li>Ivory Black for the deep pool beneath the fish</li>
+        <li>Burnt Umber dry-brushed for creek gravel in the shallows</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Matsutake Hidden Under Shore Pines</h3>
+      <p class="subject"><strong>Subject:</strong> A matsutake cap barely visible under pine duff &mdash; the forest hiding its most valuable thing in plain sight.</p>
+      <p class="palette-fit">The Matsutake Earth mix (Raw Sienna 2:Olive Green 1:Burnt Umber touch) paints the duff as subject &mdash; the mushroom is what you leave unpainted.</p>
+      <div class="tips"><ul>
+        <li>Paint the duff surrounding the cap shape &mdash; leave the cap as white paper</li>
+        <li>Olive Green overhead for the pine canopy, dappled and dark</li>
+        <li>Quinacridone Gold maple leaves scattered for seasonal context</li>
+        <li>The mushroom&rsquo;s pale dome emerges from what you don&rsquo;t paint</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Dinner-Plate Maple Leaf on Wet Asphalt</h3>
+      <p class="subject"><strong>Subject:</strong> A single bigleaf maple leaf plastered to wet asphalt &mdash; gold center rusting from margins, reflected sky on the wet surface around it.</p>
+      <p class="palette-fit">The Plate Leaf mix (Quinacridone Gold 2:Transparent Red Oxide 1) captures the dying-big quality &mdash; gold center with rust creeping inward, both transparent pigments glowing.</p>
+      <div class="tips"><ul>
+        <li>Start with Quinacridone Gold wash in leaf shape, feed Transparent Red Oxide from margins while wet</li>
+        <li>Gold center stays pure, rust creeps inward &mdash; let the pigments find their own boundary</li>
+        <li>Ivory Black thinned for wet asphalt surrounding the leaf</li>
+        <li>Moonglow for reflected sky on the wet pavement surface</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Creek-Side Autumn Panorama</h3>
+      <p class="subject"><strong>Subject:</strong> A full salmon creek scene &mdash; spawning fish, fallen leaves, wet stones, overcast light, the whole late-October package.</p>
+      <p class="palette-fit">Every color in the palette earns its place here &mdash; salmon are opaque objects, leaves transmit light, stones diffuse it, the pool absorbs it.</p>
+      <div class="tips"><ul>
+        <li>Work background to foreground &mdash; establish the overcast with Moonglow first</li>
+        <li>Moonglow on wet paper for creek stones &mdash; let the granulation do the texture work</li>
+        <li>Salmon are solid opaque objects: Cadmium Red Medium Hue and Hooker&rsquo;s Green at full concentration</li>
+        <li>Chinese White for both fungal patches on fish and foam where the current breaks over stones</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments confirmed Daniel Smith extra fine watercolors. Cadmium Red Medium Hue is cadmium-free &mdash; same intensity, no toxicity concerns. Moonglow is a Daniel Smith convenience mix that separates beautifully on cold-press paper, granulating into its component pigments for complex, diffused effects. Ivory Black has two behaviors: use it wet for deep pools (glossy, reflective) and dry-brush it for gravel shadow (matte, textured). Same pigment, two personalities.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

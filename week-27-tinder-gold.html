@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 27 — Tinder Gold</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(200,160,48,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(200,160,96,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(74,122,58,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(160,82,45,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2e4 0%, #f0ece0 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #c8a030; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 27 &mdash; PNW Watercolor Series</div>
+    <h1>Tinder Gold</h1>
+    <p class="mood">Mid-July noon, everything crackles. Salmonberries split on the stem, thimbleberries dissolve on the tongue, and the forest floor hasn&rsquo;t seen rain in six weeks. Dry easterlies strip moisture from cedar bark until it curls like parchment. Summer is hoarding &mdash; abundant and withholding at once.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a030 0%, #b89020 100%);"></div>
+        <div class="trio-info"><h3>Quinacridone Gold</h3><p>The controlling light here, mid-spectrum warmth that reads as parched noon glare on every dry surface it touches. Semi-transparent, granulates lightly on rough paper.</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a060 0%, #b89050 100%);"></div>
+        <div class="trio-info"><h3>Raw Sienna</h3><p>The anchor underfoot, bleached trail dust and hardpack. Transparent and low-staining, it lets Quinacridone Gold boss it around in washes.</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #4a7a3a 0%, #3a6a2a 100%);"></div>
+        <div class="trio-info"><h3>Sap Green</h3><p>The lone holdout, surviving understory clinging to whatever groundwater remains. Mixes down into olive tones fast when it meets the warm dominants.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#c8a030;"><span class="label" style="color:#fff;">Quinacridone Gold</span></div>
+      <div class="swatch" style="background:#c8a060;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#4a7a3a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#2a2a5a;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#d42b1e;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
+      <div class="swatch" style="background:#4a8ebc;"><span class="label" style="color:#fff;">Cerulean Blue Chr.</span></div>
+      <div class="swatch" style="background:#e8c020;"><span class="label" style="color:#777;">Hansa Yellow Deep</span></div>
+      <div class="swatch" style="background:#7a5030;"><span class="label" style="color:#fff;">Trans Brown Oxide</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c8a030;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Primary &mdash; midday glare on dry grass, the palette&rsquo;s controlling warmth</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Atmospheric &mdash; heat shimmer on gravel road, opaque haze</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#c8a060;"></div><div><div class="name">Raw Sienna</div><div class="role">Primary &mdash; bleached trail hardpack baking under open sky</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#d42b1e;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Warm Accent &mdash; salmonberry split open, juice-bright</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#4a7a3a;"></div><div><div class="name">Sap Green</div><div class="role">Primary &mdash; surviving understory, the only cool relief in the heat</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#4a8ebc;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Cool Accent &mdash; sky between smoke wisps, granular blue</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; cedar bark peeling in long curls, tinder-ready</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8c020;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Light &mdash; thimbleberry leaf backlit by noon sun</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#2a2a5a;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; shadow pooled under Douglas fir, cool and absolute</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#7a5030;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Earth &mdash; tinder-dry duff layer, the fire-starter beneath everything</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e0d0a0, #d4c490);"></div>
+        <div><h3>Easterly Haze</h3><span class="ratio">3 Buff Titanium : 1 Quinacridone Gold</span></div>
+      </div>
+      <p class="mix-description">Bleached warmth of a wind-dried ridgeline where the easterlies have scoured every surface pale.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:3; background:#e8d8b4; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#c8a030; color:#fff;">Quinacridone Gold</div>
+      </div>
+      <div class="mix-notes">Load the brush with dilute Buff Titanium first, then touch Quinacridone Gold into the wet field and let it drift. The opacity of Buff fights the transparency of QG &mdash; use that tension. Don&rsquo;t overwork it. Let the gold find its own edges in the haze.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #905838, #7a4828);"></div>
+        <div><h3>Cedar Tinder</h3><span class="ratio">2 Burnt Sienna : 1 Raw Sienna : touch Indigo</span></div>
+      </div>
+      <p class="mix-description">Parched bark ready to spark &mdash; the kind of dry that makes fire crews lose sleep.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#c8a060; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:0.15; background:#2a2a5a; color:#fff;">Indigo</div>
+      </div>
+      <div class="mix-notes">Mix Burnt Sienna and Raw Sienna on the palette first to get the base bark tone, then feather in the barest whisper of Indigo while still wet. The Indigo should read as shadow in the bark fissures, not as blue. If you can see blue, you used too much.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d06028, #c05020);"></div>
+        <div><h3>Berry Crush</h3><span class="ratio">1 Pyrrol Scarlet : 1 Quinacridone Gold</span></div>
+      </div>
+      <p class="mix-description">Salmonberry juice on fingertips &mdash; that specific sticky-sweet stain that won&rsquo;t wash off until tomorrow.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#d42b1e; color:#fff;">Pyrrol Scarlet</div>
+        <div class="mix-bar" style="flex:1; background:#c8a030; color:#fff;">Quinacridone Gold</div>
+      </div>
+      <div class="mix-notes">Wet-on-wet, letting the two pigments mingle without stirring. Pyrrol Scarlet is opaque and pushy; Quinacridone Gold is transparent and yielding. The result should look like crushed fruit &mdash; uneven, vivid, a little vulgar. Drop onto damp paper for the best bleed.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette runs hot and dry by design. Quinacridone Gold and Raw Sienna are both transparent earth-spectrum pigments that layer without going muddy, essential for building up the bleached, repetitive warmth of a rainless July. Sap Green provides the lone biological counterpoint, but it&rsquo;s outnumbered &mdash; mixed with any of the warm dominants, it immediately shifts toward olive and exhaustion. Pyrrol Scarlet punches through as the one saturated hue, the way a split salmonberry shocks against brown duff. Buff Titanium&rsquo;s opacity serves a specific atmospheric purpose: heat shimmer is not transparent. Indigo and Cerulean Blue Chromium hold the only coolness, rationed like water.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Gravel Road Heat Shimmer</h3>
+      <p class="subject"><strong>Subject:</strong> A forest service road stretching into the distance, heat shimmer blurring the middle ground, dry grass shoulders fading to bleached gold. One of those July roads where the air itself is visible.</p>
+      <p class="palette-fit">The Easterly Haze mix (Buff Titanium + Quinacridone Gold) was built for this &mdash; the opacity of Buff Titanium physically creates the density of heat shimmer on paper. Raw Sienna is the hardpack road itself. Cerulean Blue Chromium holds the one patch of sky between smoke wisps.</p>
+      <div class="tips"><ul>
+        <li>Paint the road with Raw Sienna, grading lighter toward the horizon where the heat bleaches it &mdash; the transparency lets you build the effect in layers</li>
+        <li>The shimmer zone is the Easterly Haze mix applied to damp paper so the edges blur. Don&rsquo;t overwork it &mdash; let the Buff Titanium&rsquo;s opacity and Quinacridone Gold&rsquo;s transparency fight each other</li>
+        <li>Dry grass shoulders are Quinacridone Gold dry-brushed on rough paper, with Hansa Yellow Deep at the tips catching backlight</li>
+        <li>A single strip of Cerulean Blue Chromium sky at the top, granulating and hard, is all the cool relief the scene gets</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Cedar Bark Tinder Study</h3>
+      <p class="subject"><strong>Subject:</strong> A tight crop on peeling cedar bark &mdash; the long curling strips that make fire crews nervous. A botanical-level close-up of texture, color, and dryness.</p>
+      <p class="palette-fit">The Cedar Tinder mix (Burnt Sienna + Raw Sienna + touch of Indigo) is precisely this subject. Transparent Brown Oxide adds the duff layer beneath. The palette was designed around this exact kind of parched, combustible warmth.</p>
+      <div class="tips"><ul>
+        <li>Base the bark with Burnt Sienna in vertical strokes following the grain, then layer Raw Sienna into the lighter areas where the bark has bleached</li>
+        <li>The Indigo goes into bark fissures only &mdash; if you can see blue, you&rsquo;ve used too much. It should read as shadow, nothing more</li>
+        <li>Peeling strips are painted with a rigger brush: Burnt Sienna at the attached end, grading to Raw Sienna where the curl catches light</li>
+        <li>Transparent Brown Oxide dry-brushed at the base for the accumulated duff &mdash; drag it across cold-press texture for instant forest floor</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Salmonberry Split Open</h3>
+      <p class="subject"><strong>Subject:</strong> A cluster of salmonberries on the branch &mdash; some intact, some split to reveal juice-bright interiors. The kind of trail-side moment that stops you mid-hike.</p>
+      <p class="palette-fit">The Berry Crush mix (Pyrrol Scarlet + Quinacridone Gold, 1:1 wet-on-wet) is literally salmonberry juice. Sap Green handles the leaves, and the contrast between that lone surviving green and all the warm dominants tells the whole drought story.</p>
+      <div class="tips"><ul>
+        <li>Drop the Berry Crush mix onto damp paper for each split berry &mdash; Pyrrol Scarlet&rsquo;s opacity and Quinacridone Gold&rsquo;s transparency create the uneven, vivid look of crushed fruit naturally</li>
+        <li>Intact berries are Pyrrol Scarlet alone, less dilute, with a highlight of white paper reserved on each one</li>
+        <li>Leaves are Sap Green, but mix it with a touch of Quinacridone Gold to push it toward olive &mdash; nothing stays pure green this late in a dry July</li>
+        <li>The branch is Raw Sienna with Burnt Sienna shadows, thin and wiry</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Douglas Fir Shadow Pool</h3>
+      <p class="subject"><strong>Subject:</strong> The deep shadow under a lone Douglas fir in an otherwise sun-blasted clearing &mdash; the kind of shade that feels ten degrees cooler. Looking from sun into shadow, with the grass color shifting from gold to green at the threshold.</p>
+      <p class="palette-fit">Indigo is rationed in this palette like water, and this is where you spend it. Quinacridone Gold and Raw Sienna own the sunlit clearing. Sap Green survives only in the shade. The painting is really about the boundary between two worlds.</p>
+      <div class="tips"><ul>
+        <li>Paint the sunlit clearing first: Quinacridone Gold graded into Raw Sienna, warm and dry, covering most of the paper</li>
+        <li>The shadow pool is Indigo at medium dilution &mdash; not black, just deeply cool. Lay it in with a single confident wash after the gold is fully dry</li>
+        <li>At the shadow&rsquo;s edge, Sap Green marks where grass is still alive, mixed with a trace of Quinacridone Gold so it reads as struggling, not thriving</li>
+        <li>Buff Titanium haze along the distant treeline completes the story &mdash; even the air is hot</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments confirmed Daniel Smith. Buff Titanium is the most opaque color here &mdash; use it for atmospheric effects where you want the paper to disappear. Transparent Brown Oxide is underrated for dry-brush work on textured paper; drag it across cold-press for instant duff. Cerulean Blue Chromium granulates beautifully &mdash; let it do so in sky passages rather than fighting the texture.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

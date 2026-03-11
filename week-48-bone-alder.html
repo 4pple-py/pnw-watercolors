@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 48 — Bone Alder</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(26,26,26,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(0,136,136,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(106,80,48,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(26,26,26,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #484848; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 48 &mdash; PNW Watercolor Series</div>
+    <h1>Bone Alder</h1>
+    <p class="mood">A brief clearing between atmospheric rivers. Morning frost silvers sword fern fronds into fossils. Bare alder trunks stand white as bone against charcoal sky, and wintering ducks raft in loose thousands on the Sound. Clarity so brief it feels like trespass.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);"></div>
+        <div class="trio-info"><h3>Ivory Black</h3><p>Sky behind bare alder, charcoal wash; the high-contrast partner that makes bone-white trunks legible</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #008888 0%, #007070 100%);"></div>
+        <div class="trio-info"><h3>Cobalt Teal Blue</h3><p>Winter Sound, cold and open; semi-opaque and granulating, the cold signature of December water</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #6a5030 0%, #5a4020 100%);"></div>
+        <div class="trio-info"><h3>Raw Umber</h3><p>Frozen mud, boot-printed trail; grounding the skeleton landscape in earth</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#1a1a1a;"><span class="label" style="color:#fff;">Ivory Black</span></div>
+      <div class="swatch" style="background:#008888;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
+      <div class="swatch" style="background:#6a5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#c88050;"><span class="label" style="color:#fff;">Burnt Sienna Lt</span></div>
+      <div class="swatch" style="background:#1a2a50;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#d8a8a0;"><span class="label" style="color:#fff;">Potter's Pink</span></div>
+      <div class="swatch" style="background:#5a6a2a;"><span class="label" style="color:#fff;">Olive Green</span></div>
+      <div class="swatch" style="background:#0088a0;"><span class="label" style="color:#fff;">Cerulean Blue Cr</span></div>
+      <div class="swatch" style="background:#f8f8f8;"><span class="label" style="color:#777;">Titanium White</span></div>
+      <div class="swatch" style="background:#282828;"><span class="label" style="color:#fff;">Lunar Black</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#1a1a1a;"></div><div><div class="name">Ivory Black</div><div class="role">Primary &mdash; sky behind bare alder</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#d8a8a0;"></div><div><div class="name">Potter&rsquo;s Pink</div><div class="role">Atmospheric &mdash; clearing sky, one hour of rose</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#008888;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Primary &mdash; winter Sound, cold and open</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#5a6a2a;"></div><div><div class="name">Olive Green</div><div class="role">Warm Accent &mdash; sword fern before frost melts</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#6a5030;"></div><div><div class="name">Raw Umber</div><div class="role">Primary &mdash; frozen mud, boot-printed trail</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#0088a0;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Cool Accent &mdash; ice crystal on puddle edge</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c88050;"></div><div><div class="name">Burnt Sienna Light</div><div class="role">Earth &mdash; alder catkin, dormant and waiting</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f8f8f8;"></div><div><div class="name">Titanium White</div><div class="role">Light &mdash; alder bark, bone-white</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2a50;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; deep water under duck raft</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#282828;"></div><div><div class="name">Lunar Black</div><div class="role">Dark/Atmospheric &mdash; storm retreating east, granulating</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8aa880, #90b090);"></div>
+        <div><h3>Frost Fern</h3><span class="ratio">1 Olive Green : 1 Titanium White : touch Cerulean Blue Chromium</span></div>
+      </div>
+      <p class="mix-description">Sword fern rimed and still &mdash; Titanium White frosts the Olive Green into muted icy sage.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#5a6a2a; color:#fff;">Olive Green</div>
+        <div class="mix-bar" style="flex:1; background:#f8f8f8; color:#777;">Titanium White</div>
+        <div class="mix-bar" style="flex:0.15; background:#0088a0; color:#fff;">Cerulean Blue Cr</div>
+      </div>
+      <div class="mix-notes">Titanium White frosts the Olive Green into muted icy sage. Cerulean Blue Chromium adds mineral-cold edge. Dry-brush on rough paper &mdash; white catches peaks while green sinks into valleys.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8e0d8, #d8d0c8);"></div>
+        <div><h3>Alder Bone</h3><span class="ratio">2 Titanium White : touch Raw Umber : touch Ivory Black</span></div>
+      </div>
+      <p class="mix-description">Bare trunk against storm sky &mdash; alder bark is genuinely, startlingly white.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#f8f8f8; color:#777;">Titanium White</div>
+        <div class="mix-bar" style="flex:0.15; background:#6a5030; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:0.15; background:#1a1a1a; color:#fff;">Ivory Black</div>
+      </div>
+      <div class="mix-notes">Start with Titanium White applied thickly. Touch Raw Umber to shadow side and Ivory Black to base. The white should dominate &mdash; alder bark is genuinely, startlingly white.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a5868, #1a4858);"></div>
+        <div><h3>Duck Raft</h3><span class="ratio">2 Cobalt Teal Blue : 1 Indanthrone Blue : touch Raw Umber</span></div>
+      </div>
+      <p class="mix-description">Hundreds of birds on gray-green water &mdash; paint the raft as broken shape, not individual birds.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#008888; color:#fff;">Cobalt Teal Blue</div>
+        <div class="mix-bar" style="flex:1; background:#1a2a50; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:0.15; background:#6a5030; color:#fff;">Raw Umber</div>
+      </div>
+      <div class="mix-notes">Cobalt Teal Blue provides cold open-water color. Indanthrone Blue deepens where raft clusters. Raw Umber muddies just enough for living bodies displacing water. Paint raft as broken shape, not individual birds.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette is built on the brief clearing &mdash; that two-hour window when the landscape reveals its skeleton. Ivory Black and Titanium White are the high-contrast pair that makes alder trunks legible. Cobalt Teal Blue is the Sound&rsquo;s cold signature. Potter&rsquo;s Pink captures the rose-colored clearing light. Lunar Black&rsquo;s extreme granulation gives retreating storm clouds geological texture.</p>
+    </div>
+  </div>
+
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Bone Alders Against Storm Sky</h3>
+      <p class="subject"><strong>Subject:</strong> Row of bare white alder trunks against charcoal sky &mdash; skeleton trees revealed in the brief clearing.</p>
+      <p class="palette-fit">Ivory Black and Titanium White are the high-contrast pair built for this moment. Lunar Black&rsquo;s granulation gives the retreating storm geological texture.</p>
+      <div class="tips"><ul>
+        <li>Paint sky with thinned Ivory Black leaving trunk spaces</li>
+        <li>Drop Lunar Black into retreating storm for granulating cloud texture</li>
+        <li>Apply Alder Bone mix thickly</li>
+        <li>Leave light-facing side as pure Titanium White</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Duck Raft on the Winter Sound</h3>
+      <p class="subject"><strong>Subject:</strong> Hundreds of ducks rafted on cold water, seen from shore &mdash; a broken irregular dark shape, not individual birds.</p>
+      <p class="palette-fit">The Duck Raft mix (Cobalt Teal Blue 2:Indanthrone Blue 1:Raw Umber touch) handles both water and birds as one merged shape.</p>
+      <div class="tips"><ul>
+        <li>Flat wash of Cobalt Teal Blue for water</li>
+        <li>Drop Duck Raft mix where birds cluster</li>
+        <li>Paint raft as broken irregular dark shape NOT individual birds</li>
+        <li>Potter&rsquo;s Pink strip along distant horizon</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Frost Ferns at Dawn</h3>
+      <p class="subject"><strong>Subject:</strong> Sword fern fronds rimed with frost, dark understory behind &mdash; morning frost silvering fronds into fossils.</p>
+      <p class="palette-fit">The Frost Fern mix (Olive Green 1:Titanium White 1:Cerulean Blue Chromium touch) dry-brushed on rough paper catches frost on peaks.</p>
+      <div class="tips"><ul>
+        <li>Paint dark background with Ivory Black and Indanthrone Blue</li>
+        <li>Apply Olive Green to frond shapes</li>
+        <li>Once dry, dry-brush Frost Fern mix on rough paper</li>
+        <li>Touch Cerulean Blue Chromium to frost edges</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>The Brief Clearing &mdash; Alder Grove with Rose Sky</h3>
+      <p class="subject"><strong>Subject:</strong> Wider landscape with bone-white trunks, frozen trail, rose sky &mdash; clarity so brief it feels like trespass.</p>
+      <p class="palette-fit">Potter&rsquo;s Pink carries the clearing sky. Alder Bone mix for trunks. Raw Umber grounds the frozen trail. Burnt Sienna Light warms the nearest catkins.</p>
+      <div class="tips"><ul>
+        <li>Potter&rsquo;s Pink sky in clearing zone to Lunar Black storm</li>
+        <li>Alder trunks with Alder Bone mix</li>
+        <li>Trail is Raw Umber with Ivory Black boot-prints</li>
+        <li>Burnt Sienna Light catkins on nearest branches</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith extra fine watercolors. Lunar Black is a PrimaTek pigment with dramatic granulation. Cobalt Teal Blue is semi-opaque and granulates moderately. Potter&rsquo;s Pink (PR233) is subtle, low-chroma, granulates gently.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

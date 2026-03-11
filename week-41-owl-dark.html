@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 41 — Owl Dark</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(83,104,120,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(42,74,48,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(92,51,23,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(83,104,120,0.08) 0%, transparent 40%), linear-gradient(175deg, #3a3a3a 0%, #2a2a28 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #536878; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #e0e0e0; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #a0a0a0; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 41 &mdash; PNW Watercolor Series</div>
+    <h1>Owl Dark</h1>
+    <p class="mood">4:30 PM and the barred owl&rsquo;s eight-note call drops through absolute dark. Chum salmon thrash in shin-deep creeks, their backs breaking the surface like dull knives. The forest goes silent except for death and hunger, and even the rain sounds like it&rsquo;s trying not to be heard.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #536878 0%, #465a68 100%);"></div>
+        <div class="trio-info"><h3>Payne&rsquo;s Gray</h3><p>4:30 darkness, no apology; the color of a sky that has given up on light and is not sorry about it</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2a4a30 0%, #1e3a24 100%);"></div>
+        <div class="trio-info"><h3>Perylene Green</h3><p>Salal thicket, last green standing; dark enough to function as near-black, green enough to remind you life persists</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #5c3317 0%, #4a2810 100%);"></div>
+        <div class="trio-info"><h3>Burnt Umber</h3><p>Chum salmon decay on gravel bars; the brown of things returning to the earth that made them</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#2a4a30;"><span class="label" style="color:#fff;">Perylene Green</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#1a2a4a;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#8a80a0;"><span class="label" style="color:#fff;">Moonglow</span></div>
+      <div class="swatch" style="background:#c06828;"><span class="label" style="color:#fff;">Quin. Burnt Orange</span></div>
+      <div class="swatch" style="background:#6b9e6b;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#f0f0f0;"><span class="label" style="color:#777;">Chinese White</span></div>
+      <div class="swatch" style="background:#8a5a30;"><span class="label" style="color:#fff;">Trans. Brown Oxide</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Primary &mdash; 4:30 darkness, no apology</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#8a80a0;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; fog caught between trunks at dusk</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#2a4a30;"></div><div><div class="name">Perylene Green</div><div class="role">Primary &mdash; salal thicket, last green standing</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c06828;"></div><div><div class="name">Quinacridone Burnt Orange</div><div class="role">Warm Accent &mdash; salmon egg cluster in redd</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Primary &mdash; chum salmon decay on gravel bars</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#6b9e6b;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; creek water over mossy rock</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; creek-bottom stones through tannic water</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f0f0f0;"></div><div><div class="name">Chinese White</div><div class="role">Light &mdash; owl breast feather barring</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2a4a;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; old-growth canopy absorbing all light</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#8a5a30;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Earth &mdash; creek gravel dark and mineral</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a3820, #3a3a28);"></div>
+        <div><h3>Chum Rot</h3><span class="ratio">2 Burnt Umber : 1 Perylene Green</span></div>
+      </div>
+      <p class="mix-description">Salmon carcass feeding the creekbank &mdash; the brown of death becoming the green of next year&rsquo;s growth.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5c3317; color:#fff;">Burnt Umber</div>
+        <div class="mix-bar" style="flex:1; background:#2a4a30; color:#fff;">Perylene Green</div>
+      </div>
+      <div class="mix-notes">Mix produces a deep, decayed olive-brown. Apply wet-in-wet and let the Perylene Green&rsquo;s staining power pull the mix toward black at the edges. This is not a color you correct &mdash; let it settle ugly.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #708090, #8a8a88);"></div>
+        <div><h3>Barred Wing</h3><span class="ratio">2 Payne&rsquo;s Gray : 1 Chinese White : touch Raw Sienna</span></div>
+      </div>
+      <p class="mix-description">Owl plumage dissolving into bark &mdash; neither bird nor tree, just pattern disappearing into pattern.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:1; background:#f0f0f0; color:#777;">Chinese White</div>
+        <div class="mix-bar" style="flex:0.15; background:#c68030; color:#fff;">Raw Sienna</div>
+      </div>
+      <div class="mix-notes">The Chinese White lifts the Payne&rsquo;s Gray to a feathered mid-tone. The Raw Sienna touch warms it. Apply in horizontal bars with a flat brush, leaving gaps for white paper beneath.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8a8048, #7a8858);"></div>
+        <div><h3>Tannic Current</h3><span class="ratio">1 Raw Sienna : 1 Cascade Green : touch Payne&rsquo;s Gray</span></div>
+      </div>
+      <p class="mix-description">Tea-dark water over pale gravel &mdash; transparent, amber-green, hiding everything and revealing everything.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#c68030; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#6b9e6b; color:#fff;">Cascade Green</div>
+        <div class="mix-bar" style="flex:0.15; background:#536878; color:#fff;">Payne's Gray</div>
+      </div>
+      <div class="mix-notes">Transparent amber-green. The Payne&rsquo;s Gray touch drops the value for depth. Glaze over dry paper for clear-water effect; wet-in-wet for turbulent stretches.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This is a palette built for painting in the dark. Payne&rsquo;s Gray and Indigo provide two different blacks (blue-leaning and warm-leaning). Perylene Green is the critical hinge: dark enough to function as a near-black, green enough to remind you that living things persist. Moonglow&rsquo;s tripartite granulation makes fog genuinely atmospheric. Chinese White is used sparingly, for the owl and for light on water, because this palette is about darkness earning its keep.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Darkness is not absence &mdash; it&rsquo;s a subject. These prompts lean into the 4:30 PM world where everything is shape and sound, and color is something you have to earn.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Barred Owl on Mossy Snag</h3>
+      <p class="subject"><strong>Subject:</strong> A barred owl perched on a moss-draped snag at dusk, plumage dissolving into bark &mdash; camouflage so effective it becomes a meditation on what counts as visible.</p>
+      <p class="palette-fit">The Barred Wing mix (Payne&rsquo;s Gray 2:Chinese White 1:Raw Sienna touch) was built for owl plumage that refuses to separate from its background.</p>
+      <div class="tips"><ul>
+        <li>Paint dark background first: wet wash of Perylene Green and Indigo</li>
+        <li>Let dry, paint owl using Barred Wing mix in horizontal bars</li>
+        <li>Use Chinese White sparingly for facial disc</li>
+        <li>Resist adding detail to background</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Chum Salmon Run at Dusk</h3>
+      <p class="subject"><strong>Subject:</strong> Chum salmon in shin-deep water, one spent carcass on the bank &mdash; the living and the dead in the same frame, which is what November actually looks like.</p>
+      <p class="palette-fit">The Chum Rot mix (Burnt Umber 2:Perylene Green 1) handles the carcass. Quinacridone Burnt Orange provides the tiny, almost-hopeful punctuation of salmon eggs.</p>
+      <div class="tips"><ul>
+        <li>Start with water glazes</li>
+        <li>Paint living salmon as dark shapes breaking surface</li>
+        <li>Carcass gets full Chum Rot treatment</li>
+        <li>Drop Quinacridone Burnt Orange in tiny dots for eggs</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Creek Stones Through Dark Water</h3>
+      <p class="subject"><strong>Subject:</strong> Looking down into shallow creek, pale gravel through tea-colored water &mdash; a study in transparency where the medium and the subject are the same thing.</p>
+      <p class="palette-fit">The Tannic Current mix (Raw Sienna 1:Cascade Green 1:Payne&rsquo;s Gray touch) is the water itself &mdash; glaze it over dry-painted stones and watch depth appear.</p>
+      <div class="tips"><ul>
+        <li>Paint creek stones first on dry paper</li>
+        <li>Let dry, glaze with thin Tannic Current wash</li>
+        <li>Drop Payne&rsquo;s Gray into deeper spots</li>
+        <li>Add leaf shapes with Burnt Umber</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Fog Between Old-Growth Trunks</h3>
+      <p class="subject"><strong>Subject:</strong> Massive old-growth trunks receding into fog at 4:30 PM &mdash; depth without detail, where the fog is more solid than the trees.</p>
+      <p class="palette-fit">Moonglow&rsquo;s tripartite granulation was made for this &mdash; it separates on cold-press into component violets, blues, and ochres that read as atmospheric depth.</p>
+      <div class="tips"><ul>
+        <li>Wet paper, lay graded Moonglow wash</li>
+        <li>While damp, charge trunk positions with Indigo and Payne&rsquo;s Gray</li>
+        <li>Second layer of Payne&rsquo;s Gray on nearest trunk only</li>
+        <li>No detail on ground plane</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith extra fine watercolors. Transparent Brown Oxide glazes beautifully for creek-bed depth. Moonglow separates beautifully on cold-press. Cascade Green is a Daniel Smith exclusive with a cool, slightly turquoise lean.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

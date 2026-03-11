@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 — Nettle Crocus Threshold</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #faf8f5;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(122,64,136,0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 40%, rgba(80,125,42,0.3) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 70%, rgba(92,51,23,0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 35% 30%, rgba(122,64,136,0.15) 0%, transparent 40%),
+      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
+    filter: blur(20px);
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text .week-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7a6a8a;
+    margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero-text .mood {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5a5a5a;
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* Primary Trio */
+  .trio-section {
+    margin-top: 48px;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .trio-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .trio-swatch {
+    height: 120px;
+    position: relative;
+  }
+
+  .trio-swatch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+  }
+
+  .trio-info {
+    padding: 16px 18px;
+  }
+
+  .trio-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .trio-info p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* Full Palette */
+  .palette-section {
+    margin-top: 56px;
+  }
+
+  .palette-strip {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 72px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+
+  .palette-strip .swatch {
+    flex: 1;
+    position: relative;
+    cursor: default;
+    transition: flex 0.3s ease;
+  }
+
+  .palette-strip .swatch:hover {
+    flex: 2.5;
+  }
+
+  .palette-strip .swatch .label {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .palette-strip .swatch:hover .label {
+    opacity: 1;
+  }
+
+  .palette-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 24px;
+  }
+
+  .palette-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0ece6;
+  }
+
+  .palette-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .palette-item .name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .palette-item .role {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .palette-item .num {
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Mixes */
+  .mixes-section {
+    margin-top: 56px;
+  }
+
+  .mix-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .mix-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .mix-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .mix-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+  }
+
+  .mix-header .ratio {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+  }
+
+  .mix-description {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .mix-bars {
+    display: flex;
+    gap: 4px;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mix-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .mix-notes {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    border-left: 3px solid #e8e4de;
+    padding-left: 16px;
+  }
+
+  /* Why Section */
+  .why-section {
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .why-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* Painting Prompts */
+  .prompts-section {
+    margin-top: 56px;
+  }
+
+  .prompt-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .prompt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .prompt-card .prompt-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .prompt-card .subject {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .prompt-card .subject strong {
+    color: #333;
+  }
+
+  .prompt-card .palette-fit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .prompt-card .tips {
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prompt-card .tips ul li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    padding: 4px 0;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+  }
+
+  .prompts-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* Notes */
+  .notes-section {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: #f0ece6;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.7;
+  }
+
+  .notes-section strong {
+    color: #555;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e8e4de;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 8 &mdash; PNW Watercolor Series</div>
+    <h1>Nettle Crocus Threshold</h1>
+    <p class="mood">Eagle on a Douglas fir nest, 7:30 AM, daylight just crossing 11 hours. Nettle shoots push electric green through leaf litter. First crocuses &mdash; purple, improbable &mdash; in park strips. The tension: a threshold crossed in light that the body finally believes.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Primary Trio -->
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #7a4088 0%, #6a3578 100%);"></div>
+        <div class="trio-info">
+          <h3>Cobalt Violet</h3>
+          <p>Crocus petal in a park strip; granulating, luminous, the purple that appears impossible against bark mulch</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #507d2a 0%, #456b22 100%);"></div>
+        <div class="trio-info">
+          <h3>Sap Green</h3>
+          <p>Nettle shoot, first inch above the litter; transparent, yellow-leaning, the green of new growth not yet darkened</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #5c3317 0%, #4e2a12 100%);"></div>
+        <div class="trio-info">
+          <h3>Burnt Umber</h3>
+          <p>Leaf litter mat, months deep; granulating, warm, the surface being punctured from below</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette -->
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#7a4088;"><span class="label" style="color:#fff;">Cobalt Violet</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#1b3a5c;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#9890b0;"><span class="label" style="color:#fff;">Lavender</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#e8c820;"><span class="label" style="color:#fff;">Hansa Yellow Med.</span></div>
+      <div class="swatch" style="background:#2a52be;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#7a4088;"></div><div><div class="name">Cobalt Violet</div><div class="role">Accent &mdash; crocus petal, park strip, impossible purple</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#9890b0;"></div><div><div class="name">Lavender</div><div class="role">Atmospheric &mdash; March morning sky at 7:30 AM</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Anchor &mdash; nettle shoot electric, pushing through</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; light crossing 11 hours, thinning the air</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; leaf litter mat, compacted and wet</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#e8c820;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Warm Accent &mdash; nettle leaf backlit, translucent</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; Douglas fir bark, dry side, sunlit</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#2a52be;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; crocus throat marking, deep blue vein</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1b3a5c;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; eagle shadow cast across the nest</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Cool Accent &mdash; wet bark, north side, in shadow</div></div></div>
+    </div>
+  </div>
+
+  <!-- Mixes -->
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7a4088, #6a3a48);"></div>
+        <div>
+          <h3>Crocus Ground</h3>
+          <span class="ratio">2 Cobalt Violet : 1 Burnt Umber</span>
+        </div>
+      </div>
+      <p class="mix-description">Purple petals against mud and mulch &mdash; the absurd luxury of a crocus blooming in a parking strip.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#7a4088; color:#fff;">Cobalt Violet</div>
+        <div class="mix-bar" style="flex:1; background:#5c3317; color:#fff;">Burnt Umber</div>
+      </div>
+      <div class="mix-notes">
+        Both pigments granulate, so this mix has a pebbly, textured quality &mdash; which is the exact visual of crocus petals against bark mulch. Don&rsquo;t overmix on the palette; let them remain slightly separate so the violet and brown particles interleave on the paper. Paint the crocus first in purer Cobalt Violet, then bring the Burnt Umber mulch up to meet it while damp. The bleeding edge where they meet is the ground embracing the flower. For the crocus&rsquo;s yellow stamens, drop in pure Hansa Yellow Medium with a fine brush while the violet is still wet.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #507d2a, #8aaa30);"></div>
+        <div>
+          <h3>Nettle Emergence</h3>
+          <span class="ratio">2 Sap Green : 1 Hansa Yellow Medium</span>
+        </div>
+      </div>
+      <p class="mix-description">Stinging nettle, luminous, pushing through leaf litter &mdash; the green that announces spring has committed.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#e8c820; color:#fff;">Hansa Yellow Med.</div>
+      </div>
+      <div class="mix-notes">
+        Sap Green alone is too dark for new growth. Hansa Yellow Medium opens it up &mdash; makes it glow the way new nettle shoots actually glow when backlit by March morning sun. Apply to dry paper for crisp leaf edges. The serrated nettle leaf is distinctive; use a fine brush and paint each leaf as two or three quick strokes from midrib outward. For the stem, use purer Sap Green. For the youngest leaves at the tip, increase the Hansa. The color should get warmer and lighter as it gets newer. That&rsquo;s how growth works.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5c3317, #2e3a48);"></div>
+        <div>
+          <h3>Nest Bark</h3>
+          <span class="ratio">2 Burnt Umber : 1 Indanthrone Blue</span>
+        </div>
+      </div>
+      <p class="mix-description">Douglas fir trunk at eagle-nest scale &mdash; the massive bark plates that hold a six-foot nest without complaint.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5c3317; color:#fff;">Burnt Umber</div>
+        <div class="mix-bar" style="flex:1; background:#1b3a5c; color:#fff;">Indanthrone Blue</div>
+      </div>
+      <div class="mix-notes">
+        Burnt Umber granulates; Indanthrone Blue stains smooth. The combination gives you bark with two textures &mdash; the granular surface plates and the deep, smooth fissures between them. Apply Burnt Umber first for the plates, using dry brush on rough paper. Once dry, glaze Indanthrone Blue into the fissures between plates &mdash; the staining blue will sit in the valleys while the granulated brown holds the ridges. This separation of texture is the bark. The eagle nest is just sticks and gravity above it. Paint the trunk; the nest paints itself.
+      </div>
+    </div>
+  </div>
+
+  <!-- Why These Colors -->
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette splits between two chromatic events &mdash; purple crocuses and green nettles &mdash; connected by the brown earth they&rsquo;re both breaking through. Cobalt Violet granulates, which gives crocus petals their chalky, mineral luminosity distinct from smoother violets. Sap Green is transparent and yellow-leaning, which is exactly what new growth looks like before chloroplasts darken. Burnt Umber serves both worlds: mulch for the crocuses, leaf litter for the nettles. Indanthrone Blue is the deepest dark and the most staining &mdash; reserved for shadow passages that need to stay put under subsequent glazing. Lavender handles the March sky as a convenience mix that shifts and separates, capturing the instability of early spring light. The palette is warm on the ground (Burnt Umber, Raw Sienna) and cool in the sky (Lavender, Payne&rsquo;s Gray), with the threshold expressed in the two accents that shouldn&rsquo;t exist yet but do.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Crocuses in the Parking Strip</h3>
+      <p class="subject"><strong>Subject:</strong> Three or four purple crocuses blooming in a parking strip &mdash; bark mulch, a concrete curb, maybe a tire track at the edge. The absurd luxury of spring arriving in the most municipal setting possible.</p>
+      <p class="palette-fit">The Crocus Ground mix (Cobalt Violet + Burnt Umber) gives you petals against mulch with natural granulation in both pigments. Hansa Yellow Medium drops in as the stamens. French Ultramarine provides the tiny throat markings that guide pollinators.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the bark mulch ground first with Burnt Umber, using varied brushwork for the chunky texture &mdash; let it dry completely</li>
+          <li>Paint each crocus in Cobalt Violet on dry paper for crisp petal shapes, then bring the Burnt Umber mulch up to meet the petals while the violet is still slightly damp &mdash; the bleeding edge is the ground embracing the flower</li>
+          <li>Drop pure Hansa Yellow Medium into the center of each bloom while the violet is still wet for the stamens &mdash; the yellow will arrest against the drying violet</li>
+          <li>Add the curb with Payne&rsquo;s Gray &mdash; one straight line that reminds the viewer this miracle is happening next to a street</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Nettle Shoot Emerging</h3>
+      <p class="subject"><strong>Subject:</strong> Stinging nettle pushing electric green through compacted leaf litter &mdash; the first inch of new growth, backlit by March morning sun at 7:30 AM, serrated leaves still unfurling.</p>
+      <p class="palette-fit">The Nettle Emergence mix (Sap Green + Hansa Yellow Medium) glows exactly the way new growth glows when backlit. Burnt Umber beneath it is the leaf litter being punctured. This is spring&rsquo;s commitment letter.</p>
+      <div class="tips">
+        <ul>
+          <li>Build the leaf litter floor first with Burnt Umber + Raw Sienna, layering for depth &mdash; this mat is months deep, so build it in multiple washes</li>
+          <li>Paint the nettle shoots with the Nettle Emergence mix on dry paper for crisp, serrated leaf edges &mdash; two or three quick strokes from midrib outward per leaf</li>
+          <li>For the youngest leaves at the shoot tip, increase the Hansa Yellow Medium &mdash; color gets warmer and lighter as it gets newer</li>
+          <li>Add Payne&rsquo;s Gray at the base of the shoot where it disappears into the litter &mdash; the transition from dark earth to electric green is the threshold moment</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Eagle Nest in Douglas Fir</h3>
+      <p class="subject"><strong>Subject:</strong> A bald eagle on a massive Douglas fir nest, early morning, the huge bark plates of the trunk filling the foreground. The nest is sticks and gravity. The eagle is patience.</p>
+      <p class="palette-fit">The Nest Bark mix (Burnt Umber + Indanthrone Blue) gives you bark with two textures &mdash; granular surface plates and deep, smooth fissures. Indanthrone Blue is the eagle&rsquo;s shadow cast across the nest. Lavender is the March morning sky at 7:30 AM.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the trunk first with Burnt Umber using dry brush on rough paper for the bark plates &mdash; these are massive, deeply fissured plates at this scale</li>
+          <li>Once dry, glaze Indanthrone Blue into the fissures between plates &mdash; the staining blue sits in the valleys while the granulated brown holds the ridges</li>
+          <li>The nest is Raw Sienna + Burnt Umber for the sticks, piled loosely &mdash; don&rsquo;t overdefine them, they&rsquo;re a tangle</li>
+          <li>Paint the eagle last with Payne&rsquo;s Gray (body) and Buff Titanium (head) against the Lavender morning sky &mdash; keep the bird simple. At nest scale, it&rsquo;s surprisingly small against the tree</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>March Morning Sky Study</h3>
+      <p class="subject"><strong>Subject:</strong> The sky at 7:30 AM in early March &mdash; the moment the light crosses 11 hours and the air thins toward spring. Lavender overhead, Buff Titanium at the horizon, one Douglas fir silhouette.</p>
+      <p class="palette-fit">Lavender is a convenience mix that shifts and separates on paper, capturing the instability of early spring light. Buff Titanium marks the threshold in light &mdash; it&rsquo;s the color of air that&rsquo;s just started to carry warmth.</p>
+      <div class="tips">
+        <ul>
+          <li>Wet the entire sheet and lay Lavender from the top, grading to Buff Titanium at the horizon &mdash; let Lavender&rsquo;s component pigments separate on the paper for the shifting quality of March light</li>
+          <li>While still damp, add a thin line of French Ultramarine just above the horizon for the first real blue of the season &mdash; keep it small and tentative</li>
+          <li>Paint the Douglas fir silhouette with Indanthrone Blue + Payne&rsquo;s Gray once the sky is completely dry &mdash; hard edges against the soft atmospheric wash</li>
+          <li>This is a painting about the tipping point. The light should feel like it just barely believes in itself</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 5</div>
+      <h3>Crocus Throat Detail</h3>
+      <p class="subject"><strong>Subject:</strong> An extreme close-up of a single crocus &mdash; the purple petals, the yellow stamens, and the tiny French Ultramarine veins in the throat that guide pollinators to the center.</p>
+      <p class="palette-fit">Cobalt Violet granulates for that chalky, mineral petal luminosity. French Ultramarine appears only in the throat markings &mdash; the tiny blue veins that are invisible at distance but structurally essential. Hansa Yellow Medium is the stamen glow.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the petals first with Cobalt Violet on dry paper &mdash; each petal is a single stroke with a large round brush, leaving thin white paper veins between them</li>
+          <li>While the petals are still damp, paint the throat veins with French Ultramarine using a rigger or fine liner &mdash; these are thin, precise lines radiating from the center</li>
+          <li>Drop Hansa Yellow Medium into the very center for the stamens while everything is still slightly wet &mdash; let it bloom into the surrounding violet</li>
+          <li>The background is a single out-of-focus wash of Burnt Umber (mulch) &mdash; nothing should compete with the flower&rsquo;s architecture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-section">
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Cobalt Violet is expensive and granulates heavily &mdash; it&rsquo;s worth every particle for crocus work. Temperature splits between the warm ground and cool sky, with the two accent colors (Cobalt Violet, Sap Green) standing outside that system entirely &mdash; they&rsquo;re spring, not winter. French Ultramarine appears only in the crocus throat markings &mdash; the tiny blue veins that guide pollinators. Hansa Yellow Medium is the activator: it warms Sap Green, lights up crocus stamens, and catches on the Douglas fir bark&rsquo;s dry side. Buff Titanium marks the 11-hour threshold in light. This palette is about the moment things tip &mdash; use it at the tipping point.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

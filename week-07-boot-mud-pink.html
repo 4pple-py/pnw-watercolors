@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 — Boot Mud Pink</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #faf8f5;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,94,196,0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 40%, rgba(160,82,45,0.3) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 70%, rgba(83,104,120,0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 35% 30%, rgba(255,94,196,0.15) 0%, transparent 40%),
+      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
+    filter: blur(20px);
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text .week-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #b87a8a;
+    margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero-text .mood {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5a5a5a;
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* Primary Trio */
+  .trio-section {
+    margin-top: 48px;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .trio-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .trio-swatch {
+    height: 120px;
+    position: relative;
+  }
+
+  .trio-swatch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+  }
+
+  .trio-info {
+    padding: 16px 18px;
+  }
+
+  .trio-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .trio-info p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* Full Palette */
+  .palette-section {
+    margin-top: 56px;
+  }
+
+  .palette-strip {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 72px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+
+  .palette-strip .swatch {
+    flex: 1;
+    position: relative;
+    cursor: default;
+    transition: flex 0.3s ease;
+  }
+
+  .palette-strip .swatch:hover {
+    flex: 2.5;
+  }
+
+  .palette-strip .swatch .label {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .palette-strip .swatch:hover .label {
+    opacity: 1;
+  }
+
+  .palette-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 24px;
+  }
+
+  .palette-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0ece6;
+  }
+
+  .palette-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .palette-item .name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .palette-item .role {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .palette-item .num {
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Mixes */
+  .mixes-section {
+    margin-top: 56px;
+  }
+
+  .mix-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .mix-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .mix-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .mix-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+  }
+
+  .mix-header .ratio {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+  }
+
+  .mix-description {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .mix-bars {
+    display: flex;
+    gap: 4px;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mix-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .mix-notes {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    border-left: 3px solid #e8e4de;
+    padding-left: 16px;
+  }
+
+  /* Why Section */
+  .why-section {
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .why-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* Painting Prompts */
+  .prompts-section {
+    margin-top: 56px;
+  }
+
+  .prompt-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .prompt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .prompt-card .prompt-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .prompt-card .subject {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .prompt-card .subject strong {
+    color: #333;
+  }
+
+  .prompt-card .palette-fit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .prompt-card .tips {
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prompt-card .tips ul li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    padding: 4px 0;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+  }
+
+  .prompts-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* Notes */
+  .notes-section {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: #f0ece6;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.7;
+  }
+
+  .notes-section strong {
+    color: #555;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e8e4de;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 7 &mdash; PNW Watercolor Series</div>
+    <h1>Boot Mud Pink</h1>
+    <p class="mood">First rufous hummingbird at a Tacoma feeder, 2 PM, sun breaking through. Salmonberry buds swell neon pink along every trail that&rsquo;s become a creek. Mud takes your boot and considers keeping it. The tension: delicacy arriving into a landscape that&rsquo;s still brutal underfoot.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Primary Trio -->
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #ff5ec4 0%, #e84aaf 100%);"></div>
+        <div class="trio-info">
+          <h3>Opera Pink</h3>
+          <p>Salmonberry bud tight and swelling; fluorescent, transparent, almost too much for watercolor to contain</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a0522d 0%, #8a4420 100%);"></div>
+        <div class="trio-info">
+          <h3>Burnt Sienna</h3>
+          <p>Trail mud churned by weeks of boots and rain; granulating, warm, the color of used earth</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #536878 0%, #455a68 100%);"></div>
+        <div class="trio-info">
+          <h3>Payne&rsquo;s Gray</h3>
+          <p>Wet gravel boot-packed to a shine; cool, transparent, receding into every low place</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette -->
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#ff5ec4;"><span class="label" style="color:#fff;">Opera Pink</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#3d3d4a;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#c9a0a0;"><span class="label" style="color:#fff;">Potter's Pink</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#e03020;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
+      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
+      <div class="swatch" style="background:#2a8a8a;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#ff5ec4;"></div><div><div class="name">Opera Pink</div><div class="role">Accent &mdash; salmonberry bud, tight, neon, improbable</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#c9a0a0;"></div><div><div class="name">Potter&rsquo;s Pink</div><div class="role">Atmospheric &mdash; cloud break warmth, brief</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; trail mud churned to slurry</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; brief sun hitting a trail sign</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Atmosphere &mdash; wet gravel, boot-packed and gleaming</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#e03020;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Warm Accent &mdash; rufous gorget flash in direct sun</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; standing puddle sediment, settling</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Cool Accent &mdash; salmonberry cane, green and thorned</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#3d3d4a;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; boot-print water, deep and still</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#2a8a8a;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Cool Accent &mdash; puddle reflecting a gap in the sky</div></div></div>
+    </div>
+  </div>
+
+  <!-- Mixes -->
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e03020, #ff5ec4);"></div>
+        <div>
+          <h3>Gorget Flash</h3>
+          <span class="ratio">2 Pyrrol Scarlet : 1 Opera Pink</span>
+        </div>
+      </div>
+      <p class="mix-description">Hummingbird throat in direct sun &mdash; the iridescent flare that lasts half a second and burns into memory.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#e03020; color:#fff;">Pyrrol Scarlet</div>
+        <div class="mix-bar" style="flex:1; background:#ff5ec4; color:#fff;">Opera Pink</div>
+      </div>
+      <div class="mix-notes">
+        Pyrrol Scarlet is opaque and blazing; Opera Pink is transparent and fluorescent. Together they create a red-orange glow that&rsquo;s as close to iridescence as watercolor gets. Apply to dry white paper &mdash; no underwash, no glazing. The paper itself is the light source. Use a tiny brush, one stroke, and don&rsquo;t go back into it. The gorget is a flare, not a shape. For the bird&rsquo;s body, use Perylene Green with a touch of Burnt Sienna &mdash; the rufous back is already on your palette. The gorget is the only moment of full saturation. Make it count.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #a0522d, #6a5548);"></div>
+        <div>
+          <h3>Trail Slurry</h3>
+          <span class="ratio">2 Burnt Sienna : 1 Payne&rsquo;s Gray : 1 Raw Umber</span>
+        </div>
+      </div>
+      <p class="mix-description">Boot-sucking mud, weeks of rain in it &mdash; the trail that was gravel in November and is now archaeology.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
+        <div class="mix-bar" style="flex:1; background:#826644; color:#fff;">Raw Umber</div>
+      </div>
+      <div class="mix-notes">
+        Three granulating pigments in one mix &mdash; the paper does the texture work. Apply generously to damp paper and tilt at a low angle so the wash drifts and settles unevenly. The Burnt Sienna provides the dominant warmth, Payne&rsquo;s Gray cools the shadows, and Raw Umber fills the middle with silty neutral. For boot prints, wait until the wash is damp (not wet) and lift with a thirsty brush &mdash; the lifted marks will be lighter and cooler, reading as standing water in the print. Don&rsquo;t paint boot prints; excavate them.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #ff5ec4, #3a6040);"></div>
+        <div>
+          <h3>Bud Swell</h3>
+          <span class="ratio">2 Opera Pink : trace Perylene Green</span>
+        </div>
+      </div>
+      <p class="mix-description">Salmonberry bud about to split &mdash; the calyx still holding but the pink already winning, already visible.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#ff5ec4; color:#fff;">Opera Pink</div>
+        <div class="mix-bar" style="flex:0.3; background:#1a3a2a; color:#fff;">Perylene Green</div>
+      </div>
+      <div class="mix-notes">
+        The green is just the calyx &mdash; a whisper of Perylene Green at the base of the bud where it grips the cane. Paint the bud in pure Opera Pink first, a small oval on dry paper. While it&rsquo;s still damp, touch Perylene Green at the bottom only and let it bleed upward no more than a third of the way. The staining green will arrest itself against the drying pink. That boundary is the bud splitting. For buds not yet showing pink, reverse the proportions &mdash; mostly green with a pink blush at the tip.
+      </div>
+    </div>
+  </div>
+
+  <!-- Why These Colors -->
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Opera Pink is the most polarizing pigment on any watercolorist&rsquo;s palette &mdash; fluorescent, fugitive in some brands, unapologetically artificial. But salmonberry buds in late February are exactly that: color so saturated it looks wrong against the brown world hosting it. Daniel Smith&rsquo;s Opera Pink holds up better than most. Pyrrol Scarlet&rsquo;s opacity gives the hummingbird gorget its metallic density. Burnt Sienna, Payne&rsquo;s Gray, and Raw Umber all granulate, which means every mud passage writes its own texture. Cobalt Teal Blue is the only pigment on the palette that looks like sky &mdash; and it appears only in puddle reflections, because on this trail, you see the sky by looking down. Potter&rsquo;s Pink and Buff Titanium handle the brief cloud break &mdash; both semi-opaque, both pale, both fleeting.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Salmonberry Buds Along a Mud Trail</h3>
+      <p class="subject"><strong>Subject:</strong> A trail that&rsquo;s become a creek, salmonberry canes arching overhead with tight neon-pink buds, boot-sucking mud below. The collision of delicacy and brutality that IS late February in the PNW.</p>
+      <p class="palette-fit">Opera Pink is the bud &mdash; fluorescent, improbable, almost too much. The Trail Slurry mix (Burnt Sienna + Payne&rsquo;s Gray + Raw Umber) is the mud. The palette&rsquo;s widest chroma jump &mdash; from Neutral Tint to Opera Pink &mdash; is the painting&rsquo;s entire emotional arc.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the trail mud first with the Trail Slurry mix on damp paper &mdash; three granulating pigments in one wash, tilted to drift and settle unevenly. Let the paper do the texture work</li>
+          <li>Excavate boot prints by lifting with a thirsty brush while the wash is damp (not wet) &mdash; the lifted marks read as standing water in the prints</li>
+          <li>Paint the salmonberry canes with Perylene Green, then add buds with the Bud Swell mix (Opera Pink + trace Perylene Green at the calyx). Each bud is a small oval, one stroke</li>
+          <li>Let the mud dominate the surface area. Let the pink win the eye. That ratio is the painting&rsquo;s job</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Rufous Hummingbird at the Feeder</h3>
+      <p class="subject"><strong>Subject:</strong> The first rufous hummingbird of the season at a backyard feeder &mdash; 2 PM, sun breaking through. The gorget flares once in direct light. Half a second of iridescence against a gray-green garden.</p>
+      <p class="palette-fit">The Gorget Flash mix (Pyrrol Scarlet + Opera Pink) is as close to iridescence as watercolor gets. Pyrrol Scarlet&rsquo;s opacity gives the throat its metallic density. Perylene Green + Burnt Sienna handles the rufous back.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the background garden first &mdash; soft, out of focus, Perylene Green + Payne&rsquo;s Gray on damp paper. Let it dry completely</li>
+          <li>Paint the bird&rsquo;s body with Perylene Green + Burnt Sienna for the back, Buff Titanium for the breast</li>
+          <li>The gorget is one stroke on dry white paper with the Gorget Flash mix &mdash; no underwash, no glazing. The paper itself is the light source. Tiny brush, one stroke, don&rsquo;t go back into it</li>
+          <li>The feeder can be suggested with Potter&rsquo;s Pink and Cobalt Teal Blue &mdash; keep it minimal so the bird stays the subject</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Puddle Sky</h3>
+      <p class="subject"><strong>Subject:</strong> A trail puddle reflecting a gap in the overcast &mdash; the only way to see the sky on this trail is to look down. Boot prints in the mud frame the reflection. The world inverted.</p>
+      <p class="palette-fit">Cobalt Teal Blue is the only pigment on the palette that looks like sky, and it appears only in puddle reflections. Neutral Tint gives the boot-print water its stillness. The Trail Slurry mix frames everything.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the mud around and between the puddles first with the Trail Slurry mix &mdash; leave the puddle shapes as white paper</li>
+          <li>Once the mud is dry, paint the puddle reflections with Cobalt Teal Blue for the sky gap, adding Payne&rsquo;s Gray at the puddle edges where it reflects the surrounding trees</li>
+          <li>Use Neutral Tint in the deepest boot-print puddles &mdash; these are smaller, darker, and don&rsquo;t reflect sky</li>
+          <li>Add a few Opera Pink salmonberry bud reflections in the main puddle &mdash; the inverted world should include the trail&rsquo;s best feature</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Cloud Break on the Trail Sign</h3>
+      <p class="subject"><strong>Subject:</strong> A brief moment of sun hitting a wooden trail sign, the light warm and fleeting against the surrounding gray-brown landscape. Potter&rsquo;s Pink in the clouds, Buff Titanium on the sign.</p>
+      <p class="palette-fit">Potter&rsquo;s Pink and Buff Titanium are both semi-opaque and pale &mdash; they handle the brief cloud break with exactly the right chalky, fleeting quality. The surrounding Trail Slurry dark makes the light passage feel earned.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the cloud break sky with Potter&rsquo;s Pink + Buff Titanium &mdash; keep it pale, chalky, and brief. The light should feel like it won&rsquo;t last</li>
+          <li>The trail sign is Buff Titanium on the sunlit face, Raw Umber on the shadow side &mdash; a simple value study</li>
+          <li>Surround the lit sign with the Trail Slurry mix for the muddy trail and Perylene Green for the salmonberry canes &mdash; the dark context makes the light moment precious</li>
+          <li>Add one Opera Pink bud catching the sun near the sign &mdash; pink and light arriving at the same time, both temporary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-section">
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Opera Pink is the palette&rsquo;s loudest note &mdash; use it for buds and accents only. It will overwhelm if spread across large passages. Temperature runs warm in the mud tones and splits to extremes with Opera Pink (hot) and Cobalt Teal Blue (cool). Pyrrol Scarlet is opaque; everything else leans transparent. This palette has the widest chroma range of the winter series &mdash; from Neutral Tint to Opera Pink is a massive jump. The painting&rsquo;s job is to make that jump feel earned, not jarring. Let the mud dominate the surface area. Let the pink win the eye.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

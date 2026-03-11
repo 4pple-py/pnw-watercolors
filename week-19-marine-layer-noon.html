@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 19 — Marine Layer Noon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f5f6f8;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(91,164,207,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 70%, rgba(240,200,48,0.14) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(83,104,120,0.12) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 80%, rgba(176,38,74,0.1) 0%, transparent 40%),
+      linear-gradient(175deg, #f4f6f8 0%, #eef2f6 100%);
+    filter: blur(20px);
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-text .week-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600; font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; color: #536878; margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 700; color: #1a1a1a;
+    line-height: 1.1; margin-bottom: 16px;
+  }
+
+  .hero-text .mood {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 16px; color: #5a5a5a;
+    max-width: 640px; line-height: 1.7;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e8eae8; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 19 &mdash; PNW Watercolor Series</div>
+    <h1>Marine Layer Noon</h1>
+    <p class="mood">Morning fog sits like a lid. Swainson's thrushes spiral their song upward through salal. By noon the marine layer burns off and everything underneath is suddenly, violently green. The tension between concealment and reveal &mdash; fog as curtain, sun as stagehand. The same landscape twice in one day.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Primary Trio -->
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #f0c830 0%, #d8b420 100%);"></div>
+        <div class="trio-info">
+          <h3>Hansa Yellow Medium</h3>
+          <p>Noon light hitting wet leaves, the shock of color after gray; transparent, clean, medium-warm</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b0264a 0%, #981e3e 100%);"></div>
+        <div class="trio-info">
+          <h3>Alizarin Crimson</h3>
+          <p>Salal flower interior, urn-shaped and secret; transparent, cool-leaning red that mixes violet easily</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #5ba4cf 0%, #4890b8 100%);"></div>
+        <div class="trio-info">
+          <h3>Cerulean Blue Chromium</h3>
+          <p>Marine layer breaking apart, chalky and granulating; opaque, it sits on the paper like fog sits on the land</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette -->
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#f0c830;"><span class="label" style="color:#777;">Hansa Yellow Med</span></div>
+      <div class="swatch" style="background:#b0264a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
+      <div class="swatch" style="background:#5ba4cf;"><span class="label" style="color:#fff;">Cerulean Blue Chr.</span></div>
+      <div class="swatch" style="background:#5a8c2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#3a3a42;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#c87830;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
+      <div class="swatch" style="background:#00838f;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
+      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c88a3e;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#f0c830;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Primary &mdash; noon light hitting wet leaves, violent green catalyst</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Atmospheric &mdash; marine layer before burn-off, the whole morning in one color</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b0264a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Primary &mdash; salal flower interior, the color you have to part branches to see</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c87830;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Warm Accent &mdash; madrone bark revealed by new sun, first warmth of the day</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5ba4cf;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Primary &mdash; marine layer breaking apart, granulating into patches</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#00838f;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Cool Accent &mdash; tide pool revealed as fog lifts, metallic and startling</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5a8c2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; salal hedge mass, dense and impenetrable</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; fog diffusion, the color of visibility at fifty feet</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#3a3a42;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; fog shadow on wet trunk, colorless depth</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c88a3e;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; exposed trail in noon heat, drying fast</div></div></div>
+    </div>
+  </div>
+
+  <!-- Mixes -->
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7ab0c8, #6aa0b8);"></div>
+        <div>
+          <h3>Fog Lift</h3>
+          <span class="ratio">3 Cerulean Blue Chromium : 2 Buff Titanium : 1 Payne's Gray</span>
+        </div>
+      </div>
+      <p class="mix-description">Marine layer thinning, light pushing through &mdash; the moment you see blue for the first time since yesterday.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:3; background:#5ba4cf; color:#fff;">Cerulean Blue Chr.</div>
+        <div class="mix-bar" style="flex:2; background:#e8d8b4; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+      </div>
+      <div class="mix-notes">
+        This is fog becoming sky. Cerulean Blue Chromium's granulation is the texture of breaking cloud &mdash; heavy particles settling into paper valleys while light areas read as openings. Buff Titanium is the milky diffusion that isn't quite cloud and isn't quite clear. Payne's Gray holds the underside of what's left. Apply to wet paper and tilt the board; let gravity separate the pigments the way wind separates fog.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a5828, #2a4818);"></div>
+        <div>
+          <h3>Salal Thicket</h3>
+          <span class="ratio">2 Sap Green : 1 Neutral Tint : &frac12; Alizarin Crimson</span>
+        </div>
+      </div>
+      <p class="mix-description">Dense shrub mass with urn-shaped flowers barely visible &mdash; the green wall that lines every PNW trail.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5a8c2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#3a3a42; color:#fff;">Neutral Tint</div>
+        <div class="mix-bar" style="flex:0.5; background:#b0264a; color:#fff;">Alizarin Crimson</div>
+      </div>
+      <div class="mix-notes">
+        Sap Green alone is too cheerful for salal. Neutral Tint darkens it without adding any hue &mdash; the salal interior is genuinely lightless. Alizarin Crimson is the surprise: half a part shifts the green subtly warm and accounts for the tiny urn-flowers hiding inside the hedge. Build in layers. The first wash is the surface; the second is the depth; the third is where the thrushes live.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d8b038, #c8a028);"></div>
+        <div>
+          <h3>Noon Scald</h3>
+          <span class="ratio">2 Hansa Yellow Medium : 1 Raw Sienna : &frac12; Aussie Red Gold</span>
+        </div>
+      </div>
+      <p class="mix-description">The shock of full sun after a week of gray &mdash; sudden warmth on everything, almost aggressive.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#f0c830; color:#777;">Hansa Yellow Med</div>
+        <div class="mix-bar" style="flex:1; background:#c88a3e; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:0.5; background:#c87830; color:#fff;">Aussie Red Gold</div>
+      </div>
+      <div class="mix-notes">
+        This mix is about the temperature change. Hansa Yellow Medium is the light itself &mdash; transparent and clean. Raw Sienna grounds it in earth, the trail drying in real time. Aussie Red Gold adds the madrone bark warmth, the first tree to glow when the fog lifts. Glaze this over dried cool washes (Payne's Gray, Cerulean) to create the sensation of sun arriving. The layering tells the story.
+      </div>
+    </div>
+  </div>
+
+  <!-- Why These Colors -->
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Two palettes in one: the fog half and the sun half. Cerulean Blue Chromium, Payne's Gray, and Buff Titanium handle the marine layer &mdash; all opaque or semi-opaque, all cool, all built to sit on the paper like weather. Hansa Yellow Medium, Raw Sienna, and Aussie Red Gold handle the reveal &mdash; all transparent or semi-transparent, all warm, all designed to glow through and over the fog-half's washes. Sap Green and Neutral Tint are the constants, the salal that exists in both conditions. Alizarin Crimson and Cobalt Teal Blue are the hidden details you only notice when the fog is gone.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>The Same View, Two Hours Apart</h3>
+      <p class="subject"><strong>Subject:</strong> A diptych (or a single painting split by a soft edge): the same coastal scene in morning fog, then in noon sun. Everything changes except the salal.</p>
+      <p class="palette-fit">This palette was literally designed as two palettes in one &mdash; fog half and sun half. Cerulean Blue Chromium, Payne&rsquo;s Gray, and Buff Titanium for the left panel; Hansa Yellow Medium, Raw Sienna, and Aussie Red Gold for the right.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the fog version first: wet the left half and drop in the Fog Lift mix (Cerulean Blue Chromium + Buff Titanium + Payne&rsquo;s Gray), letting it granulate undisturbed</li>
+          <li>The salal hedge runs across both halves &mdash; paint it continuously with the Salal Thicket mix so it connects the two moments</li>
+          <li>For the sun version on the right, let the fog half dry completely, then glaze the Noon Scald mix (Hansa Yellow Medium + Raw Sienna + Aussie Red Gold) over the right side</li>
+          <li>The transition between the two halves can be a soft wet-into-wet bleed &mdash; fog doesn&rsquo;t end at a hard line</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Salal Thicket With Hidden Flowers</h3>
+      <p class="subject"><strong>Subject:</strong> A dense wall of salal along a trail, dark and impenetrable, with tiny urn-shaped flowers barely visible if you look carefully.</p>
+      <p class="palette-fit">The Salal Thicket mix (Sap Green + Neutral Tint + Alizarin Crimson) handles the whole shrub mass. The Alizarin Crimson does double duty as the flowers hiding inside.</p>
+      <div class="tips">
+        <ul>
+          <li>Build the salal in three layers, drying between each: first wash of Sap Green, second wash of Sap Green + Neutral Tint in the interior, third layer of concentrated Neutral Tint in the deepest recesses</li>
+          <li>The urn flowers are tiny touches of Alizarin Crimson applied with a rigger brush into the still-damp second layer &mdash; they should blur slightly, like something you&rsquo;re not quite sure you saw</li>
+          <li>Leave the top edge of the salal hedge crisp against the sky or fog to give the dense mass a readable silhouette</li>
+          <li>A few leaves at the foreground edge can be individual Sap Green strokes on dry paper, giving scale to the mass behind</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Tide Pool Revealed</h3>
+      <p class="subject"><strong>Subject:</strong> A rocky tide pool emerging as the fog burns off &mdash; Cobalt Teal Blue water, dark wet rocks, maybe an anemone or sea star catching the first sun.</p>
+      <p class="palette-fit">Cobalt Teal Blue is the metallic, startling color of a tide pool that&rsquo;s been hidden under fog all morning. Neutral Tint handles the wet basalt. Aussie Red Gold gives you the ochre sea star.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the rocks first with Neutral Tint at varying concentrations &mdash; wet rocks are darker than dry rocks, so keep the ones closest to the water at full strength</li>
+          <li>The tide pool water is Cobalt Teal Blue applied in a single flat stroke to dry paper &mdash; its opacity gives the water that opaque, mineral-rich look</li>
+          <li>A sea star is a small star shape of Aussie Red Gold &mdash; its slight granulation on cold-pressed paper mimics the bumpy texture of the animal</li>
+          <li>Add wisps of the Fog Lift mix at the top of the composition for the last marine layer burning off above</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Madrone Trunk in New Sun</h3>
+      <p class="subject"><strong>Subject:</strong> A madrone tree trunk catching the first noon sun after fog lifts &mdash; warm bark suddenly glowing against the cool green of everything else.</p>
+      <p class="palette-fit">Aussie Red Gold is this exact tree in this exact moment. Glazing the Noon Scald mix over a cool Payne&rsquo;s Gray underpainting creates the sensation of sun arriving on bark.</p>
+      <div class="tips">
+        <ul>
+          <li>Underpaint the trunk with dilute Payne&rsquo;s Gray and let it dry &mdash; this is the fog-morning version of the bark</li>
+          <li>Glaze Aussie Red Gold over the dried Payne&rsquo;s Gray on the sun-facing side; the cool underpainting glowing through the warm glaze is the whole effect</li>
+          <li>The background salal stays in the Salal Thicket mix, still cool, still in shade &mdash; the madrone is the only warm thing in the frame</li>
+          <li>Use dry brush with Raw Sienna for the peeling bark edges where the outer layer curls away from the smooth trunk beneath</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 5</div>
+      <h3>Swainson&rsquo;s Thrush (Heard But Not Seen)</h3>
+      <p class="subject"><strong>Subject:</strong> A dense salal and fern understory in fog, the spiral song of a Swainson&rsquo;s thrush implied by the composition&rsquo;s upward energy but the bird completely invisible.</p>
+      <p class="palette-fit">This is a painting about absence and atmosphere. Payne&rsquo;s Gray fog, Sap Green salal, Neutral Tint shadows &mdash; the cool half of the palette doing quiet, patient work.</p>
+      <div class="tips">
+        <ul>
+          <li>Wet the entire paper and lay in Payne&rsquo;s Gray at the top grading to Buff Titanium at mid-height for the fog</li>
+          <li>While still damp, touch in Sap Green salal shapes at the bottom third, letting the edges blur upward into the fog</li>
+          <li>Add Neutral Tint vertically for tree trunks dissolving into the mist &mdash; lost edges everywhere, nothing fully resolved</li>
+          <li>The thrush is absent from the painting. That&rsquo;s the point. The fog and the composition imply the upward spiral of its song without showing the bird. Sometimes the best subject is the one you leave out.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Neutral Tint is a convenience mix &mdash; it's designed to darken without shifting hue, making it ideal for value adjustments in green mixes. Cerulean Blue Chromium is genuinely opaque; it will cover underlying washes rather than glazing over them, so sequence your layers accordingly. Aussie Red Gold is a uniquely warm, slightly granulating pigment that feels like it was made for madrone bark.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

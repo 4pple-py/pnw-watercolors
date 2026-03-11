@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 37 — Full Spectrum</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(224,120,48,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(204,24,48,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(80,125,42,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(224,120,48,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8f2ea 0%, #f0eee8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #d06020; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 37 &mdash; PNW Watercolor Series</div>
+    <h1>Full Spectrum</h1>
+    <p class="mood">Gold, scarlet, lemon layered on evergreen &mdash; the forest is a paint chart arguing with itself. Porcini and lobster mushrooms fruit in the understory. Elk bugling echoes off Olympic valley walls at dawn. This is the week the PNW stops being subtle. Every color at once, no apology.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e07830 0%, #c86820 100%);"></div>
+        <div class="trio-info"><h3>Cadmium Orange Hue</h3><p>Bigleaf maple at peak, the dominant warm that owns the canopy; semi-opaque, high-chroma, cadmium-free</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #cc1830 0%, #b01028 100%);"></div>
+        <div class="trio-info"><h3>Pyrrol Red</h3><p>Vine maple screaming against every dark surface; opaque, intense, slightly blue-leaning</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #507d2a 0%, #406a20 100%);"></div>
+        <div class="trio-info"><h3>Sap Green</h3><p>The evergreen anchor, the constant &mdash; the one thing not changing while everything else catches fire</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#e07830;"><span class="label" style="color:#fff;">Cad. Orange Hue</span></div>
+      <div class="swatch" style="background:#cc1830;"><span class="label" style="color:#fff;">Pyrrol Red</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#f8e838;"><span class="label" style="color:#777;">Lemon Yellow</span></div>
+      <div class="swatch" style="background:#c8a030;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#1a2a4a;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#b0522a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#c8b838;"><span class="label" style="color:#fff;">Nickel Azo Yellow</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e07830;"></div><div><div class="name">Cadmium Orange Hue</div><div class="role">Primary &mdash; bigleaf maple at peak, canopy on fire</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#1a2a4a;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; conifer shadow, deep and cool against the blaze</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#cc1830;"></div><div><div class="name">Pyrrol Red</div><div class="role">Primary &mdash; vine maple screaming, no volume knob</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; lobster mushroom orange-red crust, funky and dense</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Primary &mdash; evergreen anchor, the one thing not changing</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#b0522a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Atmospheric &mdash; porcini cap wet with dew, mahogany dome</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#f8e838;"></div><div><div class="name">Lemon Yellow</div><div class="role">Warm Accent &mdash; cottonwood going pale, lightest warm note</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Cool Accent &mdash; overcast pressing color brighter by contrast</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#c8a030;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Earth &mdash; understory mid-turn, gold shifting toward amber</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c8b838;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Light &mdash; lemon-yellow alder leaves, greenish-gold, translucent</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c08048, #a08858);"></div>
+        <div><h3>Elk Meadow Dawn</h3><span class="ratio">2 Cadmium Orange Hue : 1 Payne&rsquo;s Gray : touch Nickel Azo Yellow</span></div>
+      </div>
+      <p class="mix-description">Olympic valley at first light, fog-gold &mdash; the meadow glowing before the sun clears the ridge.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#e07830; color:#fff;">Cad. Orange Hue</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:0.15; background:#c8b838; color:#fff;">Nickel Azo</div>
+      </div>
+      <div class="mix-notes">Apply as a graded wash: Payne&rsquo;s Gray dominant at the base, Cadmium Orange Hue increasing through the middle, Nickel Azo Yellow at the crest. The fog-gold effect comes from letting the warm and cool pigments overlap in the middle zone without premixing. Work fast on wet paper.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d04828, #c06030);"></div>
+        <div><h3>Lobster Flesh</h3><span class="ratio">1 Pyrrol Red : 1 Cadmium Orange Hue : touch Burnt Umber</span></div>
+      </div>
+      <p class="mix-description">Lobster mushroom cross-section &mdash; the outer rind where the color lives, thick enough to read as opaque crust.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#cc1830; color:#fff;">Pyrrol Red</div>
+        <div class="mix-bar" style="flex:1; background:#e07830; color:#fff;">Cad. Orange Hue</div>
+        <div class="mix-bar" style="flex:0.15; background:#5c3317; color:#fff;">Burnt Umber</div>
+      </div>
+      <div class="mix-notes">The outer rind is where the color lives &mdash; Pyrrol Red and Cadmium Orange Hue mixed directly, applied thick enough to read as opaque crust. Leave the center as bare paper. The Burnt Umber touch darkens the outermost edge where forest dirt clings to the fungal surface.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a8a38, #8a7a30);"></div>
+        <div><h3>Canopy Stack</h3><span class="ratio">2 Sap Green : 1 Quinacridone Gold : touch Pyrrol Red</span></div>
+      </div>
+      <p class="mix-description">Layered foliage, the vertical spectrum &mdash; three stories of color stacked in a single view.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#c8a030; color:#fff;">Quin. Gold</div>
+        <div class="mix-bar" style="flex:0.15; background:#cc1830; color:#fff;">Pyrrol Red</div>
+      </div>
+      <div class="mix-notes">This is a layering exercise, not a mixing exercise. Paint the Sap Green canopy base first and let it dry completely. Glaze Quinacridone Gold over portions where light hits the mid-story. Then touch Pyrrol Red into the uppermost zone where vine maple crowns the stack. Each layer should be readable through the layers above.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Full Spectrum is the widest chromatic range in the autumn arc. Cadmium Orange Hue and Pyrrol Red provide the opaque, high-chroma punch that owns the canopy and understory respectively. Sap Green grounds the composition &mdash; the evergreen constant against which everything else is measured. Lemon Yellow and Nickel Azo Yellow handle the lightest warm notes: cottonwood and alder going pale. Burnt Umber and Transparent Red Oxide serve the mushroom passages &mdash; lobster mushroom crust and porcini cap. Indigo and Payne&rsquo;s Gray provide the only cool notes, outnumbered but essential as foils. This palette is warm by a 7-to-3 margin. That&rsquo;s October.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Elk Meadow at Dawn</h3>
+      <p class="subject"><strong>Subject:</strong> Olympic valley at first light &mdash; fog-gold meadow backed by dark timber, elk as suggestion rather than portrait, the whole scene pressing warm against a Payne&rsquo;s Gray overcast.</p>
+      <p class="palette-fit">The Elk Meadow Dawn mix (Cadmium Orange Hue 2:Payne&rsquo;s Gray 1:Nickel Azo Yellow touch) was built for this exact light &mdash; graded from cool base to warm crest, the fog burning off in paint.</p>
+      <div class="tips"><ul>
+        <li>Graded wash: Payne&rsquo;s Gray at base, transitioning to Cadmium Orange Hue through the middle, Nickel Azo Yellow at the crest</li>
+        <li>Indigo for the dark timber wall behind the meadow &mdash; a single confident band</li>
+        <li>Keep elk as suggestion, not portrait: Burnt Umber silhouette, no detail</li>
+        <li>Payne&rsquo;s Gray overcast pressing the warm light brighter by contrast</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Lobster Mushroom Cross-Section</h3>
+      <p class="subject"><strong>Subject:</strong> A lobster mushroom sliced open &mdash; bright orange-red exterior crust giving way to white interior, forest dirt clinging to the outer surface.</p>
+      <p class="palette-fit">The Lobster Flesh mix (Pyrrol Red 1:Cadmium Orange Hue 1:Burnt Umber touch) captures the rind at full concentration &mdash; opaque, dense, where the color lives.</p>
+      <div class="tips"><ul>
+        <li>Outer rind: Pyrrol Red and Cadmium Orange Hue at full concentration, applied thick</li>
+        <li>Burnt Umber where forest dirt clings to the fungal surface</li>
+        <li>Leave center as bare paper &mdash; the white interior needs no paint</li>
+        <li>Small format, botanical framing; Indigo background to push the warm crust forward</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Peak Foliage Canopy Stack</h3>
+      <p class="subject"><strong>Subject:</strong> Vertical cross-section of mixed forest at peak color &mdash; evergreen base, gold mid-story, red crown, three layers readable as distinct but connected.</p>
+      <p class="palette-fit">The Canopy Stack approach (Sap Green base, Quinacridone Gold mid-layer, Pyrrol Red top) is a glazing exercise &mdash; each layer readable through the layers above it.</p>
+      <div class="tips"><ul>
+        <li>Glazing exercise, not mixing &mdash; each layer must dry before the next</li>
+        <li>Sap Green base, Quinacridone Gold mid-layer, Pyrrol Red top</li>
+        <li>Each layer should be readable through the layers above</li>
+        <li>Lemon Yellow and Nickel Azo Yellow for the lightest notes where light penetrates the canopy</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Porcini in Morning Dew</h3>
+      <p class="subject"><strong>Subject:</strong> A porcini cap wet with dew &mdash; mahogany dome catching early light, thick pale stem, surrounded by moss and fallen leaves.</p>
+      <p class="palette-fit">Transparent Red Oxide is the porcini pigment &mdash; a single convex wash for the cap, with Burnt Umber for the thick stem and Sap Green for the surrounding moss.</p>
+      <div class="tips"><ul>
+        <li>Transparent Red Oxide as a single convex wash for the cap &mdash; one stroke, one dome</li>
+        <li>Leave small white highlights for dew drops catching light</li>
+        <li>Burnt Umber for the thick stem, dry-brushed for texture</li>
+        <li>Sap Green for surrounding moss, Quinacridone Gold for fallen leaves nearby</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments confirmed Daniel Smith extra fine watercolors. Cadmium Orange Hue is cadmium-free &mdash; same chroma, lower toxicity, no compromise in performance. Pyrrol Red is among the most lightfast reds available &mdash; it won&rsquo;t fade. Nickel Azo Yellow is unique in the palette: a greenish-yellow, transparent, excellent for the specific yellow of alder and cottonwood leaves that no other pigment captures. Payne&rsquo;s Gray in Daniel Smith leans blue, which makes it a better complement to the warm-dominant palette than a neutral gray would be.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 29 — Smoke Veil</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(160,64,32,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(90,106,42,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(232,216,180,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(200,160,96,0.08) 0%, transparent 40%), linear-gradient(175deg, #f0e0c8 0%, #e8d8c0 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a04020; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 29 &mdash; PNW Watercolor Series</div>
+    <h1>Smoke Veil</h1>
+    <p class="mood">Wildfire smoke rolls west and the sun turns copper coin. Fireweed blooms top out &mdash; the old signal, six weeks to frost. Huckleberries stain fingers at 3,000 feet while the valley below disappears in amber gauze. Summer is burning its own calendar.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a04020 0%, #903818 100%);"></div>
+        <div class="trio-info"><h3>Transparent Red Oxide</h3><p>The copper sun disk you can stare at without squinting, all warmth filtered through smoke; transparent and iron-based, it granulates on textured paper</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #5a6a2a 0%, #4e5e22 100%);"></div>
+        <div class="trio-info"><h3>Olive Green</h3><p>Conifers seen through smoke, already dulled to military drab; this is green with the life drained out, which is exactly right</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #0a3d6b 0%, #08305a 100%);"></div>
+        <div class="trio-info"><h3>Phthalo Blue GS</h3><p>The faint bay glow still visible below the smoke layer, a memory of last week's bioluminescence clinging to warm water</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#a04020;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
+      <div class="swatch" style="background:#5a6a2a;"><span class="label" style="color:#fff;">Olive Green</span></div>
+      <div class="swatch" style="background:#0a3d6b;"><span class="label" style="color:#fff;">Phthalo Blue GS</span></div>
+      <div class="swatch" style="background:#00695c;"><span class="label" style="color:#fff;">Phthalo Green BS</span></div>
+      <div class="swatch" style="background:#2a2a5a;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#d42070;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
+      <div class="swatch" style="background:#c8a060;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#5a3a20;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#a04020;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Primary &mdash; copper sun disk seen through smoke, no glare left</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#d42070;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Warm Accent &mdash; fireweed spire, magenta against dulled slopes</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#5a6a2a;"></div><div><div class="name">Olive Green</div><div class="role">Primary &mdash; conifers muted by particulate haze</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c8a060;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; haze-amber midground dissolving into distance</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#0a3d6b;"></div><div><div class="name">Phthalo Blue GS</div><div class="role">Primary &mdash; faint bay glow beneath the smoke layer</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; smoke-diffused horizon, where sky and land merge</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#00695c;"></div><div><div class="name">Phthalo Green BS</div><div class="role">Atmospheric &mdash; Noctiluca still pulsing, dimmer now</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; bioluminescent glow bleeding through murk</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#2a2a5a;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; smoke-choked twilight, purple-brown and heavy</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#5a3a20;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; charred ridge silhouette, the source of the smoke</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c09048, #b08038);"></div>
+        <div><h3>Smoke Sun</h3><span class="ratio">2 Transparent Red Oxide : 2 Buff Titanium : 1 Raw Sienna</span></div>
+      </div>
+      <p class="mix-description">The copper disk you can stare at directly &mdash; wildfire smoke as solar filter, stripping the sun of its authority.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#a04020; color:#fff;">Trans. Red Oxide</div>
+        <div class="mix-bar" style="flex:2; background:#e8d8b4; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#c8a060; color:#fff;">Raw Sienna</div>
+      </div>
+      <div class="mix-notes">The Buff Titanium does the heavy lifting here &mdash; its opacity creates the dense, milky quality of smoke-filtered light. Transparent Red Oxide provides the copper hue, and Raw Sienna warms the edges. Paint the disk on dry paper, then immediately surround it with dilute Buff Titanium while the edge is still damp. The bleed should be soft, not sharp. Smoke doesn't have edges.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d42070, #5a6a2a);"></div>
+        <div><h3>Fireweed Clock</h3><span class="ratio">2 Quinacridone Rose : 1 Olive Green</span></div>
+      </div>
+      <p class="mix-description">Magenta spire against a dulled green slope &mdash; the plant that counts down to frost in blooms, opening from bottom to top.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#d42070; color:#fff;">Quin. Rose</div>
+        <div class="mix-bar" style="flex:1; background:#5a6a2a; color:#fff;">Olive Green</div>
+      </div>
+      <div class="mix-notes">Side by side, not blended &mdash; Quinacridone Rose for the flower spike, Olive Green for the slope behind it. Where they meet, they'll create a muted mauve-gray that reads as atmospheric distance. The contrast between QR's vivid transparency and Olive Green's drab opacity is the whole point. Let them argue on the paper.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a5a30, #3a3a50);"></div>
+        <div><h3>Haze Conifer</h3><span class="ratio">2 Olive Green : 1 Indigo : touch Buff Titanium</span></div>
+      </div>
+      <p class="mix-description">Tree shape dissolving in particulate &mdash; you know it's a fir because you've seen a thousand, not because you can see this one clearly.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5a6a2a; color:#fff;">Olive Green</div>
+        <div class="mix-bar" style="flex:1; background:#2a2a5a; color:#fff;">Indigo</div>
+        <div class="mix-bar" style="flex:0.15; background:#e8d8b4; color:#777;">Buff Titanium</div>
+      </div>
+      <div class="mix-notes">Build the tree shape with Olive Green and Indigo first &mdash; dark enough to read as conifer, drab enough to read as smoke-filtered. While still damp, drag Buff Titanium across the edges with a dry-ish brush. The tree should lose its boundaries into the haze. Sharp edges are the enemy of smoke painting.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Smoke demands muted transparency in the warm range and opacity for atmospheric effects &mdash; this palette delivers both. Transparent Red Oxide and Raw Sienna are iron-based pigments that granulate gently, perfect for the gritty quality of particulate-laden light. Olive Green already reads as compromised; it doesn't need to be dulled further to look smoke-choked. Buff Titanium is the palette's secret weapon: its opacity creates the physical density of smoke in a way transparent pigments cannot. The bioluminescence colors &mdash; Phthalo Green BS and Cascade Green &mdash; are retained from Week 28 but diminished in role, the glow fading as water cools. Quinacridone Rose is the single saturated note, because fireweed really does scream that loudly even through haze.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Copper Sun Through Smoke</h3>
+      <p class="subject"><strong>Subject:</strong> The sun as a copper disk low in a smoke-filled sky &mdash; no glare, no rays, just a flat circle you can stare at directly. The landscape below dissolves into amber layers of diminishing visibility.</p>
+      <p class="palette-fit">The Smoke Sun mix (Transparent Red Oxide + Buff Titanium + Raw Sienna) was designed for this exact disk. Buff Titanium&rsquo;s opacity creates the physical density of smoke that no transparent pigment can match. The whole palette is built around obstructed light.</p>
+      <div class="tips"><ul>
+        <li>Paint the sun disk on dry paper with the Smoke Sun mix &mdash; a small, flat circle. No glow, no rays. Smoke kills all that</li>
+        <li>While the disk edge is still damp, surround it with dilute Buff Titanium and let the bleed go soft. Smoke doesn&rsquo;t have edges</li>
+        <li>The landscape below is layers of increasing Buff Titanium mixed with Raw Sienna &mdash; each ridge paler and warmer than the one in front, dissolving into the haze</li>
+        <li>No detail in the background. Smoke painting is about what you can&rsquo;t see. The less you paint, the more smoke you create</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Fireweed Spire Against Haze</h3>
+      <p class="subject"><strong>Subject:</strong> A single fireweed plant in full bloom &mdash; magenta flowers open from the bottom, buds still closed at the top &mdash; against a smoke-dulled green hillside. The frost countdown clock in flower form.</p>
+      <p class="palette-fit">Quinacridone Rose is the only saturated note in this entire palette, and fireweed earns it. The Fireweed Clock mix (Quinacridone Rose + Olive Green, side by side) creates that electric contrast between vivid transparency and drab opacity. The palette&rsquo;s muted quality makes the fireweed scream louder.</p>
+      <div class="tips"><ul>
+        <li>Paint the hillside first with Olive Green &mdash; drab, flat, smoke-choked. Let it dry completely</li>
+        <li>The fireweed spike is Quinacridone Rose applied with a narrow brush, working bottom (open flowers, more paint) to top (buds, less paint). The opening progression from bottom to top is the whole story</li>
+        <li>Where the magenta meets the olive green, don&rsquo;t blend &mdash; let the edge be sharp. The contrast is the point</li>
+        <li>Add Indigo stems and Olive Green leaves along the spike. The leaves should look as tired as the hillside; only the flowers are defiant</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Haze Conifer Ridge</h3>
+      <p class="subject"><strong>Subject:</strong> A ridge of conifers dissolving into wildfire smoke &mdash; the nearest trees dark and identifiable, the middle trees ghostly shapes, the farthest trees gone entirely. An exercise in atmospheric perspective compressed by particulate.</p>
+      <p class="palette-fit">The Haze Conifer mix (Olive Green + Indigo + touch of Buff Titanium) handles all three depth zones by varying the ratio. More Indigo for the near trees, more Buff Titanium for the far ones. The mix was designed to lose its edges.</p>
+      <div class="tips"><ul>
+        <li>Work back to front. Farthest ridge is almost pure Buff Titanium with a whisper of Olive Green &mdash; barely there</li>
+        <li>Middle ridge adds more Indigo and Olive Green to the Buff Titanium base. While damp, drag a dry-ish brush of Buff Titanium across the treetops to lose them into the haze</li>
+        <li>Nearest trees are Olive Green + Indigo at medium concentration, painted on dry paper with defined (but not sharp) edges</li>
+        <li>The sky above is Buff Titanium with Raw Sienna &mdash; no blue. Smoke kills blue. If your sky reads as blue, you haven&rsquo;t committed to the smoke</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Ghostly Bioluminescence Through Smoke</h3>
+      <p class="subject"><strong>Subject:</strong> A nighttime bay scene where fading bioluminescence glows dimly through smoke haze &mdash; the glow from weeks 28&ndash;29 still present but filtered, ghostly, uncertain. Smoke above, faint light below.</p>
+      <p class="palette-fit">Phthalo Green BS and Cascade Green carry over from the previous weeks but in diminished roles. Buff Titanium smoke haze sits over everything. The tension between the glow trying to reach you and the smoke blocking it is the entire painting.</p>
+      <div class="tips"><ul>
+        <li>Dark base wash of Indigo across the full sheet &mdash; this is your smoke-choked night</li>
+        <li>The glow is Cascade Green (not Phthalo Green this time &mdash; softer, more diffused) applied wet-into-wet in the lower third. It should be dim and uncertain</li>
+        <li>Over the top, while still damp, drag Buff Titanium in horizontal strokes across the glow zone &mdash; the smoke layer physically suppressing the light</li>
+        <li>Phthalo Green BS only at the very brightest point, and barely. This week, the glow is losing to the smoke. Let it.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments confirmed Daniel Smith. For bioluminescence passages that carry over from the previous weeks, keep transparency high and avoid granulation in the glow zones &mdash; but note that the glow is fading, so you can afford to let it be less precise, more ghostly. Buff Titanium and smoke effects: try spraying clean water over a Buff Titanium wash before it's fully dry for a convincing particulate bloom. Indigo tends toward purple in thin washes &mdash; useful here, since smoke-twilight genuinely skews violet.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

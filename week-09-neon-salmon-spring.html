@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 — Neon Salmon Spring</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #faf8f5;
+    color: #2a2a2a;
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .hero {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,94,196,0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 40%, rgba(181,166,66,0.3) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 70%, rgba(107,142,107,0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 35% 30%, rgba(230,62,128,0.15) 0%, transparent 40%),
+      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
+    filter: blur(20px);
+  }
+
+  .hero-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-text .week-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c75a8a;
+    margin-bottom: 8px;
+  }
+
+  .hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .hero-text .mood {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5a5a5a;
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+  }
+
+  /* Primary Trio */
+  .trio-section {
+    margin-top: 48px;
+  }
+
+  .section-label {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .trio-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .trio-swatch {
+    height: 120px;
+    position: relative;
+  }
+
+  .trio-swatch::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+  }
+
+  .trio-info {
+    padding: 16px 18px;
+  }
+
+  .trio-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .trio-info p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* Full Palette */
+  .palette-section {
+    margin-top: 56px;
+  }
+
+  .palette-strip {
+    display: flex;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 72px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+
+  .palette-strip .swatch {
+    flex: 1;
+    position: relative;
+    cursor: default;
+    transition: flex 0.3s ease;
+  }
+
+  .palette-strip .swatch:hover {
+    flex: 2.5;
+  }
+
+  .palette-strip .swatch .label {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .palette-strip .swatch:hover .label {
+    opacity: 1;
+  }
+
+  .palette-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 24px;
+  }
+
+  .palette-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0ece6;
+  }
+
+  .palette-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+
+  .palette-item .name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .palette-item .role {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .palette-item .num {
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Mixes */
+  .mixes-section {
+    margin-top: 56px;
+  }
+
+  .mix-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .mix-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .mix-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .mix-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+  }
+
+  .mix-header .ratio {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+  }
+
+  .mix-description {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .mix-bars {
+    display: flex;
+    gap: 4px;
+    height: 28px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mix-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .mix-notes {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    border-left: 3px solid #e8e4de;
+    padding-left: 16px;
+  }
+
+  /* Why Section */
+  .why-section {
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .why-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .why-card p {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* Painting Prompts */
+  .prompts-section {
+    margin-top: 56px;
+  }
+
+  .prompt-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .prompt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .prompt-card .prompt-number {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .prompt-card .subject {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .prompt-card .subject strong {
+    color: #333;
+  }
+
+  .prompt-card .palette-fit {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .prompt-card .tips {
+    border-left: 3px solid #e0e2e8;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .prompt-card .tips ul li {
+    font-size: 13.5px;
+    color: #555;
+    line-height: 1.75;
+    padding: 4px 0;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .prompt-card .tips ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #ccc;
+  }
+
+  .prompts-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  /* Notes */
+  .notes-section {
+    margin-top: 40px;
+    padding: 20px 24px;
+    background: #f0ece6;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.7;
+  }
+
+  .notes-section strong {
+    color: #555;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e8e4de;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 9 &mdash; PNW Watercolor Series</div>
+    <h1>Neon Salmon Spring</h1>
+    <p class="mood">Salmonberry blooms hit full neon along the Carbon River trail &mdash; pink so aggressive it reads as tropical. Band-tailed pigeons overhead. Bigleaf maple flowers drip chartreuse. Winter's palette shattered overnight by color it can't contain.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Primary Trio -->
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #ff5ec4 0%, #e84aaf 100%);"></div>
+        <div class="trio-info">
+          <h3>Opera Pink</h3>
+          <p>Salmonberry bloom wide open; fluorescent, transparent, the loudest thing on the trail</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b8ad3a 0%, #a09830 100%);"></div>
+        <div class="trio-info">
+          <h3>Green Gold</h3>
+          <p>Maple flower chartreuse, hanging in clusters; transparent, warm-leaning, impossible to dull</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #6b9e6b 0%, #5a8a5a 100%);"></div>
+        <div class="trio-info">
+          <h3>Cascade Green</h3>
+          <p>Moss in new light, suddenly electric; granulating, cool, the substrate revealed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Palette -->
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#ff5ec4;"><span class="label" style="color:#fff;">Opera Pink</span></div>
+      <div class="swatch" style="background:#b8ad3a;"><span class="label" style="color:#fff;">Green Gold</span></div>
+      <div class="swatch" style="background:#6b9e6b;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#3d59ab;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#e63e80;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#ff5ec4;"></div><div><div class="name">Opera Pink</div><div class="role">Accent &mdash; salmonberry bloom, full open, neon</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Atmospheric &mdash; March sky gaining blue, finally</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b8ad3a;"></div><div><div class="name">Green Gold</div><div class="role">Anchor &mdash; maple flowers dripping chartreuse</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; sun on petal, white-hot center</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#6b9e6b;"></div><div><div class="name">Cascade Green</div><div class="role">Anchor &mdash; moss in first real sun, luminous</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#e63e80;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Warm Accent &mdash; bloom cluster in shadow</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; trail gravel drying for the first time</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Cool Accent &mdash; new leaf unfurling beside flower</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Dark &mdash; branch bark behind the bloom</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Cool Accent &mdash; pigeon wing overhead, fast</div></div></div>
+    </div>
+  </div>
+
+  <!-- Mixes -->
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #ff6ac8, #e8458a);"></div>
+        <div>
+          <h3>Salmonberry Shock</h3>
+          <span class="ratio">2 Opera Pink : 1 Quinacridone Rose</span>
+        </div>
+      </div>
+      <p class="mix-description">Full-open bloom, almost vulgar pink &mdash; the flower that doesn't know subtlety and doesn't care.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#ff5ec4; color:#fff;">Opera Pink</div>
+        <div class="mix-bar" style="flex:1; background:#e63e80; color:#fff;">Quin. Rose</div>
+      </div>
+      <div class="mix-notes">
+        Opera Pink provides the fluorescent punch; Quinacridone Rose deepens it without dulling it. This is one of the few mixes where both components are high-chroma &mdash; the result is saturated beyond what most watercolor palettes produce. Apply to dry white paper to preserve maximum vibrancy. Paint each five-petaled bloom as individual petal strokes radiating from center. While damp, drop Buff Titanium into the center for the pale stamen ring.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b8ad3a, #7a9050);"></div>
+        <div>
+          <h3>Maple Drip</h3>
+          <span class="ratio">2 Green Gold : 1 Cascade Green</span>
+        </div>
+      </div>
+      <p class="mix-description">Chartreuse flower clusters hanging from bigleaf maple &mdash; gravity-fed color, dripping before the leaves even unfurl.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#b8ad3a; color:#fff;">Green Gold</div>
+        <div class="mix-bar" style="flex:1; background:#6b9e6b; color:#fff;">Cascade Green</div>
+      </div>
+      <div class="mix-notes">
+        Green Gold is warm, transparent, and utterly unique &mdash; no other pigment captures chartreuse this cleanly. Cascade Green cools and grounds it, adding the granulation that suggests the tiny individual florets in each cluster. Mix loosely and apply with a round brush, letting the clusters hang as organic shapes. The flowers dangle in chains six to eight inches long; paint them as continuous downward strokes with varying pressure.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5c7080, #3d5068);"></div>
+        <div>
+          <h3>Pigeon Canopy</h3>
+          <span class="ratio">2 Payne's Gray : 1 Cobalt Blue</span>
+        </div>
+      </div>
+      <p class="mix-description">Band-tailed flock through alder crowns &mdash; soft gray birds moving fast through new canopy, half-seen.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:1; background:#3d59ab; color:#fff;">Cobalt Blue</div>
+      </div>
+      <div class="mix-notes">
+        Band-tailed pigeons are blue-gray, and this mix nails their plumage &mdash; cooler than pure Payne's, warmer than pure Cobalt. Both pigments granulate, giving the mix a soft, feathered quality even in flat washes. For birds in flight, use quick, minimal strokes &mdash; a crescent for the body, a V for the tail. Don't overdefine. For the white tail band, lift with a damp brush while the wash is still damp.
+      </div>
+    </div>
+  </div>
+
+  <!-- Why These Colors -->
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>This palette is built for chromatic explosion after months of restraint. Opera Pink and Quinacridone Rose are the most saturated pinks available in watercolor &mdash; together they approximate the almost-fluorescent quality of salmonberry in direct sun. Green Gold is irreplaceable for chartreuse; no mix of yellow and green comes close to its specific warmth and transparency. Cascade Green granulates, which means the moss passages develop texture naturally. The earths &mdash; Raw Sienna and Burnt Umber &mdash; are minimal, present only as ground and bark, because this week the earth is no longer the story. Cobalt Blue finally appears in the sky, not just reflections or accents. The palette announces what the season is doing: trading transparency and granulation for saturation and staining. Winter's over. The pigments know it.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Salmonberry Branch in Full Sun</h3>
+      <p class="subject"><strong>Subject:</strong> A single salmonberry branch arching across the frame, three to five blooms at different stages &mdash; tight bud, half-open, full neon blast &mdash; with chartreuse maple flowers dangling behind.</p>
+      <p class="palette-fit">Opera Pink and Quinacridone Rose were born for this. The Salmonberry Shock mix (2:1 Opera Pink to Quin Rose) gives you the full-open blooms, while Opera Pink alone handles the tighter buds. Green Gold in the background maple flowers creates that electric warm-cool contrast that makes the pink sing louder.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the blooms first on dry white paper &mdash; Opera Pink loses its fluorescent punch on damp surfaces</li>
+          <li>Drop Buff Titanium into the center of each open bloom while still damp for the pale stamen ring</li>
+          <li>Use Sap Green for the calyx and stems, switching to Burnt Umber where the branch thickens</li>
+          <li>Leave aggressive white paper between blooms &mdash; these saturated pinks need breathing room or they&rsquo;ll feel heavy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Carbon River Trail After Rain</h3>
+      <p class="subject"><strong>Subject:</strong> A rain-soaked trail cutting through moss-covered alders, puddles reflecting a March sky that&rsquo;s finally turning blue, with salmonberry blooms lining both edges like neon guardrails.</p>
+      <p class="palette-fit">Raw Sienna handles the drying gravel trail surface. Cascade Green granulates naturally into the moss texture on the alders. Cobalt Blue in the puddle reflections &mdash; and finally, in the actual sky &mdash; anchors the cool side while the Opera Pink blooms pop along the edges.</p>
+      <div class="tips">
+        <ul>
+          <li>Lay in the trail with a wet-into-wet wash of Raw Sienna and Burnt Umber, letting them mingle for gravel texture</li>
+          <li>Paint the moss on tree trunks with Cascade Green applied to damp paper &mdash; the granulation does the work for you</li>
+          <li>Puddle reflections: a pale wash of Cobalt Blue with tiny hits of Opera Pink reflected from the blooms</li>
+          <li>The salmonberry along the trail edges should be the last thing you paint, on dry paper, maximum saturation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Band-Tailed Pigeons Through Alder Canopy</h3>
+      <p class="subject"><strong>Subject:</strong> A loose flock of five to eight band-tailed pigeons moving fast through bare alder crowns, half-hidden by the first green haze of leaf buds, March sky behind.</p>
+      <p class="palette-fit">The Pigeon Canopy mix (2:1 Payne&rsquo;s Gray to Cobalt Blue) gives you their blue-gray plumage with built-in granulation that reads as feather texture. The alder framework is Burnt Umber. Sap Green and Green Gold dots suggest the earliest leaf buds.</p>
+      <div class="tips">
+        <ul>
+          <li>Paint the birds with quick, confident strokes &mdash; a crescent for the body, a V for the tail, no more detail than that</li>
+          <li>Lift the white tail band with a damp brush while the Pigeon Canopy wash is still wet &mdash; one clean horizontal line per bird</li>
+          <li>The alder branches should be dry-brushed Burnt Umber, thin and angular, creating a lattice the birds move through</li>
+          <li>Dot Green Gold along branch tips for the first leaf buds &mdash; tiny, sparse, the barest suggestion of spring arriving</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Moss Log Close-Up</h3>
+      <p class="subject"><strong>Subject:</strong> A fallen nurse log carpeted in electric-green moss, with a single salmonberry bloom fallen onto it &mdash; neon pink on neon green, a color collision that only happens in early March PNW forests.</p>
+      <p class="palette-fit">Cascade Green is the star here &mdash; its granulation creates moss texture without any effort. Layer it with Green Gold for the sun-catching ridges. The single Opera Pink bloom sitting on the moss surface is a focal point that practically paints itself.</p>
+      <div class="tips">
+        <ul>
+          <li>Build the moss in two layers: a wet-into-wet base of Cascade Green, then a second pass of Green Gold on the dry ridges</li>
+          <li>The log itself peeks through as Burnt Umber and Raw Sienna in the gaps between moss clumps</li>
+          <li>Paint the fallen bloom small &mdash; three-quarter inch at most &mdash; with the Salmonberry Shock mix, on completely dry paper</li>
+          <li>Add Payne&rsquo;s Gray in the deep shadow under the log to anchor the whole composition and give the greens something dark to push against</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="notes-section">
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. This is the highest-chroma palette in the series &mdash; Opera Pink, Quinacridone Rose, and Green Gold are all maximum-saturation pigments. Handle with respect. Temperature runs warm: the pinks and chartreuse dominate, with Cobalt Blue and Cascade Green as the only cool balance. Opera Pink is fluorescent and may appear to glow under certain lighting &mdash; that's not a defect, it's the point. Keep white paper aggressive in the design &mdash; these saturated colors need breathing room. The trail is finally drying. The palette should feel like relief.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

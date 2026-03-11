@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 24 — Orca Strait</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(58,140,160,0.18) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(176,38,74,0.14) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(240,200,48,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(0,131,143,0.1) 0%, transparent 40%), linear-gradient(175deg, #f0f6f8 0%, #eef4f8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #3a8ca0; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  /* Painting Prompts */
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e6eef0; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 24 &mdash; PNW Watercolor Series</div>
+    <h1>Orca Strait</h1>
+    <p class="mood">Rain stops like a switch thrown. Douglas fir candles harden from tender to tough. Orca follow Chinook through Haro Strait, black-and-white against turquoise. Summer asserting sovereignty &mdash; dry, bright, salt-washed, absolute. The San Juan light is different now: cleaner, harder, with no apologies and no filter.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #f0c830 0%, #d8b420 100%);"></div>
+        <div class="trio-info"><h3>Hansa Yellow Medium</h3><p>Hardened fir candles turning yellow-green, the transition from spring growth to summer toughness; transparent</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b0264a 0%, #981e3e 100%);"></div>
+        <div class="trio-info"><h3>Alizarin Crimson</h3><p>Strawberry flesh at peak, the red that means the first fruit is here; transparent, cool-leaning, staining</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #3a8ca0 0%, #2a7c90 100%);"></div>
+        <div class="trio-info"><h3>Mayan Blue Genuine</h3><p>Haro Strait turquoise, genuine mineral pigment, granulating, unique and irreplaceable</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#f0c830;"><span class="label" style="color:#777;">Hansa Yellow Med</span></div>
+      <div class="swatch" style="background:#b0264a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
+      <div class="swatch" style="background:#3a8ca0;"><span class="label" style="color:#fff;">Mayan Blue Gen.</span></div>
+      <div class="swatch" style="background:#5a8c2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#1a1a1a;"><span class="label" style="color:#fff;">Ivory Black</span></div>
+      <div class="swatch" style="background:#5ba4cf;"><span class="label" style="color:#fff;">Cerulean Blue Chr.</span></div>
+      <div class="swatch" style="background:#c87830;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
+      <div class="swatch" style="background:#00838f;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
+      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c88a3e;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#f0c830;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Primary &mdash; hardened fir candles, yellow-green and stiffening</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#5ba4cf;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Atmospheric &mdash; San Juan sky dry season, chalky and hard</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b0264a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Primary &mdash; strawberry flesh at peak, warm in the hand</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c87830;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Warm Accent &mdash; madrone trunk in first summer glow</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#3a8ca0;"></div><div><div class="name">Mayan Blue Genuine</div><div class="role">Primary &mdash; Haro Strait turquoise, mineral-genuine and irreplaceable</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#00838f;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Cool Accent &mdash; glacial-feed water entering the strait</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5a8c2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; fir canopy darkening to summer green</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; orca saddle patch, warm gray-white behind the dorsal</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a1a1a;"></div><div><div class="name">Ivory Black</div><div class="role">Dark &mdash; orca flank, the blackest black in the natural world</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c88a3e;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; sun-baked sandstone bluff, San Juan geology</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a90a0, #2a8090);"></div>
+        <div><h3>Orca Water</h3><span class="ratio">3 Mayan Blue Genuine : 1 Cobalt Teal Blue : &frac12; Cerulean Blue Chromium</span></div>
+      </div>
+      <p class="mix-description">Haro Strait on a still day &mdash; turquoise water holding orca shadows, glacial silt suspended in salt.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:3; background:#3a8ca0; color:#fff;">Mayan Blue Gen.</div>
+        <div class="mix-bar" style="flex:1; background:#00838f; color:#fff;">Cobalt Teal</div>
+        <div class="mix-bar" style="flex:0.5; background:#5ba4cf; color:#fff;">Cerulean Blue</div>
+      </div>
+      <div class="mix-notes">Mayan Blue Genuine is an actual mineral pigment &mdash; it granulates with a texture nothing else replicates, settling into paper valleys like silt settles in water. Cobalt Teal Blue intensifies the turquoise toward the glacial-feed channels. Cerulean Blue Chromium adds the sky reflection on the water's surface. Apply to wet paper and leave it. The granulation will build the strait's color for you. This mix is why you buy genuine mineral pigments.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b03848, #a02838);"></div>
+        <div><h3>Strawberry Peak</h3><span class="ratio">2 Alizarin Crimson : 1 Aussie Red Gold : &frac14; Hansa Yellow Medium</span></div>
+      </div>
+      <p class="mix-description">Fruit so ripe it's warm in your hand &mdash; Skagit strawberries at the solstice, peak sugar.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#b0264a; color:#fff;">Alizarin Crimson</div>
+        <div class="mix-bar" style="flex:1; background:#c87830; color:#fff;">Aussie Red Gold</div>
+        <div class="mix-bar" style="flex:0.25; background:#f0c830; color:#777;">Hansa Yellow</div>
+      </div>
+      <div class="mix-notes">Alizarin Crimson is the flesh &mdash; cool, transparent, staining. Aussie Red Gold adds the warmth of sun-heated fruit, the way a strawberry feels warm when you pick it at noon. Hansa Yellow Medium at the seed pockets, the tiny yellow points in the red. Apply in small, rounded forms. Strawberries are not large subjects, and the mix should feel intimate. Concentrated for the heart, dilute for the shoulder where the color pales.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a8838, #5a7828);"></div>
+        <div><h3>Fir Harden</h3><span class="ratio">2 Sap Green : 1 Hansa Yellow Medium : &frac12; Raw Sienna</span></div>
+      </div>
+      <p class="mix-description">New growth losing its tenderness &mdash; Douglas fir candles stiffening from spring-soft to summer-tough.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5a8c2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#f0c830; color:#777;">Hansa Yellow Med</div>
+        <div class="mix-bar" style="flex:0.5; background:#c88a3e; color:#fff;">Raw Sienna</div>
+      </div>
+      <div class="mix-notes">Sap Green is the mature needle &mdash; dark, reliable, the green the fir settles into for summer. Hansa Yellow Medium retains the last of the spring candle's lighter color at the tips. Raw Sienna dries the mix out, adding the woody quality of needles that are no longer soft enough to crush between fingers. Glaze in two stages: Sap Green base, then Hansa Yellow Medium-Raw Sienna tips wet-on-dry. The layering tells the hardening story.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Mayan Blue Genuine justifies this entire palette. It's made from genuine Maya blue mineral &mdash; the same pigment used in Pre-Columbian murals &mdash; and its granulation on watercolor paper replicates the suspended-silt quality of Haro Strait water in a way no synthetic pigment can. Ivory Black is here for the orca, and nothing else would be honest &mdash; the orca is the blackest animal you'll see in PNW waters. Alizarin Crimson's transparency lets strawberry flesh glow from within. Aussie Red Gold handles madrone bark with its characteristic copper warmth. The palette is clean, bright, and mineral-forward: summer in the San Juans is not subtle.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Orca Surfacing in Haro Strait</h3>
+      <p class="subject"><strong>Subject:</strong> A single orca breaking the surface mid-strait &mdash; dorsal fin and saddle patch against turquoise water, with a San Juan island bluff in the background.</p>
+      <p class="palette-fit">Ivory Black for the flank (the only honest choice), Buff Titanium for the saddle patch, and the Orca Water mix (Mayan Blue Genuine + Cobalt Teal Blue + Cerulean Blue Chromium) for the strait itself. The mineral granulation of the water mix does half the painting for you.</p>
+      <div class="tips"><ul>
+        <li>Paint the water first using the Orca Water mix on thoroughly wet paper &mdash; let Mayan Blue Genuine&rsquo;s granulation settle undisturbed, building the silt-in-water texture naturally</li>
+        <li>The orca goes in after the water is bone-dry. Ivory Black at full concentration for the body; it&rsquo;s warm enough to read as alive, not graphic</li>
+        <li>Buff Titanium for the saddle patch &mdash; apply it slightly thicker than you think, since it needs to hold its own against that black</li>
+        <li>Leave a thin line of white paper between the dorsal fin and the water for the spray catch &mdash; don&rsquo;t paint it white, preserve it</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Strawberry Harvest Still Life</h3>
+      <p class="subject"><strong>Subject:</strong> A handful of Skagit strawberries in a weathered wooden bowl, some whole, some halved showing the flesh &mdash; the kind of still life you can set up on your kitchen counter right now.</p>
+      <p class="palette-fit">The Strawberry Peak mix (Alizarin Crimson + Aussie Red Gold + Hansa Yellow Medium) captures the cool-red exterior and warm interior in one flexible mixture. Raw Sienna handles the wooden bowl.</p>
+      <div class="tips"><ul>
+        <li>Paint the halved berries first with concentrated Alizarin Crimson for the flesh, letting it pool slightly at the center where the color deepens</li>
+        <li>Touch Hansa Yellow Medium into the seed pockets while the red is still damp &mdash; the yellow will push into the crimson and create those characteristic seed divots</li>
+        <li>The bowl is Raw Sienna base with dry-brush grain lines in Burnt Sienna &mdash; keep it simple so the berries stay the star</li>
+        <li>Aussie Red Gold on the sun-facing shoulders of the whole berries gives that warm-in-your-hand feeling the palette description nails</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>San Juan Sandstone Bluff</h3>
+      <p class="subject"><strong>Subject:</strong> A sandstone bluff dropping into turquoise water, with a single twisted madrone growing from a crack &mdash; the classic San Juan shoreline composition.</p>
+      <p class="palette-fit">Raw Sienna for the geology, the Orca Water mix for the strait below, and Aussie Red Gold for the madrone&rsquo;s first copper glow of summer. Cerulean Blue Chromium overhead gives you that hard, dry-season sky.</p>
+      <div class="tips"><ul>
+        <li>Block in the bluff with Raw Sienna on dry paper, then drop Aussie Red Gold into the sunlit faces while wet for the warm sandstone glow</li>
+        <li>The water at the base of the bluff is the Orca Water mix, but add a touch more Cobalt Teal Blue where the water shallows over rock &mdash; the color shifts greener there</li>
+        <li>The madrone trunk is Aussie Red Gold with Sap Green leaves &mdash; keep the tree small relative to the bluff so the geology dominates</li>
+        <li>Cerulean Blue Chromium for the sky, applied in a single graded wash from concentrated at the zenith to near-nothing at the horizon</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Douglas Fir Candles Hardening</h3>
+      <p class="subject"><strong>Subject:</strong> A close-up branch study of Douglas fir showing new growth transitioning from spring-tender to summer-tough &mdash; the candles stiffening at their tips.</p>
+      <p class="palette-fit">The Fir Harden mix (Sap Green + Hansa Yellow Medium + Raw Sienna) captures exactly this transition. The two-stage glazing technique built into the mix recipe tells the hardening story.</p>
+      <div class="tips"><ul>
+        <li>Glaze the mature needles with Sap Green first and let them dry completely &mdash; these are the dark, established growth</li>
+        <li>The new candles get a mix of Hansa Yellow Medium and Raw Sienna, applied wet-on-dry over the Sap Green base &mdash; the lighter, warmer color on top reads as newer growth</li>
+        <li>Leave the very tips of the freshest candles as pure Hansa Yellow Medium &mdash; these are the last holdouts of spring softness</li>
+        <li>Background should be out-of-focus Sap Green to keep the study intimate and botanical</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Mayan Blue Genuine is a PrimaTek pigment made from genuine mineral &mdash; it's expensive and worth it. Its granulation is unique and cannot be replicated by mixing. Ivory Black is the warmest black available; for orca flanks in sunlight, it's more accurate than Lamp Black or Mars Black. Alizarin Crimson (Daniel Smith's version, PR206) is lightfast &mdash; this is not the fugitive traditional alizarin.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>
