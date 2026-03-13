@@ -6,423 +6,65 @@
 <title>Week 5 — Carbazole Dusk</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #faf8f5;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 60%, rgba(58,22,89,0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 40%, rgba(139,69,19,0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 70%, rgba(27,58,92,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 35% 30%, rgba(58,22,89,0.15) 0%, transparent 40%),
-      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #7a5a8a;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0ece6;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e8e4de;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0ece6;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #777;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #555;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4de;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 60%, rgba(75,0,130,0.35) 0%, transparent 50%), radial-gradient(ellipse at 55% 40%, rgba(40,68,102,0.3) 0%, transparent 45%), radial-gradient(ellipse at 75% 70%, rgba(164,40,58,0.25) 0%, transparent 50%), radial-gradient(ellipse at 35% 30%, rgba(196,40,110,0.15) 0%, transparent 40%), linear-gradient(175deg, #f8f4ee 0%, #f0ece6 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #7b5a8e; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 5 &mdash; PNW Watercolor Series</div>
     <h1>Carbazole Dusk</h1>
-    <p class="mood">Red alder catkins dangle over the Stillaguamish at 5:15 PM &mdash; the sky a single bruise from Carbazole to nothing. Varied thrush whistles once from deep second-growth. Light gains two minutes but you can&rsquo;t feel it yet. The tension: lengthening that registers only in data, not in the body.</p>
+    <p class="mood">The sun drops behind the Olympics at 4:15 and the sky turns violet. Not purple &mdash; violet. That clean, cold, staining color that only happens in winter when the air has nothing in it. Bare cottonwoods along the Snoqualmie stand black against it. A thin crimson line at the horizon lasts maybe ten minutes, then it&rsquo;s gone.</p>
   </div>
 </div>
 
@@ -442,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #3a1659 0%, #2e1148 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #4b0082 0%, #3a0066 100%);"></div>
         <div class="trio-info">
           <h3>Carbazole Violet</h3>
-          <p>Sky at civil twilight, the specific violet that lives between daylight and dark; deep-staining, transparent, absolute</p>
+          <p>The sky itself at 4:30 &mdash; that ten-minute violet window between daylight and dark that only winter delivers.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #8b4513 0%, #7a3c10 100%);"></div>
-        <div class="trio-info">
-          <h3>Transparent Red Oxide</h3>
-          <p>Alder catkin dangle, rust-red and backlit; clean transparency, warm against the violet</p>
-        </div>
-      </div>
-      <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #1b3a5c 0%, #152e4a 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #284466 0%, #1e3350 100%);"></div>
         <div class="trio-info">
           <h3>Indanthrone Blue</h3>
-          <p>River surface at last light, holding the sky&rsquo;s color but darker; staining, deep, non-granulating</p>
+          <p>The deep overhead sky where violet shades into blue-black &mdash; the color directly above you when you look up through bare branches.</p>
+        </div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a4283a 0%, #8a1f2e 100%);"></div>
+        <div class="trio-info">
+          <h3>Alizarin Crimson</h3>
+          <p>That thin band of red-violet at the horizon where the sun was &mdash; the last warm thing in the sky.</p>
         </div>
       </div>
     </div>
@@ -469,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#3a1659;"><span class="label" style="color:#fff;">Carbazole Violet</span></div>
-      <div class="swatch" style="background:#8b4513;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
-      <div class="swatch" style="background:#1b3a5c;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
-      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
-      <div class="swatch" style="background:#2a2a30;"><span class="label" style="color:#fff;">Lunar Black</span></div>
-      <div class="swatch" style="background:#6b6080;"><span class="label" style="color:#fff;">Moonglow</span></div>
+      <div class="swatch" style="background:#4b0082;"><span class="label" style="color:#fff;">Carbazole Violet</span></div>
+      <div class="swatch" style="background:#284466;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#a4283a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne&rsquo;s Gray</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#1a1a1e;"><span class="label" style="color:#fff;">Lamp Black</span></div>
       <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#b85c2a;"><span class="label" style="color:#fff;">Quin. Burnt Orange</span></div>
-      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
-      <div class="swatch" style="background:#2a52be;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#6b6a8a;"><span class="label" style="color:#fff;">Moonglow</span></div>
+      <div class="swatch" style="background:#8b5e3c;"><span class="label" style="color:#fff;">Trans. Brown Oxide</span></div>
+      <div class="swatch" style="background:#c4286e;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#3a1659;"></div><div><div class="name">Carbazole Violet</div><div class="role">Atmosphere &mdash; sky from zenith to horizon, civil twilight</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#6b6080;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; horizon glow remnant, shifting</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#8b4513;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Anchor &mdash; alder catkins dangling over the river</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; sky at zenith, fading toward nothing</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#1b3a5c;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Anchor &mdash; Stillaguamish surface at last light</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#b85c2a;"></div><div><div class="name">Quinacridone Burnt Orange</div><div class="role">Warm Accent &mdash; catkin pollen dust, barely visible</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; dried alder leaf on the bank, curled</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Cool Accent &mdash; moss on bridge abutment, deep</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#2a2a30;"></div><div><div class="name">Lunar Black</div><div class="role">Dark &mdash; conifer mass, no detail, just weight</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#2a52be;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; last blue in the west, granulating out</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#4b0082;"></div><div><div class="name">Carbazole Violet</div><div class="role">Primary &mdash; dominant dusk violet, the sky at civil twilight</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#1a1a1e;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; tree trunk darks, deepest silhouettes</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#284466;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Primary &mdash; deep blue-violet sky overhead</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; last pale light at the horizon edge</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#a4283a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Primary &mdash; red-violet horizon glow</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#6b6a8a;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; granulating twilight shift at the horizon</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; bare branch silhouettes against the sky</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#8b5e3c;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Earth &mdash; bark tones on cottonwood and maple</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; upper sky, granulating into the violet</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c4286e;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Warm Accent &mdash; pink-violet transition zone in the sky</div></div></div>
     </div>
   </div>
 
@@ -500,55 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8b4513, #b85c2a);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5a2870, #6b6a8a);"></div>
         <div>
-          <h3>Catkin Rust</h3>
-          <span class="ratio">2 Transparent Red Oxide : 1 Quinacridone Burnt Orange</span>
+          <h3>Horizon Shiver</h3>
+          <span class="ratio">1 Carbazole Violet : 2 Moonglow : touch of Buff Titanium</span>
         </div>
       </div>
-      <p class="mix-description">Pendulous alder catkins backlit against the fading west &mdash; rust-red fingers reaching for water they&rsquo;ll never touch.</p>
+      <p class="mix-description">The unstable zone where the violet sky meets the last warm light &mdash; color breaking apart as you watch it.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#8b4513; color:#fff;">Trans. Red Oxide</div>
-        <div class="mix-bar" style="flex:1; background:#b85c2a; color:#fff;">Quin. Burnt Orange</div>
+        <div class="mix-bar" style="flex:1; background:#4b0082; color:#fff;">Carbazole Violet</div>
+        <div class="mix-bar" style="flex:2; background:#6b6a8a; color:#fff;">Moonglow</div>
+        <div class="mix-bar" style="flex:0.5; background:#f5e6c8; color:#777;">Buff Titanium</div>
       </div>
       <div class="mix-notes">
-        Both pigments are transparent, so the backlit quality is built into the chemistry. Mix on the palette and use a rigger or fine round to paint each catkin as a single downward stroke &mdash; they hang, so paint them hanging. Transparent Red Oxide provides the body; Quinacridone Burnt Orange gives the pollen-dust warmth at the tips. For catkins in full shadow, drop the Burnt Orange and add a touch of Carbazole Violet instead. The transparency means you can glaze these over a dried sky wash and the twilight will show through.
+        This is where the magic of Moonglow earns its place. Moonglow is a convenience mix of Ultramarine Blue (PB29), Viridian (PG7), and Alizarin Crimson (PR206) &mdash; and on wet paper those three pigments separate. Drop it into a wash of Carbazole Violet and the granulation creates a horizon that shifts between blue, violet, and gray in ways you cannot control. That&rsquo;s the point. The Buff Titanium lifts the value just enough to read as lingering light. Apply wet-into-wet and walk away. Touching this while it dries will kill the separation.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a1659, #1b3a5c);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6e1858, #4b0082);"></div>
         <div>
-          <h3>River Bruise</h3>
-          <span class="ratio">2 Carbazole Violet : 1 Indanthrone Blue</span>
+          <h3>Afterburn Violet</h3>
+          <span class="ratio">2 Carbazole Violet : 1 Quinacridone Rose : touch of Alizarin Crimson</span>
         </div>
       </div>
-      <p class="mix-description">Stillaguamish surface at dusk &mdash; the river wearing the sky&rsquo;s bruise, darker and less forgiving.</p>
+      <p class="mix-description">The ten-minute window after sunset when the sky is neither red nor violet but something electric between them.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#3a1659; color:#fff;">Carbazole Violet</div>
-        <div class="mix-bar" style="flex:1; background:#1b3a5c; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:2; background:#4b0082; color:#fff;">Carbazole Violet</div>
+        <div class="mix-bar" style="flex:1; background:#c4286e; color:#fff;">Quin. Rose</div>
+        <div class="mix-bar" style="flex:0.5; background:#a4283a; color:#fff;">Alizarin Crimson</div>
       </div>
       <div class="mix-notes">
-        Both pigments stain permanently. This is not a mix you lift or correct &mdash; commit to it. Lay a graduated wash from Carbazole-heavy at the top (reflecting sky) to Indanthrone-heavy at the bottom (river&rsquo;s own darkness). Neither pigment granulates, so the surface will be smooth &mdash; which is what slow, deep river water looks like at dusk. For current ripples, drag a damp brush through while still wet. For the far bank&rsquo;s reflection, reverse the ratio.
+        All three pigments are transparent stainers, so this mix glows from within &mdash; light passes through to the paper and bounces back through the pigment. Carbazole Violet (PV23) provides the deep violet structure. Quinacridone Rose (PV19) pushes it warm without muddying. The touch of Alizarin Crimson (PR83) adds a red-violet depth at the horizon edge. This mix stains permanently on contact, so lay it confidently in one pass. Use it for that specific band of sky just above where the sun was &mdash; the part that makes you stop walking and look west.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #2a2a30, #1a3a2a);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a3a4a, #1a1a1e);"></div>
         <div>
-          <h3>Thrush Wood</h3>
-          <span class="ratio">2 Lunar Black : 1 Perylene Green</span>
+          <h3>Branch Bone</h3>
+          <span class="ratio">2 Payne&rsquo;s Gray : 1 Lamp Black : touch of Transparent Brown Oxide</span>
         </div>
       </div>
-      <p class="mix-description">Second-growth interior, no sky &mdash; the dark that a varied thrush whistles from, seen from outside, impenetrable.</p>
+      <p class="mix-description">Bare cottonwood limbs against the violet &mdash; not pure black, because nothing in nature is. There&rsquo;s bark in there.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#2a2a30; color:#fff;">Lunar Black</div>
-        <div class="mix-bar" style="flex:1; background:#1a3a2a; color:#fff;">Perylene Green</div>
+        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
+        <div class="mix-bar" style="flex:1; background:#1a1a1e; color:#fff;">Lamp Black</div>
+        <div class="mix-bar" style="flex:0.5; background:#8b5e3c; color:#fff;">Trans. Brown Oxide</div>
       </div>
       <div class="mix-notes">
-        Lunar Black granulates heavily; Perylene Green stains smoothly. Together they create a dark with internal texture &mdash; the granulation reads as branch density while the staining green keeps it from going neutral. Apply to damp paper and let the Lunar Black particles settle. Don&rsquo;t try to paint individual trees inside this mass &mdash; the point is that you can&rsquo;t see them. The thrush is in there. You&rsquo;ll have to trust the sound. For the edge where forest meets sky, soften with a clean damp brush.
+        Payne&rsquo;s Gray (PBk6, PB29, PV23) already leans blue-violet, which means these silhouettes belong to this sky without forcing them. Lamp Black deepens the value for the thickest trunks and main forks. The touch of Transparent Brown Oxide is crucial &mdash; it&rsquo;s the warmth of actual bark showing through, the thing that tells your eye these are real trees and not cutout shapes. Use a round brush, not a rigger &mdash; bare winter branches have weight and thickness. Paint from trunk outward, letting each stroke thin naturally as the branch narrows. The finest twigs can be scratched out with a palette knife while the wash is still damp.
       </div>
     </div>
   </div>
@@ -557,71 +202,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>Carbazole Violet is the palette&rsquo;s reason for existing &mdash; it&rsquo;s the single most accurate pigment for Pacific Northwest civil twilight, that ten-minute window when the sky goes violet before it goes black. It stains absolutely, which means the sky wash is permanent and everything else layers on top of or beside it. Transparent Red Oxide and Quinacridone Burnt Orange are both transparent warm stainers, giving the catkins their backlit quality against the cold sky. Indanthrone Blue and Carbazole Violet are staining partners that mix to a deep, smooth river surface &mdash; no granulation, no texture, just depth. Lunar Black provides the only granulation in the palette, reserved for the conifer mass where texture equals density. Moonglow at the horizon shifts its tricolor granulation against the smooth staining sky above &mdash; instability where the light is dying.</p>
+      <p>Carbazole Violet is the palette&rsquo;s reason for existing. It is the single most accurate pigment for that specific violet phase of PNW winter dusk &mdash; not purple, not lavender, but that deep, clean, electric violet the sky produces when the atmosphere is cold and clear. It stains permanently, which means the sky wash locks in and everything else works around it. Indanthrone Blue deepens the overhead sky where violet shades toward blue-black, and together these two staining pigments build the full range of the winter sky from horizon to zenith. Alizarin Crimson provides the thin warm band at the horizon &mdash; fugitive in sunlight but honest in a sketchbook. Payne&rsquo;s Gray and Lamp Black build the bare branch silhouettes, with Transparent Brown Oxide warming them just enough to read as real bark rather than flat shapes. French Ultramarine granulates at the upper sky edge where Carbazole Violet is smooth, and that textural contrast matters. Moonglow separates into its component pigments at the horizon, creating color shifts you couldn&rsquo;t mix on purpose. Quinacridone Rose bridges the gap between the violet sky and the crimson horizon. Buff Titanium is the last pale light &mdash; use it sparingly, because at 4:30 in January, there isn&rsquo;t much light left.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Late January, early February. The sun sets at 4:30. You have ten minutes of violet sky before it goes dark. These prompts are built for that window and this palette.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Alder Catkins Over the Stillaguamish</h3>
-      <p class="subject"><strong>Subject:</strong> Red alder catkins dangling over the river at 5:15 PM, backlit against a Carbazole Violet sky. The catkins are rust-red fingers reaching downward; the water below mirrors the sky&rsquo;s bruise.</p>
-      <p class="palette-fit">The Catkin Rust mix (Transparent Red Oxide + Quinacridone Burnt Orange) gives you backlit catkins that glow with transparency. The River Bruise mix (Carbazole Violet + Indanthrone Blue) is the water and sky in one smooth, staining wash. Warm over cold, small against vast.</p>
+      <h3>Cottonwood Silhouette, 4:20 PM</h3>
+      <p class="subject"><strong>Subject:</strong> A bare black cottonwood against the full violet sky, seen from a river trail. The tree&rsquo;s crown is a web of branches &mdash; no leaves, just structure. The sky behind it goes from Indanthrone Blue overhead through Carbazole Violet to a thin line of Alizarin Crimson at the horizon.</p>
+      <p class="palette-fit">The Branch Bone mix gives you silhouettes that belong to this sky. Carbazole Violet and Indanthrone Blue build the graduated sky wash. That thin crimson horizon line is pure Alizarin Crimson, barely diluted.</p>
       <div class="tips">
         <ul>
-          <li>Paint the sky first as a graduated wash of Carbazole Violet &mdash; heavier at zenith, fading toward Buff Titanium at the horizon. This stains permanently, so commit</li>
-          <li>Once dry, paint the river with the River Bruise mix, grading from Carbazole-heavy (reflecting sky) to Indanthrone-heavy (river&rsquo;s own dark)</li>
-          <li>Glaze the catkins over the dried sky with the Catkin Rust mix using a rigger &mdash; each catkin is a single downward stroke. The transparency lets the violet show through at the attachment points</li>
-          <li>Add Moonglow at the horizon line where sky meets land for that shifting, dying glow</li>
+          <li>Paint the sky first as a continuous graded wash &mdash; Indanthrone Blue at the top, blending into Carbazole Violet at center, with Alizarin Crimson at the very bottom. Both top pigments stain, so work quickly and don&rsquo;t go back</li>
+          <li>Let the sky dry completely. Carbazole Violet stains on contact &mdash; if you paint branches into a wet sky, you lose the crisp silhouette edge</li>
+          <li>Paint the tree with the Branch Bone mix, starting from the trunk base. Use a #8 round, not a rigger &mdash; winter branches have real thickness</li>
+          <li>For the finest twigs at the crown edges, scratch into the damp Branch Bone wash with a palette knife or credit card edge &mdash; this lifts the Payne&rsquo;s Gray slightly and reveals the violet sky beneath</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Varied Thrush in Second Growth</h3>
-      <p class="subject"><strong>Subject:</strong> The view from a trail looking into impenetrable second-growth conifer forest at dusk. You can&rsquo;t see the varied thrush. You can hear it &mdash; one clear whistle from deep inside the dark.</p>
-      <p class="palette-fit">The Thrush Wood mix (Lunar Black + Perylene Green) creates a dark with internal texture &mdash; granulation reads as branch density, staining green keeps it from going dead neutral. This is a painting about darkness that isn&rsquo;t empty.</p>
+      <h3>Olympics at Last Light</h3>
+      <p class="subject"><strong>Subject:</strong> The Olympic Mountains seen across the Sound at the moment the sun drops behind them. The peaks are dark shapes &mdash; Lamp Black and Payne&rsquo;s Gray &mdash; against a sky that runs the full violet spectrum. A band of Buff Titanium at the horizon is the last daylight.</p>
+      <p class="palette-fit">The Afterburn Violet mix gives you that electric sky band just above the mountains. Moonglow at the horizon will granulate and separate into shifting color. The mountains themselves are simple dark shapes &mdash; Lamp Black with a breath of French Ultramarine for atmospheric distance.</p>
       <div class="tips">
         <ul>
-          <li>Paint the entire forest mass with Lunar Black + Perylene Green on damp paper &mdash; let the Lunar Black granulate for at least five minutes without touching it</li>
-          <li>Soften the top edge where forest meets sky with a clean damp brush &mdash; the transition should be gradual, not hard</li>
-          <li>The sky above is Carbazole Violet grading to Buff Titanium, already mostly gone</li>
-          <li>Leave one small branch silhouette unpainted at the forest edge &mdash; that&rsquo;s where the thrush might be sitting. The negative space suggests the bird without painting it</li>
+          <li>Wet the entire paper. Lay Buff Titanium at the horizon, then work upward through Afterburn Violet into pure Carbazole Violet, finishing with Indanthrone Blue at the top</li>
+          <li>While the horizon zone is still wet, drop in Moonglow and let it granulate &mdash; the pigment separation creates the atmospheric shimmer of distant air over water</li>
+          <li>Let everything dry. Paint the Olympic ridge as a single silhouette shape with Lamp Black plus a touch of French Ultramarine &mdash; the blue suggests distance without announcing it</li>
+          <li>The mountains should have soft top edges (snow-covered peaks catch the last light) and hard bottom edges where they meet the sky band</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Civil Twilight River Reflection</h3>
-      <p class="subject"><strong>Subject:</strong> The Stillaguamish at the ten-minute window of civil twilight &mdash; the sky a single violet bruise reflected in slow, deep water. A bridge abutment anchors one side. No sun, just the afterglow.</p>
-      <p class="palette-fit">Carbazole Violet and Indanthrone Blue are both staining and non-granulating, which gives you the smooth, deep surface of slow river water at dusk. Perylene Green on the bridge abutment&rsquo;s moss provides the one grounded, earthly element.</p>
+      <h3>Streetlights Coming On</h3>
+      <p class="subject"><strong>Subject:</strong> A residential street at 4:35 PM &mdash; streetlights just flickering to life, their sodium glow against the violet sky. Bare bigleaf maples line the sidewalk. The sky is still bright enough to silhouette the branches but dark enough that the lights register.</p>
+      <p class="palette-fit">Buff Titanium dropped into wet Carbazole Violet creates the streetlight glow &mdash; the semi-opaque titanium pushes back against the staining violet. Transparent Brown Oxide warms the light poles and maple bark. The Branch Bone mix handles the tree silhouettes.</p>
       <div class="tips">
         <ul>
-          <li>This is a painting of two smooth surfaces &mdash; sky and water &mdash; so work on hot-pressed or smooth cold-pressed paper to minimize texture</li>
-          <li>Lay the sky as a single graded wash: Carbazole Violet at zenith to Indanthrone Blue at the horizon. Neither pigment granulates, so the transition will be seamless</li>
-          <li>Mirror the sky in the water, but darker and slightly shifted toward Indanthrone Blue &mdash; rivers always read darker than the sky they reflect</li>
-          <li>Paint the bridge abutment with Perylene Green (moss) and Raw Sienna (concrete) as the hard geometric shape that anchors the composition against all that soft atmosphere</li>
+          <li>Mask the streetlight globes with masking fluid before painting the sky. Lay the sky wash with Carbazole Violet, grading darker at the top</li>
+          <li>Once the sky is dry, remove the masking and paint the light globes with Buff Titanium tinted with a whisper of Quinacridone Rose &mdash; sodium lights aren&rsquo;t white, they&rsquo;re warm</li>
+          <li>Paint the glow halos by wetting the area around each light and dropping in dilute Buff Titanium &mdash; it will bloom into the dampened violet sky</li>
+          <li>The maples and light poles are Branch Bone mix, but add more Transparent Brown Oxide for the trunks closest to the viewer where bark texture is visible</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Last Blue in the West</h3>
-      <p class="subject"><strong>Subject:</strong> A narrow band of French Ultramarine blue at the western horizon, the last true color before the sky goes fully violet-to-black. Above it, Carbazole Violet. Below it, the dark land.</p>
-      <p class="palette-fit">French Ultramarine is the only granulating pigment in an otherwise smooth sky &mdash; its texture at the horizon reads as the atmosphere&rsquo;s last hold on daylight. Carbazole Violet above is smooth and absolute. The contrast between granulating blue and staining violet IS the subject.</p>
+      <h3>The Violet Window</h3>
+      <p class="subject"><strong>Subject:</strong> Pure sky study &mdash; no trees, no mountains, just the ten-minute violet phase from zenith to horizon. The subject is the color transition itself: Indanthrone Blue to Carbazole Violet to Quinacridone Rose to Alizarin Crimson to Buff Titanium.</p>
+      <p class="palette-fit">This is a palette exercise disguised as a painting. Every primary and accent pigment appears in its natural position in the sky. French Ultramarine granulates against the smooth staining pigments around it, creating texture where the atmosphere thickens near the horizon.</p>
       <div class="tips">
         <ul>
-          <li>Wet the top two-thirds and lay Carbazole Violet as a smooth graded wash &mdash; darkest at zenith, lighter toward the center</li>
-          <li>While still damp at the bottom edge, touch in French Ultramarine pure and unmixed &mdash; let it bloom slightly into the violet above</li>
-          <li>The granulation of the Ultramarine against the smooth Carbazole is the visual event &mdash; don&rsquo;t blend them together</li>
-          <li>Paint the land silhouette with Lunar Black + Perylene Green once everything is dry &mdash; hard edge against the soft sky</li>
+          <li>Work on a full sheet, landscape orientation. Wet the entire surface evenly. Speed matters &mdash; you&rsquo;re racing the drying time just like the sky is racing the clock</li>
+          <li>Start at the top with Indanthrone Blue, then Carbazole Violet in the upper-middle, French Ultramarine just below that (its granulation will create visible texture against the smooth staining pigments), then Quinacridone Rose, Alizarin Crimson, and finally Buff Titanium at the bottom</li>
+          <li>Drop Moonglow into the transition zone between Carbazole Violet and the warm colors &mdash; let it separate on the wet paper into its component blues, violets, and grays</li>
+          <li>Do not touch it once it&rsquo;s laid down. Every brushstroke after the initial pass will destroy the wet-into-wet transitions that make this study work. Set it flat and walk away for thirty minutes</li>
         </ul>
       </div>
     </div>
@@ -629,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. This palette stains hard &mdash; Carbazole Violet, Indanthrone Blue, Transparent Red Oxide, and Perylene Green are all permanent on contact. Plan your whites and lights before touching brush to paper. Temperature runs cool-to-violet with the catkin pigments as the only true warms. Lunar Black and Moonglow provide the palette&rsquo;s granulation; everything else is smooth. French Ultramarine appears only for the last wedge of blue in the western sky &mdash; use it pure, unmixed, at the horizon. Buff Titanium is the lightest note and should be applied sparingly, because at civil twilight, there isn&rsquo;t much light left to depict.
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Carbazole Violet (PV23) is one of the most intensely staining pigments in watercolor &mdash; it bonds to paper fibers on contact and cannot be fully lifted. Plan your lights before it touches the surface. Indanthrone Blue (PB60) stains similarly. Alizarin Crimson (PR83) is a classic that&rsquo;s somewhat fugitive in prolonged light exposure but perfectly stable in a sketchbook. Moonglow is Daniel Smith&rsquo;s convenience mix of PB29/PG7/PR206 &mdash; its value is in the granulating separation of its component pigments on wet paper, producing color shifts you cannot premix. French Ultramarine (PB29) granulates visibly, which provides textural contrast against the smooth staining violets. Payne&rsquo;s Gray (PBk6/PB29/PV23) already contains Carbazole Violet, so branch silhouettes painted with it naturally harmonize with the sky. Lamp Black (PBk7) is opaque and dense &mdash; reserve it for the darkest darks. Temperature runs overwhelmingly cool in this palette; Transparent Brown Oxide (PR101) and Buff Titanium (PW6:1) are the only true warms.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

@@ -6,111 +6,65 @@
 <title>Week 17 — Camas Blue Hour</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(10,60,140,0.18) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(212,43,30,0.14) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(232,184,32,0.12) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(65,105,200,0.1) 0%, transparent 40%),
-      linear-gradient(175deg, #f8f4e8 0%, #e8eef8 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text { position: relative; z-index: 1; }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600; font-size: 13px; letter-spacing: 3px;
-    text-transform: uppercase; color: #0a3c8c; margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px; font-weight: 700; color: #1a1a1a;
-    line-height: 1.1; margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; font-size: 16px; color: #5a5a5a;
-    max-width: 640px; line-height: 1.7;
-  }
-
-  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
-  .trio-section { margin-top: 48px; }
-  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
-  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .trio-swatch { height: 120px; position: relative; }
-  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
-  .trio-info { padding: 16px 18px; }
-  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
-  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
-  .palette-section { margin-top: 56px; }
-  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
-  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
-  .palette-strip .swatch:hover { flex: 2.5; }
-  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
-  .palette-strip .swatch:hover .label { opacity: 1; }
-  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
-  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
-  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-  .palette-item .name { font-weight: 600; font-size: 14px; }
-  .palette-item .role { font-size: 12px; color: #888; }
-  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
-  .mixes-section { margin-top: 56px; }
-  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
-  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
-  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
-  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
-  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
-  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
-  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
-  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
-  .why-section { margin-top: 56px; }
-  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
-  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
-  .prompts-section { margin-top: 56px; }
-  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
-  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
-  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
-  .prompt-card .subject strong { color: #333; }
-  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
-  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
-  .prompt-card .tips ul { list-style: none; padding: 0; }
-  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
-  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
-  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e8eaf0; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
-  .notes-section strong { color: #444; }
-  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Source Sans 3',sans-serif;background:#f5f6f8;color:#2a2a2a;line-height:1.6;padding:0;}
+  .hero{position:relative;height:320px;overflow:hidden;display:flex;align-items:flex-end;padding:40px;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(40,68,102,0.22) 0%,transparent 50%),radial-gradient(ellipse at 30% 70%,rgba(63,63,160,0.20) 0%,transparent 45%),radial-gradient(ellipse at 50% 50%,rgba(138,93,154,0.16) 0%,transparent 40%),radial-gradient(ellipse at 80% 80%,rgba(107,106,138,0.12) 0%,transparent 40%),linear-gradient(175deg,#e8e4f2 0%,#d0d4e8 50%,#3a3a6e 100%);filter:blur(20px);}
+  .hero-text{position:relative;z-index:1;}
+  .hero-text .week-label{font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#6a5a9a;margin-bottom:8px;}
+  .hero-text h1{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:#1a1a1a;line-height:1.1;margin-bottom:16px;}
+  .hero-text .mood{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#5a5a5a;max-width:640px;line-height:1.7;}
+  .container{max-width:900px;margin:0 auto;padding:0 40px 60px;}
+  .trio-section{margin-top:48px;}
+  .section-label{font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#999;margin-bottom:20px;}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .trio-card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+  .trio-swatch{height:120px;position:relative;}
+  .trio-swatch::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.4));}
+  .trio-info{padding:16px 18px;}
+  .trio-info h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;}
+  .trio-info p{font-size:13px;color:#777;line-height:1.5;}
+  .palette-section{margin-top:56px;}
+  .palette-strip{display:flex;border-radius:12px;overflow:hidden;height:72px;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:16px;}
+  .palette-strip .swatch{flex:1;position:relative;cursor:default;transition:flex 0.3s ease;}
+  .palette-strip .swatch:hover{flex:2.5;}
+  .palette-strip .swatch .label{position:absolute;bottom:6px;left:8px;font-size:10px;font-weight:600;letter-spacing:0.5px;opacity:0;transition:opacity 0.3s ease;white-space:nowrap;}
+  .palette-strip .swatch:hover .label{opacity:1;}
+  .palette-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;}
+  .palette-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #ecedf0;}
+  .palette-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.1);}
+  .palette-item .name{font-weight:600;font-size:14px;}
+  .palette-item .role{font-size:12px;color:#888;}
+  .palette-item .num{font-size:11px;color:#bbb;font-weight:600;width:16px;flex-shrink:0;}
+  .mixes-section{margin-top:56px;}
+  .mix-card{background:white;border-radius:12px;padding:28px 32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+  .mix-header{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+  .mix-preview{width:48px;height:48px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 2px 6px rgba(0,0,0,0.1);}
+  .mix-header h3{font-family:'Playfair Display',serif;font-size:22px;}
+  .mix-header .ratio{font-size:13px;color:#999;font-weight:400;}
+  .mix-description{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#666;margin-bottom:16px;line-height:1.6;}
+  .mix-bars{display:flex;gap:4px;height:28px;border-radius:6px;overflow:hidden;margin-bottom:16px;}
+  .mix-bar{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;letter-spacing:0.5px;}
+  .mix-notes{font-size:13.5px;color:#555;line-height:1.75;border-left:3px solid #e0e2e8;padding-left:16px;}
+  .why-section{margin-top:56px;}
+  .why-card{background:white;border-radius:12px;padding:28px 32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+  .why-card h2{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:16px;}
+  .why-card p{font-size:14.5px;color:#555;line-height:1.8;}
+  .prompts-section{margin-top:56px;}
+  .prompt-card{background:white;border-radius:12px;padding:28px 32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+  .prompt-card h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;}
+  .prompt-card .prompt-number{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px;}
+  .prompt-card .subject{font-size:14.5px;color:#555;line-height:1.7;margin-bottom:12px;}
+  .prompt-card .subject strong{color:#333;}
+  .prompt-card .palette-fit{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#666;margin-bottom:16px;line-height:1.6;}
+  .prompt-card .tips{border-left:3px solid #e0e2e8;padding-left:16px;}
+  .prompt-card .tips ul{list-style:none;padding:0;}
+  .prompt-card .tips ul li{font-size:13.5px;color:#555;line-height:1.75;padding:4px 0;position:relative;padding-left:16px;}
+  .prompt-card .tips ul li::before{content:'—';position:absolute;left:0;color:#ccc;}
+  .prompts-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#777;margin-bottom:24px;line-height:1.6;}
+  .notes-section{margin-top:40px;padding:20px 24px;background:#e4e2ec;border-radius:12px;font-size:13px;color:#666;line-height:1.7;}
+  .notes-section strong{color:#444;}
+  .footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid #dde0e5;font-size:12px;color:#bbb;letter-spacing:1px;}
 </style>
 </head>
 <body>
@@ -119,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 17 &mdash; PNW Watercolor Series</div>
     <h1>Camas Blue Hour</h1>
-    <p class="mood">Camas prairies at dusk, the blue so dense it looks painted. Cottonwood resin sweetens the whole valley. A western tanager lands like a lit match on a dark branch. Spring running hot and cool simultaneously &mdash; fire-orange bird, ice-blue flower, and the tension between them is the whole season in one frame.</p>
+    <p class="mood">Blue hour turns camas meadows into extensions of the sky. The flowers and the overhead become the same blue-violet, and you lose the horizon in it. Cobalt Violet flower heads catch the last warm light. Moonglow granulates across everything &mdash; its pigments separating into the same blues and violets the landscape is already made of. The meadow breathes purple.</p>
   </div>
 </div>
 
@@ -130,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8b820 0%, #d0a418 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #3f3fa0 0%, #333390 100%);"></div>
         <div class="trio-info">
-          <h3>Hansa Yellow Deep</h3>
-          <p>Cottonwood leaf backlit by low sun; transparent, warm, and rich without crossing into orange</p>
+          <h3>Ultramarine Blue</h3>
+          <p>The camas flower itself &mdash; slightly more violet-leaning than French Ultramarine, transparent, granulating, and ancient-feeling on paper</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #d42b1e 0%, #b82018 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #8a5d9a 0%, #7a4d8a 100%);"></div>
         <div class="trio-info">
-          <h3>Pyrrol Scarlet</h3>
-          <p>Tanager breast, the red that burns against green; opaque, intense, unapologetic</p>
+          <h3>Cobalt Violet</h3>
+          <p>Individual camas flower heads catching the last warm light; PV14 granulates beautifully, each stroke breaking into violet particles</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #0a3c8c 0%, #082e6e 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #284466 0%, #1e3450 100%);"></div>
         <div class="trio-info">
-          <h3>Phthalo Blue GS</h3>
-          <p>Camas field at distance, the blue that takes over when you stop counting individual flowers; transparent, staining, ferociously strong</p>
+          <h3>Indanthrone Blue</h3>
+          <p>Blue hour deep sky, the overhead darkness pressing down; transparent, slow-drying, with a red undertone that makes it glow rather than flatten</p>
         </div>
       </div>
     </div>
@@ -157,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#e8b820;"><span class="label" style="color:#777;">Hansa Yellow Deep</span></div>
-      <div class="swatch" style="background:#d42b1e;"><span class="label" style="color:#fff;">Pyrrol Scarlet</span></div>
-      <div class="swatch" style="background:#0a3c8c;"><span class="label" style="color:#fff;">Phthalo Blue GS</span></div>
-      <div class="swatch" style="background:#a8ad00;"><span class="label" style="color:#fff;">Green Gold</span></div>
-      <div class="swatch" style="background:#1b2f5e;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
-      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
-      <div class="swatch" style="background:#e8641b;"><span class="label" style="color:#fff;">Pyrrol Orange</span></div>
-      <div class="swatch" style="background:#006848;"><span class="label" style="color:#fff;">Phthalo Green BS</span></div>
-      <div class="swatch" style="background:#f5e14d;"><span class="label" style="color:#777;">Hansa Yellow Lt</span></div>
-      <div class="swatch" style="background:#c8962a;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#3f3fa0;"><span class="label" style="color:#fff;">Ultramarine Blue</span></div>
+      <div class="swatch" style="background:#8a5d9a;"><span class="label" style="color:#fff;">Cobalt Violet</span></div>
+      <div class="swatch" style="background:#284466;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#9890c2;"><span class="label" style="color:#fff;">Lavender</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#6b6a8a;"><span class="label" style="color:#fff;">Moonglow</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#888;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c4286e;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e8b820;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Primary &mdash; cottonwood leaf backlit, amber-gold and translucent</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Atmospheric &mdash; prairie sky going violet, the hour between light and dark</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#d42b1e;"></div><div><div class="name">Pyrrol Scarlet</div><div class="role">Primary &mdash; tanager breast, hot enough to read across a meadow</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e8641b;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Warm Accent &mdash; tanager wing bar, the second note of fire</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#0a3c8c;"></div><div><div class="name">Phthalo Blue GS</div><div class="role">Primary &mdash; camas field at distance, blue drowning the grass</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#006848;"></div><div><div class="name">Phthalo Green BS</div><div class="role">Cool Accent &mdash; river-edge willow, green that leans toward water</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a8ad00;"></div><div><div class="name">Green Gold</div><div class="role">Earth &mdash; new cottonwood leaf, yellow-green and sticky</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e14d;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Light &mdash; resin-gold evening air, the color of cottonwood scent</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1b2f5e;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; river-bottom shadow at dusk, blue gone nearly black</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c8962a;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Earth &mdash; late sun on grass seed heads, warm and granulating</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#3f3fa0;"></div><div><div class="name">Ultramarine Blue</div><div class="role">Primary &mdash; camas blue-violet, the flower made pigment</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; meadow grass at dusk, going dark and warm</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#8a5d9a;"></div><div><div class="name">Cobalt Violet</div><div class="role">Primary &mdash; camas flower heads catching last light, granulating</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#6b6a8a;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; twilight granulation, separates into blue-violet-gray</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#284466;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Primary &mdash; blue hour deep sky, darkness with warmth in it</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Dark &mdash; approaching darkness, the cool neutral that anchors</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Transition &mdash; sky between zenith and horizon, warm granulating blue</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; last pale horizon glow, opaque and warm</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#9890c2;"></div><div><div class="name">Lavender</div><div class="role">Atmospheric &mdash; field haze, the pale violet between you and the meadow</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c4286e;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Warm Accent &mdash; warm notes in violet flowers, the pink the eye almost misses</div></div></div>
     </div>
   </div>
 
@@ -188,58 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a4898, #123880);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a4a98, #3a3a80);"></div>
         <div>
-          <h3>Camas Dusk</h3>
-          <span class="ratio">3 Phthalo Blue GS : 1 Cobalt Blue : &frac12; Indanthrone Blue</span>
+          <h3>Camas Drift</h3>
+          <span class="ratio">3 Ultramarine Blue : 1 Cobalt Violet : &frac12; Quinacridone Rose</span>
         </div>
       </div>
-      <p class="mix-description">The field as one blue mass at arm's length &mdash; individual flowers dissolved into collective color.</p>
+      <p class="mix-description">A thousand camas flowers seen from twenty feet &mdash; not individual blooms but a blue-violet current moving through grass.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#0a3c8c; color:#fff;">Phthalo Blue GS</div>
-        <div class="mix-bar" style="flex:1; background:#4169c8; color:#fff;">Cobalt Blue</div>
-        <div class="mix-bar" style="flex:0.5; background:#1b2f5e; color:#fff;">Indanthrone</div>
+        <div class="mix-bar" style="flex:3; background:#3f3fa0; color:#fff;">Ultramarine Blue</div>
+        <div class="mix-bar" style="flex:1; background:#8a5d9a; color:#fff;">Cobalt Violet</div>
+        <div class="mix-bar" style="flex:0.5; background:#c4286e; color:#fff;">Quin. Rose</div>
       </div>
       <div class="mix-notes">
-        Phthalo Blue GS is the engine &mdash; staining, transparent, it floods the wash with camas blue. Cobalt Blue introduces granulation, breaking the flatness into something that reads as a thousand separate flowers. Indanthrone Blue deepens the shadows between stems. Apply wet-in-wet at high dilution for the field at distance; concentrate for foreground clusters. This mix stains permanently &mdash; commit to it.
+        Ultramarine Blue is the engine &mdash; its violet lean already halfway to camas. Cobalt Violet (PV14) introduces granulation that breaks the wash into what reads as separate flower heads without painting a single one. Quinacridone Rose warms the mix just enough to keep it alive in the last light. Apply wet-in-wet on tilted paper and let gravity pull the pigments into drifts. Cobalt Violet will settle into the valleys of cold-pressed paper while Ultramarine floats &mdash; this separation is the whole effect.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d84828, #c83818);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a4878, #2a3868);"></div>
         <div>
-          <h3>Tanager Flash</h3>
-          <span class="ratio">2 Pyrrol Scarlet : 1 Transparent Pyrrol Orange : &frac12; Hansa Yellow Deep</span>
+          <h3>Lost Horizon</h3>
+          <span class="ratio">2 Indanthrone Blue : 1 Moonglow : &frac12; Lavender</span>
         </div>
       </div>
-      <p class="mix-description">Hot enough to see from fifty yards &mdash; the bird that evolution made visible on purpose.</p>
+      <p class="mix-description">Where the meadow ends and the sky begins &mdash; or doesn&rsquo;t. The line you came to find and couldn&rsquo;t.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#d42b1e; color:#fff;">Pyrrol Scarlet</div>
-        <div class="mix-bar" style="flex:1; background:#e8641b; color:#fff;">Pyrrol Orange</div>
-        <div class="mix-bar" style="flex:0.5; background:#e8b820; color:#777;">Hansa Yellow</div>
+        <div class="mix-bar" style="flex:2; background:#284466; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#6b6a8a; color:#fff;">Moonglow</div>
+        <div class="mix-bar" style="flex:0.5; background:#9890c2; color:#fff;">Lavender</div>
       </div>
       <div class="mix-notes">
-        Pyrrol Scarlet is semi-opaque &mdash; it sits on the paper with presence, which is exactly what a tanager does on a branch. Transparent Pyrrol Orange adds fire without competing. Hansa Yellow Deep at the edges gives the breast its golden transition toward the belly. Mix on the palette and apply in one confident stroke. This bird doesn't wait for you to adjust.
+        Indanthrone Blue is transparent and deep &mdash; it makes the sky feel like it has actual depth behind it. Moonglow is the secret weapon: a multi-pigment convenience mix that separates on paper into blue, violet, and gray particles. It IS blue hour in a tube. Lavender lifts the value just enough for the transition zone where sky meets field. Wet the entire horizon band and float this mix across it in a single pass. The pigment separation will do the rest &mdash; you&rsquo;ll get a horizon that dissolves rather than divides.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b89830, #a88828);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a6848, #3a5838);"></div>
         <div>
-          <h3>Cottonwood Resin</h3>
-          <span class="ratio">2 Quinacridone Gold : 1 Green Gold : &frac12; Hansa Yellow Light</span>
+          <h3>Dusk Meadow Floor</h3>
+          <span class="ratio">2 Sap Green : 1 Payne's Gray : &frac12; French Ultramarine</span>
         </div>
       </div>
-      <p class="mix-description">Sticky amber warmth you smell before you see the trees &mdash; the synaesthetic color of spring evening.</p>
+      <p class="mix-description">Grass at the hour when green gives up and lets blue take over &mdash; the meadow floor surrendering to twilight.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#c8962a; color:#fff;">Quin. Gold</div>
-        <div class="mix-bar" style="flex:1; background:#a8ad00; color:#fff;">Green Gold</div>
-        <div class="mix-bar" style="flex:0.5; background:#f5e14d; color:#777;">Hansa Yellow Lt</div>
+        <div class="mix-bar" style="flex:2; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:0.5; background:#2a3d9c; color:#fff;">Fr. Ultramarine</div>
       </div>
       <div class="mix-notes">
-        Quinacridone Gold granulates subtly, adding texture that feels like resin on bark. Green Gold keeps the mix alive &mdash; it's a living amber, not a dead one. Hansa Yellow Light lifts the value for the haze effect. Use diluted as a unifying glaze over dried washes to tie a composition together with evening warmth. Quinacridone Gold's slight granulation on cold-pressed paper is the whole trick here.
+        Sap Green at dusk isn&rsquo;t really green anymore &mdash; Payne&rsquo;s Gray cools and darkens it into the blue-green that grass actually becomes when the sun drops below the horizon. French Ultramarine nudges the whole mix toward violet, matching the reflected sky color on wet grass blades. Use diluted for the middle-distance meadow floor between camas clumps. The granulation from French Ultramarine gives the grass texture without brushwork.
       </div>
     </div>
   </div>
@@ -248,7 +202,7 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>The palette is polarized by design &mdash; Phthalo Blue GS and Pyrrol Scarlet are near-complements that vibrate against each other the way camas fields vibrate against tanager plumage. Phthalo Blue GS is dangerously strong and staining; it needs Cobalt Blue and Indanthrone Blue to give it dimension. The warm side (Hansa Yellow Deep, Transparent Pyrrol Orange, Quinacridone Gold) is all transparent or semi-transparent, so the warmth glows from within. Green Gold and Phthalo Green BS bridge the temperature gap &mdash; greens that can live next to both the fire-orange bird and the ice-blue meadow without choosing sides.</p>
+      <p>This palette is almost monochromatic on purpose &mdash; because blue hour is almost monochromatic on purpose. Ultramarine Blue and French Ultramarine occupy nearly the same hue space but behave differently: Ultramarine Blue leans slightly more violet (the camas flower), while French Ultramarine leans slightly warmer (the transitional sky). Cobalt Violet is the only true violet, and its PV14 granulation means every stroke breaks into particles that mimic individual flower heads. Indanthrone Blue handles the deep overhead sky with a transparency that feels like actual depth. Moonglow is the cheat code &mdash; its multi-pigment formula separates into the same blues, violets, and grays the landscape is already made of. Lavender provides the atmospheric haze between you and the far meadow. Sap Green and Payne&rsquo;s Gray anchor the ground plane. Buff Titanium is the only warm holdout, the last ribbon of light at the horizon, and Quinacridone Rose gives the violet flowers their hidden warmth &mdash; the pink undertone you sense more than see.</p>
     </div>
   </div>
 
@@ -259,60 +213,60 @@
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Camas Prairie at Blue Hour</h3>
-      <p class="subject"><strong>Subject:</strong> A wide camas meadow at dusk, the entire field dissolved into a single blue-purple mass, with a dark tree line and a sky going violet above.</p>
-      <p class="palette-fit">The Camas Dusk mix (Phthalo Blue GS + Cobalt Blue + Indanthrone Blue) handles the whole meadow in one wash. Cobalt Blue&rsquo;s granulation creates the illusion of individual flowers without painting a single one.</p>
+      <h3>Camas Meadow at Dusk</h3>
+      <p class="subject"><strong>Subject:</strong> A wide Willamette Valley camas meadow at blue hour, the entire field a single blue-violet drift, dark tree line barely visible, sky and flowers merging into the same color.</p>
+      <p class="palette-fit">The Camas Drift mix (Ultramarine Blue + Cobalt Violet + Quinacridone Rose) handles the entire meadow. The Lost Horizon mix dissolves the tree line into sky. This is a painting about losing edges, not finding them.</p>
       <div class="tips">
         <ul>
-          <li>Wet the meadow area completely and flood in the Camas Dusk mix at medium dilution &mdash; Phthalo Blue GS stains permanently, so this is a one-shot commitment</li>
-          <li>While the wash is still wet, touch in concentrated Indanthrone Blue at the base of the tree line for shadows between stems</li>
-          <li>The tree line silhouette is Indanthrone Blue mixed with a breath of Phthalo Green BS, applied after the meadow dries</li>
-          <li>Leave a thin dry strip between meadow and sky so they don&rsquo;t merge &mdash; the horizon line matters in a flat prairie composition</li>
+          <li>Wet the entire paper and work sky-down: Indanthrone Blue at the zenith, the Lost Horizon mix across the middle band, the Camas Drift mix for the meadow &mdash; all in one continuous wet-in-wet pass</li>
+          <li>Let Cobalt Violet&rsquo;s granulation do the work of suggesting individual flowers &mdash; don&rsquo;t paint them, let the pigment particles settle into the paper valleys</li>
+          <li>The tree line is a single stroke of Payne&rsquo;s Gray while the wash is still damp, so it bleeds softly rather than cutting the composition in two</li>
+          <li>Leave one small strip of dry paper near the horizon and touch it with Buff Titanium &mdash; the last light, the only warm note in the entire painting</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Western Tanager on a Dark Branch</h3>
-      <p class="subject"><strong>Subject:</strong> A single western tanager perched on a cottonwood branch, scarlet and gold against deep blue-green background.</p>
-      <p class="palette-fit">The Tanager Flash mix (Pyrrol Scarlet + Transparent Pyrrol Orange + Hansa Yellow Deep) gives you the entire bird in three strokes. Phthalo Green BS behind it provides maximum complementary contrast.</p>
+      <h3>Single Camas Stem Close-Up</h3>
+      <p class="subject"><strong>Subject:</strong> One camas stem in sharp focus, six-petaled flowers open along the raceme, with the rest of the meadow blurred into a blue-violet wash behind it.</p>
+      <p class="palette-fit">Cobalt Violet for the individual petals, Ultramarine Blue for the shadows between them. Quinacridone Rose warms the petal edges where the last light hits. Lavender blurs the background into haze.</p>
       <div class="tips">
         <ul>
-          <li>Paint the background first: Phthalo Green BS with a touch of Indanthrone Blue, let it dry completely</li>
-          <li>The tanager&rsquo;s head is pure Pyrrol Scarlet &mdash; one stroke, semi-opaque, it will sit on top of the dried background with physical presence</li>
-          <li>Transition from Pyrrol Scarlet to Transparent Pyrrol Orange to Hansa Yellow Deep down the breast while each color is still damp</li>
-          <li>The black wings are Indanthrone Blue, not black &mdash; it keeps the bird chromatic and lets the warm body blaze by contrast</li>
+          <li>Paint the background first: a wet-in-wet wash of Lavender and dilute Ultramarine Blue, completely soft and out of focus &mdash; let it dry fully</li>
+          <li>The stem is Sap Green darkened with a touch of Payne&rsquo;s Gray, one confident vertical stroke with a rigger brush</li>
+          <li>Each petal is Cobalt Violet applied to dry paper &mdash; PV14&rsquo;s granulation gives the petals texture that reads as real even at close range</li>
+          <li>Touch the petal tips with Quinacridone Rose while the violet is still damp for the warm glow of translucent petals catching side light</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Cottonwood Grove at Golden Hour</h3>
-      <p class="subject"><strong>Subject:</strong> Backlit cottonwood trees with translucent spring leaves glowing amber-gold, the resinous evening air almost visible as color.</p>
-      <p class="palette-fit">The Cottonwood Resin mix (Quinacridone Gold + Green Gold + Hansa Yellow Light) is this exact scene in a puddle of paint. Hansa Yellow Deep does the backlit leaves.</p>
+      <h3>The Horizon Line Disappearing</h3>
+      <p class="subject"><strong>Subject:</strong> A minimal composition: just the horizon band where camas meadow meets blue-hour sky, the line dissolving as you watch. More feeling than scene.</p>
+      <p class="palette-fit">The Lost Horizon mix (Indanthrone Blue + Moonglow + Lavender) was designed for exactly this moment. Buff Titanium is your only anchor to the physical world &mdash; the last warm line before everything goes blue.</p>
       <div class="tips">
         <ul>
-          <li>Glaze the entire scene with dilute Hansa Yellow Light first to establish the golden-hour color temperature</li>
-          <li>Paint individual backlit leaves as Hansa Yellow Deep on dry paper &mdash; transparency lets the underlying gold wash glow through</li>
-          <li>The Cottonwood Resin mix works as a unifying glaze applied over the dried tree trunks to suggest resinous air</li>
-          <li>Quinacridone Gold&rsquo;s subtle granulation on cold-pressed paper mimics the sticky texture of cottonwood bark &mdash; let the pigment do the work</li>
+          <li>This is an exercise in wet-in-wet courage: wet the full sheet and commit to a single pass, sky to ground, with no hard edges anywhere</li>
+          <li>Indanthrone Blue at the top, transitioning to the Lost Horizon mix at center, then French Ultramarine and Ultramarine Blue below &mdash; the sky and meadow should be nearly indistinguishable</li>
+          <li>While everything is still wet, drag a line of Buff Titanium across the horizon &mdash; it&rsquo;s opaque enough to hold its shape briefly before the blues absorb it</li>
+          <li>Moonglow&rsquo;s pigment separation will create the entire twilight atmosphere as it dries &mdash; resist the urge to add more. The paint knows what blue hour looks like.</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>The Collision (Tanager Over Camas Field)</h3>
-      <p class="subject"><strong>Subject:</strong> The full scene &mdash; a camas meadow at dusk with a tanager crossing the frame, fire-orange against ice-blue. The whole season in one painting.</p>
-      <p class="palette-fit">This is why the palette is polarized. Phthalo Blue GS and Pyrrol Scarlet are near-complements that vibrate against each other the way this scene actually vibrates in life.</p>
+      <h3>Meadow Path at Blue Hour</h3>
+      <p class="subject"><strong>Subject:</strong> A mown path curving through a camas prairie at dusk, the path itself a darker line of trampled grass, camas rising on both sides, the whole scene sinking into violet.</p>
+      <p class="palette-fit">The Dusk Meadow Floor mix (Sap Green + Payne&rsquo;s Gray + French Ultramarine) gives you the path and the grass between flowers. Camas Drift handles the flowers themselves. The path is where you are; the flowers are where you want to be.</p>
       <div class="tips">
         <ul>
-          <li>Paint the camas meadow first and let it dry thoroughly &mdash; Phthalo Blue GS needs to be fully set before you layer anything over it</li>
-          <li>The tanager can be small &mdash; even a centimeter across, the Pyrrol Scarlet will read against the blue because complementary contrast does the work of scale</li>
-          <li>Frame the bird against the darkest part of the meadow (concentrated Camas Dusk mix) for maximum pop</li>
-          <li>Add a Cottonwood Resin glaze along the horizon line to suggest the warm evening air where the blue field meets the golden sky</li>
+          <li>Block in the sky with Indanthrone Blue and Moonglow first, leaving the meadow area as white paper &mdash; let the sky dry before proceeding</li>
+          <li>The path is the Dusk Meadow Floor mix applied in a curving shape that leads the eye into the middle distance &mdash; darker (more Payne&rsquo;s Gray) in the foreground, lighter as it recedes</li>
+          <li>Camas flowers flanking the path are the Camas Drift mix touched in while the grass wash is still slightly damp, so they bleed at the base but hold shape at the top</li>
+          <li>Drop concentrated Cobalt Violet into the nearest flower clumps for foreground detail &mdash; the granulation will give them presence that the distant flowers lack, creating natural depth</li>
         </ul>
       </div>
     </div>
@@ -320,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Phthalo Blue GS is among the strongest tinting pigments available &mdash; a little obliterates a lot, so load your brush with respect. Pyrrol Scarlet is lightfast and semi-opaque; it won't glow from the paper the way Quinacridone Rose does, but it holds its ground. Indanthrone Blue is a slow dryer that rewards patience &mdash; let it settle before judging the value.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Moonglow is a multi-pigment convenience mix (PB29, PR177, PBk6) that separates on paper into blue, violet, and gray particles &mdash; it is blue hour in a tube. Cobalt Violet (PV14) is a genuine cobalt pigment that granulates heavily; it&rsquo;s expensive and worth it. Ultramarine Blue vs. French Ultramarine: both are PB29, but Daniel Smith&rsquo;s Ultramarine Blue formulation leans slightly more violet. Buff Titanium (PW6:1) is opaque by nature &mdash; use it sparingly or it will flatten your washes.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

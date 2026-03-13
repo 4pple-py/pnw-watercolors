@@ -6,423 +6,65 @@
 <title>Week 2 — Atmospheric River Tea</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #faf8f5;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 60%, rgba(107,96,128,0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 40%, rgba(139,94,60,0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 70%, rgba(27,58,92,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 35% 30%, rgba(107,96,128,0.15) 0%, transparent 40%),
-      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #7a6a5a;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0ece6;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e8e4de;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0ece6;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #777;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #555;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4de;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 60%, rgba(139,94,60,0.3) 0%, transparent 50%), radial-gradient(ellipse at 55% 40%, rgba(200,160,80,0.25) 0%, transparent 45%), radial-gradient(ellipse at 75% 70%, rgba(160,82,45,0.2) 0%, transparent 50%), radial-gradient(ellipse at 35% 30%, rgba(184,134,11,0.15) 0%, transparent 40%), linear-gradient(175deg, #f8f4ee 0%, #f0ece6 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #8b6e4e; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,205 +73,170 @@
   <div class="hero-text">
     <div class="week-label">Week 2 &mdash; PNW Watercolor Series</div>
     <h1>Atmospheric River Tea</h1>
-    <p class="mood">Third atmospheric river in ten days. Licorice fern grips moss-sleeved maples while creeks run the color of steeped bark. Midday reads like dusk &mdash; the cloud deck isn&rsquo;t a ceiling, it&rsquo;s a floor pressed down. The tension: saturation without color &mdash; everything soaked, nothing bright.</p>
+    <p class="mood">The Pineapple Express makes landfall and the rivers go brown overnight. Tannin-stained water the color of strong rooibos carries alder leaves and cedar bark past flooded banks. The rain is warm &mdash; subtropical moisture on frozen ground &mdash; and the sky presses down like a lid.</p>
   </div>
 </div>
 
 <div class="container">
 
-  <!-- Primary Trio -->
   <div class="trio-section">
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #6b6080 0%, #5a5070 100%);"></div>
-        <div class="trio-info">
-          <h3>Moonglow</h3>
-          <p>Bruise-light filtering through the cloud deck; granulating, tricolor-shifting, it does the atmospheric work of three pigments in one</p>
-        </div>
-      </div>
-      <div class="trio-card">
         <div class="trio-swatch" style="background: linear-gradient(135deg, #8b5e3c 0%, #7a4e2c 100%);"></div>
-        <div class="trio-info">
-          <h3>Transparent Brown Oxide</h3>
-          <p>Creek tannin, pure and clean; transparent enough to layer without muddying</p>
-        </div>
+        <div class="trio-info"><h3>Transparent Brown Oxide</h3><p>The river itself &mdash; pure tannin water running over cobble, transparent enough to see the stones beneath</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #1b3a5c 0%, #0f2a4c 100%);"></div>
-        <div class="trio-info">
-          <h3>Indanthrone Blue</h3>
-          <p>Deep wet bark at full saturation; staining, non-granulating, the darkest blue that still reads as blue</p>
-        </div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a050 0%, #b89040 100%);"></div>
+        <div class="trio-info"><h3>Raw Sienna</h3><p>Amber warmth where floodwater catches what little light makes it through the overcast</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a0522d 0%, #8a421d 100%);"></div>
+        <div class="trio-info"><h3>Burnt Sienna</h3><p>Deep tea at full steep &mdash; the concentrated color where current slows and tannins pool</p></div>
       </div>
     </div>
   </div>
 
-  <!-- Full Palette -->
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#6b6080;"><span class="label" style="color:#fff;">Moonglow</span></div>
       <div class="swatch" style="background:#8b5e3c;"><span class="label" style="color:#fff;">Trans. Brown Oxide</span></div>
-      <div class="swatch" style="background:#1b3a5c;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
-      <div class="swatch" style="background:#c68030;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
-      <div class="swatch" style="background:#2a2a30;"><span class="label" style="color:#fff;">Lunar Black</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
       <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
-      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#b85c2a;"><span class="label" style="color:#fff;">Quin. Burnt Orange</span></div>
+      <div class="swatch" style="background:#736357;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#c8a53a;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
       <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
+      <div class="swatch" style="background:#b8860b;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#9c6b4e;"><span class="label" style="color:#fff;">Sedona Genuine</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#6b6080;"></div><div><div class="name">Moonglow</div><div class="role">Atmosphere &mdash; bruise-light through the cloud deck, shifting</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Atmospheric &mdash; licorice fern spore lines, warm punctuation</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#8b5e3c;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Anchor &mdash; creek tannin, the color of steeped landscape</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; fog ceiling, the brightest thing in the scene</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#1b3a5c;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Anchor &mdash; deep wet bark, bigleaf maple in downpour</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#b85c2a;"></div><div><div class="name">Quinacridone Burnt Orange</div><div class="role">Warm Accent &mdash; alder catkin hint, barely there</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c68030;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; maple trunk wet side, warm and transparent</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Cool Accent &mdash; road runoff joining creek water</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#2a2a30;"></div><div><div class="name">Lunar Black</div><div class="role">Dark &mdash; saturated shadow pooling beneath root wads</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Cool Accent &mdash; moss mat on branch, dripping</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#8b5e3c;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Primary &mdash; tannin water, clean and luminous</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; rain sky pressing down</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Raw Sienna</div><div class="role">Primary &mdash; amber warmth in flood light</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; overcast atmosphere, road runoff</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Primary &mdash; deep tea color, pooling tannin</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#b8860b;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Warm Accent &mdash; golden tannin highlights</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#736357;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; cold muddy banks, exposed clay</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; dark riverbed, submerged logs</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#c8a53a;"></div><div><div class="name">Yellow Ochre</div><div class="role">Warm Accent &mdash; amber glow where light breaks</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#9c6b4e;"></div><div><div class="name">Sedona Genuine</div><div class="role">Atmospheric &mdash; mineral earth suspended in floodwater</div></div></div>
     </div>
   </div>
 
-  <!-- Mixes -->
   <div class="mixes-section">
     <div class="section-label">Mixes &amp; Ratios</div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8b5e3c, #7a6068);"></div>
-        <div>
-          <h3>Tannin Creek</h3>
-          <span class="ratio">3 Transparent Brown Oxide : 1 Moonglow</span>
-        </div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #9c7040, #7a5a48);"></div>
+        <div><h3>Rooibos Current</h3><span class="ratio">2 Transparent Brown Oxide : 1 Quinacridone Gold : touch Sedona Genuine</span></div>
       </div>
-      <p class="mix-description">Tea-brown water over cobble &mdash; the creek running with a week&rsquo;s worth of dissolved forest floor.</p>
+      <p class="mix-description">Mid-river flood water catching a break in the clouds &mdash; brown gone briefly gold.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#8b5e3c; color:#fff;">Trans. Brown Oxide</div>
-        <div class="mix-bar" style="flex:1; background:#6b6080; color:#fff;">Moonglow</div>
+        <div class="mix-bar" style="flex:2; background:#8b5e3c; color:#fff;">Trans. Brown Oxide</div>
+        <div class="mix-bar" style="flex:1; background:#b8860b; color:#fff;">Quin. Gold</div>
+        <div class="mix-bar" style="flex:0.2; background:#9c6b4e; color:#fff;">Sedona Genuine</div>
       </div>
-      <div class="mix-notes">
-        Both pigments are transparent, so this mix glows even in heavy application. Lay Transparent Brown Oxide first, wet, then touch Moonglow into the deeper pools &mdash; the granulation in Moonglow will settle into the crevices while the oxide stays smooth on the surface. This separation is the visual difference between shallow flow and standing depth. For faster water, use more oxide; for still pools, more Moonglow.
-      </div>
+      <div class="mix-notes">Transparent Brown Oxide and Quinacridone Gold are both fully transparent and staining, so this mix glows from the paper up even at heavy concentration. The Quinacridone Gold shifts the brown toward a warm amber that reads as light hitting tannin water &mdash; not yellow, not orange, but that specific golden-brown of rooibos held up to a window. Touch Sedona Genuine into the wet mix and its mineral granulation settles into the paper valleys, mimicking sediment suspended in current. Apply to wet paper for soft-edged flow; dry paper for the sharp line where fast water meets bank.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1b3a5c, #2a2a30);"></div>
-        <div>
-          <h3>Bark in Rain</h3>
-          <span class="ratio">2 Indanthrone Blue : 1 Lunar Black</span>
-        </div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5a5868, #4a4a5a);"></div>
+        <div><h3>Low Ceiling</h3><span class="ratio">2 Payne&rsquo;s Gray : 1 French Ultramarine : touch Raw Umber</span></div>
       </div>
-      <p class="mix-description">Bigleaf maple trunk mid-downpour &mdash; so saturated with water it&rsquo;s lost its brown entirely and gone to blue-black.</p>
+      <p class="mix-description">The sky that isn&rsquo;t a sky anymore &mdash; just weight pressing down with rain in it.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#1b3a5c; color:#fff;">Indanthrone Blue</div>
-        <div class="mix-bar" style="flex:1; background:#2a2a30; color:#fff;">Lunar Black</div>
+        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
+        <div class="mix-bar" style="flex:1; background:#2a3d9c; color:#fff;">French Ultramarine</div>
+        <div class="mix-bar" style="flex:0.2; background:#736357; color:#fff;">Raw Umber</div>
       </div>
-      <div class="mix-notes">
-        Lunar Black granulates dramatically &mdash; let it. Mix loosely on the palette and apply to damp paper so the granulation has room to separate. Indanthrone Blue anchors the color while Lunar Black provides the particulate texture of wet bark. This is a dark that still has temperature (cool) and texture (rough). For the wettest surfaces, add more water and let the granulation do the bark work. Don&rsquo;t scrub.
-      </div>
+      <div class="mix-notes">French Ultramarine granulates heavily and Payne&rsquo;s Gray is smooth &mdash; together they produce a sky that has visible texture where rain is thickest and smooth passages where the cloud thins. The Raw Umber touch warms the gray just enough to keep it from reading as cold neutral; atmospheric river clouds carry subtropical moisture and they look it. Lay this mix in a single graded wash across the top third of your painting, tilting the board to let the granulation settle downward. Where you want the heaviest rain, add more Ultramarine while wet.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a3a2a, #8a6a30);"></div>
-        <div>
-          <h3>Moss Sleeve</h3>
-          <span class="ratio">2 Perylene Green : 1 Raw Sienna</span>
-        </div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7a5830, #5c3a1a);"></div>
+        <div><h3>Bark Liquor</h3><span class="ratio">2 Burnt Sienna : 1 Burnt Umber : touch Yellow Ochre</span></div>
       </div>
-      <p class="mix-description">Epiphyte mat dripping &mdash; the moss that sleeves every maple branch, heavier now than the wood beneath it.</p>
+      <p class="mix-description">Cedar bark steeping in standing water &mdash; the concentrated tannin at the bottom of every puddle.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#1a3a2a; color:#fff;">Perylene Green</div>
-        <div class="mix-bar" style="flex:1; background:#c68030; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:2; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#5c3317; color:#fff;">Burnt Umber</div>
+        <div class="mix-bar" style="flex:0.2; background:#c8a53a; color:#fff;">Yellow Ochre</div>
       </div>
-      <div class="mix-notes">
-        Perylene Green stains and Raw Sienna granulates &mdash; together they give you the two-texture reality of moss over bark. Apply the mix to dry paper for defined moss edges, or to damp paper for the soft mass of an entire sleeved branch. Raw Sienna warms the green just enough to read as organic growth rather than paint. More Raw Sienna for older, browner moss; more Perylene Green for the actively growing tips.
-      </div>
+      <div class="mix-notes">Burnt Sienna is semi-transparent and warm; Burnt Umber is more opaque and cooler. Mixed, they produce a rich dark brown that still has internal temperature variation rather than going flat. The Yellow Ochre touch lifts the edges where this dark water catches ambient light &mdash; drop it in while the mix is still wet and it will bloom outward naturally. This is your darkest water color. Use it for standing puddles, backed-up culverts, and the still pools behind logjams where tannin concentrates. Burnt Sienna granulates slightly on rough paper, which adds sediment texture without effort.</div>
     </div>
   </div>
 
-  <!-- Why These Colors -->
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>The palette is engineered around transparency &mdash; seven of the ten pigments are fully transparent, because an atmospheric river turns the entire landscape into a lightbox of layered veils. Moonglow&rsquo;s tricolor granulation (it separates into blue, red, and yellow on textured paper) mimics the strange shifting light under deep cloud cover. Transparent Brown Oxide is the cleanest tannin-colored pigment available &mdash; no opacity, no granulation, just pure dissolved-bark color. Lunar Black&rsquo;s extreme granulation provides the only texture in what is otherwise a smooth, soaked world. Indanthrone Blue stains permanently, which is exactly what sustained rain does to every surface it touches. This palette doesn&rsquo;t fight the monochrome &mdash; it finds the variation within it.</p>
+      <p>This palette is built around browns on purpose. An atmospheric river turns the entire watershed into a steeping pot, and the visual range of tannin water &mdash; from pale amber to near-black &mdash; is wider than most people realize. Transparent Brown Oxide is the cleanest tannin pigment available: fully transparent, non-granulating, it layers without muddying. Raw Sienna and Yellow Ochre occupy similar warm territory but behave differently &mdash; Raw Sienna granulates and lifts easily, while Yellow Ochre is opaque and stays put, giving you both soft and hard edges in the amber range. French Ultramarine earns the only blue slot because its heavy granulation mimics rain-loaded clouds better than any smooth blue could. Quinacridone Gold is the surprise &mdash; it transforms the browns from muddy to luminous when glazed over them, the way actual light transforms actual floodwater. Sedona Genuine is a Primatek mineral pigment that granulates with real ground earth, settling into paper texture the way suspended sediment settles in slow current.</p>
     </div>
   </div>
 
-  <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Stuck staring at a blank page? These subjects are built for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and what&rsquo;s happening outside right now.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Moss-Sleeved Maple in Downpour</h3>
-      <p class="subject"><strong>Subject:</strong> A single bigleaf maple in full rain, every branch wrapped in dripping moss, the trunk gone blue-black with saturation. The background is fog. The foreground is puddle.</p>
-      <p class="palette-fit">The Bark in Rain mix (Indanthrone Blue + Lunar Black) gives you that rain-saturated trunk, while Moss Sleeve (Perylene Green + Raw Sienna) handles every epiphyte. Buff Titanium is the fog &mdash; the brightest value in a scene with no sun.</p>
-      <div class="tips">
-        <ul>
-          <li>Wet the entire sheet and lay Buff Titanium + Moonglow as the fog ground first &mdash; keep it pale and let Moonglow&rsquo;s granulation do the atmospheric shifting</li>
-          <li>Paint the trunk wet-into-wet with Indanthrone Blue + Lunar Black while the fog wash is still damp, so the edges bleed into mist</li>
-          <li>Once dry, add the moss sleeves with Perylene Green + Raw Sienna on dry paper for defined edges where moss meets air</li>
-          <li>Use a spray bottle to flick clean water onto the finished painting for rain-drop blooms &mdash; the transparent pigments will push aside beautifully</li>
-        </ul>
-      </div>
+      <h3>Tannin River at Flood Stage</h3>
+      <p class="subject"><strong>Subject:</strong> A PNW river running tea-brown at high water, carrying foam and debris. Overhanging alders on the far bank, the sky a solid gray pressing down to meet the treeline.</p>
+      <p class="palette-fit">The Rooibos Current mix is the river surface &mdash; Transparent Brown Oxide glowing with Quinacridone Gold where light hits, Sedona Genuine granulating in the slow eddies. Low Ceiling handles the entire sky in one wash.</p>
+      <div class="tips"><ul>
+        <li>Paint the sky first with the Low Ceiling mix as a single graded wash, stronger at the top &mdash; let French Ultramarine&rsquo;s granulation settle before touching anything else</li>
+        <li>The river is the Rooibos Current mix applied to wet paper in horizontal strokes, leaving thin white lines for foam streaks</li>
+        <li>Alders on the far bank are Raw Umber trunks with Payne&rsquo;s Gray branches &mdash; keep them simple silhouettes against the sky</li>
+        <li>Drop Quinacridone Gold into the wet river wash where the eye should travel &mdash; flood water catches light in specific places, not everywhere</li>
+      </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Tannin Creek Over Cobble</h3>
-      <p class="subject"><strong>Subject:</strong> A forest creek running tea-brown over smooth cobblestones, licorice ferns on the bank, the water surface broken by a single half-submerged log.</p>
-      <p class="palette-fit">The Tannin Creek mix (Transparent Brown Oxide + Moonglow) is literally this water &mdash; transparent, glowing, with granulation settling into the deep pools. Burnt Sienna gives you the licorice fern spore lines as warm punctuation.</p>
-      <div class="tips">
-        <ul>
-          <li>Paint the cobblestones first with Raw Sienna, leaving white paper gaps for water highlights &mdash; let them dry completely</li>
-          <li>Glaze the Tannin Creek mix over the cobbles in a single confident wash &mdash; the transparency will let the stones show through, which is how clear tannin water actually looks</li>
-          <li>Add deeper pools with more Moonglow, letting it granulate and settle where the water slows</li>
-          <li>Paint licorice ferns on the bank with Perylene Green + Raw Sienna, then add Burnt Sienna dots along the underside of each frond for the spore sori</li>
-        </ul>
-      </div>
+      <h3>Culvert Outfall After 48 Hours of Rain</h3>
+      <p class="subject"><strong>Subject:</strong> A road culvert pouring brown water into a ditch, the concrete pipe stained with years of tannin. Gravel shoulder above, blackberry canes arching over the outfall.</p>
+      <p class="palette-fit">Bark Liquor gives you the concentrated dark water pouring from the pipe. Raw Umber is the concrete &mdash; stained, cold, structural. Payne&rsquo;s Gray handles the wet gravel road surface above.</p>
+      <div class="tips"><ul>
+        <li>Paint the culvert pipe with Raw Umber, leaving a hard-edged circle of white paper for the water coming out &mdash; fill that circle with Bark Liquor mix while the umber is still damp</li>
+        <li>The ditch water below is Transparent Brown Oxide thinned to a pale wash, getting darker toward the culvert with more Burnt Sienna</li>
+        <li>Wet gravel is Payne&rsquo;s Gray dry-brushed over dry paper for texture, with Burnt Umber in the tire ruts</li>
+        <li>Blackberry canes are Burnt Umber with thorns scratched out using a palette knife while the paint is wet</li>
+      </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Road Runoff Joining the Creek</h3>
-      <p class="subject"><strong>Subject:</strong> Where a gravel road&rsquo;s runoff ditch meets the forest creek &mdash; two colors of water merging, the gray road water bleeding into the brown forest water. Rain is falling.</p>
-      <p class="palette-fit">Payne&rsquo;s Gray is the road runoff &mdash; cool, mineral, urban. Transparent Brown Oxide is the creek &mdash; warm, organic, forest. Where they meet on wet paper, the mixing happens naturally.</p>
-      <div class="tips">
-        <ul>
-          <li>Divide the paper into two zones and wet the whole surface &mdash; lay Payne&rsquo;s Gray on the road side and Transparent Brown Oxide on the creek side</li>
-          <li>Let them find each other at the confluence while the paper is still wet &mdash; the blending zone IS the subject, so don&rsquo;t direct it too much</li>
-          <li>Once dry, add the road gravel with Lunar Black dry-brushed, and the creek bank with Raw Sienna</li>
-          <li>Quinacridone Burnt Orange makes a tiny alder catkin accent at the top of the frame &mdash; barely there, but it places the season</li>
-        </ul>
-      </div>
+      <h3>Alder Leaves in the Current</h3>
+      <p class="subject"><strong>Subject:</strong> Close-up of tannin water flowing over cobblestones, carrying alder leaves. Some leaves are pinned against rocks, others spinning in small eddies. The water is clear enough to see the stones but stained deep amber.</p>
+      <p class="palette-fit">Raw Sienna and Yellow Ochre build the cobblestones under water. Transparent Brown Oxide glazed over them IS the tannin water &mdash; transparent enough to let the stones read through. Quinacridone Gold catches where the surface breaks over a rock.</p>
+      <div class="tips"><ul>
+        <li>Paint the cobblestones first with Raw Sienna and Yellow Ochre, varying warm and cool, and let them dry completely</li>
+        <li>Glaze Transparent Brown Oxide over the entire stone field in one confident pass &mdash; the transparency lets every stone show through, which is exactly how tannin water looks</li>
+        <li>Alder leaves are Burnt Sienna with Burnt Umber veins, painted on top of the glaze once dry &mdash; some flat, some foreshortened as they spin</li>
+        <li>Use Quinacridone Gold for the bright crescent where water accelerates over a stone &mdash; a thin line of reflected sky light on moving water</li>
+      </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Root Wad in Shadow</h3>
-      <p class="subject"><strong>Subject:</strong> An uprooted tree&rsquo;s root wad at the creek bank, the tangled roots holding a cave of darkness beneath. Moss and mud and pooling shadow.</p>
-      <p class="palette-fit">Lunar Black&rsquo;s extreme granulation gives you the shadow under the root wad with real texture &mdash; not flat dark, but particulate dark. Indanthrone Blue deepens it. Perylene Green + Raw Sienna handle the moss.</p>
-      <div class="tips">
-        <ul>
-          <li>Paint the root wad&rsquo;s dark interior first with Lunar Black on damp paper &mdash; let the granulation separate and settle for at least five minutes</li>
-          <li>Add Indanthrone Blue into the deepest recesses while the Lunar Black is still slightly damp for a dark that has both texture and depth</li>
-          <li>Paint the roots themselves with Transparent Brown Oxide for the exposed wood, Perylene Green + Raw Sienna for the mossy surfaces</li>
-          <li>The water pooling beneath the root wad is Moonglow at its most dilute &mdash; a pale, shifting wash that catches light the darkness above doesn&rsquo;t</li>
-        </ul>
-      </div>
+      <h3>Flooded Pasture at Dusk</h3>
+      <p class="subject"><strong>Subject:</strong> A low-lying farm field holding six inches of standing water, fence posts emerging from the flood. One bare oak silhouetted against the last amber light on the horizon. Everything else is gray.</p>
+      <p class="palette-fit">The horizon band is Quinacridone Gold and Yellow Ochre &mdash; the only warm light in the scene. Payne&rsquo;s Gray and French Ultramarine build the rest of the sky. The standing water reflects everything above it, giving you a mirror-image painting.</p>
+      <div class="tips"><ul>
+        <li>Wet the entire sheet and lay the sky: Payne&rsquo;s Gray overhead grading to a narrow band of Quinacridone Gold and Yellow Ochre at the horizon</li>
+        <li>While still damp, paint the oak silhouette with Burnt Umber &mdash; let the edges bleed slightly into the wet sky for atmosphere</li>
+        <li>The standing water is the sky reflected: flip the same color sequence, Quinacridone Gold near the horizon line grading to Payne&rsquo;s Gray in the foreground</li>
+        <li>Fence posts are Burnt Umber dry-brushed on once everything is dry, with Sedona Genuine at the waterline where mineral deposits and mud mark the flood level</li>
+      </ul></div>
     </div>
   </div>
 
-  <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Temperature runs cool-to-neutral with Burnt Sienna and Quinacridone Burnt Orange as the only true warms &mdash; use them sparingly or the rain feeling breaks. Moonglow and Lunar Black both granulate heavily; give them rough paper and time. Transparent Brown Oxide and Raw Sienna are close in hue but completely different in behavior &mdash; oxide is smooth and staining, sienna is granulating and liftable. Don&rsquo;t substitute one for the other. This is a palette that rewards wet-in-wet work and patience. Let gravity and water do the mixing. The landscape is already doing the same thing outside your window.
+    <strong>Notes:</strong> All ten pigments are Daniel Smith extra fine watercolors. Sedona Genuine is a Primatek mineral pigment made from actual ground earth &mdash; it granulates with real mineral particles, settling into paper texture in ways synthetic pigments cannot replicate. Transparent Brown Oxide (PBr7) and Raw Sienna (PBr7) share a pigment number but behave very differently: the oxide is smooth and staining, the sienna granulates and lifts easily. Don&rsquo;t substitute one for the other. French Ultramarine (PB29) granulates heavily &mdash; give it rough paper and time to settle. Quinacridone Gold (PO49) is transparent and staining; once it&rsquo;s down, it stays. This palette rewards glazing in thin layers &mdash; build depth by stacking transparent washes rather than mixing darker on the palette. The browns look close in the tube but spread wide on paper.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

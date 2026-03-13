@@ -9,9 +9,9 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
   .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(245,225,77,0.18) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(176,24,48,0.14) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(200,120,152,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(91,164,207,0.1) 0%, transparent 40%), linear-gradient(175deg, #f8f4e8 0%, #eef2f8 100%); filter: blur(20px); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 15%, rgba(42,122,181,0.22) 0%, transparent 50%), radial-gradient(ellipse at 80% 40%, rgba(232,168,32,0.18) 0%, transparent 45%), radial-gradient(ellipse at 30% 60%, rgba(0,136,138,0.15) 0%, transparent 40%), radial-gradient(ellipse at 50% 80%, rgba(42,61,156,0.08) 0%, transparent 40%), linear-gradient(175deg, #e8f0f8 0%, #f8f4e0 40%, #e0f4f4 100%); filter: blur(20px); }
   .hero-text { position: relative; z-index: 1; }
-  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #b01830; margin-bottom: 8px; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #3a8aaa; margin-bottom: 8px; }
   .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
   .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
@@ -50,7 +50,6 @@
   .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
   .prompts-section { margin-top: 56px; }
   .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
@@ -63,7 +62,7 @@
   .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
   .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
   .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0eae8; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e8f0f0; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
   .notes-section strong { color: #444; }
   .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
@@ -74,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 22 &mdash; PNW Watercolor Series</div>
     <h1>Solstice Ridge</h1>
-    <p class="mood">Nearly sixteen hours of light. Beargrass torches the high ridges white. Fireweed climbs from the bottom. Duochrome Cactus Flower week &mdash; the sky at 10 PM shifts pink-to-gold like the pigment itself. Summer arriving not as heat but as light that refuses to leave. The mountain ridges are still readable at hours that should be night.</p>
+    <p class="mood">Sixteen hours of light on a Cascade ridge. The sky is Cerulean Blue so saturated it hurts to look at directly. Glacial tarns hold that impossible Cobalt Teal Blue. New Gamboge meadow light pours over everything. Snow patches still cling to the north faces like they didn&rsquo;t get the memo. The full spectrum hitting at once because the sun has all day to work the whole sky.</p>
   </div>
 </div>
 
@@ -84,16 +83,16 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #f5e14d 0%, #e0cc38 100%);"></div>
-        <div class="trio-info"><h3>Hansa Yellow Light</h3><p>Alpine grass in endless light, cool yellow at elevation; transparent, clean, refuses to go muddy</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2a7ab5 0%, #1e6a9e 100%);"></div>
+        <div class="trio-info"><h3>Cerulean Blue</h3><p>High summer sky at alpine elevation; opaque, granulating, the blue that means altitude and full-spectrum daylight</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #b01830 0%, #980e24 100%);"></div>
-        <div class="trio-info"><h3>Deep Scarlet</h3><p>Fireweed's first blooms opening from stalk-bottom up; transparent, deep, a red that knows where it's going</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8a820 0%, #d49818 100%);"></div>
+        <div class="trio-info"><h3>New Gamboge</h3><p>Full sun golden light on everything the ridgeline catches; transparent, warm, relentlessly luminous</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #5ba4cf 0%, #4890b8 100%);"></div>
-        <div class="trio-info"><h3>Cerulean Blue Chromium</h3><p>High-altitude sky, deeper and harder than lowland blue; opaque, granulating, mineral-honest</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #00888a 0%, #007072 100%);"></div>
+        <div class="trio-info"><h3>Cobalt Teal Blue</h3><p>Glacial tarns and alpine ice; PG50&rsquo;s turquoise hits a frequency no other pigment reaches &mdash; the color of snowmelt holding sky</p></div>
       </div>
     </div>
   </div>
@@ -101,28 +100,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#f5e14d;"><span class="label" style="color:#777;">Hansa Yellow Lt</span></div>
-      <div class="swatch" style="background:#b01830;"><span class="label" style="color:#fff;">Deep Scarlet</span></div>
-      <div class="swatch" style="background:#5ba4cf;"><span class="label" style="color:#fff;">Cerulean Blue Chr.</span></div>
-      <div class="swatch" style="background:#5a8c2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
-      <div class="swatch" style="background:#0a3020;"><span class="label" style="color:#fff;">Perylene Green</span></div>
-      <div class="swatch" style="background:#c87898;"><span class="label" style="color:#fff;">Cactus Flower</span></div>
-      <div class="swatch" style="background:#c87830;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
-      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
-      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#c88a3e;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#2a7ab5;"><span class="label" style="color:#fff;">Cerulean Blue</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
+      <div class="swatch" style="background:#00888a;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
+      <div class="swatch" style="background:#0a4a6a;"><span class="label" style="color:#fff;">Phthalo Blue GS</span></div>
+      <div class="swatch" style="background:#d4a820;"><span class="label" style="color:#fff;">Hansa Yellow Deep</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#8b4a2a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#f5f5f5;"><span class="label" style="color:#777;">Titanium White</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#f5e14d;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Primary &mdash; alpine grass in longest light, cool gold at the year's peak</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#c87898;"></div><div><div class="name">Duochrome Cactus Flower</div><div class="role">Atmospheric &mdash; 10 PM sky shifting pink-to-gold</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b01830;"></div><div><div class="name">Deep Scarlet</div><div class="role">Primary &mdash; fireweed's first blooms, climbing the stalk like a slow fuse</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c87830;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Warm Accent &mdash; beargrass stalk going amber below the plume</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5ba4cf;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Primary &mdash; high-altitude sky, granulating and absolute</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; snowmelt creek through meadow, water-cooled green</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5a8c2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; subalpine meadow, the green between wildflowers</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; beargrass plume, cream-white and architectural</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#0a3020;"></div><div><div class="name">Perylene Green</div><div class="role">Dark &mdash; old-growth where marbled murrelets nest, dark as consequence</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c88a3e;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; exposed ridge trail, boot-packed and sun-baked</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#2a7ab5;"></div><div><div class="name">Cerulean Blue</div><div class="role">Primary &mdash; high summer sky, so saturated it reads as physical weight</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; exposed ridge rock, sun-warmed and iron-rich</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Primary &mdash; full sun golden light, the color of sixteen hours</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; alpine meadow between snowfields, green in a hurry</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#00888a;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Primary &mdash; glacial tarn turquoise, PG50&rsquo;s irreplaceable frequency</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#8b4a2a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Warm Accent &mdash; ridge rock in warm shadow, volcanic substrate</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#0a4a6a;"></div><div><div class="name">Phthalo Blue GS</div><div class="role">Depth &mdash; intense sky at the zenith, where blue goes past cerulean</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Distance &mdash; far mountain ranges dissolving into atmosphere</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#d4a820;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Light &mdash; meadow grass catching low-angle solstice gold</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#f5f5f5;"></div><div><div class="name">Titanium White</div><div class="role">Opacity &mdash; snow patches on north faces, cloud bodies, glacial highlight</div></div></div>
     </div>
   </div>
 
@@ -131,127 +130,114 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e0d0a0, #d4c490);"></div>
-        <div><h3>Beargrass Torch</h3><span class="ratio">3 Buff Titanium : 1 Hansa Yellow Light : &frac14; Raw Sienna</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a6888, #0e5a78);"></div>
+        <div><h3>Glacial Tarn</h3><span class="ratio">2 Cobalt Teal Blue : 1 Cerulean Blue : &frac14; Titanium White</span></div>
       </div>
-      <p class="mix-description">Cream-white plumes catching horizontal solstice light on a ridgeline &mdash; botanical torches marking the elevation where trees give up.</p>
+      <p class="mix-description">The impossible turquoise of snowmelt pooled in granite &mdash; a color that makes people ask if the photo is edited.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e8d8b4; color:#777;">Buff Titanium</div>
-        <div class="mix-bar" style="flex:1; background:#f5e14d; color:#777;">Hansa Yellow Lt</div>
-        <div class="mix-bar" style="flex:0.25; background:#c88a3e; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:2; background:#00888a; color:#fff;">Cobalt Teal Blue</div>
+        <div class="mix-bar" style="flex:1; background:#2a7ab5; color:#fff;">Cerulean Blue</div>
+        <div class="mix-bar" style="flex:0.25; background:#f5f5f5; color:#777;">Ti White</div>
       </div>
-      <div class="mix-notes">Buff Titanium gives the plume its physical presence &mdash; beargrass flowers are dense, opaque, cream-colored structures. Hansa Yellow Light warms the light side where the 10 PM sun catches them horizontally. Raw Sienna at the base where the plume meets the stalk. Apply with an upward brushstroke, dry brush at the tip for the feathered texture. These are vertical forms; paint them vertically.</div>
+      <div class="mix-notes">Cobalt Teal Blue PG50 is doing the heavy lifting &mdash; that turquoise frequency is unique in watercolor and nothing else substitutes. Cerulean Blue shifts the mix slightly toward sky-reflected blue, which is what you actually see in a tarn: turquoise water reflecting blue sky. The touch of Titanium White adds the milky opacity that glacial flour creates &mdash; these aren&rsquo;t clear pools, they&rsquo;re mineral suspensions. Apply wet and let the granulation happen. PG50 and Cerulean both granulate, and together they create the stippled texture of light on glacial water.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c06878, #b05868);"></div>
-        <div><h3>Cactus Flower Sky</h3><span class="ratio">2 Duochrome Cactus Flower : 1 Deep Scarlet : &frac12; Hansa Yellow Light</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7a6a38, #6a5a30);"></div>
+        <div><h3>Alpine Meadow Gold</h3><span class="ratio">2 New Gamboge : 1 Sap Green : &frac12; Hansa Yellow Deep</span></div>
       </div>
-      <p class="mix-description">The pink-to-gold shift of a sky that won't go dark &mdash; the solstice refusing to end.</p>
+      <p class="mix-description">Subalpine meadow at peak bloom &mdash; that green-gold of grass and sedge that only happens when the snow left eight weeks ago and the sun hasn&rsquo;t stopped since.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#c87898; color:#fff;">Cactus Flower</div>
-        <div class="mix-bar" style="flex:1; background:#b01830; color:#fff;">Deep Scarlet</div>
-        <div class="mix-bar" style="flex:0.5; background:#f5e14d; color:#777;">Hansa Yellow</div>
+        <div class="mix-bar" style="flex:2; background:#e8a820; color:#fff;">New Gamboge</div>
+        <div class="mix-bar" style="flex:1; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:0.5; background:#d4a820; color:#fff;">Hansa Yellow Deep</div>
       </div>
-      <div class="mix-notes">Duochrome Cactus Flower is the star &mdash; it shifts between pink and gold depending on viewing angle and paper texture, which is exactly what a solstice sky does. Deep Scarlet intensifies the pink register. Hansa Yellow Light lifts the gold register. Apply to wet paper in a single sweeping wash and do not touch again. The duochrome shift needs undisturbed pigment settling to work its trick. Tilt the board to let gravity pull the color gradient.</div>
+      <div class="mix-notes">New Gamboge brings transparent golden warmth &mdash; the light itself, not just the surface. Sap Green cools the mix toward vegetation reality without killing the luminosity. Hansa Yellow Deep deepens the gold register and gives it staying power in the warm zone. This mix reads as sunlit meadow from across a valley. Vary the Sap Green proportion: more for shaded grass, less for the sunstruck ridgetop where the meadow is more gold than green. Let these pigments mingle on the paper rather than pre-mixing &mdash; the variation is the meadow.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #2a5040, #1a4030);"></div>
-        <div><h3>Ridgeline Dusk</h3><span class="ratio">2 Cerulean Blue Chromium : 1 Perylene Green : &frac12; Sap Green</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a4838, #5a3a2a);"></div>
+        <div><h3>Ridge Rock Warm</h3><span class="ratio">1 Burnt Sienna : 1 Transparent Red Oxide : &frac12; French Ultramarine</span></div>
       </div>
-      <p class="mix-description">Forested ridge silhouette at 10 PM, still readable &mdash; dark enough to be night anywhere else, but here the light holds.</p>
+      <p class="mix-description">Cascade volcanic rock baking in solstice sun &mdash; andesite and basalt warming all day until the stone radiates back.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#5ba4cf; color:#fff;">Cerulean Blue Chr.</div>
-        <div class="mix-bar" style="flex:1; background:#0a3020; color:#fff;">Perylene Green</div>
-        <div class="mix-bar" style="flex:0.5; background:#5a8c2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#8b4a2a; color:#fff;">Trans. Red Oxide</div>
+        <div class="mix-bar" style="flex:0.5; background:#2a3d9c; color:#fff;">Fr. Ultramarine</div>
       </div>
-      <div class="mix-notes">This isn't black &mdash; it's the specific dark blue-green of conifers silhouetted against a sky that still has light in it. Cerulean Blue Chromium's opacity creates the solid mass of the ridgeline. Perylene Green deepens toward black without actually arriving there. Sap Green adds just enough life to prevent the mix from reading as dead silhouette. Apply with the board flat; the opacity of this mix means drips show.</div>
+      <div class="mix-notes">Burnt Sienna and Transparent Red Oxide together create a richer, more complex warm than either alone &mdash; Burnt Sienna leans orange while Transparent Red Oxide leans brick, and alpine rock sits exactly between them. French Ultramarine in the shadow side creates granulating darks that read as mineral texture rather than flat shadow. This is the classic watercolor complementary pairing: iron oxide plus ultramarine, but split across two different iron oxides for depth. Wet the shadow areas first and drop the Ultramarine in to let it granulate against the warm base.</div>
     </div>
   </div>
 
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>Duochrome Cactus Flower is the palette's reason for existing &mdash; a Daniel Smith interference pigment that physically shifts between pink and gold, mimicking the solstice sky's behavior with actual optical physics rather than mixing tricks. The rest of the palette supports it: Hansa Yellow Light and Deep Scarlet extend the duochrome's range in both directions. Cerulean Blue Chromium handles the sky overhead while Cactus Flower handles the horizon. Perylene Green is the only dark capable of rendering 10 PM darkness that still lets you read tree shapes. Buff Titanium earns its place through the beargrass &mdash; these are opaque flowers demanding opaque paint.</p>
+      <p>The solstice ridge is full-spectrum light hitting everything at once, so this palette spreads wide. Cerulean Blue and Phthalo Blue GS split sky duties &mdash; Cerulean for the opaque, granulating, obviously-alpine overhead blue; Phthalo for the zenith where blue goes deeper than a single pigment can reach. Cobalt Teal Blue PG50 is irreplaceable: no other pigment hits the glacial tarn frequency, that turquoise-in-the-mountains color you can&rsquo;t mix from a standard palette. New Gamboge and Hansa Yellow Deep handle the golden light at two registers, warm-transparent and warm-deep. Burnt Sienna and Transparent Red Oxide are the ridge itself &mdash; volcanic rock in sun and shadow. Sap Green is the alpine meadow growing at high speed between snowfields. French Ultramarine pushes distant ranges back into atmosphere. And Titanium White earns its rare watercolor appearance because snow patches on north faces demand actual opacity &mdash; you cannot lift white out of a Cerulean Blue wash and have it read as snow.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects built for this palette &mdash; each one uses the full-spectrum solstice light and leans into the colors you&rsquo;ve already got mixed.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Beargrass on the Ridge at 10 PM</h3>
-      <p class="subject"><strong>Subject:</strong> Beargrass plumes torching a high ridge in horizontal solstice light, the sky behind them shifting from pink to gold, mountains still readable in the endless dusk.</p>
-      <p class="palette-fit">The Beargrass Torch mix (Buff Titanium + Hansa Yellow Light + Raw Sienna) handles the plumes. The Cactus Flower Sky mix behind them is the reason this palette exists &mdash; one pigment doing what the sky actually does.</p>
+      <h3>Ridge Panorama at Golden Hour</h3>
+      <p class="subject"><strong>Subject:</strong> A Cascade ridge at 8 PM, sun still high enough to pour New Gamboge light across the whole scene. Alpine meadow foreground, rocky ridgeline mid-ground, layered ranges disappearing into French Ultramarine distance. Snow patches on north faces. The sky that particular Cerulean Blue that only happens above 6,000 feet.</p>
+      <p class="palette-fit">Every pigment has a job. Cerulean Blue sky, Phthalo Blue GS zenith, New Gamboge and Hansa Yellow Deep on the meadow, Burnt Sienna and Transparent Red Oxide on the rock, French Ultramarine distance, Titanium White snow, Sap Green between the wildflowers.</p>
       <div class="tips"><ul>
-        <li>Paint the sky first: wet the paper and sweep the Cactus Flower Sky mix (Duochrome Cactus Flower + Deep Scarlet + Hansa Yellow Light) in a single pass, tilting the board to let gravity create the gradient</li>
-        <li>Do not touch the sky wash again &mdash; Duochrome Cactus Flower needs undisturbed settling to achieve its pink-to-gold shift</li>
-        <li>Once dry, paint the beargrass plumes with upward strokes of the Beargrass Torch mix, using dry brush at the tips for the feathered texture</li>
-        <li>Aussie Red Gold on the stalks below each plume gives the amber color of the drying stem catching sideways light</li>
+        <li>Work back to front: sky is Cerulean Blue grading to Phthalo Blue GS at the zenith &mdash; wet paper, single wash, tilt the board to let the heavier Cerulean settle toward the horizon</li>
+        <li>Distant ranges are French Ultramarine at high dilution &mdash; each successive range gets slightly more pigment and slightly warmer, adding a breath of Cerulean Blue to the nearest</li>
+        <li>The Ridge Rock Warm mix (Burnt Sienna + Transparent Red Oxide + French Ultramarine) for the mid-ground ridgeline, with French Ultramarine dropped into wet shadow sides for granulating texture</li>
+        <li>Snow patches are Titanium White mixed thick, applied after everything is bone dry &mdash; they need to sit on top of the paper, opaque and definite</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Subalpine Meadow With Fireweed</h3>
-      <p class="subject"><strong>Subject:</strong> An alpine meadow at treeline, fireweed stalks opening from the bottom up, Sap Green grass between them, a Cerulean Blue Chromium sky overhead.</p>
-      <p class="palette-fit">Deep Scarlet is the fireweed &mdash; transparent and deep, it builds intensity in layers the way the flowers build up the stalk. Sap Green meadow and Cerulean Blue Chromium sky are the classic alpine color trio.</p>
+      <h3>Glacial Tarn at Treeline</h3>
+      <p class="subject"><strong>Subject:</strong> A glacial tarn sitting in a granite bowl below a snowfield. That absurd turquoise &mdash; Cobalt Teal Blue made real by rock flour suspension. Reflected sky and ridge in the water. Snow at the upper edge, meadow at the lower.</p>
+      <p class="palette-fit">The Glacial Tarn mix (Cobalt Teal Blue + Cerulean Blue + Titanium White) is the painting&rsquo;s center. PG50&rsquo;s unique turquoise does what no mix of blue and green can replicate &mdash; it already is the color.</p>
       <div class="tips"><ul>
-        <li>The sky is Cerulean Blue Chromium applied at full concentration to dry paper &mdash; at altitude, the blue is harder and deeper than lowland sky, and the granulation adds mineral honesty</li>
-        <li>The meadow is Sap Green with touches of Hansa Yellow Light where the sun hits, applied in loose horizontal strokes</li>
-        <li>Fireweed stalks are vertical lines of Deep Scarlet, darkest at the bottom where the flowers opened first, fading to buds at the top</li>
-        <li>Cascade Green in a narrow strip marks the snowmelt creek cutting through the meadow &mdash; the cool accent that says water is near</li>
+        <li>The tarn is the Glacial Tarn mix applied to wet paper in one confident wash &mdash; let Cobalt Teal Blue and Cerulean Blue granulate together for the stippled texture of glacial water</li>
+        <li>Reflections of the Ridge Rock Warm mix float on top of the still-wet tarn wash, blurred by the water&rsquo;s surface tension</li>
+        <li>The snowfield above the tarn is Titanium White mixed with a whisper of Cerulean Blue &mdash; snow isn&rsquo;t white, it&rsquo;s sky-colored in shadow</li>
+        <li>Sap Green and Hansa Yellow Deep in the meadow below the tarn outlet, where snowmelt waters the most intense alpine green you&rsquo;ll see all year</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>The 10 PM Ridgeline Silhouette</h3>
-      <p class="subject"><strong>Subject:</strong> A forested ridge against a sky that refuses to go dark &mdash; the serrated line of conifers still readable at an hour that should be night, Duochrome Cactus Flower sky behind.</p>
-      <p class="palette-fit">The Ridgeline Dusk mix (Cerulean Blue Chromium + Perylene Green + Sap Green) is the specific dark blue-green of conifers silhouetted against lingering light. It&rsquo;s not black. That&rsquo;s the whole point.</p>
+      <h3>Alpine Meadow With Snow Patches</h3>
+      <p class="subject"><strong>Subject:</strong> A subalpine meadow at peak early-summer bloom, snow patches still lingering in the hollows. The meadow is alpine gold-green, the snow is shelf-edged and retreating, and the contrast between the two says everything about the season&rsquo;s momentum.</p>
+      <p class="palette-fit">The Alpine Meadow Gold mix (New Gamboge + Sap Green + Hansa Yellow Deep) handles the meadow. Titanium White for the snow. The boundary between them is the painting &mdash; where gold-green meets white.</p>
       <div class="tips"><ul>
-        <li>Paint the sky in two zones: Cerulean Blue Chromium at the zenith grading down to the Cactus Flower Sky mix at the horizon. Let it dry completely.</li>
-        <li>The ridgeline is one continuous stroke of Ridgeline Dusk mix applied with a flat brush &mdash; jagged top edge for the conifer silhouette, flat bottom</li>
-        <li>Apply with the board flat so the opaque mix doesn&rsquo;t drip &mdash; Cerulean Blue Chromium&rsquo;s opacity means gravity works against you on tilted surfaces</li>
-        <li>Leave the horizon strip between ridgeline and sky the brightest part of the Duochrome Cactus Flower wash &mdash; that&rsquo;s where the light lives longest</li>
+        <li>Paint the snow patches first as reserved white paper with a thin Titanium White glaze &mdash; keep the edges hard and shelf-like on the uphill side, soft and melting on the downhill</li>
+        <li>The Alpine Meadow Gold mix surrounds the snow: more Sap Green in the shaded areas near the snowfield edges, more New Gamboge on the sun-facing slopes</li>
+        <li>Meltwater channels between snow and meadow are thin lines of Cobalt Teal Blue, barely a brushstroke wide, carrying glacial turquoise through the green</li>
+        <li>Burnt Sienna for exposed rocks emerging from the snowpack &mdash; warm sentinels marking where the snow was a week ago</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Alpine Trail at the Solstice</h3>
-      <p class="subject"><strong>Subject:</strong> A boot-packed ridge trail winding through beargrass and heather, the longest day of the year stretching shadows to impossible lengths.</p>
-      <p class="palette-fit">Raw Sienna is the sun-baked trail. Beargrass Torch plumes line both sides. The long shadows are Perylene Green on the ground and Cerulean Blue Chromium in the air.</p>
+      <h3>Solstice Light at 9:30 PM</h3>
+      <p class="subject"><strong>Subject:</strong> The sunset that won&rsquo;t end. A Cascade ridge silhouette against a sky still lit at 9:30 PM, New Gamboge light going horizontal across everything, the blue deepening above while the gold refuses to leave below. The longest day&rsquo;s last act, which lasts an hour.</p>
+      <p class="palette-fit">New Gamboge and Hansa Yellow Deep own the horizon. Phthalo Blue GS and French Ultramarine take the upper sky. The ridge silhouette is Burnt Sienna and Transparent Red Oxide backlit to near-black. Cobalt Teal Blue lingers in the transition zone where gold meets blue &mdash; that teal moment in the solstice sky.</p>
       <div class="tips"><ul>
-        <li>The trail is Raw Sienna with a touch of Buff Titanium for the sun-baked, compacted surface &mdash; paint it first as the compositional spine</li>
-        <li>Beargrass plumes along the trail edges are the Beargrass Torch mix, varying the Hansa Yellow Light proportion to show which plumes catch the low sun</li>
-        <li>Shadows stretching across the trail are dilute Perylene Green &mdash; laid over the dried Raw Sienna trail, the complementary pairing creates the specific color of shadow on warm earth</li>
-        <li>Sap Green heather patches between the beargrass fill the alpine meadow without competing for attention</li>
-      </ul></div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-number">Prompt 5</div>
-      <h3>Solstice Panorama (The Whole Ridge)</h3>
-      <p class="subject"><strong>Subject:</strong> The full alpine panorama &mdash; beargrass ridgeline in foreground, layered mountain ranges behind, the sky cycling through every color this palette offers as the solstice sun circles but never quite sets.</p>
-      <p class="palette-fit">Every pigment in the palette has a job in this painting. Duochrome Cactus Flower sky, Cerulean Blue Chromium overhead, Ridgeline Dusk silhouettes, Beargrass Torch foreground, Deep Scarlet fireweed, Sap Green meadow. This is the painting the palette was designed for.</p>
-      <div class="tips"><ul>
-        <li>Work back to front: sky first (Cactus Flower Sky mix wet-in-wet), then distant ridges (Ridgeline Dusk mix at high dilution), then mid-ground ridge (Ridgeline Dusk at full strength), then foreground meadow</li>
-        <li>Distant ranges should be progressively lighter and cooler &mdash; add more Cerulean Blue Chromium and dilute more for each receding layer</li>
-        <li>The foreground meadow is the most detailed zone: individual beargrass plumes, fireweed stalks, Cascade Green creek, Raw Sienna trail</li>
-        <li>Duochrome Cactus Flower works best applied generously over white paper &mdash; thin washes lose the color shift, so don&rsquo;t skimp on the sky</li>
+        <li>The sky is a single graded wash, top to bottom: Phthalo Blue GS at the zenith, grading through French Ultramarine, into Cerulean Blue, touching Cobalt Teal Blue at the transition, then New Gamboge and Hansa Yellow Deep blazing along the horizon &mdash; tilt the board and work fast</li>
+        <li>Let the sky dry completely. The ridge silhouette is a concentrated mix of Transparent Red Oxide and Burnt Sienna with a touch of Phthalo Blue GS &mdash; dark enough to silhouette but warm enough to show the day&rsquo;s heat still radiating</li>
+        <li>The gold-to-blue transition is where this painting lives or dies: if the Cobalt Teal Blue bleeds correctly into the New Gamboge zone, you get that exact solstice teal-gold moment</li>
+        <li>Titanium White for the last snow patches catching the final horizontal light &mdash; bright flares on an otherwise dark ridgeline, proof the mountain still holds winter</li>
       </ul></div>
     </div>
   </div>
 
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Duochrome Cactus Flower is an interference pigment &mdash; it works best over white or very light paper and shifts color depending on viewing angle. Apply it generously; thin washes lose the duochrome effect. Deep Scarlet is a newer Daniel Smith pigment with excellent lightfastness and a blue-leaning red that partners well with the duochrome. Perylene Green in mass tone is nearly black &mdash; dilute test swatches before committing.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Cobalt Teal Blue (PG50) is a unique pigment &mdash; no combination of Phthalo Blue and Phthalo Green replicates its specific turquoise frequency. It granulates beautifully and is semi-opaque. Cerulean Blue (PB35) is also opaque and granulating; when combined with Cobalt Teal Blue, both granulate into each other for a stippled mineral texture that reads as natural. Titanium White is unusual in watercolor but necessary here &mdash; snow patches on dark rock cannot be achieved by lifting or reserving paper in a complex painting. Use it thick. French Ultramarine granulates with Burnt Sienna for that classic watercolor texture trick; it works even better with Transparent Red Oxide.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

@@ -9,9 +9,9 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
   .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(40,65,160,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(200,128,80,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(90,106,42,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(40,65,160,0.08) 0%, transparent 40%), linear-gradient(175deg, #e8e4e0 0%, #d8d4d0 100%); filter: blur(20px); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(54,69,79,0.28) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(43,68,105,0.22) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(81,82,82,0.18) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(93,75,106,0.14) 0%, transparent 40%), linear-gradient(175deg, #d8dce4 0%, #c5cad4 100%); filter: blur(20px); }
   .hero-text { position: relative; z-index: 1; }
-  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #2841a0; margin-bottom: 8px; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #5a6a7a; margin-bottom: 8px; }
   .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
   .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
@@ -50,7 +50,6 @@
   .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
   .prompts-section { margin-top: 56px; }
   .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
@@ -63,7 +62,7 @@
   .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
   .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
   .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e2e4ea; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
   .notes-section strong { color: #444; }
   .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
@@ -74,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 42 &mdash; PNW Watercolor Series</div>
     <h1>Convergence Pour</h1>
-    <p class="mood">Convergence zone locked over the lowlands, dumping rain that turns to sleet at 1,200 feet. Eagles circle back to the rivers like rumors confirmed. The sky cannot hold what it carries, and neither can the ground &mdash; every ditch is a creek, every creek a river, and the chanterelles are drowning in their own abundance.</p>
+    <p class="mood">Weather fronts stack up over the coast and slam into each other somewhere above the Chehalis Valley. The sky turns the color of wet slate. Rain doesn&rsquo;t fall &mdash; it arrives, in curtains, in walls, in sheets that erase the middle distance entirely. You can watch it coming across the fields: a dark column moving at highway speed, swallowing fence posts and barns and then you. This is the convergence zone doing what it does best &mdash; turning October into a verb.</p>
   </div>
 </div>
 
@@ -84,16 +83,16 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #2841a0 0%, #1e3590 100%);"></div>
-        <div class="trio-info"><h3>French Ultramarine</h3><p>Saturated storm cell overhead; the blue that means business, granulating and heavy with intention</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #36454f 0%, #2e3a42 100%);"></div>
+        <div class="trio-info"><h3>Payne&rsquo;s Gray</h3><p>The driving rain itself &mdash; blue-gray, cool, and endlessly versatile; the workhorse pigment that builds every value from drizzle to deluge</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #c88050 0%, #b87040 100%);"></div>
-        <div class="trio-info"><h3>Burnt Sienna Light</h3><p>Bald eagle shoulder plumage; warm and transparent, the complement that makes ultramarine granulate into weather</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2b4469 0%, #1e3350 100%);"></div>
+        <div class="trio-info"><h3>Indanthrone Blue</h3><p>Deep storm sky at its most dramatic; a brooding, granulating blue-black that separates PNW storms from ordinary overcast</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #5a6a2a 0%, #4a5a1e 100%);"></div>
-        <div class="trio-info"><h3>Olive Green</h3><p>Chanterelle hollow in hemlock duff; the forest floor&rsquo;s fungal palette without false vibrancy</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #515252 0%, #434444 100%);"></div>
+        <div class="trio-info"><h3>Neutral Tint</h3><p>The rain curtain between you and the horizon &mdash; neither warm nor cool, pure atmospheric obstruction, the color of visibility itself disappearing</p></div>
       </div>
     </div>
   </div>
@@ -101,28 +100,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#2841a0;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
-      <div class="swatch" style="background:#c88050;"><span class="label" style="color:#fff;">Burnt Sienna Lt</span></div>
-      <div class="swatch" style="background:#5a6a2a;"><span class="label" style="color:#fff;">Olive Green</span></div>
-      <div class="swatch" style="background:#c8a848;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
-      <div class="swatch" style="background:#1a1a20;"><span class="label" style="color:#fff;">Lamp Black</span></div>
-      <div class="swatch" style="background:#9a80b0;"><span class="label" style="color:#fff;">Lavender</span></div>
-      <div class="swatch" style="background:#b0522a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
-      <div class="swatch" style="background:#006856;"><span class="label" style="color:#fff;">Phthalo Green BS</span></div>
-      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#6a5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#36454f;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#2b4469;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#515252;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#1e3f6f;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#3d6e9e;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#1a1a1a;"><span class="label" style="color:#fff;">Lamp Black</span></div>
+      <div class="swatch" style="background:#d4c8a8;"><span class="label" style="color:#333;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#5d4b6a;"><span class="label" style="color:#fff;">Shadow Violet</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#2841a0;"></div><div><div class="name">French Ultramarine</div><div class="role">Primary &mdash; saturated storm cell overhead</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#9a80b0;"></div><div><div class="name">Lavender</div><div class="role">Atmospheric &mdash; sleet haze over foothills</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#c88050;"></div><div><div class="name">Burnt Sienna Light</div><div class="role">Primary &mdash; bald eagle shoulder plumage</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#b0522a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Warm Accent &mdash; alder catkins spent and darkening</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5a6a2a;"></div><div><div class="name">Olive Green</div><div class="role">Primary &mdash; chanterelle hollow in hemlock duff</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#006856;"></div><div><div class="name">Phthalo Green BS</div><div class="role">Cool Accent &mdash; river pool deep and still</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c8a848;"></div><div><div class="name">Yellow Ochre</div><div class="role">Earth &mdash; hedgehog mushroom teeth, pale gold</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; snow line visible at treeline</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a1a20;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; eagle silhouette on snag</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#6a5030;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; rain-soaked trail mud</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#36454f;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Primary &mdash; driving rain, core gray structure</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; mud wash, flooded field warmth</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#2b4469;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Primary &mdash; dark storm sky, deep blue-black</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#3d6e9e;"></div><div><div class="name">Cobalt Blue</div><div class="role">Atmospheric &mdash; rain reflection on surfaces</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#515252;"></div><div><div class="name">Neutral Tint</div><div class="role">Primary &mdash; rain curtain, atmospheric obstruction</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#1a1a1a;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; storm&rsquo;s darkest core, maximum value</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#1e3f6f;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; storm blue, electric sky breaks</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#d4c8a8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; rain streak highlights, last light</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; flooded ground, saturated field dirt</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#5d4b6a;"></div><div><div class="name">Shadow Violet</div><div class="role">Atmospheric &mdash; rain shadow depth, purple-gray distance</div></div></div>
     </div>
   </div>
 
@@ -131,112 +130,114 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #9a8838, #a89840);"></div>
-        <div><h3>Chanterelle Gill</h3><span class="ratio">1 Olive Green : 2 Yellow Ochre</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a4856, #2e3c48);"></div>
+        <div><h3>Wall of Water</h3><span class="ratio">2 Payne&rsquo;s Gray : 1 Neutral Tint : &frac12; Indanthrone Blue</span></div>
       </div>
-      <p class="mix-description">Golden folds under hemlock canopy &mdash; the chanterelle&rsquo;s secret architecture, radiating from stem to cap edge.</p>
+      <p class="mix-description">The visible edge of a rain curtain crossing a valley &mdash; that moment when you can see the downpour as a solid thing, a wall with an inside and an outside.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:1; background:#5a6a2a; color:#fff;">Olive Green</div>
-        <div class="mix-bar" style="flex:2; background:#c8a848; color:#fff;">Yellow Ochre</div>
+        <div class="mix-bar" style="flex:2; background:#36454f; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:1; background:#515252; color:#fff;">Neutral Tint</div>
+        <div class="mix-bar" style="flex:0.5; background:#2b4469; color:#fff;">Indanthrone Blue</div>
       </div>
-      <div class="mix-notes">Yellow Ochre dominates with warm opacity while Olive Green pulls toward forest floor. Apply with small round in radiating strokes from stem outward.</div>
+      <div class="mix-notes">Payne&rsquo;s Gray is the structural backbone &mdash; it has just enough blue to read as rain rather than smoke, and it dilutes into a huge range of values from near-black downpour to pale drizzle haze. Neutral Tint flattens the mix toward true gray, removing the personality that would make the rain look like sky instead of water. Indanthrone Blue pushes the darkest passages toward that deep blue-black you see when a storm cell is directly overhead. Apply on very wet paper with a large mop brush, tilting the board to let the pigment flow downward in streaks. The gravity does your brushwork for you &mdash; rain paints itself if you let it.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a2a60, #1a2848);"></div>
-        <div><h3>River Steel</h3><span class="ratio">2 French Ultramarine : 1 Lamp Black</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a5a4a, #5c4e3e);"></div>
+        <div><h3>Flood Mud</h3><span class="ratio">2 Raw Umber : 1 Burnt Sienna : &frac14; Payne&rsquo;s Gray</span></div>
       </div>
-      <p class="mix-description">Swollen current carrying sky &mdash; the river as mirror and muscle, reflecting nothing but its own weight.</p>
+      <p class="mix-description">October field after the third straight day of rain &mdash; the ground stops absorbing and starts reflecting, and the mud becomes a mirror with a memory of dirt.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#2841a0; color:#fff;">French Ultramarine</div>
-        <div class="mix-bar" style="flex:1; background:#1a1a20; color:#fff;">Lamp Black</div>
+        <div class="mix-bar" style="flex:2; background:#826644; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:1; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:0.25; background:#36454f; color:#fff;">Payne's Gray</div>
       </div>
-      <div class="mix-notes">French Ultramarine&rsquo;s granulation with Lamp Black&rsquo;s cool density produces steely blue-black. Lay wet on rough paper and tilt to flow directionally.</div>
+      <div class="mix-notes">Raw Umber is the color of PNW field dirt when it&rsquo;s fully saturated &mdash; not the romantic brown of dry soil, but the flat, heavy, greenish-brown of ground that can&rsquo;t take any more water. Burnt Sienna warms specific zones where clay subsoil surfaces through the topsoil, giving the flooded field variation instead of monotony. Payne&rsquo;s Gray cools the mix just enough that the mud reads as wet rather than merely brown &mdash; without it, you&rsquo;d paint a dry road instead of a flood. Apply in puddles on the paper, letting the pigments mingle unevenly. Drop clear water into drying areas to create backruns that mimic standing water on uneven ground.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a4838, #5a4030);"></div>
-        <div><h3>Eagle Perch</h3><span class="ratio">1 Burnt Sienna Light : 1 Lamp Black : touch Buff Titanium</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a4260, #3e3854);"></div>
+        <div><h3>Storm Core</h3><span class="ratio">2 Indanthrone Blue : 1 Lamp Black : &frac12; Shadow Violet</span></div>
       </div>
-      <p class="mix-description">Wet bark under talons &mdash; the branch worn smooth by years of raptor landings.</p>
+      <p class="mix-description">The center of the convergence zone, directly overhead &mdash; so dark it makes noon look like dusk, so heavy the air pressure changes in your ears.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:1; background:#c88050; color:#fff;">Burnt Sienna Lt</div>
-        <div class="mix-bar" style="flex:1; background:#1a1a20; color:#fff;">Lamp Black</div>
-        <div class="mix-bar" style="flex:0.15; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:2; background:#2b4469; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#1a1a1a; color:#fff;">Lamp Black</div>
+        <div class="mix-bar" style="flex:0.5; background:#5d4b6a; color:#fff;">Shadow Violet</div>
       </div>
-      <div class="mix-notes">Mix on palette for warm charcoal. Apply to branch shape, touch Buff Titanium to upper edge while wet. Let it bloom.</div>
+      <div class="mix-notes">Indanthrone Blue has a granulating quality that Lamp Black lacks &mdash; the blue particles separate on textured paper, creating the churning, uneven darkness of a real storm cell rather than a flat painted-on black. Lamp Black provides the absolute depth: the value floor that tells the viewer this is the darkest thing in the painting and everything else is relative to it. Shadow Violet is the key to the whole mix &mdash; heavy rain in the PNW has a purple cast that photographs capture but painters often miss. It&rsquo;s the moisture in the air refracting what little light remains. Use this mix sparingly and only at the storm&rsquo;s zenith. Apply to damp paper and let the Indanthrone Blue granulate naturally.</div>
     </div>
   </div>
 
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>The convergence zone is about collision. French Ultramarine and Burnt Sienna Light are the classic granulating complement pair. Olive Green and Yellow Ochre handle the forest floor&rsquo;s fungal palette without false vibrancy. Lamp Black provides true darks for eagle silhouettes. Lavender granulates into soft violet-grays for sleet haze. Phthalo Green BS is the deep-water note, used sparingly.</p>
+      <p>A convergence zone palette needs to do one thing supremely well: paint rain as a visible, physical presence in the landscape. That&rsquo;s why three primaries are all gray-family pigments. Payne&rsquo;s Gray anchors every value from pale mist to dark deluge. Neutral Tint strips away color bias to paint the rain curtain itself &mdash; that band of reduced visibility that has no hue, only density. Indanthrone Blue pushes the upper sky to storm-dark without resorting to black alone, granulating as it dries to create the turbulent texture of stacked cumulonimbus. French Ultramarine handles the rare moments when a crack in the cloud deck reveals electric blue &mdash; the color you see for two seconds before the next cell closes in. Cobalt Blue gives you the rain-wet reflective surfaces: roads, puddles, car hoods, anything that turns into a mirror when the water hits. Raw Umber and Burnt Sienna are the flooded earth &mdash; the two-tone mud of valley farmland in October. Lamp Black is reserved for the storm&rsquo;s absolute center, the value anchor that makes everything else look luminous by comparison. Buff Titanium, semi-opaque and warm, paints the rain streaks catching whatever diffused light survives &mdash; those pale diagonal lines that tell you rain is falling rather than just present. Shadow Violet provides the purple-gray atmospheric quality unique to heavy PNW rain &mdash; the color that makes October storms look different from storms anywhere else.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">The convergence zone turns everything into water &mdash; these prompts work with that transformation rather than against it.</p>
+    <p class="prompts-intro">Rain this heavy demands commitment. Soak your paper, tilt your board, and let gravity be your collaborator &mdash; these subjects reward the painter who gives up control and lets the water work.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Chanterelles in Hemlock Duff</h3>
-      <p class="subject"><strong>Subject:</strong> Golden chanterelles emerging from dark hemlock duff &mdash; the forest floor&rsquo;s quiet gold rush, hidden under dripping boughs.</p>
-      <p class="palette-fit">The Chanterelle Gill mix (Olive Green 1:Yellow Ochre 2) captures the warm opacity of gill folds radiating from stem to cap edge.</p>
+      <h3>Rain Wall Crossing the Skagit Flats</h3>
+      <p class="subject"><strong>Subject:</strong> A visible wall of rain sweeping across flat farmland, erasing barns and treelines as it advances. The near ground is still dry enough to see. The far ground has disappeared. A single road cuts toward the vanishing point.</p>
+      <p class="palette-fit">The Wall of Water mix (Payne&rsquo;s Gray + Neutral Tint + Indanthrone Blue) does the heavy lifting here, graded from full strength at the storm front to dilute mist at the edges. Buff Titanium streaks mark where rain catches light.</p>
       <div class="tips"><ul>
-        <li>Paint dark background first with Olive Green and Raw Umber</li>
-        <li>Let dry, paint caps with Yellow Ochre</li>
-        <li>Use Chanterelle Gill mix in radiating strokes</li>
-        <li>Glaze Lavender over far background for rain-haze</li>
+        <li>Wet the entire upper two-thirds of the paper and apply the Wall of Water mix with a loaded mop brush, letting it flow downward &mdash; tilt the board at 20 degrees so gravity creates vertical rain streaks naturally</li>
+        <li>The rain wall&rsquo;s leading edge is the darkest value: load Indanthrone Blue into the Wall of Water mix here, letting the granulation create turbulent texture at the boundary between rain and clear air</li>
+        <li>While the rain wash is still damp, lift thin vertical lines with a thirsty flat brush to create Buff Titanium rain streaks &mdash; these are the lit streaks where diffused light catches falling water</li>
+        <li>The dry foreground is Raw Umber and Burnt Sienna in the Flood Mud mix, but drier and warmer than the rest &mdash; this temperature contrast is what sells the approaching storm</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Eagle on Snag Above Swollen River</h3>
-      <p class="subject"><strong>Subject:</strong> Bald eagle hunched on bare snag, steel-gray river below, sleet haze softening everything beyond fifty yards.</p>
-      <p class="palette-fit">River Steel (French Ultramarine 2:Lamp Black 1) gives the water its weight, while Eagle Perch (Burnt Sienna Light 1:Lamp Black 1:Buff Titanium touch) handles the wet bark.</p>
+      <h3>Highway 101 in the Downpour</h3>
+      <p class="subject"><strong>Subject:</strong> A two-lane highway through coastal forest, rain so heavy the road surface becomes a sheet of reflected sky. Headlights approaching through the murk. Douglas firs as dark vertical shapes flanking the road. Spray rising from tires.</p>
+      <p class="palette-fit">Cobalt Blue for the wet road reflections, the Storm Core mix (Indanthrone Blue + Lamp Black + Shadow Violet) for the forest wall on either side. Buff Titanium for headlight glow diffused through rain.</p>
       <div class="tips"><ul>
-        <li>Lay sky with Lavender, let it granulate</li>
-        <li>Paint river with River Steel mix on tilted paper</li>
-        <li>Snag gets Eagle Perch mix</li>
-        <li>Paint eagle last on dry paper with hard edges</li>
+        <li>The road surface is Cobalt Blue diluted and laid flat &mdash; wet roads in rain reflect sky color, which means the road is often lighter than the forest beside it, a counterintuitive value relationship that makes the scene read as true</li>
+        <li>Flanking trees are the Storm Core mix applied as dark vertical masses with no detail &mdash; in this rain, you cannot see individual branches, only shapes. Let the Indanthrone Blue granulate to suggest bark texture at the nearest trunks</li>
+        <li>Headlights are negative painting: leave two small areas of dry paper and surround them with Buff Titanium in a soft halo, then grade into Payne&rsquo;s Gray as the glow fades into rain</li>
+        <li>Tire spray is spattered Neutral Tint and Buff Titanium flicked from a loaded brush &mdash; the spatter mimics the randomness of road spray better than any deliberate brushwork</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Flooded Trail Through Second Growth</h3>
-      <p class="subject"><strong>Subject:</strong> Lowland trail submerged under three inches of water &mdash; the path still visible but belonging to the rain now, not to you.</p>
-      <p class="palette-fit">Every color in the palette gets reflected. This is a painting about doubling &mdash; the world above water and the world below it, using the same pigments at different dilutions.</p>
+      <h3>Flooded Field with Fence Posts</h3>
+      <p class="subject"><strong>Subject:</strong> A Willamette Valley field flooded to standing water, fence posts marching into the distance with their reflections doubling them. The sky and water nearly merge at the horizon. A lone oak at the field&rsquo;s far edge.</p>
+      <p class="palette-fit">The Flood Mud mix (Raw Umber + Burnt Sienna + Payne&rsquo;s Gray) for the earth tones visible through shallow water. Payne&rsquo;s Gray graded with Neutral Tint for the sky-water merge. Shadow Violet for the reflected distance.</p>
       <div class="tips"><ul>
-        <li>Paint upper half normally</li>
-        <li>Before lower half dries, paint reflections in diluted versions</li>
-        <li>Use Phthalo Green BS in deepest standing water</li>
-        <li>Break reflections with Buff Titanium horizontal strokes</li>
+        <li>Where sky meets standing water at the horizon, use Neutral Tint at the same value in both zones &mdash; the lack of contrast between sky and water&rsquo;s surface is what creates the eerie convergence-zone feeling of being inside the rain rather than under it</li>
+        <li>Fence posts are Lamp Black and Raw Umber, painted with a rigger brush as confident single strokes. Their reflections are the same colors but broken and slightly lighter &mdash; drag the brush quickly over textured paper to skip and create the rippled reflection effect</li>
+        <li>The standing water shows the Flood Mud mix underneath in the shallow zones and pure Payne&rsquo;s Gray reflection in the deeper areas &mdash; this depth variation gives the flood three-dimensional terrain</li>
+        <li>The lone oak is Shadow Violet mixed with Payne&rsquo;s Gray, softened at its edges by lifting into the damp sky wash &mdash; it should feel like it&rsquo;s being absorbed into the rain, not standing against it</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Convergence Zone Storm Cell</h3>
-      <p class="subject"><strong>Subject:</strong> Pure sky study of a massive storm cell &mdash; no land, no trees, just the architecture of weather doing what it does best over the lowlands.</p>
-      <p class="palette-fit">French Ultramarine and Lavender own the sky. This is a wet-in-wet exercise where the paper does half the work and you do the other half by knowing when to stop.</p>
+      <h3>Convergence Zone from Above &mdash; Mountain Pass View</h3>
+      <p class="subject"><strong>Subject:</strong> Looking down from a Cascade foothill into a valley filled with rain. Multiple storm cells visible as distinct dark columns. Layers of atmosphere between you and the valley floor. Breaks in cloud cover revealing brief patches of French Ultramarine sky.</p>
+      <p class="palette-fit">Every gray in the palette gets layered here &mdash; Payne&rsquo;s Gray, Neutral Tint, and Shadow Violet at different dilutions create the atmospheric perspective. French Ultramarine for the sky breaks. The Storm Core mix for the darkest cells.</p>
       <div class="tips"><ul>
-        <li>Work entirely wet-in-wet on soaked paper</li>
-        <li>Let Lavender bloom downward for sleet curtain</li>
-        <li>Touch Buff Titanium along foothill line</li>
-        <li>Leave white paper at cloud top edge</li>
+        <li>Work in distinct layers from background to foreground: the farthest rain cells are Neutral Tint at 10% strength, middle cells are Payne&rsquo;s Gray at 30%, and the nearest storm column is the full Storm Core mix &mdash; this value progression creates depth through atmosphere alone</li>
+        <li>Sky breaks are French Ultramarine applied with small, decisive strokes between cloud masses &mdash; these are the only pure-color moments in the painting and they need to sing against all that gray</li>
+        <li>The valley floor is barely visible: Raw Umber and Burnt Sienna at extreme dilution, glimpsed through gaps in the rain. Less is more here &mdash; the ground is a rumor, not a statement</li>
+        <li>Rain columns are vertical washes of the Wall of Water mix dropped into wet paper and allowed to stream downward &mdash; paint each cell separately, letting each dry slightly before adding the next, so they overlap but remain distinct</li>
       </ul></div>
     </div>
   </div>
 
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith extra fine watercolors. Burnt Sienna Light is distinct from standard Burnt Sienna &mdash; lighter, more transparent. Lavender granulates beautifully into component violets and blues. French Ultramarine and Burnt Sienna Light mixed 1:1 produce granulating grays.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Payne&rsquo;s Gray (PBk6, PB29, PV42) is Daniel Smith&rsquo;s version &mdash; slightly bluer than some brands, which matters for rain. Indanthrone Blue (PB60) granulates beautifully on rough paper, creating storm texture passively. Neutral Tint (PBk6, PV42, PB15) is a convenience mix but earns its place by being truly neutral &mdash; no color bias means no accidental warmth or coolness in your rain curtains. Shadow Violet (PV15, PBk6) provides that specific purple-gray cast unique to heavy PNW precipitation. Buff Titanium (PW6:1) is semi-opaque by nature, which makes it ideal for suggesting light diffused through rain.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

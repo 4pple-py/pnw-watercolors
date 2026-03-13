@@ -9,11 +9,11 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
   .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(26,92,50,0.2) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(40,40,40,0.16) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(106,80,48,0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(26,92,50,0.08) 0%, transparent 40%), linear-gradient(175deg, #2a3a28 0%, #1a2a1a 100%); filter: blur(20px); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(80,160,60,0.22) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(100,128,40,0.18) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(0,128,70,0.14) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(180,200,40,0.12) 0%, transparent 40%), linear-gradient(175deg, #eaf2e4 0%, #e0ecda 100%); filter: blur(20px); }
   .hero-text { position: relative; z-index: 1; }
-  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #2a6830; margin-bottom: 8px; }
-  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #e0e8e0; line-height: 1.1; margin-bottom: 16px; }
-  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #a0a8a0; max-width: 640px; line-height: 1.7; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #4a7a30; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
   .trio-section { margin-top: 48px; }
   .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
@@ -50,7 +50,6 @@
   .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
   .prompts-section { margin-top: 56px; }
   .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
@@ -63,7 +62,7 @@
   .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
   .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
   .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e4eedc; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
   .notes-section strong { color: #444; }
   .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
@@ -74,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 43 &mdash; PNW Watercolor Series</div>
     <h1>Neon Moss</h1>
-    <p class="mood">Noon, and the moss is almost fluorescent &mdash; weeks of rain have pumped it full of impossible green against charcoal trunks. Trumpeter swans land on Skagit flats like white freight. The world shrinks to nine hours of light but the green gets louder.</p>
+    <p class="mood">First real soaking rain of fall and every surface that spent summer drying out wakes up overnight. Moss on bigleaf maples goes from dusty olive to electric green in forty-eight hours. The color is almost aggressive &mdash; fluorescent, radioactive, the kind of green that makes visitors from other places stop walking and stare. Every branch, every fence rail, every north-facing rock face becomes a broadcast. The forest is recharging, and it wants you to know.</p>
   </div>
 </div>
 
@@ -84,16 +83,16 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a5c32 0%, #104a28 100%);"></div>
-        <div class="trio-info"><h3>Hooker&rsquo;s Green</h3><p>Moss screaming from every surface; the green that has absorbed weeks of rain and is now louder than it has any right to be</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #50a03c 0%, #449832 100%);"></div>
+        <div class="trio-info"><h3>Cascade Green</h3><p>That specific cool, bright moss green unique to the PNW &mdash; the color that makes out-of-towners reach for their phones; clean, vivid, unmistakable</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #282828 0%, #1a1a1a 100%);"></div>
-        <div class="trio-info"><h3>Lunar Black</h3><p>Wet bark, granulated and ancient; the mineral dark that makes the green glow by sheer contrast</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #648028 0%, #587020 100%);"></div>
+        <div class="trio-info"><h3>Sap Green</h3><p>Structural mid-tone moss &mdash; the green that holds the composition together between the electric highlights and deep shadows; warm, natural, reliable</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #6a5030 0%, #5a4020 100%);"></div>
-        <div class="trio-info"><h3>Raw Umber</h3><p>River opacity, clay and runoff; the Skagit running brown after days of rain, carrying the mountains downstream</p></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #008046 0%, #006838 100%);"></div>
+        <div class="trio-info"><h3>Phthalo Green (BS)</h3><p>Intense wet moss at maximum saturation &mdash; staining, transparent, overwhelming if unchecked; the nuclear reactor in the palette that powers the neon effect</p></div>
       </div>
     </div>
   </div>
@@ -101,28 +100,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#1a5c32;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
-      <div class="swatch" style="background:#282828;"><span class="label" style="color:#fff;">Lunar Black</span></div>
-      <div class="swatch" style="background:#6a5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
-      <div class="swatch" style="background:#f0d840;"><span class="label" style="color:#555;">Hansa Yellow Lt</span></div>
-      <div class="swatch" style="background:#1a2a50;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
-      <div class="swatch" style="background:#d8a8a0;"><span class="label" style="color:#555;">Potter's Pink</span></div>
-      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
-      <div class="swatch" style="background:#008888;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
-      <div class="swatch" style="background:#f8f8f8;"><span class="label" style="color:#777;">Titanium White</span></div>
-      <div class="swatch" style="background:#2a5848;"><span class="label" style="color:#fff;">Undersea Green</span></div>
+      <div class="swatch" style="background:#50a03c;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#648028;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#008046;"><span class="label" style="color:#fff;">Phthalo Green BS</span></div>
+      <div class="swatch" style="background:#b4c828;"><span class="label" style="color:#333;">Green Gold</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#c8b400;"><span class="label" style="color:#333;">Nickel Azo Yellow</span></div>
+      <div class="swatch" style="background:#1e3f6f;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#36454f;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#515252;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#1a5c32;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Primary &mdash; moss screaming from every surface</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#d8a8a0;"></div><div><div class="name">Potter&rsquo;s Pink</div><div class="role">Atmospheric &mdash; dawn behind Cascades, 7:30 AM</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#282828;"></div><div><div class="name">Lunar Black</div><div class="role">Primary &mdash; wet bark granulated and ancient</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Warm Accent &mdash; bigleaf maple leaf, last one</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#6a5030;"></div><div><div class="name">Raw Umber</div><div class="role">Primary &mdash; river opacity, clay and runoff</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#008888;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Cool Accent &mdash; swan wing speculum flash</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#f0d840;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Earth &mdash; moss highlights in rare sun</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f8f8f8;"></div><div><div class="name">Titanium White</div><div class="role">Light &mdash; trumpeter swan body on gray water</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2a50;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; deep shade beneath big-leaf maple</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#2a5848;"></div><div><div class="name">Undersea Green</div><div class="role">Cool Accent/Deep &mdash; slough water beneath swan raft</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#50a03c;"></div><div><div class="name">Cascade Green</div><div class="role">Primary &mdash; electric moss green, the signature color</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#c8b400;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Accent &mdash; acid green highlights on wet moss tips</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#648028;"></div><div><div class="name">Sap Green</div><div class="role">Primary &mdash; structural moss mid-tone</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#1e3f6f;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; rain-wet surfaces, sky reflection</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#008046;"></div><div><div class="name">Phthalo Green (BS)</div><div class="role">Primary &mdash; intense wet moss, maximum chroma</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; bark beneath moss, branch structure</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#b4c828;"></div><div><div class="name">Green Gold</div><div class="role">Green &mdash; warm moss undertone, sunlit edges</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#36454f;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; wet trunk shadows, bark in rain</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Green &mdash; deep moss shadow, understory darkness</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#515252;"></div><div><div class="name">Neutral Tint</div><div class="role">Atmospheric &mdash; rain air, distance between trees</div></div></div>
     </div>
   </div>
 
@@ -131,112 +130,114 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #f0f0f0, #e0e8e8);"></div>
-        <div><h3>Swan Landing</h3><span class="ratio">3 Titanium White : touch Cobalt Teal Blue : touch Lunar Black</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5aaa3a, #4c9830);"></div>
+        <div><h3>Recharge Green</h3><span class="ratio">2 Cascade Green : 1 Phthalo Green (BS) : &frac12; Nickel Azo Yellow</span></div>
       </div>
-      <p class="mix-description">White bird on pewter slough &mdash; not warm white, not cold white, but the specific white of a living thing on gray water.</p>
+      <p class="mix-description">The electric moment when moss wakes up &mdash; that first morning after rain when the green is so vivid it looks backlit, even in overcast.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#f8f8f8; color:#777;">Titanium White</div>
-        <div class="mix-bar" style="flex:0.15; background:#008888; color:#fff;">Cobalt Teal</div>
-        <div class="mix-bar" style="flex:0.15; background:#282828; color:#fff;">Lunar Black</div>
+        <div class="mix-bar" style="flex:2; background:#50a03c; color:#fff;">Cascade Green</div>
+        <div class="mix-bar" style="flex:1; background:#008046; color:#fff;">Phthalo Green BS</div>
+        <div class="mix-bar" style="flex:0.5; background:#c8b400; color:#333;">Nickel Azo Yellow</div>
       </div>
-      <div class="mix-notes">Cobalt Teal Blue cools the white &mdash; swans are never warm white. Lunar Black only in shadow areas. Apply thickly enough to sit on paper&rsquo;s surface; opacity is the point.</div>
+      <div class="mix-notes">Cascade Green is the structural color &mdash; it reads as &ldquo;PNW moss&rdquo; immediately, with the cool, clean quality that separates our moss from the yellowish moss of other climates. Phthalo Green BS intensifies the chroma past what feels natural, which is exactly right &mdash; rehydrated moss IS unnaturally vivid. It stains, so commit to your placement. Nickel Azo Yellow pushes the highlights toward that acidic, almost toxic brightness on the outermost moss tips where water beads catch light. Apply Cascade Green as the base wash, then drop Phthalo Green BS into the wettest, most saturated areas while still damp. Touch Nickel Azo Yellow onto the highest points while the under-layers are barely damp &mdash; it will bloom slightly, mimicking the fuzzy edges of moss filaments.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a7a28, #58a030);"></div>
-        <div><h3>Drunk Moss</h3><span class="ratio">2 Hooker&rsquo;s Green : 1 Hansa Yellow Light</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #4a6a30, #3e5c28);"></div>
+        <div><h3>Old Growth Carpet</h3><span class="ratio">2 Sap Green : 1 Hooker&rsquo;s Green : &frac14; Raw Umber</span></div>
       </div>
-      <p class="mix-description">Neon carpet on nurse log &mdash; the green that makes you check whether you&rsquo;re seeing things or whether the forest really is glowing.</p>
+      <p class="mix-description">The thick moss mantle on a bigleaf maple branch &mdash; years of growth compressed into a living carpet, deeper and darker where the branch curves away from light.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#1a5c32; color:#fff;">Hooker's Green</div>
-        <div class="mix-bar" style="flex:1; background:#f0d840; color:#555;">Hansa Yellow Lt</div>
+        <div class="mix-bar" style="flex:2; background:#648028; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#355e3b; color:#fff;">Hooker's Green</div>
+        <div class="mix-bar" style="flex:0.25; background:#826644; color:#fff;">Raw Umber</div>
       </div>
-      <div class="mix-notes">Hansa Yellow Light lifts Hooker&rsquo;s Green toward fluorescence. Apply in thick, wet strokes onto damp paper. Load the brush until it drips. This is not a subtle mix.</div>
+      <div class="mix-notes">Sap Green is the workhorse mid-tone &mdash; warm enough to read as organic, structured enough to hold the moss&rsquo;s form without dissolving into abstraction. Hooker&rsquo;s Green deepens the shadows where moss layers stack so thick the bottom layers never dry, creating the dark recesses between clumps that give the carpet its three-dimensional texture. Raw Umber anchors the mix to the bark beneath &mdash; moss is never floating in space, and this earth tone grounds the greens to the branch. Apply Sap Green first as an even mid-tone, then work Hooker&rsquo;s Green into the shadowed undersides and deep crevices. The Raw Umber goes at the edges where moss thins and bark peeks through. Let the transitions happen on damp paper so the greens bleed softly into one another the way real moss layers do.</div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #584838, #484030);"></div>
-        <div><h3>Silt River</h3><span class="ratio">3 Raw Umber : 1 Lunar Black</span></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7a8a30, #6c7c28);"></div>
+        <div><h3>Acid Fringe</h3><span class="ratio">2 Green Gold : 1 Nickel Azo Yellow : &frac14; Cascade Green</span></div>
       </div>
-      <p class="mix-description">Skagit running opaque after days of rain &mdash; carrying the mountains downstream one particle at a time.</p>
+      <p class="mix-description">The luminous yellow-green at the growing edge of moss colonies &mdash; new growth so bright it looks like it&rsquo;s generating its own light.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#6a5030; color:#fff;">Raw Umber</div>
-        <div class="mix-bar" style="flex:1; background:#282828; color:#fff;">Lunar Black</div>
+        <div class="mix-bar" style="flex:2; background:#b4c828; color:#333;">Green Gold</div>
+        <div class="mix-bar" style="flex:1; background:#c8b400; color:#333;">Nickel Azo Yellow</div>
+        <div class="mix-bar" style="flex:0.25; background:#50a03c; color:#fff;">Cascade Green</div>
       </div>
-      <div class="mix-notes">Raw Umber&rsquo;s opacity does the work. Lunar Black granulates dramatically. Apply wet on dry paper and do not touch it again &mdash; granulation needs to settle undisturbed.</div>
+      <div class="mix-notes">Green Gold is the warm side of moss &mdash; where new filaments reach outward and catch ambient light, they shift from the cool green of the moss body toward this golden-green that&rsquo;s almost more yellow than green. Nickel Azo Yellow is the most acidic, high-key pigment in the palette &mdash; a controlled dose of it makes the fringe glow without tipping into chartreuse. Cascade Green at the edges ties the fringe back to the parent moss colony, preventing the warm tones from floating free. Use this mix only at the outermost edges of moss patches and on the tips of individual fronds. Apply with the tip of a small round brush in tiny, irregular dabs &mdash; moss grows in random directions and any pattern will look painted rather than grown. The Green Gold&rsquo;s transparency lets the paper glow through, reinforcing the backlit effect.</div>
     </div>
   </div>
 
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is built on the contrast between fluorescent life and mineral inertia. Hooker&rsquo;s Green paired with Hansa Yellow Light produces almost-unnatural neon. Lunar Black&rsquo;s extreme granulation mimics bark, stone, and wet wood. Indanthrone Blue provides deep shade. Potter&rsquo;s Pink and New Gamboge are calendar markers. Titanium White earns its place because trumpeter swans demand true opacity.</p>
+      <p>Five greens is not excessive &mdash; it&rsquo;s accurate. Walk up to a moss-covered bigleaf maple after an October rain and count the greens you actually see: the cool, vivid green of the main moss body (Cascade Green), the warm structural mid-tone where old growth thickens (Sap Green), the intense, almost unreal saturation of thoroughly soaked patches (Phthalo Green BS), the golden undertone where moss catches warm light (Green Gold), and the deep shadow green where layers compress in the crevices (Hooker&rsquo;s Green). Each one does something the others cannot. Nickel Azo Yellow is the high note &mdash; that acidic, almost uncomfortable brightness on the newest growth tips that makes the whole scene vibrate. Without it, the greens are beautiful but calm; with it, they&rsquo;re electric, which is the truth of rehydrated PNW moss. French Ultramarine provides the rain-wet surface sheen on bark and rock, the blue reflection that proves everything is soaked. Raw Umber is the bark architecture beneath the moss &mdash; without visible structure, moss floats like a texture applied to nothing. Payne&rsquo;s Gray darkens the wet trunks and creates the shadows that make the neon greens pop by contrast. Neutral Tint handles the rain-filled air between trees, the atmospheric depth that says this forest goes back farther than you can see.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Nine hours of light and the green gets louder &mdash; these prompts are about painting what happens when the world simplifies down to contrast and saturation.</p>
+    <p class="prompts-intro">Every surface is a canvas this week. The rain has turned the forest into a green light show &mdash; your job is to capture the intensity without it reading as fake. Restraint in value, abandon in chroma.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Moss-Draped Big-Leaf Maple</h3>
-      <p class="subject"><strong>Subject:</strong> A single trunk smothered in moss, one last golden leaf clinging &mdash; the tree wearing more green than it grew, the leaf a flag of surrender.</p>
-      <p class="palette-fit">Drunk Moss (Hooker&rsquo;s Green 2:Hansa Yellow Light 1) is the headline. Lunar Black&rsquo;s granulation provides the bark beneath. New Gamboge gets one confident leaf shape.</p>
+      <h3>Bigleaf Maple Branch &mdash; Moss Portrait</h3>
+      <p class="subject"><strong>Subject:</strong> A single horizontal bigleaf maple branch, so thickly coated in moss it&rsquo;s more green than bark. Ferns growing from the moss. Rain dripping from the branch tips. The branch fills the frame like a landscape in miniature.</p>
+      <p class="palette-fit">The Old Growth Carpet mix (Sap Green + Hooker&rsquo;s Green + Raw Umber) builds the moss body. Recharge Green (Cascade Green + Phthalo Green BS + Nickel Azo Yellow) for the most vivid wet patches. Raw Umber for the rare bark visible at the branch&rsquo;s ends.</p>
       <div class="tips"><ul>
-        <li>Paint trunk first with Lunar Black, let it granulate</li>
-        <li>Load brush to dripping with Drunk Moss mix</li>
-        <li>Drop pure Hansa Yellow Light for brightest highlights</li>
-        <li>Paint single New Gamboge leaf last with crisp edge</li>
+        <li>Start with the branch structure in Raw Umber &mdash; even though most of it will be covered by moss, knowing where the bark is underneath gives the moss something to cling to and prevents it from looking like a green cloud</li>
+        <li>Build the moss in layers: Old Growth Carpet mix as the broad mid-tone first, then Recharge Green into the areas facing upward where rain hits directly and saturation is highest</li>
+        <li>Ferns growing from the moss are Sap Green with touches of Green Gold at their tips &mdash; they need to read as separate plants, so paint them with crisper edges than the surrounding moss</li>
+        <li>Rain drops on the branch tips are negative painting: leave tiny circles of white paper or lift them out with a damp brush, then add the faintest ring of Payne&rsquo;s Gray shadow beneath each drop</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Trumpeter Swans on Skagit Flats</h3>
-      <p class="subject"><strong>Subject:</strong> A raft of trumpeter swans on pewter slough &mdash; white freight on gray water, the heaviest grace note in the landscape.</p>
-      <p class="palette-fit">Swan Landing (Titanium White 3:Cobalt Teal Blue touch:Lunar Black touch) is applied thick because opacity is the subject. The water beneath is Undersea Green and Raw Umber.</p>
+      <h3>Moss on a Stone Wall &mdash; Roadside Near Astoria</h3>
+      <p class="subject"><strong>Subject:</strong> An old stone retaining wall along a coastal highway, every mortar joint packed with moss. Rain darkens the stone to near-black while the moss blazes green. Ferns cascade from the top. Mist in the background.</p>
+      <p class="palette-fit">Payne&rsquo;s Gray for rain-darkened stone. The Acid Fringe mix (Green Gold + Nickel Azo Yellow + Cascade Green) for the brilliant moss in the mortar joints. Neutral Tint for the coastal mist behind everything.</p>
       <div class="tips"><ul>
-        <li>Paint water first with Undersea Green and Raw Umber</li>
-        <li>Apply Swan Landing mix thickly</li>
-        <li>Add Lunar Black touches to shadow sides</li>
-        <li>Landing swan gets hard-edged white wings, softened wingtips</li>
+        <li>Paint the stone wall first in Payne&rsquo;s Gray, varying the value block by block &mdash; wet stone is not uniform, and each stone absorbs water differently. Leave the mortar joints as thin white lines initially</li>
+        <li>Once the stone is dry, fill the mortar joints with the Acid Fringe mix applied with a rigger brush &mdash; the thin, bright lines of moss against dark stone create the maximum contrast that makes this subject so striking</li>
+        <li>French Ultramarine glazed thinly over select stones adds the blue sheen of wet surfaces reflecting overcast sky &mdash; apply only to the most prominent stones to suggest rain-slick surfaces</li>
+        <li>The background mist is Neutral Tint at extreme dilution, applied to wet paper and left alone &mdash; the mist should have no edges, no brushwork, just a gradual dissolution of detail behind the sharp-focused wall</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Nurse Log Close-Up</h3>
-      <p class="subject"><strong>Subject:</strong> Cross-section of nurse log hosting an ecosystem &mdash; death feeding life in miniature, the forest&rsquo;s recycling made visible.</p>
-      <p class="palette-fit">Lunar Black for the log&rsquo;s mineral dark, Drunk Moss for the living carpet, and a rigger brush for the tiny hemlock seedlings that prove the cycle works.</p>
+      <h3>Forest Floor Mosscape &mdash; Hoh Rain Forest</h3>
+      <p class="subject"><strong>Subject:</strong> Looking down at the forest floor where every fallen log, rock, and root is blanketed in moss of varying ages and species. A nurse log with seedlings growing from its mossy back. Tiny mushrooms. The green goes on forever.</p>
+      <p class="palette-fit">All five greens get used here in different zones: Hooker&rsquo;s Green for the oldest, darkest moss in the shadows; Cascade Green for the dominant carpet; Phthalo Green BS for the wettest spots; Green Gold and Nickel Azo Yellow for the highlights and new growth. Raw Umber for the nurse log&rsquo;s exposed wood.</p>
       <div class="tips"><ul>
-        <li>Block in log with Lunar Black</li>
-        <li>While damp, charge Hooker&rsquo;s Green into top</li>
-        <li>Build moss with Drunk Moss mix in stippled strokes</li>
-        <li>Paint tiny hemlock seedlings with rigger brush</li>
+        <li>Map the composition by value before thinking about green: the darkest greens (Hooker&rsquo;s Green) go in the crevices between logs, the mid-tones (Sap Green, Cascade Green) cover the main surfaces, and the brightest greens (Acid Fringe mix) hit only the uppermost surfaces catching light</li>
+        <li>The nurse log is Raw Umber where bark shows through, transitioning to Old Growth Carpet mix where moss has taken over &mdash; the gradient from bark to moss is gradual and should be painted wet-into-wet</li>
+        <li>Tiny mushrooms are lifted white paper with Payne&rsquo;s Gray shadows &mdash; these small non-green accents give the eye places to rest in the sea of green</li>
+        <li>Depth in a mosscape comes from aerial perspective within inches: the moss nearest the viewer has sharp texture and vivid chroma (Recharge Green), while moss even a few feet away softens and grays (add Neutral Tint to any green to push it back in space)</li>
       </ul></div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Silt River at Dawn</h3>
-      <p class="subject"><strong>Subject:</strong> Skagit running opaque with first pink light &mdash; three horizontal bands of sky, mountains, and river, the simplest composition and the hardest to pull off.</p>
-      <p class="palette-fit">Potter&rsquo;s Pink earns its place in the palette right here &mdash; dawn behind the Cascades. Silt River (Raw Umber 3:Lunar Black 1) is one confident wash.</p>
+      <h3>Moss-Draped Alders in Rain &mdash; Quinault Valley</h3>
+      <p class="subject"><strong>Subject:</strong> A stand of red alders with moss hanging from every branch like green drapery. Rain falling through the canopy. The trunks are dark with moisture. Light filters through from behind, backlighting the moss so it glows.</p>
+      <p class="palette-fit">Payne&rsquo;s Gray for the rain-soaked alder trunks. Recharge Green for the backlit moss. Neutral Tint for rain in the air between trees. Green Gold for the warm glow where light penetrates the moss canopy from behind.</p>
       <div class="tips"><ul>
-        <li>Three horizontal bands: sky, mountains, river</li>
-        <li>Sky: Indanthrone Blue fading to Potter&rsquo;s Pink</li>
-        <li>Mountains: silhouettes in Indanthrone Blue</li>
-        <li>River: Silt River mix in single confident wash</li>
+        <li>The backlighting is the key to this composition: paint the moss greens warmer and more yellow (Green Gold dominant) where light comes through, and cooler and darker (Hooker&rsquo;s Green, Sap Green) on the side facing the viewer</li>
+        <li>Alder trunks in rain are Payne&rsquo;s Gray with Raw Umber &mdash; alders have pale bark when dry, but rain turns them dramatically dark, creating strong contrast against the bright moss</li>
+        <li>Hanging moss is painted as irregular curtains using the Recharge Green mix applied to damp paper with downward strokes &mdash; let the pigment run and feather at the bottom edges to suggest the wispy, dripping quality of saturated moss</li>
+        <li>Rain between the trees is Neutral Tint glazed over everything in the middle distance after all layers are dry &mdash; this single glaze pushes the background trees back and creates the wet-air atmosphere that makes the nearest moss-draped alder pop forward</li>
       </ul></div>
     </div>
   </div>
 
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith extra fine watercolors. Lunar Black is a PrimaTek pigment with extraordinary granulation. Undersea Green is a Daniel Smith convenience mix. Titanium White is opaque by design &mdash; use only where opacity is intentional.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Cascade Green (PG7, PY150) is a Daniel Smith signature color &mdash; cool, clean, and unmistakably PNW. Phthalo Green Blue Shade (PG7) is extremely staining and intense; use it diluted unless you want permanent neon. Sap Green (PG36, PY150) is warmer and more natural than Cascade Green, providing the structural mid-tone. Green Gold (PY129) bridges green and yellow with a unique transparency. Hooker&rsquo;s Green (PG36, PY3, PG7) is the darkest green here &mdash; use it for shadow and depth. Nickel Azo Yellow (PY150) has the specific acidic quality that matches new moss growth; no other yellow captures it.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

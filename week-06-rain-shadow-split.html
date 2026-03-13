@@ -6,423 +6,65 @@
 <title>Week 6 — Rain Shadow Split</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #faf8f5;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 60%, rgba(61,89,171,0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 40%, rgba(130,102,68,0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 70%, rgba(184,134,11,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 35% 30%, rgba(61,89,171,0.15) 0%, transparent 40%),
-      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #7a8aab;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0ece6;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e8e4de;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0ece6;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #777;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #555;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4de;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 50%, rgba(83,104,120,0.4) 0%, transparent 45%), radial-gradient(ellipse at 35% 40%, rgba(61,89,171,0.3) 0%, transparent 40%), radial-gradient(ellipse at 55% 60%, rgba(107,124,63,0.25) 0%, transparent 40%), radial-gradient(ellipse at 75% 45%, rgba(212,168,32,0.35) 0%, transparent 45%), radial-gradient(ellipse at 90% 55%, rgba(200,160,80,0.3) 0%, transparent 40%), linear-gradient(175deg, #e8eaee 0%, #f5e6c8 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #6b7c3f; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 6 &mdash; PNW Watercolor Series</div>
     <h1>Rain Shadow Split</h1>
-    <p class="mood">Sequim gets sun while Seattle gets hammered &mdash; a 40-mile gap in weather. Pacific tree frogs calling from ditches at 7 PM, hazelnut catkins swinging pale against wet bark. The tension: the Olympics as wall &mdash; abundance on one side, drought memory on the other.</p>
+    <p class="mood">Cross Snoqualmie Pass and the world cracks open. Behind you: Hooker&rsquo;s Green forest under Payne&rsquo;s Gray ceiling, rain on the windshield. Ahead: Hansa Yellow light on golden hills, Olive Green sage, Buff Titanium sky so bright you squint. Same state, same hour, two entirely different paintings.</p>
   </div>
 </div>
 
@@ -445,21 +87,21 @@
         <div class="trio-swatch" style="background: linear-gradient(135deg, #3d59ab 0%, #334d96 100%);"></div>
         <div class="trio-info">
           <h3>Cobalt Blue</h3>
-          <p>Sequim sky, rare and real; granulating, clean, the blue that earns its presence by being withheld all winter</p>
+          <p>Wet-side sky between squalls &mdash; granulating, mineral, the blue you see for thirty seconds before the next cloud swallows it</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #826644 0%, #6e5638 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #d4a820 0%, #c49a18 100%);"></div>
         <div class="trio-info">
-          <h3>Raw Umber</h3>
-          <p>Ditch bank where tree frogs call; transparent, granulating, the substrate of every lowland edge</p>
+          <h3>Hansa Yellow Deep</h3>
+          <p>Dry-side warmth &mdash; transparent, saturated, the February sun hitting Ellensburg hills like a door thrown open</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #b8860b 0%, #a07508 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #4a4e5a 0%, #3e424c 100%);"></div>
         <div class="trio-info">
-          <h3>Quinacridone Gold</h3>
-          <p>Hazelnut catkin backlit by low sun; transparent, warm, luminous even in small quantities</p>
+          <h3>Neutral Tint</h3>
+          <p>Wet-side veil &mdash; the colorless weight of overcast, neither warm nor cool, just present</p>
         </div>
       </div>
     </div>
@@ -470,27 +112,27 @@
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
       <div class="swatch" style="background:#3d59ab;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
-      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
-      <div class="swatch" style="background:#b8860b;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
-      <div class="swatch" style="background:#c8a84e;"><span class="label" style="color:#777;">Yellow Ochre</span></div>
-      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
-      <div class="swatch" style="background:#4a8bad;"><span class="label" style="color:#fff;">Cerulean Blue</span></div>
+      <div class="swatch" style="background:#d4a820;"><span class="label" style="color:#fff;">Hansa Yellow Dp</span></div>
+      <div class="swatch" style="background:#4a4e5a;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#555;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#b8724a;"><span class="label" style="color:#fff;">Burnt Sienna Lt</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">Fr. Ultramarine</span></div>
+      <div class="swatch" style="background:#6b7c3f;"><span class="label" style="color:#fff;">Olive Green</span></div>
       <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#f0d860;"><span class="label" style="color:#777;">Hansa Yellow Lt</span></div>
       <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#3a6b4a;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Atmosphere &mdash; Sequim rain-shadow sky, thin but earned</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#4a8bad;"></div><div><div class="name">Cerulean Blue</div><div class="role">Atmospheric &mdash; Olympic rain shadow horizon, wide open</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; ditch bank where Pacific tree frogs breed</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; pale winter sun on fieldstone</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#b8860b;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Warm Accent &mdash; hazelnut catkin catching low-angle sun</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#f0d860;border:1px solid #d8c24e;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Warm Accent &mdash; catkin pollen shimmer, barely there</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c8a84e;"></div><div><div class="name">Yellow Ochre</div><div class="role">Earth &mdash; dried grass in the rain shadow, straw-pale</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Cool Accent &mdash; westside wall of rain, distant</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Dark &mdash; wet hazel bark, dark and fissured</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#3a6b4a;"></div><div><div class="name">Hooker's Green</div><div class="role">Cool Accent &mdash; frog-ditch algae, vivid in standing water</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Primary &mdash; wet-side granulating sky</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#d4a820;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Primary &mdash; dry-side warm light</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#4a4e5a;"></div><div><div class="name">Neutral Tint</div><div class="role">Primary &mdash; wet-side veil</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; dry-side golden landscape</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Green &mdash; wet-side forest</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#b8724a;"></div><div><div class="name">Burnt Sienna Light</div><div class="role">Warm Accent &mdash; dry-side warm earth</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; rain cloud blue</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#6b7c3f;"></div><div><div class="name">Olive Green</div><div class="role">Green &mdash; dry-side sage and bunchgrass</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e6c8; border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; dry-side bright atmosphere</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Atmospheric &mdash; wet-side overcast</div></div></div>
     </div>
   </div>
 
@@ -500,55 +142,56 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3d59ab, #d0cbb8);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #536878, #3a5040);"></div>
         <div>
-          <h3>Shadow Sun</h3>
-          <span class="ratio">1 Cobalt Blue : 2 Buff Titanium</span>
+          <h3>Westside Drench</h3>
+          <span class="ratio">2 Payne&rsquo;s Gray : 1 Hooker&rsquo;s Green</span>
         </div>
       </div>
-      <p class="mix-description">Rain shadow sky &mdash; thin but real, the blue that Sequim earns while Seattle drowns.</p>
+      <p class="mix-description">The wet side of the pass &mdash; sodden Douglas fir under a sky that forgot what blue looks like.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:1; background:#355e3b; color:#fff;">Hooker's Green</div>
+      </div>
+      <div class="mix-notes">
+        Payne&rsquo;s Gray is PB29/PBk6/PV19 &mdash; it already leans blue-violet, so adding Hooker&rsquo;s Green (PG36/PY150) pushes it into that specific dark-forest-under-overcast temperature. The mix stays clean because neither pigment is opaque. Use it wet-in-wet for the tree masses flanking I-90 before the pass &mdash; the kind of forest that&rsquo;s so dark and dense it reads as a single value from the car. For variation, tilt the ratio toward more Hooker&rsquo;s Green where light catches the canopy, more Payne&rsquo;s Gray where the trees merge into cloud.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d4a820, #c8a050);"></div>
+        <div>
+          <h3>Kittitas Gold</h3>
+          <span class="ratio">1 Hansa Yellow Deep : 1 Raw Sienna : touch Buff Titanium</span>
+        </div>
+      </div>
+      <p class="mix-description">Dry-side golden hills in February light &mdash; dormant grass glowing like the sun lives inside the ground.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:1; background:#d4a820; color:#fff;">Hansa Yel. Dp</div>
+        <div class="mix-bar" style="flex:1; background:#c8a050; color:#555;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:0.3; background:#f5e6c8; color:#777;">Buff Ti.</div>
+      </div>
+      <div class="mix-notes">
+        Hansa Yellow Deep (PY65) is transparent and saturated; Raw Sienna (PBr7) is transparent and granulating. Together they produce a luminous gold that granulates just enough to suggest dry grass texture without going muddy. The touch of Buff Titanium (PW6:1) lifts the value and adds the slightest opacity &mdash; that bright, bleached quality of winter sun on east-side hills. Apply in a graded wash from the horizon up, letting Raw Sienna dominate the foreground (closer, warmer, more texture) and Hansa Yellow Deep take the mid-distance where the light concentrates.
+      </div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3d59ab, #6b7c3f);"></div>
+        <div>
+          <h3>Pass Divide</h3>
+          <span class="ratio">1 Cobalt Blue : 1 Olive Green</span>
+        </div>
+      </div>
+      <p class="mix-description">The transition zone at Snoqualmie Pass itself &mdash; where wet-side blue and dry-side sage exist in the same breath.</p>
       <div class="mix-bars">
         <div class="mix-bar" style="flex:1; background:#3d59ab; color:#fff;">Cobalt Blue</div>
-        <div class="mix-bar" style="flex:2; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#6b7c3f; color:#fff;">Olive Green</div>
       </div>
       <div class="mix-notes">
-        This is a sky that&rsquo;s more white than blue &mdash; the Buff Titanium dominates because winter rain-shadow sun is pale, washed-out, tentative. Mix on the palette and apply as a graded wash, heavier Cobalt at zenith, nearly pure Buff at the horizon. Cobalt Blue&rsquo;s granulation will add a subtle texture that reads as thin atmosphere. Don&rsquo;t overload &mdash; this sky is precious because it&rsquo;s barely there. For the Olympic mountains below, switch to Payne&rsquo;s Gray and let the contrast tell the rain shadow story.
-      </div>
-    </div>
-
-    <div class="mix-card">
-      <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a6b4a, #6a7a52);"></div>
-        <div>
-          <h3>Frog Ditch</h3>
-          <span class="ratio">2 Hooker's Green : 1 Raw Umber</span>
-        </div>
-      </div>
-      <p class="mix-description">Standing water with algae bloom &mdash; the drainage ditch where tree frogs sing their entire spring into being.</p>
-      <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#3a6b4a; color:#fff;">Hooker's Green</div>
-        <div class="mix-bar" style="flex:1; background:#826644; color:#fff;">Raw Umber</div>
-      </div>
-      <div class="mix-notes">
-        Hooker&rsquo;s Green is a convenience mix &mdash; it&rsquo;s already complex. Adding Raw Umber earths it into ditch-water territory. Apply wet to the paper and let them mingle rather than premixing completely; the partial separation reads as algae floating over silty bottom. For the water surface, keep it smooth. For the bank, add more Raw Umber and use dry brush for the grass stubble. The frogs are calling from here. You won&rsquo;t paint them &mdash; they&rsquo;re thumbnail-sized and invisible. Paint the place they choose.
-      </div>
-    </div>
-
-    <div class="mix-card">
-      <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b8860b, #c8a838);"></div>
-        <div>
-          <h3>Catkin Swing</h3>
-          <span class="ratio">2 Quinacridone Gold : 1 Hansa Yellow Light</span>
-        </div>
-      </div>
-      <p class="mix-description">Hazelnut catkins in low-angle sun &mdash; pale gold pendulums swinging against dark wet bark.</p>
-      <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#b8860b; color:#fff;">Quin. Gold</div>
-        <div class="mix-bar" style="flex:1; background:#f0d860; color:#777;">Hansa Yellow Lt</div>
-      </div>
-      <div class="mix-notes">
-        Quinacridone Gold is transparent and warm; Hansa Yellow Light lifts it toward the pale, pollen-dusty quality of hazelnut catkins. Paint each catkin as a single stroke with a rigger &mdash; they hang in clusters of three to five, each about two inches long. Apply over a dried dark wash of Burnt Umber (the bark) so the transparency lets the dark show through at the attachment point. Hansa Yellow Light is the sun-catching tip; Quinacridone Gold is the body. For catkins in shadow, drop the Hansa entirely and add Raw Umber.
+        This is the color of the transition &mdash; neither fully wet-side nor dry-side. Cobalt Blue (PB28) granulates; Olive Green (PO49/PG7/PY42) is smooth and warm. Mixed equally they produce a complex blue-green-gray that shifts depending on the paper&rsquo;s moisture. Use it for the snow-patched ridgeline at the pass summit, for the moment where the forest starts thinning and the first golden hills appear in the distance. Let the two pigments separate slightly on the paper &mdash; the granulation tells the story of two climates colliding.
       </div>
     </div>
   </div>
@@ -557,71 +200,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>The rain shadow is fundamentally a story about two sides of a mountain, and this palette holds both. Cobalt Blue and Cerulean Blue split the sky duties &mdash; Cobalt for the Sequim side (warmer, granulating, earned), Cerulean for the wider horizon (cooler, smoother, more confident). Payne&rsquo;s Gray is Seattle&rsquo;s sky, visible as a distant wall to the west. Quinacridone Gold and Hansa Yellow Light are both transparent, giving the catkins a backlit luminosity that opaque yellows can&rsquo;t achieve. Raw Umber and Yellow Ochre granulate together beautifully for the dry-grass, rain-shadow-floor passages. Hooker&rsquo;s Green is deliberately vivid &mdash; the ditch algae is the most saturated thing in the scene, thriving in standing water while everything else waits for spring.</p>
+      <p>This palette is built on a fault line. One side is wet, cool, and dense: Payne&rsquo;s Gray for the overcast, French Ultramarine for the heavy rain-cloud blue, Cobalt Blue for the rare break, Hooker&rsquo;s Green for the soaked forest, Neutral Tint for the veil that hangs over everything. The other side is warm, open, and golden: Hansa Yellow Deep for the light itself, Raw Sienna for the dormant hills, Olive Green for the sage and bunchgrass, Burnt Sienna Light for the warm ranch earth, Buff Titanium for the bright sky you squint into. Ten pigments, two climates. The split isn&rsquo;t just thematic &mdash; it&rsquo;s structural. The wet-side pigments are cooler, more transparent, built for layering gray on gray. The dry-side pigments are warmer, include more earth tones, and Buff Titanium brings the only semi-opaque body to the palette &mdash; because the dry side has substance, weight, visible light.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects that live inside this palette&rsquo;s split personality. Each one asks you to commit to a side &mdash; or paint the line where they meet.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Rain Shadow Split &mdash; Two Skies</h3>
-      <p class="subject"><strong>Subject:</strong> The view from Hurricane Ridge or a Sequim overlook: Cobalt Blue sky overhead, the Olympic wall behind you, and Seattle&rsquo;s gray rain curtain visible 40 miles to the east. Two weathers in one frame.</p>
-      <p class="palette-fit">Cobalt Blue and Cerulean Blue handle the rain-shadow sky (warm and granulating vs. cool and smooth). Payne&rsquo;s Gray is the distant rain wall. The palette literally holds both sides of the mountain.</p>
+      <h3>Snoqualmie Pass Crossing</h3>
+      <p class="subject"><strong>Subject:</strong> The view from your windshield cresting the pass on I-90. Rearview: dark forest and low cloud. Ahead: the valley opens, golden and bright, and the road drops toward Ellensburg. The split happens in real time.</p>
+      <p class="palette-fit">The Westside Drench mix handles everything behind you. Kittitas Gold handles everything ahead. The Pass Divide mix lives right at the summit, where the two worlds overlap and the snow-patched ridgeline can&rsquo;t decide which side it belongs to.</p>
       <div class="tips">
         <ul>
-          <li>Divide the paper roughly 60/40 &mdash; the rain shadow sky gets the larger share, because this painting is about the gift of sun</li>
-          <li>Paint the rain-shadow sky with the Shadow Sun mix (Cobalt Blue + Buff Titanium), grading from more Cobalt at zenith to nearly pure Buff at the horizon</li>
-          <li>Paint the distant rain curtain with Payne&rsquo;s Gray on damp paper, letting it bleed and soften &mdash; rain seen from 40 miles away is a veil, not a wall</li>
-          <li>The Olympic ridge between the two skies is Burnt Umber + Payne&rsquo;s Gray &mdash; it should be the hardest edge in the painting, the dividing line</li>
+          <li>Split your paper vertically &mdash; wet side on the left, dry side on the right, the pass summit as the dividing line</li>
+          <li>Paint the left half with Westside Drench (Payne&rsquo;s Gray + Hooker&rsquo;s Green) wet-in-wet, letting the forest and cloud merge into a single dark mass</li>
+          <li>Paint the right half with Kittitas Gold (Hansa Yellow Deep + Raw Sienna + Buff Titanium) as a graded wash, brighter and more open</li>
+          <li>The road itself is Neutral Tint &mdash; a thin dark line pulling you from one world into the other</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Frog Ditch at Dusk</h3>
-      <p class="subject"><strong>Subject:</strong> A drainage ditch in the Sequim lowlands at 7 PM, standing water bright with algae, Pacific tree frogs calling from invisible positions. The sound is everywhere; the frogs are nowhere.</p>
-      <p class="palette-fit">The Frog Ditch mix (Hooker&rsquo;s Green + Raw Umber) is deliberately vivid &mdash; ditch algae is the most saturated thing in the scene. Raw Umber earths the banks. You won&rsquo;t paint the frogs, but you&rsquo;ll paint exactly where they choose to be.</p>
+      <h3>Wet-Side Forest, North Bend</h3>
+      <p class="subject"><strong>Subject:</strong> Douglas fir and western red cedar in the rain, just west of the pass. Everything is dark, vertical, dripping. The sky is indistinguishable from the canopy. A February afternoon that never quite becomes day.</p>
+      <p class="palette-fit">This is the cool side of the palette doing its best work. Hooker&rsquo;s Green for the canopy, Payne&rsquo;s Gray for the sky and shadows, French Ultramarine for the deep blue in the rain clouds, Neutral Tint for the overall atmospheric weight.</p>
       <div class="tips">
         <ul>
-          <li>Paint the standing water with Hooker&rsquo;s Green + Raw Umber, applying wet and letting them mingle on the paper &mdash; the partial separation reads as algae floating over silty bottom</li>
-          <li>Build the banks with Raw Umber + Yellow Ochre, using dry brush for the grass stubble that lines the ditch edge</li>
-          <li>Add a reflection of the rain-shadow sky in the water with a thin glaze of Cobalt Blue over the dried green &mdash; just enough to show there&rsquo;s sky above</li>
-          <li>Leave the painting without any visible wildlife &mdash; the frogs are thumbnail-sized and invisible. Paint their habitat so well that the viewer can hear them</li>
+          <li>Wet the entire paper and lay in French Ultramarine at the top, letting it bleed into Payne&rsquo;s Gray &mdash; the sky and cloud are one continuous wash</li>
+          <li>While still damp, drop Hooker&rsquo;s Green for the tree masses, letting it merge upward into the sky &mdash; the boundary between forest and cloud should be lost</li>
+          <li>Once dry, use Neutral Tint for the trunks &mdash; vertical strokes, slightly varied, suggesting depth without detail</li>
+          <li>Leave no warm colors in this painting. The absence of gold is the point &mdash; that warmth is forty miles east, on the other side</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Hazelnut Catkins Against Wet Bark</h3>
-      <p class="subject"><strong>Subject:</strong> A close study of hazelnut catkins in low-angle February sun &mdash; pale gold pendulums swinging against dark, fissured bark. The contrast between warm catkin and cold bark is the whole story.</p>
-      <p class="palette-fit">The Catkin Swing mix (Quinacridone Gold + Hansa Yellow Light) gives you transparent, pollen-dusty catkins. Burnt Umber provides the dark wet bark they hang against. Both yellows are transparent, so the catkins glow like backlit pendants.</p>
+      <h3>Dry-Side Ranch Country, Kittitas Valley</h3>
+      <p class="subject"><strong>Subject:</strong> A ranch fence line running toward golden hills east of Ellensburg. Dormant bunchgrass, sage, open sky, a barn the color of Burnt Sienna Light. February sun low and warm, casting long shadows that are actually blue.</p>
+      <p class="palette-fit">Kittitas Gold for the hills. Olive Green for the sage. Burnt Sienna Light for the barn and warm earth. Buff Titanium for the wide sky. Cobalt Blue for the shadows &mdash; because on the dry side, even the shadows carry color.</p>
       <div class="tips">
         <ul>
-          <li>Paint the bark first with Burnt Umber, building up the fissured texture with dry brush on rough paper. Let it dry completely</li>
-          <li>Paint each catkin as a single rigger stroke over the dried bark &mdash; the transparency of the Catkin Swing mix lets the dark bark show through at the attachment point</li>
-          <li>Hansa Yellow Light goes at the sun-catching tip; Quinacridone Gold is the body. For catkins in shadow, drop the Hansa and add Raw Umber</li>
-          <li>Keep the background out of focus with a soft wash of Payne&rsquo;s Gray &mdash; the catkins and bark should be the sharpest things in the painting</li>
+          <li>Paint the sky with Buff Titanium mixed with a whisper of Cobalt Blue &mdash; bright, pale, the kind of winter sky that makes you reach for sunglasses</li>
+          <li>Build the hills with Kittitas Gold as a base wash, then add Olive Green in drybrush strokes for the sage clumps and bunchgrass</li>
+          <li>The barn is pure Burnt Sienna Light &mdash; lighter and more orange than regular Burnt Sienna, perfect for weathered east-side wood</li>
+          <li>Cast shadows on the golden ground are Cobalt Blue, diluted &mdash; they granulate on the paper and read as cold air pooling in low spots</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Sequim Fieldstone in Pale Sun</h3>
-      <p class="subject"><strong>Subject:</strong> A fieldstone wall or fence corner in the rain shadow, pale winter sun warming the stone, dried grass at the base, the wide-open horizon behind.</p>
-      <p class="palette-fit">Buff Titanium is the pale sun on the stone &mdash; semi-opaque and quiet. Yellow Ochre and Raw Umber give you the dried grass and earthen base. Cerulean Blue handles the wide-open horizon behind, smoother and more confident than the intimate Cobalt overhead.</p>
+      <h3>The Transition &mdash; Hyak to Keechelus</h3>
+      <p class="subject"><strong>Subject:</strong> The stretch of I-90 between Hyak and Keechelus Lake where the forest starts thinning, patches of snow appear on south-facing slopes, and the light changes. Not yet the dry side, but no longer the wet side. The in-between.</p>
+      <p class="palette-fit">The Pass Divide mix (Cobalt Blue + Olive Green) owns this painting. It&rsquo;s the color of uncertainty &mdash; part rain-forest blue, part sage-country green. Raw Sienna starts appearing in the ground. Neutral Tint still hangs in the air.</p>
       <div class="tips">
         <ul>
-          <li>Paint the stone with Raw Umber + Buff Titanium, varying the ratio for each stone &mdash; more Buff for the sunlit face, more Raw Umber for the shadowed edges</li>
-          <li>The grass at the base is Yellow Ochre in thin, dry-brush strokes &mdash; straw-pale and winter-beaten</li>
-          <li>Paint the horizon sky with Cerulean Blue, keeping it flat and opaque &mdash; this is the rain shadow at its most expansive, nothing between you and the sky</li>
-          <li>Add a distant Payne&rsquo;s Gray rain curtain at one edge of the horizon to remind the viewer what the other side of the mountain looks like</li>
+          <li>Use the Pass Divide mix for the middle-distance ridges, letting Cobalt Blue and Olive Green separate on the paper to suggest the climate shifting</li>
+          <li>Paint the lake with Cobalt Blue alone, flat and cold &mdash; Keechelus is alpine, steel-colored, not yet touched by the warmth ahead</li>
+          <li>Add Raw Sienna to the exposed hillsides where snow has melted &mdash; the first hint of the golden landscape to come</li>
+          <li>Keep Neutral Tint in the sky but thinned out, breaking up &mdash; the overcast is losing its grip, and the dry-side light is starting to win</li>
         </ul>
       </div>
     </div>
@@ -629,7 +272,9 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Temperature splits the palette down the middle: the rain-shadow side runs warm (Quinacridone Gold, Yellow Ochre, Hansa Yellow Light) while the wet side runs cool (Payne&rsquo;s Gray, Cobalt Blue). Cerulean Blue is opaque &mdash; use it for the horizon, not for glazing. Hooker&rsquo;s Green is a convenience mix; it&rsquo;s already balanced and doesn&rsquo;t need much adjustment. Two blues on the palette (Cobalt and Cerulean) serve different atmospheric roles &mdash; don&rsquo;t substitute one for the other. The palette works best when you commit to the split: warm light on the right, cool rain on the left, the Olympics as the dividing line.
+    <strong>Rain shadow effect:</strong> The Cascades and Olympics force moisture-laden Pacific air upward, where it cools and drops its rain on the western slopes. The eastern side sits in the &ldquo;shadow&rdquo; &mdash; dry, sunny, sometimes receiving less than 10 inches of rain annually while the west side gets 80+. It&rsquo;s one of the most dramatic climate transitions in North America, and it happens over the span of a single mountain pass.<br><br>
+    <strong>Burnt Sienna Light vs. Burnt Sienna:</strong> Daniel Smith&rsquo;s Burnt Sienna Light (PBr7) is lighter-valued and more orange than their regular Burnt Sienna. It&rsquo;s closer to a terracotta &mdash; warmer, less red-brown, more golden-brown. Perfect for the sun-baked wood and earth of the dry side, where the regular Burnt Sienna would read too heavy and dark.<br><br>
+    <strong>Pigment notes:</strong> All ten pigments are Daniel Smith watercolors. Neutral Tint (PBk6/PV19/PB15) is a convenience mix that reads as a true neutral &mdash; useful for atmospheric weight without color bias. Olive Green (PO49/PG7/PY42) is warm and muted, ideal for the sagebrush and bunchgrass east of the Cascades. Cobalt Blue (PB28) granulates beautifully; French Ultramarine (PB29) less so but offers deeper blue saturation for storm clouds.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

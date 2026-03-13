@@ -6,375 +6,65 @@
 <title>Week 18 — Rhododendron Shade</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(230,62,98,0.18) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(65,105,200,0.16) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(160,82,45,0.12) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(106,96,136,0.1) 0%, transparent 40%),
-      linear-gradient(175deg, #f6f0f4 0%, #eef0f4 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #8a4a6a;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 30%, rgba(196,40,110,0.22) 0%, transparent 45%), radial-gradient(ellipse at 35% 75%, rgba(26,58,42,0.28) 0%, transparent 50%), radial-gradient(ellipse at 75% 65%, rgba(255,94,196,0.14) 0%, transparent 40%), radial-gradient(ellipse at 20% 40%, rgba(40,68,102,0.16) 0%, transparent 40%), linear-gradient(175deg, #1a3a2a 0%, #2a1a2a 40%, #c4286e 85%, #ff5ec4 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a0406a; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #f0e8ec; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #c8b0c0; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
   .trio-section { margin-top: 48px; }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
   .trio-info { padding: 16px 18px; }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
   .palette-section { margin-top: 56px; }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
   .palette-strip .swatch:hover { flex: 2.5; }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
   .palette-strip .swatch:hover .label { opacity: 1; }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #ecedf0;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
   .palette-item .name { font-weight: 600; font-size: 14px; }
   .palette-item .role { font-size: 12px; color: #888; }
   .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
-
   .mixes-section { margin-top: 56px; }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
   .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
   .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
   .why-section { margin-top: 56px; }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #ede8ee;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #666;
-    line-height: 1.7;
-  }
-
-  .notes-section strong { color: #444; }
-
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #dde0e5;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #2a1a2a; border-radius: 12px; font-size: 13px; color: #c8b0c0; line-height: 1.7; }
+  .notes-section strong { color: #e0d0d8; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -383,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 18 &mdash; PNW Watercolor Series</div>
     <h1>Rhododendron Shade</h1>
-    <p class="mood">Pacific rhododendron blooms in filtered forest light &mdash; pink against dark. Madrone flowers hang cream-quiet above. Rufous hummingbirds stitch between them, furious with purpose. Spring has gone interior, working the understory while the canopy thickens overhead. Everything happens in shade now, and the shade is where the color lives.</p>
+    <p class="mood">Rhododendrons bloom where it&rsquo;s dark. That&rsquo;s what makes them extraordinary &mdash; Quinacridone Rose and Opera Pink explosions in Perylene Green shadow, like someone left neon signs in the forest. The blooms catch whatever light exists and throw it back amplified. Indanthrone Blue darkness pressing in from every side. One shaft of Hansa Yellow Medium light. April 30 through May 6.</p>
   </div>
 </div>
 
@@ -394,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e63e62 0%, #c8304e 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c4286e 0%, #a02058 100%);"></div>
         <div class="trio-info">
           <h3>Quinacridone Rose</h3>
-          <p>Rhododendron cluster, the pink that owns the forest in May; transparent, staining, intense even in shade</p>
+          <p>The rhododendron itself &mdash; hot magenta that refuses to behave in shade; transparent, staining, PV19 at its most defiant</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a84a 0%, #b0943e 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a3a2a 0%, #0e2418 100%);"></div>
         <div class="trio-info">
-          <h3>Nickel Azo Yellow</h3>
-          <p>Madrone flower cluster, cream-gold and quiet; semi-transparent, muted, content to be secondary</p>
+          <h3>Perylene Green</h3>
+          <p>Deep forest shade so dark it swallows brushstrokes; PBk31, transparent, the near-black that makes every pink detonate</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #4169c8 0%, #2a52a8 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #a4283a 0%, #8a1e2e 100%);"></div>
         <div class="trio-info">
-          <h3>Cobalt Blue</h3>
-          <p>Sky through canopy gap, blue broken into shards; granulating, luminous, seen only in fragments</p>
+          <h3>Alizarin Crimson</h3>
+          <p>Deep pink-red of the oldest blooms &mdash; cool-leaning PR177 that makes clean violets when it meets blue, no mud</p>
         </div>
       </div>
     </div>
@@ -421,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#e63e62;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
-      <div class="swatch" style="background:#c8a84a;"><span class="label" style="color:#fff;">Nickel Azo Yellow</span></div>
-      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
-      <div class="swatch" style="background:#1a5c32;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
-      <div class="swatch" style="background:#0a3020;"><span class="label" style="color:#fff;">Perylene Green</span></div>
-      <div class="swatch" style="background:#6a6088;"><span class="label" style="color:#fff;">Moonglow</span></div>
-      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
-      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
-      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#6b5a3e;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#c4286e;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
+      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
+      <div class="swatch" style="background:#a4283a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
+      <div class="swatch" style="background:#ff5ec4;"><span class="label" style="color:#fff;">Opera Pink</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker's Green</span></div>
+      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
+      <div class="swatch" style="background:#284466;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#8b4a2a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
+      <div class="swatch" style="background:#e8c820;"><span class="label" style="color:#333;">Hansa Yellow Med.</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e63e62;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Primary &mdash; rhododendron cluster, the forest's pink announcement</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#6a6088;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; cloud-filtered glow reaching the understory in pieces</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#c8a84a;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Primary &mdash; madrone flower cluster, understated gold</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Warm Accent &mdash; hummingbird gorget flash, copper fire in a dark room</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Primary &mdash; sky through canopy gap, rationed light</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; fern bank in shade, cool and self-sufficient</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#1a5c32;"></div><div><div class="name">Hooker's Green</div><div class="role">Earth &mdash; deep rhododendron leaf, dark and waxy</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; madrone flower cream, soft opacity for quiet blooms</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#0a3020;"></div><div><div class="name">Perylene Green</div><div class="role">Dark &mdash; forest floor with no direct light, the bottom of the well</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#6b5a3e;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; nurse-log duff, the dark soft earth that feeds everything</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c4286e;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Primary &mdash; rhody magenta, the bloom that owns the darkness</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; forest floor duff, bark in shadow</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Primary &mdash; deep forest shade, the darkness that makes everything else visible</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#284466;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; deep shade blue, the cold pressed in from every side</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#a4283a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Primary &mdash; deep pink-red blooms, the older flowers going dark</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#8b4a2a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Warm Accent &mdash; bark and duff, the warm underpainting of forest floor</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#ff5ec4;"></div><div><div class="name">Opera Pink</div><div class="role">Accent &mdash; bright petals catching light, fluorescent and unapologetic</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Structure &mdash; shadow architecture, the bones beneath the darkness</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Earth &mdash; rhody foliage, waxy leaves that never drop</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#e8c820;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Light &mdash; dappled light, the one shaft that makes it through</div></div></div>
     </div>
   </div>
 
@@ -452,58 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d06878, #c05868);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d040a0, #a02870);"></div>
         <div>
-          <h3>Rhodo Pink</h3>
-          <span class="ratio">3 Quinacridone Rose : 1 Buff Titanium : &frac14; Cobalt Blue</span>
+          <h3>Neon Understory</h3>
+          <span class="ratio">2 Opera Pink : 1 Quinacridone Rose : &frac14; Hansa Yellow Medium</span>
         </div>
       </div>
-      <p class="mix-description">Cool pink of native Pacific rhododendron &mdash; not garden pink, not hot pink, but the specific shade that means second-growth forest in May.</p>
+      <p class="mix-description">The youngest rhododendron petals catching a shaft of light &mdash; so bright they look radioactive against the forest dark.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e63e62; color:#fff;">Quin. Rose</div>
-        <div class="mix-bar" style="flex:1; background:#e8d8b4; color:#777;">Buff Titanium</div>
-        <div class="mix-bar" style="flex:0.25; background:#4169c8; color:#fff;">Cobalt</div>
+        <div class="mix-bar" style="flex:2; background:#ff5ec4; color:#fff;">Opera Pink</div>
+        <div class="mix-bar" style="flex:1; background:#c4286e; color:#fff;">Quin. Rose</div>
+        <div class="mix-bar" style="flex:0.25; background:#e8c820; color:#333;">Hansa Yellow Med.</div>
       </div>
       <div class="mix-notes">
-        Quinacridone Rose straight is too hot for native rhododendron. Buff Titanium cools and softens it &mdash; adds the dusty quality of petals in shade. The touch of Cobalt Blue leans the mix cool, away from tropical and toward temperate. Apply at moderate dilution; too concentrated and it reads like garden azalea, too dilute and you lose the rhododendron's presence in the dark forest.
+        Opera Pink (BV10:1) is fugitive and fluorescent &mdash; it literally glows, which is exactly the point for the freshest petals in a light shaft. Quinacridone Rose anchors the mix with PV19&rsquo;s permanence and transparency, pulling the fluorescence toward a believable magenta. The whisper of Hansa Yellow Medium warms the mix just enough to suggest sunlight hitting the petal. Apply at moderate dilution over dry white paper; the glow depends on paper reflectance. This mix will fade over months &mdash; like the real petals. Use it knowing that.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a4030, #2a3020);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a2844, #1e1830);"></div>
         <div>
-          <h3>Nurse Log</h3>
-          <span class="ratio">2 Raw Umber : 1 Perylene Green : &frac12; Hooker's Green</span>
+          <h3>Rhody Midnight</h3>
+          <span class="ratio">2 Indanthrone Blue : 1 Perylene Green : &frac12; Alizarin Crimson</span>
         </div>
       </div>
-      <p class="mix-description">Dark rotting wood alive with seedlings &mdash; the dead feeding the living, the forest's central deal.</p>
+      <p class="mix-description">The deepest shade beneath a mature rhododendron canopy &mdash; not black, but a darkness with violet memory.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#6b5a3e; color:#fff;">Raw Umber</div>
-        <div class="mix-bar" style="flex:1; background:#0a3020; color:#fff;">Perylene Green</div>
-        <div class="mix-bar" style="flex:0.5; background:#1a5c32; color:#fff;">Hooker's Green</div>
+        <div class="mix-bar" style="flex:2; background:#284466; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#1a3a2a; color:#fff;">Perylene Green</div>
+        <div class="mix-bar" style="flex:0.5; background:#a4283a; color:#fff;">Alizarin Crimson</div>
       </div>
       <div class="mix-notes">
-        Raw Umber gives you decomposing wood &mdash; granular, earthy, honest about its origins. Perylene Green darkens without muddying, adding the near-black of wet rot. Hooker's Green introduces the living element &mdash; moss and hemlock seedlings rooted in the decay. Layer dry over dry to build the textural complexity of a nurse log. Let the granulation of Raw Umber do the heavy lifting.
+        Indanthrone Blue (PB60) is already one of the darkest blues in the Daniel Smith line &mdash; transparent, staining, nearly black at full concentration. Perylene Green deepens it further and shifts the temperature toward the cold of actual forest shade. The Alizarin Crimson is the secret: it introduces a violet undertone that reads as reflected bloom-light even in the darkest passages. This is your shadow color for everything under the rhododendron canopy. Layer wet-on-dry for depth that stays luminous instead of going dead.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b06040, #a05030);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a4838, #4a3020);"></div>
         <div>
-          <h3>Gorget Spark</h3>
-          <span class="ratio">2 Burnt Sienna : 1 Quinacridone Rose : &frac12; Nickel Azo Yellow</span>
+          <h3>Forest Floor Dark</h3>
+          <span class="ratio">2 Burnt Umber : 1 Transparent Red Oxide : &frac12; Hooker&rsquo;s Green</span>
         </div>
       </div>
-      <p class="mix-description">Rufous hummingbird throat catching one ray of sun that made it through the canopy &mdash; copper flashing to gold.</p>
+      <p class="mix-description">Decomposing needles and bark under the rhododendron thicket &mdash; the ground nobody sees because they&rsquo;re looking up at the flowers.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#a0522d; color:#fff;">Burnt Sienna</div>
-        <div class="mix-bar" style="flex:1; background:#e63e62; color:#fff;">Quin. Rose</div>
-        <div class="mix-bar" style="flex:0.5; background:#c8a84a; color:#fff;">Nickel Azo Yellow</div>
+        <div class="mix-bar" style="flex:2; background:#5c3317; color:#fff;">Burnt Umber</div>
+        <div class="mix-bar" style="flex:1; background:#8b4a2a; color:#fff;">Trans. Red Oxide</div>
+        <div class="mix-bar" style="flex:0.5; background:#355e3b; color:#fff;">Hooker&rsquo;s Green</div>
       </div>
       <div class="mix-notes">
-        Burnt Sienna is the gorget's copper base &mdash; warm, semi-transparent, it glows. Quinacridone Rose pushes it toward the iridescent magenta that rufous hummingbirds flash at certain angles. Nickel Azo Yellow adds the gold shift. Apply this mix small and precise &mdash; the gorget is tiny, and the power comes from contrast against the dark forest, not from size. One charged brushstroke against a Perylene Green background.
+        Burnt Umber (PBr7) gives you the dark, cool base of decomposing organic matter &mdash; it granulates on rough paper, which is exactly the texture of forest duff. Transparent Red Oxide warms it, adding the iron-rich color of Douglas fir bark and hemlock needles breaking down. Hooker&rsquo;s Green introduces the green of moss and liverwort colonizing the litter layer. Apply loosely on dry paper and let the pigments separate in their own time. The granulation is the texture. Don&rsquo;t overwork it.
       </div>
     </div>
   </div>
@@ -512,86 +202,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is calibrated for low light. Quinacridone Rose and Cobalt Blue are both luminous at moderate dilution &mdash; they glow rather than recede, which is essential for painting color that exists in shade. Perylene Green and Hooker's Green give the palette two registers of forest darkness: Perylene for the floor, Hooker's for the foliage. Moonglow handles the diffused overhead light with its built-in granulation and violet undertone. Burnt Sienna is the only warm accent, and it's deployed for one purpose: the hummingbird. The restraint is intentional. In the understory, less warmth means each warm note detonates.</p>
+      <p>This palette is built around one idea: light trapped in darkness. Seven of the ten pigments are dark &mdash; Perylene Green, Hooker&rsquo;s Green, Burnt Umber, Indanthrone Blue, Transparent Red Oxide, Payne&rsquo;s Gray, and Alizarin Crimson all live in the lower registers. That&rsquo;s intentional. Rhododendron shade is mostly shade. The three light-carriers &mdash; Opera Pink, Quinacridone Rose, and Hansa Yellow Medium &mdash; detonate precisely because they&rsquo;re outnumbered. Opera Pink is fugitive and fluorescent, which mirrors the actual optical strangeness of rhododendron petals catching stray photons in deep forest. Quinacridone Rose is its permanent anchor. Hansa Yellow Medium is the single warm note of actual sunlight, used sparingly because in this forest, sunlight is rare. Indanthrone Blue and Perylene Green together create darkness with depth instead of mud. Payne&rsquo;s Gray structures the shadows without competing with the color darks. The whole palette asks one question: how bright can pink burn when everything around it is nearly black?</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects built for this palette&rsquo;s drama of light against dark. Every prompt leans into the contrast &mdash; hot pink detonating in near-black forest.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Rhododendron Cluster in Deep Shade</h3>
-      <p class="subject"><strong>Subject:</strong> A single Pacific rhododendron flower cluster glowing pink against the dark understory, waxy leaves framing it, barely enough light to read by.</p>
-      <p class="palette-fit">The Rhodo Pink mix (Quinacridone Rose + Buff Titanium + Cobalt Blue) is this exact flower in this exact light. Perylene Green and Hooker&rsquo;s Green behind it create the darkness that makes the pink detonate.</p>
+      <h3>Rhody Cluster in Shade</h3>
+      <p class="subject"><strong>Subject:</strong> A full Pacific rhododendron flower cluster glowing magenta in deep understory shadow. Waxy leaves frame it. The light is almost gone, but the bloom doesn&rsquo;t care.</p>
+      <p class="palette-fit">The Neon Understory mix (Opera Pink + Quinacridone Rose + Hansa Yellow Medium) is the bloom itself. Rhody Midnight (Indanthrone Blue + Perylene Green + Alizarin Crimson) is everything around it. The painting lives or dies on the contrast between them.</p>
       <div class="tips">
         <ul>
-          <li>Paint the dark background first &mdash; Perylene Green for the deepest shadows, Hooker&rsquo;s Green for the waxy leaves &mdash; and let it dry completely</li>
-          <li>Mix Rhodo Pink at moderate concentration and apply in petal-shaped strokes on top of the dried dark ground; the opacity of Buff Titanium helps the pink sit on the surface</li>
-          <li>Use pure Quinacridone Rose at higher concentration for the deepest folds between petals, where the pink intensifies</li>
-          <li>Leave small flecks of untouched Buff Titanium at petal edges for the dusty quality of rhododendron in shade</li>
+          <li>Paint the Rhody Midnight dark background first and let it dry completely &mdash; Perylene Green deepest at center, Indanthrone Blue at edges</li>
+          <li>Apply Neon Understory mix for the flower cluster on the dried dark ground; the fluorescence of Opera Pink will physically glow against the dark</li>
+          <li>Use pure Quinacridone Rose at full concentration for the petal folds and centers where color intensifies in shadow</li>
+          <li>Hooker&rsquo;s Green for the waxy leaves, applied around the bloom to frame it &mdash; they&rsquo;re the intermediary between the magenta blast and the Perylene dark</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Rufous Hummingbird at the Flower</h3>
-      <p class="subject"><strong>Subject:</strong> A rufous hummingbird hovering at a rhododendron bloom, gorget catching one shaft of filtered light, wings blurred with motion.</p>
-      <p class="palette-fit">The Gorget Spark mix (Burnt Sienna + Quinacridone Rose + Nickel Azo Yellow) is the only warm accent in an otherwise cool palette. One tiny mark of copper-gold against a Perylene Green background, and the whole painting ignites.</p>
+      <h3>Single Bloom Catching a Light Shaft</h3>
+      <p class="subject"><strong>Subject:</strong> One rhododendron flower isolated by a single shaft of light breaking through the canopy. Everything else is dark. The bloom is incandescent.</p>
+      <p class="palette-fit">Hansa Yellow Medium is the light shaft itself. Where it hits the flower, the Neon Understory mix goes warm and electric. Where the shaft misses, Rhody Midnight closes in.</p>
       <div class="tips">
         <ul>
-          <li>The hummingbird body is Burnt Sienna &mdash; one or two strokes maximum at the scale of a real hummingbird relative to a rhododendron cluster</li>
-          <li>The gorget flash is the Gorget Spark mix applied while the body is still damp, concentrated at the throat, bleeding slightly into the copper</li>
-          <li>Wings are a single stroke of very dilute Moonglow dragged quickly &mdash; the blur is the point, and Moonglow&rsquo;s violet undertone reads as iridescence</li>
-          <li>Place the bird off-center against the darkest part of your background; the contrast ratio does the work of detail</li>
+          <li>Mask or preserve a diagonal strip of white paper for the light shaft &mdash; this is the structural decision that makes the painting work</li>
+          <li>Wash dilute Hansa Yellow Medium through the shaft area to establish the warm light, bleeding slightly at edges into the surrounding dark</li>
+          <li>The bloom where it catches the shaft gets the full Neon Understory treatment &mdash; Opera Pink over the Hansa wash creates an almost unbearable warmth</li>
+          <li>Surround everything with Rhody Midnight, letting the Alizarin Crimson component creep closest to the bloom for that violet reflected-light transition</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Nurse Log With Seedlings</h3>
-      <p class="subject"><strong>Subject:</strong> A decomposing nurse log colonized by hemlock seedlings and moss, the forest&rsquo;s cycle of death-feeding-life in one horizontal composition.</p>
-      <p class="palette-fit">The Nurse Log mix (Raw Umber + Perylene Green + Hooker&rsquo;s Green) was built for rotting wood. Hooker&rsquo;s Green and Cascade Green handle the moss and seedlings growing from it.</p>
+      <h3>Rhody Tunnel</h3>
+      <p class="subject"><strong>Subject:</strong> A trail overhung by mature rhododendrons forming a living tunnel &mdash; blooms overhead, waxy leaves pressing in from both sides, the path disappearing into green-black darkness ahead.</p>
+      <p class="palette-fit">This is a value painting. Perylene Green and Indanthrone Blue build the tunnel&rsquo;s depth. Hooker&rsquo;s Green is the leaf canopy overhead. Bloom clusters in Quinacridone Rose and Opera Pink hang above like lanterns in a cave.</p>
       <div class="tips">
         <ul>
-          <li>Lay down Raw Umber first for the log body, working on dry paper with a textured brush to catch the tooth &mdash; the granulation mimics bark grain</li>
-          <li>Drop Perylene Green into the damp Raw Umber on the shadow side for the wet-rot darkness &mdash; let them mingle without mixing</li>
-          <li>Hemlock seedlings are tiny upward strokes of Hooker&rsquo;s Green, spaced irregularly along the top of the log</li>
-          <li>Moss is Cascade Green dabbed with a nearly dry brush &mdash; the cool green reads differently from the Hooker&rsquo;s Green seedlings, giving you two textures of life</li>
+          <li>Establish the vanishing point with concentrated Perylene Green &mdash; the trail disappears into near-black, and that depth is the painting&rsquo;s engine</li>
+          <li>Build the tunnel walls with Hooker&rsquo;s Green over dried Perylene Green, layering wet-on-dry for canopy depth</li>
+          <li>Bloom clusters overhead get smaller and less saturated toward the background &mdash; atmospheric perspective in magenta, from Opera Pink in the foreground to dilute Quinacridone Rose in the distance</li>
+          <li>The trail surface is Forest Floor Dark mix (Burnt Umber + Transparent Red Oxide + Hooker&rsquo;s Green) &mdash; soft, dark, duff-colored, pulling the eye inward</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Light Through the Canopy Gap</h3>
-      <p class="subject"><strong>Subject:</strong> A looking-up view through the forest canopy, one gap of sky letting Cobalt Blue through, Moonglow filtering down, a rhododendron bloom catching the light.</p>
-      <p class="palette-fit">Cobalt Blue is your sky-shard. Moonglow is the diffused light reaching the understory. The Rhodo Pink cluster is the payoff &mdash; the bloom that caught the one available ray.</p>
+      <h3>Forest Floor Under Rhododendrons</h3>
+      <p class="subject"><strong>Subject:</strong> Looking down instead of up. The ground beneath a rhododendron thicket &mdash; fallen petals on dark duff, decomposing leaves, Payne&rsquo;s Gray shadows of the canopy above.</p>
+      <p class="palette-fit">Forest Floor Dark mix is the ground itself. Fallen petals are small marks of Quinacridone Rose and Alizarin Crimson scattered across the duff. Payne&rsquo;s Gray handles the canopy shadow pattern cast on the floor.</p>
       <div class="tips">
         <ul>
-          <li>Start with the canopy: Hooker&rsquo;s Green and Perylene Green layered wet-on-dry, leaving one irregular gap of white paper for the sky</li>
-          <li>Fill the sky gap with Cobalt Blue &mdash; its granulation at the edges will soften naturally into the leaf shapes surrounding it</li>
-          <li>Wash dilute Moonglow over the mid-ground areas where filtered light reaches &mdash; its violet-blue shift reads as the specific color of forest shade</li>
-          <li>The rhododendron bloom is your focal point: Rhodo Pink mix, placed where the Moonglow light is brightest, so it reads as the flower catching the best available light</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-number">Prompt 5</div>
-      <h3>The Interior Forest (Everything in Shade)</h3>
-      <p class="subject"><strong>Subject:</strong> A wide view down a trail through old second-growth, rhododendrons blooming on both sides, the path disappearing into green darkness.</p>
-      <p class="palette-fit">This is a value painting disguised as a color painting. Perylene Green, Hooker&rsquo;s Green, Cascade Green, and Raw Umber handle four registers of darkness, with Rhodo Pink clusters as the only high-chroma notes.</p>
-      <div class="tips">
-        <ul>
-          <li>Establish the darkest darks first with Perylene Green at the vanishing point &mdash; the trail disappears into near-black, and that depth pulls the eye in</li>
-          <li>Build the forest walls with Hooker&rsquo;s Green layered over dried Cascade Green for canopy depth</li>
-          <li>Rhododendron clusters on each side of the path are Rhodo Pink applied at decreasing saturation toward the background &mdash; atmospheric perspective in pink</li>
-          <li>The trail surface is Raw Umber with a touch of Moonglow &mdash; duff-colored, soft, the kind of path you walk quietly on</li>
+          <li>Lay down the Forest Floor Dark mix first &mdash; Burnt Umber and Transparent Red Oxide for the duff, letting the pigments granulate naturally on rough paper</li>
+          <li>While damp, drop in Payne&rsquo;s Gray for the overhead canopy shadow pattern &mdash; irregular, organic shapes of leaves blocking whatever light reaches down</li>
+          <li>Once dry, scatter small petal-shaped marks of Quinacridone Rose and dilute Alizarin Crimson across the surface &mdash; fallen flowers, still vivid against the brown</li>
+          <li>A few tiny dots of Hansa Yellow Medium where light penetrates the canopy and hits the forest floor &mdash; each one a small event in an otherwise dark composition</li>
         </ul>
       </div>
     </div>
@@ -599,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Perylene Green is extremely dark in mass tone &mdash; squeeze out a small amount and test before committing. Moonglow is a three-pigment convenience mix that granulates unpredictably and shifts between violet and blue depending on dilution. Buff Titanium is semi-opaque; it physically lightens mixes rather than just diluting them, which is why it works for the madrone flower cream.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Opera Pink (BV10:1) is a fluorescent pigment &mdash; it will fade with prolonged UV exposure. Use it for studies and working pieces where the glow matters more than archival permanence. Perylene Green (PBk31) is extremely dark in mass tone; test dilutions before committing. Indanthrone Blue (PB60) is equally dark and staining &mdash; together with Perylene Green it creates a two-pigment darkness with more depth than any pre-mixed black. Alizarin Crimson (PR177) is the synthetic, lightfast version &mdash; not the fugitive PR83 of student paints. Hansa Yellow Medium (PY97) is semi-transparent and non-staining; it lifts cleanly, which matters when you need to reclaim light in a mostly-dark painting.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 50 — Lichen Throne</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(90,138,106,0.22) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(130,143,90,0.18) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(195,175,100,0.14) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(85,110,75,0.1) 0%, transparent 40%), linear-gradient(175deg, #f0f2ea 0%, #e8ebe2 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a08840; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 50 &mdash; PNW Watercolor Series</div>
+    <h1>Lichen Throne</h1>
+    <p class="mood">December rain polishes every surface, and the lichens answer. They crust the big-leaf maples in coats of sage and sulfur, drape old-growth branches in pale green beards, stain basalt boulders with maps no one drew. A lichen-covered stump becomes a throne &mdash; velvet-soft, ancient, the kingdom measured in millimeters per century. The forest floor smells like wet stone and slow patience.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #5a8a6a 0%, #4e7a5c 100%);"></div>
+        <div class="trio-info"><h3>Green Apatite Genuine</h3><p>Ground mineral apatite stone &mdash; granulates into lichen texture naturally; the muted sage-green of foliose lichen on wet bark</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #6b9e7a 0%, #5c8e6c 100%);"></div>
+        <div class="trio-info"><h3>Jadeite Genuine</h3><p>PrimaTek jade mineral &mdash; cool blue-green of rain-soaked lichen; granulates into stone-surface texture that no synthetic pigment can match</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a050 0%, #b89040 100%);"></div>
+        <div class="trio-info"><h3>Yellow Ochre</h3><p>The gold-green of Xanthoria lichen on sunlit branches; earthy, opaque, ancient &mdash; the warmest note in the lichen spectrum</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#5a8a6a;"><span class="label" style="color:#fff;">Green Apatite Gen.</span></div>
+      <div class="swatch" style="background:#6b9e7a;"><span class="label" style="color:#fff;">Jadeite Genuine</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
+      <div class="swatch" style="background:#2e8a6a;"><span class="label" style="color:#fff;">Cascade Green</span></div>
+      <div class="swatch" style="background:#5a6e30;"><span class="label" style="color:#fff;">Olive Green</span></div>
+      <div class="swatch" style="background:#6b5030;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#4a5468;"><span class="label" style="color:#fff;">Payne&rsquo;s Gray</span></div>
+      <div class="swatch" style="background:#2a3da8;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#bab000;"><span class="label" style="color:#222;">Nickel Azo Yellow</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#5a8a6a;"></div><div><div class="name">Green Apatite Genuine</div><div class="role">Primary &mdash; mineral lichen green, PrimaTek granulation</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#6b5030;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; bark and stone substrate beneath the lichen</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#6b9e7a;"></div><div><div class="name">Jadeite Genuine</div><div class="role">Primary &mdash; jade lichen tone, cool PrimaTek mineral</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#4a5468;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; wet stone, overcast shadow</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Yellow Ochre</div><div class="role">Primary &mdash; lichen gold-green, Xanthoria warmth</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#2a3da8;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; cold winter air, distance</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#2e8a6a;"></div><div><div class="name">Cascade Green</div><div class="role">Green &mdash; cool lichen, blue-green crusts</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#bab000;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Accent &mdash; acid crustose lichen, electric yellow-green</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#5a6e30;"></div><div><div class="name">Olive Green</div><div class="role">Green &mdash; warm lichen, mossy olive tones</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; bark undertone, warm substrate</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a8e68, #5a7e58);"></div>
+        <div><h3>Foliose Velvet</h3><span class="ratio">2 Green Apatite Genuine : 1 Jadeite Genuine : &frac12; Yellow Ochre</span></div>
+      </div>
+      <p class="mix-description">The soft sage-green of leafy lichen spreading across an old-growth maple limb &mdash; mineral, muted, impossibly textured.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#5a8a6a; color:#fff;">Green Apatite Gen.</div>
+        <div class="mix-bar" style="flex:1; background:#6b9e7a; color:#fff;">Jadeite Genuine</div>
+        <div class="mix-bar" style="flex:0.5; background:#c8a050; color:#fff;">Yellow Ochre</div>
+      </div>
+      <div class="mix-notes">Two PrimaTek minerals together is the entire point of this mix. Green Apatite Genuine and Jadeite Genuine are both ground stone, and when they settle into paper texture they create a granulation pattern that IS lichen &mdash; you cannot paint this effect with a brush, only with gravity and mineral weight. Yellow Ochre warms the mix just enough to keep it from reading as pure mineral and nudges it toward the living warmth of actual lichen. Apply to very wet paper and tilt the board in multiple directions. Let the minerals find their own settling pattern. Each drying will be different, which is exactly how lichen works.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8a8a30, #7a7a20);"></div>
+        <div><h3>Acid Crust</h3><span class="ratio">2 Nickel Azo Yellow : 1 Olive Green : &frac14; Cascade Green</span></div>
+      </div>
+      <p class="mix-description">The shocking chartreuse of crustose lichen on exposed rock faces &mdash; electric, almost fluorescent, unmistakably alive.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#bab000; color:#222;">Nickel Azo Yellow</div>
+        <div class="mix-bar" style="flex:1; background:#5a6e30; color:#fff;">Olive Green</div>
+        <div class="mix-bar" style="flex:0.25; background:#2e8a6a; color:#fff;">Cascade Green</div>
+      </div>
+      <div class="mix-notes">Nickel Azo Yellow has a natural yellow-green bias that synthetic cadmium yellows lack &mdash; it reads as biological rather than decorative, which is exactly what crustose lichen demands. Olive Green grounds the acidity, pulling the yellow toward the organic olive range without killing its intensity. Cascade Green at the edges cools the mix toward the blue-green crusts you find on north-facing rock. Apply in small, irregular patches with a dry brush &mdash; crustose lichen grows in circles and splotches, never in washes. Let each dab dry before placing the next to maintain hard edges between colonies.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5a5a5a, #4a4a52);"></div>
+        <div><h3>Wet Basalt</h3><span class="ratio">2 Payne&rsquo;s Gray : 1 Raw Umber : &frac14; French Ultramarine</span></div>
+      </div>
+      <p class="mix-description">Rain-darkened stone beneath the lichen colonies &mdash; the cool, dense substrate that makes every green read brighter by contrast.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#4a5468; color:#fff;">Payne&rsquo;s Gray</div>
+        <div class="mix-bar" style="flex:1; background:#6b5030; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:0.25; background:#2a3da8; color:#fff;">French Ultramarine</div>
+      </div>
+      <div class="mix-notes">Payne&rsquo;s Gray provides the blue-gray base of wet volcanic rock without going dead neutral &mdash; it has enough blue to feel cold, which is what December stone feels like underhand. Raw Umber adds the brown sediment tone where organic matter has stained the rock surface, keeping it from looking painted. French Ultramarine in small doses pushes the coolest shadows toward the cold blue of a stone that hasn&rsquo;t seen sun in weeks. Paint this mix as the negative space around your lichen colonies &mdash; the dark substrate that makes the greens and yellows pop. Wet the paper first and drop the mix around the lichen shapes, letting it bleed to the edges but not into the lichens themselves.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>Lichen is where the PrimaTek pigments earn their keep. Green Apatite Genuine and Jadeite Genuine are actual minerals ground into paint &mdash; apatite and jade &mdash; and their granulation on paper IS lichen texture. No amount of brushwork with synthetic greens can replicate the way these mineral particles settle into paper valleys and create the mottled, irregular surface of a lichen colony. Yellow Ochre handles the gold-green Xanthoria species that colonize sun-exposed branches, providing the warm note in what is otherwise a cool palette. Cascade Green extends the range toward the blue-green crusts on north-facing surfaces, while Olive Green covers the warmer, mossy olive lichens on bark. Nickel Azo Yellow is the wildcard &mdash; its acid yellow-green nails the almost fluorescent crustose lichens that shock you on exposed rock faces. Raw Umber and Burnt Sienna give you the bark and stone substrates beneath the lichens, the surfaces that anchor these slow organisms. Payne&rsquo;s Gray darkens wet stone without killing color. French Ultramarine in the distance places the scene in December &mdash; cold air, blue shadows, the short light of the darkest month.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">Every surface in the December forest wears its lichen like regalia. These prompts lean into the textures the PrimaTek pigments were born to render &mdash; slow, mineral, patient as the organisms themselves.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Lichen-Crusted Big-Leaf Maple Limb</h3>
+      <p class="subject"><strong>Subject:</strong> A single horizontal limb of a big-leaf maple, thick with foliose and fruticose lichen. The bark is barely visible beneath layers of sage-green, gray-green, and sulfur-yellow growth. Rain beads on every surface. Background is soft December fog.</p>
+      <p class="palette-fit">The Foliose Velvet mix (Green Apatite Genuine + Jadeite Genuine + Yellow Ochre) covers the dominant lichen. Acid Crust (Nickel Azo Yellow + Olive Green + Cascade Green) for the bright chartreuse patches. Raw Umber peeks through where bark is still exposed.</p>
+      <div class="tips"><ul>
+        <li>Paint the Raw Umber bark substrate first and let it dry completely &mdash; the lichen will go over this, but glimpses of bark between colonies ground the composition</li>
+        <li>Apply the Foliose Velvet mix to thoroughly wet paper over the bark &mdash; tilt the board and let the mineral pigments settle naturally; this granulation IS your lichen texture</li>
+        <li>Acid Crust patches go in last, dry-brushed in small irregular circles to represent crustose colonies &mdash; their hard edges contrast with the soft foliose lichen</li>
+        <li>Rain beads are negative painting: leave tiny circles of untouched paper, then add the faintest shadow beneath each with dilute Payne&rsquo;s Gray</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Basalt Boulder Colony</h3>
+      <p class="subject"><strong>Subject:</strong> A rain-dark basalt boulder in a Cascade Range streambed, its surface mapped with concentric circles of crustose lichen in yellow, sage, and gray-green. Wet stone gleams between the colonies. Moving water blurs in the foreground.</p>
+      <p class="palette-fit">Wet Basalt (Payne&rsquo;s Gray + Raw Umber + French Ultramarine) for the stone. Acid Crust for the yellow lichen circles. Foliose Velvet for the sage colonies. The dark stone substrate makes every lichen color sing.</p>
+      <div class="tips"><ul>
+        <li>Map out the lichen colonies with masking fluid first &mdash; concentric circles and irregular patches; the negative space between them is the wet stone that needs to stay dark</li>
+        <li>Paint the Wet Basalt mix into the unmasked areas on damp paper, letting French Ultramarine concentrate in the wettest shadows for cold depth</li>
+        <li>Remove masking and paint each colony: Acid Crust for the yellow circles (dry brush, hard edges), Foliose Velvet for the sage areas (wet, let minerals granulate)</li>
+        <li>The foreground water is French Ultramarine and Payne&rsquo;s Gray on very wet paper with horizontal strokes &mdash; let the blur happen naturally by working quickly on soaked paper</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Old-Growth Stump Throne</h3>
+      <p class="subject"><strong>Subject:</strong> A massive old-growth stump, chest-high, completely upholstered in lichen and moss. The cut surface is decades old, softened by growth. Sword ferns ring the base. Deep forest light, no direct sun.</p>
+      <p class="palette-fit">Every green in the palette gets work here: Green Apatite Genuine and Jadeite Genuine for the lichen mantle, Olive Green for the mossy transitions, Cascade Green for the cooler north-facing surfaces. Burnt Sienna for the ancient wood still showing through.</p>
+      <div class="tips"><ul>
+        <li>Wet the entire stump area and lay in a base wash of Olive Green mixed with Raw Umber &mdash; this is the underlying moss layer that unifies everything</li>
+        <li>While still damp, drop Green Apatite Genuine and Jadeite Genuine into the top and sides of the stump &mdash; let the mineral pigments granulate and separate; fight the urge to brush them smooth</li>
+        <li>The cut surface of the stump shows weathered Burnt Sienna and Raw Umber in the grain lines, visible through thin lichen growth &mdash; use a rigger brush for these fine lines</li>
+        <li>Sword ferns at the base are Cascade Green with Olive Green for the older fronds &mdash; paint them in quick downward strokes, each frond a single confident mark</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Lichen Color Study &mdash; Four Species</h3>
+      <p class="subject"><strong>Subject:</strong> A botanical-style study of four lichen types on four small bark or stone samples: sulfur-yellow crustose, sage-green foliose, gray-green fruticose beards, and dark olive shield lichen. Each on its own substrate, arranged on a white ground.</p>
+      <p class="palette-fit">Nickel Azo Yellow for the sulfur crustose. Green Apatite Genuine + Jadeite Genuine for the foliose. Cascade Green + Payne&rsquo;s Gray for the fruticose beards. Olive Green + Raw Umber for the shield lichen. A pure exercise in the palette&rsquo;s greens.</p>
+      <div class="tips"><ul>
+        <li>Treat each sample as a separate miniature painting &mdash; the white paper between them is as important as the subjects; this is observation, not composition</li>
+        <li>The sulfur crustose sample is Nickel Azo Yellow applied in stippled dots with a small round brush &mdash; crustose lichen grows as a flat crust, not a leafy body</li>
+        <li>Foliose lichen on the second sample needs the full Foliose Velvet mix on wet paper &mdash; tilt the sample area to get mineral granulation, and lift edges with a damp brush to suggest the leafy curling lobes</li>
+        <li>Fruticose beards hang downward &mdash; paint them with a rigger brush using Cascade Green thinned with Payne&rsquo;s Gray, each strand a single pulling stroke from top to bottom</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Green Apatite Genuine and Jadeite Genuine are PrimaTek pigments &mdash; actual ground minerals (apatite and jadeite stone) &mdash; and their granulation is unique to mineral pigments. They cannot be replicated by mixing synthetic greens. Nickel Azo Yellow (PY150) is a transparent yellow-green that reads as distinctly biological. Yellow Ochre (PY43) is a natural iron oxide, opaque and ancient. Payne&rsquo;s Gray is a convenience mix of Ultramarine Blue, Carbon Black, and sometimes Burnt Sienna, and it excels at wet stone.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

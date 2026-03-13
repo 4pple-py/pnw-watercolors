@@ -5,112 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Week 16 — White Bract Morning</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(212,114,138,0.16) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(43,61,142,0.14) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(200,168,74,0.10) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(83,104,120,0.08) 0%, transparent 40%),
-      linear-gradient(175deg, #f8f6f2 0%, #eef0f6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text { position: relative; z-index: 1; }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600; font-size: 13px; letter-spacing: 3px;
-    text-transform: uppercase; color: #536878; margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px; font-weight: 700; color: #1a1a1a;
-    line-height: 1.1; margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; font-size: 16px; color: #5a5a5a;
-    max-width: 640px; line-height: 1.7;
-  }
-
-  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
-  .trio-section { margin-top: 48px; }
-  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
-  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .trio-swatch { height: 120px; position: relative; }
-  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
-  .trio-info { padding: 16px 18px; }
-  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
-  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
-  .palette-section { margin-top: 56px; }
-  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
-  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
-  .palette-strip .swatch:hover { flex: 2.5; }
-  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
-  .palette-strip .swatch:hover .label { opacity: 1; }
-  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
-  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
-  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-  .palette-item .name { font-weight: 600; font-size: 14px; }
-  .palette-item .role { font-size: 12px; color: #888; }
-  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
-  .mixes-section { margin-top: 56px; }
-  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
-  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
-  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
-  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
-  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
-  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
-  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
-  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
-  .why-section { margin-top: 56px; }
-  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
-  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
-  .prompts-section { margin-top: 56px; }
-  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
-  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
-  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
-  .prompt-card .subject strong { color: #333; }
-  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
-  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
-  .prompt-card .tips ul { list-style: none; padding: 0; }
-  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
-  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
-  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #e8ece8; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
-  .notes-section strong { color: #444; }
-  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Source Sans 3',sans-serif;background:#f5f6f8;color:#2a2a2a;line-height:1.6;padding:0;}.hero{position:relative;height:320px;overflow:hidden;display:flex;align-items:flex-end;padding:40px;}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 30%,rgba(240,239,240,0.35) 0%,transparent 45%),radial-gradient(ellipse at 30% 70%,rgba(26,58,42,0.22) 0%,transparent 50%),radial-gradient(ellipse at 70% 60%,rgba(61,89,171,0.14) 0%,transparent 40%),radial-gradient(ellipse at 50% 50%,rgba(80,125,42,0.08) 0%,transparent 40%),linear-gradient(175deg,#f0f2ee 0%,#1a3a2a 100%);filter:blur(20px);}.hero-text{position:relative;z-index:1;}.hero-text .week-label{font-family:'Source Sans 3',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#4a7a5a;margin-bottom:8px;}.hero-text h1{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:#1a1a1a;line-height:1.1;margin-bottom:16px;}.hero-text .mood{font-family:'Playfair Display',serif;font-style:italic;font-size:16px;color:#5a5a5a;max-width:640px;line-height:1.7;}.container{max-width:900px;margin:0 auto;padding:0 40px 60px;}.trio-section{margin-top:48px;}.section-label{font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:#999;margin-bottom:20px;}.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}.trio-card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}.trio-swatch{height:120px;position:relative;}.trio-swatch::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.4));}.trio-info{padding:16px 18px;}.trio-info h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:4px;}.trio-info p{font-size:13px;color:#777;line-height:1.5;}.palette-section{margin-top:56px;}.palette-strip{display:flex;border-radius:12px;overflow:hidden;height:72px;box-shadow:0 2px 12px rgba(0,0,0,0.06);margin-bottom:16px;}.palette-strip .swatch{flex:1;position:relative;cursor:default;transition:flex 0.3s ease;}.palette-strip .swatch:hover{flex:2.5;}.palette-strip .swatch .label{position:absolute;bottom:6px;left:8px;font-size:10px;font-weight:600;letter-spacing:0.5px;opacity:0;transition:opacity 0.3s ease;white-space:nowrap;}.palette-strip .swatch:hover .label{opacity:1;}.palette-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 24px;}.palette-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #ecedf0;}.palette-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.1);}.palette-item .name{font-weight:600;font-size:14px;}.palette-item .role{font-size:12px;color:#888;}.palette-item .num{font-size:11px;color:#bbb;font-weight:600;width:16px;flex-shrink:0;}.mixes-section{margin-top:56px;}.mix-card{background:white;border-radius:12px;padding:28px 32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}.mix-header{display:flex;align-items:center;gap:16px;margin-bottom:12px;}.mix-preview{width:48px;height:48px;border-radius:50%;flex-shrink:0;box-shadow:inset 0 2px 6px rgba(0,0,0,0.1);}.mix-header h3{font-family:'Playfair Display',serif;font-size:22px;}.mix-header .ratio{font-size:13px;color:#999;font-weight:400;}.mix-description{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#666;margin-bottom:16px;line-height:1.6;}.mix-bars{display:flex;gap:4px;height:28px;border-radius:6px;overflow:hidden;margin-bottom:16px;}.mix-bar{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;letter-spacing:0.5px;}.mix-notes{font-size:13.5px;color:#555;line-height:1.75;border-left:3px solid #e0e2e8;padding-left:16px;}.why-section{margin-top:56px;}.why-card{background:white;border-radius:12px;padding:28px 32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}.why-card h2{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:16px;}.why-card p{font-size:14.5px;color:#555;line-height:1.8;}.prompts-section{margin-top:56px;}.prompt-card{background:white;border-radius:12px;padding:28px 32px;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);}.prompt-card h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;}.prompt-card .prompt-number{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px;}.prompt-card .subject{font-size:14.5px;color:#555;line-height:1.7;margin-bottom:12px;}.prompt-card .subject strong{color:#333;}.prompt-card .palette-fit{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#666;margin-bottom:16px;line-height:1.6;}.prompt-card .tips{border-left:3px solid #e0e2e8;padding-left:16px;}.prompt-card .tips ul{list-style:none;padding:0;}.prompt-card .tips ul li{font-size:13.5px;color:#555;line-height:1.75;padding:4px 0;position:relative;padding-left:16px;}.prompt-card .tips ul li::before{content:'—';position:absolute;left:0;color:#ccc;}.prompts-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:#777;margin-bottom:24px;line-height:1.6;}.notes-section{margin-top:40px;padding:20px 24px;background:#e8ece8;border-radius:12px;font-size:13px;color:#666;line-height:1.7;}.notes-section strong{color:#444;}.footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid #dde0e5;font-size:12px;color:#bbb;letter-spacing:1px;}
 </style>
 </head>
 <body>
@@ -119,7 +14,7 @@
   <div class="hero-text">
     <div class="week-label">Week 16 &mdash; PNW Watercolor Series</div>
     <h1>White Bract Morning</h1>
-    <p class="mood">Pacific dogwood catches early light in the understory, white bracts hovering like held breath. Gray whales pass offshore, visible only as patience. Warblers move through in waves you hear but can't find. Spring pausing between one spectacle and the next &mdash; the quiet week, the inhale before May.</p>
+    <p class="mood">Dogwood bracts catch the morning mist light like paper lanterns in the forest. Chinese White against Perylene Green darkness. Cobalt Blue mist threading between the trunks. The green is so deep the white glows. Every year you forget how good this contrast is.</p>
   </div>
 </div>
 
@@ -130,24 +25,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a84a 0%, #b0943e 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #f0eff0 0%, #e4e3e4 100%); border-bottom: 1px solid #e0e0e0;"></div>
         <div class="trio-info">
-          <h3>Nickel Azo Yellow</h3>
-          <p>Warbler flash in the canopy, a soft muted yellow that reads as warmth glimpsed and lost; semi-transparent, gentle</p>
+          <h3>Chinese White</h3>
+          <p>The bract itself &mdash; semi-opaque zinc white that glows against dark backgrounds without looking painted-on; the whole week pivots on this pigment</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #d4728a 0%, #c06078 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a3a2a 0%, #0f2a1c 100%);"></div>
         <div class="trio-info">
-          <h3>Rose Madder Permanent</h3>
-          <p>Dogwood bract blush-edge, the faintest pink on what looks white; transparent, non-staining, lifts cleanly</p>
+          <h3>Perylene Green</h3>
+          <p>Deep forest dark that makes white sing; PBk31 is one of the darkest greens available, and that darkness is the point</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #2b3d8e 0%, #1e2e70 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #3d59ab 0%, #2e4590 100%);"></div>
         <div class="trio-info">
-          <h3>French Ultramarine</h3>
-          <p>Deep ocean viewed from a headland, the blue that means depth; transparent, granulating, and warm-leaning for a blue</p>
+          <h3>Cobalt Blue</h3>
+          <p>Morning mist made visible; granulates beautifully on cold-press paper, breaking into the soft particles that are exactly how fog behaves</p>
         </div>
       </div>
     </div>
@@ -157,28 +52,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#c8a84a;"><span class="label" style="color:#fff;">Nickel Azo Yellow</span></div>
-      <div class="swatch" style="background:#d4728a;"><span class="label" style="color:#fff;">Rose Madder Perm.</span></div>
-      <div class="swatch" style="background:#2b3d8e;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
-      <div class="swatch" style="background:#5a8c2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
-      <div class="swatch" style="background:#1a2744;"><span class="label" style="color:#fff;">Indigo</span></div>
+      <div class="swatch" style="background:#f0eff0; border-right:1px solid #e0e0e0;"><span class="label" style="color:#888;">Chinese White</span></div>
+      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#7aaa8a;">Perylene Green</span></div>
+      <div class="swatch" style="background:#3d59ab;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#888;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#f0d040;"><span class="label" style="color:#555;">Hansa Yellow Lt</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#8b5e3c;"><span class="label" style="color:#fff;">Trans. Brown Oxide</span></div>
+      <div class="swatch" style="background:#b8ad3a;"><span class="label" style="color:#fff;">Green Gold</span></div>
       <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#a0482a;"><span class="label" style="color:#fff;">Trans. Red Oxide</span></div>
-      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
-      <div class="swatch" style="background:#f2f0ee;"><span class="label" style="color:#888;">Chinese White</span></div>
-      <div class="swatch" style="background:#6b7c3a;"><span class="label" style="color:#fff;">Olive Green</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c8a84a;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Primary &mdash; warbler flash in canopy, glimpsed through binoculars and gone</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Atmospheric &mdash; marine overcast pressing inland, soft and persistent</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#d4728a;"></div><div><div class="name">Rose Madder Permanent</div><div class="role">Primary &mdash; dogwood bract blush-edge, barely there but essential</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#a0482a;"></div><div><div class="name">Transparent Red Oxide</div><div class="role">Warm Accent &mdash; madrone trunk, iron-red and warm as sun-baked clay</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#2b3d8e;"></div><div><div class="name">French Ultramarine</div><div class="role">Primary &mdash; deep ocean from headland, distant and absolute</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; understory filtered light, green made quiet by shade</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5a8c2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; sword fern frond fully extended, the understory's baseline</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f2f0ee; border:1px solid #ddd;"></div><div><div class="name">Chinese White</div><div class="role">Light &mdash; dogwood bract, true white with just enough body to hover</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2744;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; wave trough shadow, the dark between swells</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#6b7c3a;"></div><div><div class="name">Olive Green</div><div class="role">Earth &mdash; headland bluff grass, dry and salt-wind-tough</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#f0eff0; border:1px solid #ddd;"></div><div><div class="name">Chinese White</div><div class="role">Primary &mdash; dogwood bracts, semi-opaque glow against dark forest</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#f0d040;"></div><div><div class="name">Hansa Yellow Light</div><div class="role">Accent &mdash; dogwood center cluster, warm morning sun</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Primary &mdash; deep forest canopy, the dark that makes white visible</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Raw Sienna</div><div class="role">Warm &mdash; bark tones, warm morning light on trunk and branch</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Primary &mdash; morning mist, granulating fog between trunks</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#8b5e3c;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Structure &mdash; branch architecture, warm dark for drawing lines</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; leaf green, the living understory beneath the bracts</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#b8ad3a;"></div><div><div class="name">Green Gold</div><div class="role">Transitional &mdash; new leaf yellow-green, spring growth catching light</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Warm Light &mdash; morning glow on petal edges, warm paper tone</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Shadow &mdash; mist shadow, cool atmospheric depth</div></div></div>
     </div>
   </div>
 
@@ -188,58 +83,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8c8d0, #deb8c4);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #f2ece0, #eee6d4);"></div>
         <div>
-          <h3>Bract Glow</h3>
-          <span class="ratio">2 Chinese White : 1 Rose Madder Permanent : &frac14; Nickel Azo Yellow</span>
+          <h3>Morning Bract</h3>
+          <span class="ratio">3 Chinese White : 1 Buff Titanium : &frac14; Hansa Yellow Light</span>
         </div>
       </div>
-      <p class="mix-description">Dogwood white flushed warm at center, the part that's not petal but pretends convincingly.</p>
+      <p class="mix-description">The warm side of a dogwood bract at 7 a.m., when the first sun hits it and white turns to something almost golden.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#f2f0ee; color:#888; border: 1px solid #ddd;">Chinese White</div>
-        <div class="mix-bar" style="flex:1; background:#d4728a; color:#fff;">Rose Madder</div>
-        <div class="mix-bar" style="flex:0.25; background:#c8a84a; color:#fff;">Nickel Azo</div>
+        <div class="mix-bar" style="flex:3; background:#f0eff0; color:#888; border:1px solid #ddd;">Chinese White</div>
+        <div class="mix-bar" style="flex:1; background:#f5e6c8; color:#888;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:0.25; background:#f0d040; color:#555;">Hansa Yellow Lt</div>
       </div>
       <div class="mix-notes">
-        Chinese White provides body &mdash; this mix is meant to sit on the paper, not sink in. Rose Madder Permanent tints without staining, so you can lift back to near-white for highlights. The whisper of Nickel Azo Yellow warms the center the way real dogwood bracts warm toward their inflorescence. Apply to dry paper for crisp bract edges.
+        Chinese White gives the mix body &mdash; it sits on the surface instead of sinking in, which is exactly how a bract reads in life: a thing on top of the forest, not absorbed by it. Buff Titanium warms the white without tinting it pink or yellow &mdash; just shifts it toward morning. The thread of Hansa Yellow Light is the sun arriving. Apply to dry paper for crisp bract edges. This mix is opaque enough to go over dried green washes if you need to add bracts after the forest is down.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #506878, #485e6c);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #2a4a3a, #1e3a2c);"></div>
         <div>
-          <h3>Headland Gray</h3>
-          <span class="ratio">3 Payne's Gray : 1 French Ultramarine : &frac12; Olive Green</span>
+          <h3>Deep Canopy Dark</h3>
+          <span class="ratio">3 Perylene Green : 1 Payne's Gray : &frac12; Cobalt Blue</span>
         </div>
       </div>
-      <p class="mix-description">Watching for whale spouts in flat light, eyes straining against the gray-blue sameness of ocean and sky.</p>
+      <p class="mix-description">The forest behind the dogwood, so dark it makes the bracts glow. The green you feel more than see.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#536878; color:#fff;">Payne's Gray</div>
-        <div class="mix-bar" style="flex:1; background:#2b3d8e; color:#fff;">Fr. Ultramarine</div>
-        <div class="mix-bar" style="flex:0.5; background:#6b7c3a; color:#fff;">Olive Green</div>
+        <div class="mix-bar" style="flex:3; background:#1a3a2a; color:#7aaa8a;">Perylene Green</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:0.5; background:#3d59ab; color:#fff;">Cobalt Blue</div>
       </div>
       <div class="mix-notes">
-        Payne's Gray runs cool and neutral &mdash; French Ultramarine warms and deepens it, pulling the mix toward ocean rather than concrete. Olive Green is the surprise: it adds the faintly organic, living quality that separates sea-gray from city-gray. Use at high dilution for distant water, concentrated for foreground swells.
+        Perylene Green is already one of the darkest pigments in the Daniel Smith line &mdash; PBk31 is technically a black that reads green. Payne's Gray cools and neutralizes it toward shadow. The half-part Cobalt Blue is the mist working into the dark spaces, giving the shadow atmosphere rather than emptiness. At full concentration this is nearly black; diluted, it separates into green and blue granulation that looks like forest light filtering through canopy layers.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7a9c48, #6a8c38);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8aaa44, #7a9a38);"></div>
         <div>
-          <h3>Warbler Canopy</h3>
-          <span class="ratio">2 Sap Green : 2 Nickel Azo Yellow : 1 Cascade Green</span>
+          <h3>New Leaf Veil</h3>
+          <span class="ratio">2 Green Gold : 1 Sap Green : &frac12; Raw Sienna</span>
         </div>
       </div>
-      <p class="mix-description">Bright tangled green where yellow-rumped warblers disappear the instant you look up.</p>
+      <p class="mix-description">Late April's newest leaves, still translucent, still more yellow than green. The canopy hasn't filled in yet.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#5a8c2a; color:#fff;">Sap Green</div>
-        <div class="mix-bar" style="flex:2; background:#c8a84a; color:#fff;">Nickel Azo Yellow</div>
-        <div class="mix-bar" style="flex:1; background:#5b8a72; color:#fff;">Cascade Green</div>
+        <div class="mix-bar" style="flex:2; background:#b8ad3a; color:#fff;">Green Gold</div>
+        <div class="mix-bar" style="flex:1; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:0.5; background:#c8a050; color:#fff;">Raw Sienna</div>
       </div>
       <div class="mix-notes">
-        Equal parts Sap Green and Nickel Azo Yellow make a canopy green that's alive with spring light &mdash; the yellow keeps it from going flat. Cascade Green cools the shadows between leaves. Layer wet-on-dry to build the density of a canopy you can hear birds in but can't see them through. The Nickel Azo Yellow is semi-transparent, so it glazes beautifully over dried green.
+        Green Gold leads because April leaves aren't fully green yet &mdash; they're that translucent yellow-green that makes the whole forest feel backlit. Sap Green steadies it toward an actual leaf color without killing the light. Raw Sienna is the warm undertone of bark showing through thin foliage, the branch you can still see because the leaf hasn't grown large enough to hide it. Glaze this over dried Cobalt Blue mist washes and the layers will create aerial perspective almost by accident.
       </div>
     </div>
   </div>
@@ -248,71 +143,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This is a restraint palette for a restrained week. Rose Madder Permanent is the gentlest red available &mdash; non-staining, liftable, barely there &mdash; because dogwood bracts are barely pink. Nickel Azo Yellow is similarly quiet, a muted gold rather than a shout. French Ultramarine's granulation gives ocean texture at distance, while Indigo handles the darks with a blue-black that stays chromatic. Chinese White is essential here as a mixing white for the bracts; this is one of the few palettes where opacity is the point. Payne's Gray ties atmosphere to ocean without committing to either.</p>
+      <p>This palette is built on a single contrast: white against dark green. Chinese White (PW4) is semi-opaque zinc &mdash; it glows on the paper without looking like correction fluid, which is exactly what dogwood bracts do in the forest. Perylene Green is one of the darkest greens Daniel Smith makes, and that darkness is the stage the bracts perform on. Cobalt Blue granulates into the soft-edged particles that are indistinguishable from morning mist on cold-press paper. Buff Titanium and Hansa Yellow Light warm the bracts toward morning light without overstating it. Sap Green and Green Gold handle the living canopy at two stages of spring growth. Raw Sienna and Transparent Brown Oxide give you bark &mdash; warm tones for trunk and branch structure. Payne's Gray ties the mist to the shadows. Ten pigments, one job: making white look luminous by surrounding it with everything that isn't.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects built for this week&rsquo;s palette &mdash; each one leans into that white-on-dark-green contrast that makes dogwood season feel like the forest invented paper lanterns.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Dogwood Bracts in the Understory</h3>
-      <p class="subject"><strong>Subject:</strong> A cluster of Pacific dogwood &ldquo;flowers&rdquo; (bracts) hovering in the filtered light of a second-growth forest, dark trunks behind them.</p>
-      <p class="palette-fit">The Bract Glow mix (Chinese White + Rose Madder Permanent + Nickel Azo Yellow) was literally designed for this. Against a background of Cascade Green and Sap Green forest, the white bracts will float forward like they do in life.</p>
+      <h3>Dogwood Branch Close-Up</h3>
+      <p class="subject"><strong>Subject:</strong> A single dogwood branch at arm&rsquo;s length &mdash; three or four bracts open, the tiny true flowers visible at center, branch structure clear against a soft green background.</p>
+      <p class="palette-fit">The Morning Bract mix (Chinese White + Buff Titanium + Hansa Yellow Light) handles the sunlit bracts. Transparent Brown Oxide draws the branch. Hansa Yellow Light, concentrated, dots the tiny true flowers at center.</p>
       <div class="tips">
         <ul>
-          <li>Paint the dark understory first with Cascade Green and Sap Green layered wet-on-dry, then let it dry completely before adding bracts</li>
-          <li>Mix the Bract Glow on the palette and apply to dry paper so the edges stay crisp &mdash; dogwood bracts have clean, notched outlines</li>
-          <li>Rose Madder Permanent lifts almost completely, so you can dab back to near-white for highlight edges with a clean damp brush</li>
-          <li>Leave a sliver of untouched white paper at the brightest bract tip for a highlight that no pigment can match</li>
+          <li>Paint the soft background first with dilute Sap Green and Green Gold wet-in-wet, then let it dry completely before adding any bract work</li>
+          <li>Each bract has a notched tip &mdash; use the Morning Bract mix on dry paper with a small round brush to get those crisp, characteristic indentations</li>
+          <li>The branch is Transparent Brown Oxide with a rigger brush; dogwood branches have a clean, architectural quality that rewards careful line work</li>
+          <li>Leave a sliver of untouched white paper at the brightest edge of each bract &mdash; no pigment is as white as the paper itself</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Whale Watch From the Headland</h3>
-      <p class="subject"><strong>Subject:</strong> A coastal headland view &mdash; gray ocean merging with overcast sky, bluff grass in the foreground, and maybe (maybe) a distant spout.</p>
-      <p class="palette-fit">The Headland Gray mix (Payne&rsquo;s Gray + French Ultramarine + Olive Green) handles the entire ocean-sky merge. Olive Green does the salt-tough bluff grass. Indigo gives you wave troughs.</p>
+      <h3>Misty Forest with Dogwood Canopy</h3>
+      <p class="subject"><strong>Subject:</strong> A stand of Douglas fir with dogwood as understory, morning mist threading between trunks, white bracts scattered at mid-height like suspended paper.</p>
+      <p class="palette-fit">Deep Canopy Dark (Perylene Green + Payne&rsquo;s Gray + Cobalt Blue) builds the fir trunks and deep background. Cobalt Blue alone, highly diluted, is the mist. Chinese White bracts go on last, opaque over the dried dark.</p>
       <div class="tips">
         <ul>
-          <li>Wet the entire sky-and-ocean area and drop in Payne&rsquo;s Gray and French Ultramarine, letting them blend where sky meets sea &mdash; the lost edge is the point</li>
-          <li>While the wash is still damp, add Indigo in horizontal strokes for wave shadows in the middle distance</li>
-          <li>The bluff grass is Olive Green on dry paper with a fan brush or splayed flat brush for texture</li>
-          <li>If you paint the whale spout, use Chinese White applied with a rigger &mdash; one quick vertical mark. Restraint is everything.</li>
+          <li>Wet the upper third of the paper and float in dilute Cobalt Blue for the mist layer &mdash; let it granulate; that texture is the fog</li>
+          <li>Once dry, paint fir trunks with Deep Canopy Dark using a flat brush, vertical strokes, leaving gaps where mist interrupts them</li>
+          <li>The dogwood bracts are Chinese White mixed with a touch of Buff Titanium, applied with a small brush directly over the dark wash &mdash; this is where semi-opacity earns its keep</li>
+          <li>Distant bracts should be smaller and slightly bluer (add a breath of Cobalt Blue to the white) to push them back in space</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Warbler in the Canopy (Glimpsed and Gone)</h3>
-      <p class="subject"><strong>Subject:</strong> A looking-up view through tangled spring canopy, with one small flash of yellow suggesting a warbler you&rsquo;ll never quite see.</p>
-      <p class="palette-fit">The Warbler Canopy mix (Sap Green + Nickel Azo Yellow + Cascade Green) builds the tangled green. One tiny dab of concentrated Nickel Azo Yellow is your bird.</p>
+      <h3>Single Bract with Morning Dew</h3>
+      <p class="subject"><strong>Subject:</strong> One dogwood bract filling most of the frame, dew drops catching light on its surface, the green of the leaf behind it showing through at thin spots.</p>
+      <p class="palette-fit">Chinese White and Buff Titanium build the bract surface. Sap Green shows through where the bract is thin. Raw Sienna warms the veins. Dewdrops are pure paper white with Payne&rsquo;s Gray shadow crescents.</p>
       <div class="tips">
         <ul>
-          <li>Work the canopy in three layers: Nickel Azo Yellow wash for backlit areas, then Sap Green wet-on-dry for leaf mass, then Cascade Green for cool shadows</li>
-          <li>Leave small irregular gaps of white paper for sky showing through the canopy &mdash; this creates the dappled-light effect</li>
-          <li>The warbler is just a single charged touch of Nickel Azo Yellow, maybe 5mm across, placed off-center in a gap between leaves</li>
-          <li>Add a single branch line with Transparent Red Oxide (madrone) to give the bird something to perch on</li>
+          <li>This is a study in restraint &mdash; wash the entire bract shape with very dilute Buff Titanium first, leaving hard white paper only where dewdrops will catch the light</li>
+          <li>While the wash is damp, drop in thin Sap Green where the bract is translucent, letting it bleed softly into the warm base</li>
+          <li>Vein lines are Raw Sienna with a rigger brush after everything is dry &mdash; dogwood bract veins curve from center to the notched tip</li>
+          <li>Each dewdrop is a tiny circle of untouched paper with a crescent of Payne&rsquo;s Gray shadow on the underside; less is more here</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Morning Mist Along the Forest Road</h3>
-      <p class="subject"><strong>Subject:</strong> A gravel forest road disappearing into morning mist, sword ferns lining both sides, dogwood bracts visible as pale shapes in the middle distance.</p>
-      <p class="palette-fit">Payne&rsquo;s Gray at high dilution is the mist itself. Sap Green handles the fern walls. The dogwood bracts become soft Bract Glow shapes losing their edges in the fog.</p>
+      <h3>Forest Path with White Overhead</h3>
+      <p class="subject"><strong>Subject:</strong> A trail disappearing into second-growth forest, dogwood bracts forming a loose white canopy overhead, morning light filtering down, ferns lining the path.</p>
+      <p class="palette-fit">The path is Raw Sienna and Transparent Brown Oxide. Perylene Green handles the deep forest walls. Green Gold and Sap Green build the fern understory. Bracts overhead are Chinese White catching the light that Cobalt Blue mist softens.</p>
       <div class="tips">
         <ul>
-          <li>Wet the upper half of the paper and float in very dilute Payne&rsquo;s Gray, heavier at the top, fading to nothing at the horizon line</li>
-          <li>Sword ferns are Sap Green pulled downward in quick arcing strokes with a round brush &mdash; don&rsquo;t paint individual fronds, paint the gesture of them</li>
-          <li>The distant dogwood bracts should be Bract Glow mix applied while the mist wash is still slightly damp, so their edges soften and blur</li>
-          <li>The road itself is dilute Payne&rsquo;s Gray with a touch of Olive Green for gravel. Sometimes the palette teaches you to see differently.</li>
+          <li>Establish the light source first &mdash; mask or preserve white paper where morning sun breaks through the canopy, then build the forest dark around those openings</li>
+          <li>The path narrows to a point; use Raw Sienna thinning to Transparent Brown Oxide as it recedes, letting perspective do the compositional work</li>
+          <li>Ferns are Sap Green pulled in quick downward arcs on either side of the path &mdash; paint the gesture, not individual fronds</li>
+          <li>Overhead bracts should vary: some crisp Morning Bract mix on dry paper in the foreground, some soft Chinese White dropped into damp Cobalt Blue mist in the distance</li>
         </ul>
       </div>
     </div>
@@ -320,7 +215,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Chinese White (PW4) is zinc-based and semi-transparent &mdash; it won't fully cover darks but creates beautiful opalescent tints. Rose Madder Permanent is the lightfast replacement for true Rose Madder; it lifts almost completely, making it ideal for soft florals. Nickel Azo Yellow may separate slightly in wet washes &mdash; this is a feature, not a flaw, for canopy work.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Chinese White (PW4) is zinc-based and semi-opaque &mdash; it won't fully cover darks, but that translucency is what gives it a glow rather than a painted-on look. Perylene Green (PBk31) is technically a black that reads as one of the darkest greens available. Cobalt Blue (PB28) granulates beautifully on cold-press paper, making it ideal for mist and atmospheric effects. Buff Titanium (PW6:1) is a warm opaque white useful for shifting Chinese White toward morning light without adding chroma.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

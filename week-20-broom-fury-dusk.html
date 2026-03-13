@@ -6,59 +6,14 @@
 <title>Week 20 — Broom Fury Dusk</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(232,184,32,0.18) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(144,76,148,0.16) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(10,60,140,0.12) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(180,167,214,0.1) 0%, transparent 40%),
-      linear-gradient(175deg, #f8f4e8 0%, #eee8f4 100%);
-    filter: blur(20px);
-  }
-
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(212,168,32,0.22) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(232,120,32,0.18) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(232,90,32,0.14) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(40,68,102,0.1) 0%, transparent 40%), linear-gradient(175deg, #f8f0e0 0%, #f0e4d0 100%); filter: blur(20px); }
   .hero-text { position: relative; z-index: 1; }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600; font-size: 13px; letter-spacing: 3px;
-    text-transform: uppercase; color: #904c94; margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px; font-weight: 700; color: #1a1a1a;
-    line-height: 1.1; margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; font-size: 16px; color: #5a5a5a;
-    max-width: 640px; line-height: 1.7;
-  }
-
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #b89020; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
   .trio-section { margin-top: 48px; }
   .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
@@ -95,7 +50,6 @@
   .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
   .prompts-section { margin-top: 56px; }
   .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
@@ -108,7 +62,7 @@
   .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
   .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
   .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
-  .notes-section { margin-top: 40px; padding: 20px 24px; background: #ede8f0; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f4ecd8; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
   .notes-section strong { color: #444; }
   .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
@@ -119,223 +73,193 @@
   <div class="hero-text">
     <div class="week-label">Week 20 &mdash; PNW Watercolor Series</div>
     <h1>Broom Fury Dusk</h1>
-    <p class="mood">Scotch broom has conquered every roadside &mdash; invasive, golden, unapologetic. Elderberry holds its cream plates up like offerings. Dusk past 9 PM stretches the sky into lavender. Spring tipping into summer's arrogance, and the weeds got there first. The longest evenings of the year belong to things that weren't invited.</p>
+    <p class="mood">May 14 through 20. Scotch broom owns every roadside, every clear-cut, every neglected lot. You&rsquo;re supposed to hate it &mdash; invasive, aggressive, choking out native plants &mdash; but at dusk, backlit by sunset fire, it&rsquo;s undeniably gorgeous. Hansa Yellow Deep fury from I-5 to the coast. The beauty of destruction, and nobody can look away.</p>
   </div>
 </div>
 
 <div class="container">
 
-  <!-- Primary Trio -->
   <div class="trio-section">
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8b820 0%, #d0a418 100%);"></div>
-        <div class="trio-info">
-          <h3>Hansa Yellow Deep</h3>
-          <p>Scotch broom bank, aggressive yellow colonizing every cleared slope; transparent, warm, slightly orange-leaning</p>
-        </div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #d4a820 0%, #c49818 100%);"></div>
+        <div class="trio-info"><h3>Hansa Yellow Deep</h3><p>Scotch broom at full scream; transparent, warm, slightly orange-leaning yellow that owns every disturbed slope in the PNW right now</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #904c94 0%, #7a3c7e 100%);"></div>
-        <div class="trio-info">
-          <h3>Cobalt Violet</h3>
-          <p>Lupine spikes in road cuts, the native purple fighting back; granulating, semi-transparent, genuinely violet</p>
-        </div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e87820 0%, #d06818 100%);"></div>
+        <div class="trio-info"><h3>Cadmium Orange Hue</h3><p>Sunset fire behind the broom banks; opaque, punchy, blocks of burning sky that the yellow silhouettes against</p></div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #0a3c8c 0%, #082e6e 100%);"></div>
-        <div class="trio-info">
-          <h3>Phthalo Blue GS</h3>
-          <p>Deep dusk east-facing sky, the blue that arrives when the sun's attention is elsewhere; transparent, staining</p>
-        </div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e85a20 0%, #d04a18 100%);"></div>
+        <div class="trio-info"><h3>Transparent Pyrrol Orange</h3><p>Sunset glow through broom petals; PO73 transparency means light passes through it the way it passes through actual backlit flowers</p></div>
       </div>
     </div>
   </div>
 
-  <!-- Full Palette -->
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#e8b820;"><span class="label" style="color:#777;">Hansa Yellow Deep</span></div>
-      <div class="swatch" style="background:#904c94;"><span class="label" style="color:#fff;">Cobalt Violet</span></div>
-      <div class="swatch" style="background:#0a3c8c;"><span class="label" style="color:#fff;">Phthalo Blue GS</span></div>
-      <div class="swatch" style="background:#a8ad00;"><span class="label" style="color:#fff;">Green Gold</span></div>
-      <div class="swatch" style="background:#1a2744;"><span class="label" style="color:#fff;">Indigo</span></div>
-      <div class="swatch" style="background:#b4a7d6;"><span class="label" style="color:#444;">Lavender</span></div>
-      <div class="swatch" style="background:#e8641b;"><span class="label" style="color:#fff;">Pyrrol Orange</span></div>
-      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
-      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#6b7c3a;"><span class="label" style="color:#fff;">Olive Green</span></div>
+      <div class="swatch" style="background:#d4a820;"><span class="label" style="color:#777;">Hansa Yellow Deep</span></div>
+      <div class="swatch" style="background:#e87820;"><span class="label" style="color:#fff;">Cadmium Orange Hue</span></div>
+      <div class="swatch" style="background:#e85a20;"><span class="label" style="color:#fff;">Pyrrol Orange</span></div>
+      <div class="swatch" style="background:#a4283a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
+      <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
+      <div class="swatch" style="background:#6b7c3f;"><span class="label" style="color:#fff;">Olive Green</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#284466;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#1a1a1e;"><span class="label" style="color:#fff;">Lamp Black</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e8b820;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Primary &mdash; scotch broom bank, the gold that owns the roadsides</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#b4a7d6;"></div><div><div class="name">Lavender</div><div class="role">Atmospheric &mdash; western sky at civil twilight, violet-pink and weightless</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#904c94;"></div><div><div class="name">Cobalt Violet</div><div class="role">Primary &mdash; lupine spikes in road cuts, granulating purple defiance</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e8641b;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Warm Accent &mdash; fading sun on elderberry, last warmth clinging</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#0a3c8c;"></div><div><div class="name">Phthalo Blue GS</div><div class="role">Primary &mdash; deep dusk east-facing sky, blue past the point of comfort</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; elderberry leaf, the dark green platform</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a8ad00;"></div><div><div class="name">Green Gold</div><div class="role">Earth &mdash; broom stem green-yellow, the invasive's infrastructure</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; elderberry flower plate, flat-topped and luminous</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a2744;"></div><div><div class="name">Indigo</div><div class="role">Dark &mdash; tree line at 9:30 PM, the last readable silhouette</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#6b7c3a;"></div><div><div class="name">Olive Green</div><div class="role">Earth &mdash; dry grass beneath broom, the native understory smothered</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#d4a820;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Primary &mdash; broom yellow, the invasive gold screaming from every roadside</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#6b7c3f;"></div><div><div class="name">Olive Green</div><div class="role">Earth &mdash; dry roadside grass, gravel shoulder weeds, not lush</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#e87820;"></div><div><div class="name">Cadmium Orange Hue</div><div class="role">Primary &mdash; sunset fire, opaque blocks of western sky</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Earth &mdash; dry ground, exposed dirt in clear-cuts, warm anchor</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#e85a20;"></div><div><div class="name">Transparent Pyrrol Orange</div><div class="role">Primary &mdash; sunset glow through broom, backlit petals, PO73 transparency</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#284466;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; approaching night from the east, the blue that swallows the fire</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a4283a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Warm Accent &mdash; deep sunset red at the horizon line, fleeting</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; upper sky above the fire, granulating blue</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; broom foliage, the green infrastructure beneath the yellow</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#1a1a1e;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; silhouette darks, power lines, fence posts against the blaze</div></div></div>
     </div>
   </div>
 
-  <!-- Mixes -->
   <div class="mixes-section">
     <div class="section-label">Mixes &amp; Ratios</div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d8b020, #c8a010);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d8a020, #c89418);"></div>
         <div>
           <h3>Broom Blaze</h3>
-          <span class="ratio">3 Hansa Yellow Deep : 1 Green Gold : &frac12; Transparent Pyrrol Orange</span>
+          <span class="ratio">3 Hansa Yellow Deep : 1 Transparent Pyrrol Orange : &frac12; Sap Green</span>
         </div>
       </div>
-      <p class="mix-description">Invasive yellow so aggressive it hurts your eyes &mdash; the color equivalent of a species that grows three feet a season.</p>
+      <p class="mix-description">The yellow that took over the highway &mdash; so saturated it reads as aggression, so beautiful you slow down anyway.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e8b820; color:#777;">Hansa Yellow Deep</div>
-        <div class="mix-bar" style="flex:1; background:#a8ad00; color:#fff;">Green Gold</div>
-        <div class="mix-bar" style="flex:0.5; background:#e8641b; color:#fff;">Pyrrol Orange</div>
+        <div class="mix-bar" style="flex:3; background:#d4a820; color:#777;">Hansa Yellow Deep</div>
+        <div class="mix-bar" style="flex:1; background:#e85a20; color:#fff;">Pyrrol Orange</div>
+        <div class="mix-bar" style="flex:0.5; background:#507d2a; color:#fff;">Sap Green</div>
       </div>
       <div class="mix-notes">
-        Don't soften this. Hansa Yellow Deep at full concentration is the point &mdash; broom doesn't do subtle. Green Gold adds the stem-green undertone visible in dense stands. Transparent Pyrrol Orange warms the shadow side of flower clusters. Apply boldly, let it be garish. If the color looks like too much, it's accurate. This invasive earned its reputation.
+        Hansa Yellow Deep at full concentration is the point &mdash; broom doesn&rsquo;t do subtle. Transparent Pyrrol Orange warms the shadow side of flower clusters and gives the backlit glow that makes broom look radioactive at dusk. The half-part Sap Green is the stem structure visible in dense stands; drop it in while the yellow is still wet and let it bleed upward. If this mix looks like too much, you&rsquo;re reading the roadside correctly.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #684880, #584070);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c85828, #b84820);"></div>
         <div>
-          <h3>Lupine Dusk</h3>
-          <span class="ratio">2 Cobalt Violet : 1 Phthalo Blue GS : &frac12; Lavender</span>
+          <h3>Highway Sunset</h3>
+          <span class="ratio">2 Cadmium Orange Hue : 1 Alizarin Crimson : &frac12; Transparent Pyrrol Orange</span>
         </div>
       </div>
-      <p class="mix-description">Granulating purple spikes against dimming sky &mdash; native lupine holding ground in the road cut.</p>
+      <p class="mix-description">The sky behind the broom banks &mdash; opaque fire grading into deep red, the kind of sunset that makes you pull over on I-5.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#904c94; color:#fff;">Cobalt Violet</div>
-        <div class="mix-bar" style="flex:1; background:#0a3c8c; color:#fff;">Phthalo Blue GS</div>
-        <div class="mix-bar" style="flex:0.5; background:#b4a7d6; color:#444;">Lavender</div>
+        <div class="mix-bar" style="flex:2; background:#e87820; color:#fff;">Cadmium Orange Hue</div>
+        <div class="mix-bar" style="flex:1; background:#a4283a; color:#fff;">Alizarin Crimson</div>
+        <div class="mix-bar" style="flex:0.5; background:#e85a20; color:#fff;">Pyrrol Orange</div>
       </div>
       <div class="mix-notes">
-        Cobalt Violet granulates dramatically &mdash; heavy pigment particles settle into paper texture, mimicking the way individual lupine flowers cluster on the spike. Phthalo Blue GS deepens the shadow side without neutralizing the violet. Lavender ties the spikes to the sky behind them. Work wet-on-dry for defined flower spikes; the granulation provides detail at the micro level automatically.
+        Cadmium Orange Hue is opaque &mdash; it blocks light, builds solid color, gives the sunset its weight. Alizarin Crimson deepens the lower horizon where the sun has already dropped. Transparent Pyrrol Orange bridges the two: apply it between the opaque orange and the crimson while both are damp, and it glows where they meet. The transparency difference between the Cadmium Hue and the Pyrrol Orange is doing real optical work here &mdash; one blocks, one transmits. Different jobs, same sky.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e0d0a8, #d4c498);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #384860, #2a3850);"></div>
         <div>
-          <h3>Elderberry Cream</h3>
-          <span class="ratio">3 Buff Titanium : &frac12; Hansa Yellow Deep : &frac14; Cascade Green</span>
+          <h3>Dusk Eats the Road</h3>
+          <span class="ratio">2 Indanthrone Blue : 1 Burnt Sienna : &frac12; Lamp Black</span>
         </div>
       </div>
-      <p class="mix-description">Flat-topped flower clusters catching the very last light of a 9 PM dusk &mdash; cream going gold.</p>
+      <p class="mix-description">The eastern sky and ground merging as night arrives &mdash; blue-brown darkness swallowing the clear-cut from behind.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e8d8b4; color:#777;">Buff Titanium</div>
-        <div class="mix-bar" style="flex:0.5; background:#e8b820; color:#777;">Hansa Yellow</div>
-        <div class="mix-bar" style="flex:0.25; background:#5b8a72; color:#fff;">Cascade Green</div>
+        <div class="mix-bar" style="flex:2; background:#284466; color:#fff;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:0.5; background:#1a1a1e; color:#fff;">Lamp Black</div>
       </div>
       <div class="mix-notes">
-        Buff Titanium dominates because elderberry flowers are fundamentally white-cream with body. They're not translucent &mdash; they're opaque, flat plates that catch light. The half-part Hansa Yellow Deep is the last sun warming them. Cascade Green in the shadow beneath each plate gives them dimension. Apply with a flat brush; these flowers are architectural, not wispy.
+        Indanthrone Blue is the night that&rsquo;s coming &mdash; not black, not purple, just deep transparent blue with enough red to feel inevitable. Burnt Sienna grounds it literally: this is the dirt road, the exposed clear-cut soil, the shoulder gravel going dark. The half-part Lamp Black drops the value without shifting the hue. Use this mix for everything the sunset isn&rsquo;t touching. It makes the yellows and oranges scream louder by contrast.
       </div>
     </div>
   </div>
 
-  <!-- Why These Colors -->
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is split between the invasive (Hansa Yellow Deep, Green Gold, Transparent Pyrrol Orange) and the native (Cobalt Violet, Phthalo Blue GS, Cascade Green), with the atmospheric colors (Lavender, Buff Titanium, Indigo) mediating between them. Cobalt Violet is irreplaceable here &mdash; no mix of red and blue granulates the same way, and lupine demands granulation. Phthalo Blue GS handles the deep dusk sky because it's the only blue transparent enough to stay luminous at high concentration. Indigo at the tree line is practically black but still reads as night-blue, not as death.</p>
+      <p>This palette splits into three temperature zones: the hot yellows and oranges of broom and sunset (Hansa Yellow Deep, Cadmium Orange Hue, Transparent Pyrrol Orange, Alizarin Crimson), the dry earths of the roadside (Sap Green, Olive Green, Burnt Sienna), and the approaching night (Indanthrone Blue, French Ultramarine, Lamp Black). The two oranges are doing fundamentally different optical work &mdash; Cadmium Orange Hue is opaque, building solid sunset mass, while Transparent Pyrrol Orange (PO73) lets light through, which is exactly what happens when you&rsquo;re looking at backlit broom petals. Olive Green keeps the roadsides dry and unglamorous, because this isn&rsquo;t lush forest &mdash; it&rsquo;s gravel shoulders and neglected lots. Indanthrone Blue and French Ultramarine handle the sky&rsquo;s transition from fire to night: Indanthrone at the horizon where warmth still contaminates the blue, French Ultramarine overhead where the sky has already gone cold. Lamp Black is for the silhouettes &mdash; power lines, fence posts, tree forms &mdash; that give the sunset something to burn against.</p>
     </div>
   </div>
 
-  <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four scenes built for this palette &mdash; each one leans hard into the yellow-orange fury and the dusk that frames it. The broom is the subject whether you want it to be or not.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Broom-Choked Roadside at Dusk</h3>
-      <p class="subject"><strong>Subject:</strong> A PNW highway shoulder completely overtaken by scotch broom, golden banks rising on both sides of the road, the sky going lavender at 9 PM.</p>
-      <p class="palette-fit">The Broom Blaze mix (Hansa Yellow Deep + Green Gold + Transparent Pyrrol Orange) at full saturation is this exact scene. Lavender overhead and Indigo at the tree line give you the late-spring dusk that frames it.</p>
+      <h3>Broom-Choked Roadside at Sunset</h3>
+      <p class="subject"><strong>Subject:</strong> A two-lane PNW highway shoulder completely overtaken by scotch broom, golden banks rising on both sides, the sky behind them going orange-red as the sun drops.</p>
+      <p class="palette-fit">The Broom Blaze mix (Hansa Yellow Deep + Transparent Pyrrol Orange + Sap Green) at full saturation is this exact scene. Highway Sunset behind it, Dusk Eats the Road for the asphalt and eastern sky.</p>
       <div class="tips">
         <ul>
-          <li>Paint the sky first: Lavender wash at the top grading into Phthalo Blue GS at the zenith, applied wet-in-wet and left alone</li>
-          <li>The broom banks are Broom Blaze mix at full concentration &mdash; don&rsquo;t dilute, don&rsquo;t apologize. Let it be garish because it genuinely is</li>
-          <li>Green Gold stems are visible in the dense stands; pull thin vertical strokes through the yellow while it&rsquo;s still damp</li>
-          <li>The road is Indigo at low concentration with a touch of Olive Green for asphalt &mdash; a neutral stage for the yellow spectacle on either side</li>
+          <li>Paint the sky first: Highway Sunset mix applied wet-in-wet from the horizon up, grading into French Ultramarine at the zenith</li>
+          <li>The broom banks are Broom Blaze at full concentration &mdash; don&rsquo;t dilute, don&rsquo;t apologize. Let Transparent Pyrrol Orange glow at the backlit edges</li>
+          <li>The road surface is Dusk Eats the Road at low concentration &mdash; a neutral stage for the yellow spectacle on either side</li>
+          <li>Lamp Black fence posts or power poles give the composition vertical structure and something for the sunset to silhouette against</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Lupine Versus Broom (Native Holds Ground)</h3>
-      <p class="subject"><strong>Subject:</strong> A road cut where native lupine spikes compete with invasive broom &mdash; purple and gold side by side, the ecological drama painted in complementary colors.</p>
-      <p class="palette-fit">Cobalt Violet and Hansa Yellow Deep are near-complements. Set them next to each other and they vibrate the way the real plants do when they share a disturbed slope.</p>
+      <h3>Single Broom Branch, Backlit</h3>
+      <p class="subject"><strong>Subject:</strong> One branch of scotch broom held up against the sunset &mdash; individual pea-shaped flowers glowing with transmitted light, stem and leaves dark against the fire.</p>
+      <p class="palette-fit">This is where the transparency of Transparent Pyrrol Orange earns its place. Hansa Yellow Deep for the flower faces, Pyrrol Orange for the backlit edges, Sap Green and Lamp Black for the stem going dark.</p>
       <div class="tips">
         <ul>
-          <li>Paint the broom first (Broom Blaze mix) on the left or upper portion of the slope, then let it dry completely</li>
-          <li>The lupine spikes are the Lupine Dusk mix (Cobalt Violet + Phthalo Blue GS + Lavender) applied wet-on-dry for crisp vertical forms</li>
-          <li>Let Cobalt Violet granulate &mdash; the heavy pigment particles settling into paper texture mimic the way individual flowers cluster on a lupine spike</li>
-          <li>Olive Green at the base is the smothered native grass, dilute and defeated, tying the composition to the ground</li>
+          <li>Paint the background sky first: Cadmium Orange Hue fading to Alizarin Crimson, let it dry completely</li>
+          <li>The flowers facing you are Hansa Yellow Deep; the edges catching backlight are Transparent Pyrrol Orange applied while the yellow is damp</li>
+          <li>The stem is Sap Green darkened with Lamp Black &mdash; it&rsquo;s a silhouette, so keep it simple and crisp against the glow</li>
+          <li>Leave slivers of the orange sky showing between flowers &mdash; the negative space is what makes the backlit effect read</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Elderberry Catching the Last Light</h3>
-      <p class="subject"><strong>Subject:</strong> A red elderberry in full cream-colored bloom, flat-topped flower plates catching horizontal 9 PM light, dark Cascade Green leaves below.</p>
-      <p class="palette-fit">The Elderberry Cream mix (Buff Titanium + Hansa Yellow Deep + Cascade Green) handles the entire flower head. The architectural, flat-topped shape of elderberry is perfect for a flat brush.</p>
+      <h3>I-5 Median Strip</h3>
+      <p class="subject"><strong>Subject:</strong> The concrete median of Interstate 5 with scotch broom erupting from every crack and gap, headlights approaching from the north, sunset fading in the west.</p>
+      <p class="palette-fit">Olive Green and Burnt Sienna for the gritty median infrastructure. Broom Blaze for the yellow explosion. Indanthrone Blue and Lamp Black for the approaching headlight darkness.</p>
       <div class="tips">
         <ul>
-          <li>Paint the leaf mass first with Cascade Green on dry paper &mdash; elderberry leaves are compound and elegant, worth a few careful strokes</li>
-          <li>The flower plates are Elderberry Cream applied with a flat brush in single horizontal strokes &mdash; these flowers are architectural, not rounded</li>
-          <li>Add a wash of Transparent Pyrrol Orange to the light-facing edges of the flower plates for the last sun warming them gold</li>
-          <li>The background is the Lavender dusk sky, applied before the elderberry and dried, so the cream plates pop forward against violet</li>
+          <li>The median barrier is Burnt Sienna mixed with Olive Green &mdash; concrete that&rsquo;s been weathering since the &rsquo;90s, stained and cracked</li>
+          <li>Broom erupts upward from the barrier in pure Hansa Yellow Deep, with Transparent Pyrrol Orange where the last sun catches it</li>
+          <li>The highway surface on both sides is Indanthrone Blue at low concentration &mdash; wet asphalt reflecting the dying sky</li>
+          <li>Approaching headlights are just preserved white paper with a faint Hansa Yellow Deep halo &mdash; let the darkness of Lamp Black around them do the work</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>9:30 PM Tree Line Silhouette</h3>
-      <p class="subject"><strong>Subject:</strong> The moment the tree line becomes a silhouette against the last glow of a late-May dusk &mdash; Indigo shapes against Lavender sky, with broom still faintly yellow in the foreground.</p>
-      <p class="palette-fit">Indigo is the last readable silhouette. Lavender and Phthalo Blue GS handle the sky&rsquo;s gradient from warm horizon to deep zenith. The broom in foreground is Hansa Yellow Deep going dark.</p>
+      <h3>Clear-Cut Hillside Gone Yellow</h3>
+      <p class="subject"><strong>Subject:</strong> An entire clear-cut hillside blanketed in scotch broom from stump line to ridge &mdash; the kind of scene that makes ecologists furious and painters reach for yellow.</p>
+      <p class="palette-fit">This is a painting about one color dominating everything. Hansa Yellow Deep, Transparent Pyrrol Orange, and Sap Green give you three registers of invasive gold. The Dusk Eats the Road mix handles the tree line and stumps.</p>
       <div class="tips">
         <ul>
-          <li>The sky is a graded wash: Lavender at the horizon, blending up into Phthalo Blue GS at the top. Apply to wet paper in one pass</li>
-          <li>The tree line is Indigo applied with a flat brush in a single jagged horizontal stroke after the sky is dry &mdash; firs and hemlocks as a serrated edge</li>
-          <li>Foreground broom is Hansa Yellow Deep at reduced saturation &mdash; the flowers are losing their color in the dimming light, so don&rsquo;t paint them at full noon intensity</li>
-          <li>A few Cobalt Violet lupine spikes in the foreground catch the last light and add purple notes against the darkening yellow</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-number">Prompt 5</div>
-      <h3>The Invasion in Full (Panoramic Broom Hillside)</h3>
-      <p class="subject"><strong>Subject:</strong> An entire hillside blanketed in scotch broom from bottom to top &mdash; the kind of scene that makes ecologists wince and painters reach for yellow.</p>
-      <p class="palette-fit">This is a painting about one color dominating everything. Hansa Yellow Deep, Green Gold, and Transparent Pyrrol Orange give you three registers of invasive gold. The composition is a study in yellow.</p>
-      <div class="tips">
-        <ul>
-          <li>Cover the entire hillside area with Hansa Yellow Deep at various concentrations &mdash; heavier at the top, slightly diluted in the distance</li>
-          <li>While wet, drop Green Gold into the shadow areas where dense stems show through the flowers</li>
-          <li>Transparent Pyrrol Orange warms the sun-facing clusters and creates the only value variation in the yellow mass</li>
-          <li>The sky should be restrained &mdash; Lavender or dilute Phthalo Blue GS &mdash; so nothing competes with the broom. Let the yellow be overwhelming. That&rsquo;s the ecological truth of it.</li>
+          <li>Cover the hillside with Hansa Yellow Deep at varying concentrations &mdash; heavier at the crest where broom is densest, slightly diluted in the draws</li>
+          <li>While wet, drop Transparent Pyrrol Orange into the sun-facing slopes and Sap Green into the shadow draws where stems show through</li>
+          <li>Stumps and slash are Burnt Sienna and Lamp Black &mdash; the evidence of what was cleared to let the broom in</li>
+          <li>The sky should be restrained &mdash; French Ultramarine grading to Indanthrone Blue &mdash; so nothing competes with the yellow. Let the broom be overwhelming. That&rsquo;s the ecological truth of it</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Cobalt Violet is expensive and granulates heavily &mdash; embrace the texture, it's the pigment's gift. Phthalo Blue GS will dominate any mix it enters; load conservatively. Lavender is a Daniel Smith convenience color that's difficult to replicate by mixing; its pastel violet with slight granulation is unique. Olive Green tends toward brown at high concentration &mdash; keep it dilute for accurate dry-grass reads.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Transparent Pyrrol Orange (PO73) is genuinely transparent &mdash; it glows when backlit, which is the entire reason it&rsquo;s here alongside the opaque Cadmium Orange Hue. Different optical jobs. Olive Green tends toward brown at high concentration; keep it dilute for accurate dry-roadside reads. French Ultramarine granulates beautifully in sky washes &mdash; let the particles settle. Indanthrone Blue is the most versatile dark in this palette; mixed with Burnt Sienna it replaces black for most shadow work while keeping color alive.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

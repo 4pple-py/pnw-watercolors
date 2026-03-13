@@ -6,423 +6,65 @@
 <title>Week 1 — Pewter Eagle Light</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #faf8f5;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 60%, rgba(83,104,120,0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 40%, rgba(130,102,68,0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 70%, rgba(26,58,42,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 35% 30%, rgba(83,104,120,0.15) 0%, transparent 40%),
-      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #6b7f6b;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0ece6;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e8e4de;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0ece6;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #777;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #555;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4de;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 60%, rgba(83,104,120,0.35) 0%, transparent 50%), radial-gradient(ellipse at 55% 40%, rgba(42,61,156,0.2) 0%, transparent 45%), radial-gradient(ellipse at 75% 70%, rgba(245,230,200,0.3) 0%, transparent 50%), radial-gradient(ellipse at 35% 30%, rgba(74,78,90,0.15) 0%, transparent 40%), linear-gradient(175deg, #f0f1f3 0%, #e8eaee 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #6b7888; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 1 &mdash; PNW Watercolor Series</div>
     <h1>Pewter Eagle Light</h1>
-    <p class="mood">Early January on the Skagit &mdash; bald eagles hunched in bare cottonwoods over chum-dark water, 3:30 PM already dimming. Sword ferns stay defiantly green beneath a sky that hasn&rsquo;t committed to rain or clearing. Winter here doesn&rsquo;t storm; it settles. The tension: stillness that is actually predation.</p>
+    <p class="mood">Early January on the Skagit flats. The sky is a single sheet of pewter pressed down on silver-gray water, and bald eagles are everywhere &mdash; hunched on driftwood, wheeling over sandbars, dark shapes against a world drained to metal. The only real color is on the birds themselves: chocolate brown, white head, a beak like a dropped coin of cadmium yellow.</p>
   </div>
 </div>
 
@@ -445,21 +87,21 @@
         <div class="trio-swatch" style="background: linear-gradient(135deg, #536878 0%, #465a6a 100%);"></div>
         <div class="trio-info">
           <h3>Payne&rsquo;s Gray</h3>
-          <p>The structural overcast, pressed low and unmoving; mixes cool without going lifeless</p>
+          <p>The pewter sky itself &mdash; that heavy, unbroken overcast pressing flat on the river corridor.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #826644 0%, #705838 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2a3d9c 0%, #223284 100%);"></div>
         <div class="trio-info">
-          <h3>Raw Umber</h3>
-          <p>Gravel bar silt and riverbank earth; granulating, transparent, the ground truth of every Skagit scene</p>
+          <h3>French Ultramarine</h3>
+          <p>The cold blue undertone hiding inside every gray sky, visible only where the cloud layer thins.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #1a3a2a 0%, #122e20 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #f5e6c8 0%, #eddcb6 100%);"></div>
         <div class="trio-info">
-          <h3>Perylene Green</h3>
-          <p>Sword fern blades in zero direct light; deep, staining, refuses to gray out even under heavy wash</p>
+          <h3>Buff Titanium</h3>
+          <p>Silver-white light skidding across flat water &mdash; the brightest thing in a world with no sun.</p>
         </div>
       </div>
     </div>
@@ -470,27 +112,27 @@
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
       <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
-      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
-      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
-      <div class="swatch" style="background:#3d3d4a;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
-      <div class="swatch" style="background:#c9a0a0;"><span class="label" style="color:#fff;">Potter's Pink</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
       <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#b8860b;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
-      <div class="swatch" style="background:#1b3a5c;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
-      <div class="swatch" style="background:#2a52be;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#736357;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#4a4e5a;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#f0eff0;"><span class="label" style="color:#777;">Chinese White</span></div>
+      <div class="swatch" style="background:#c8a53a;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#2b2b2b;"><span class="label" style="color:#fff;">Ivory Black</span></div>
+      <div class="swatch" style="background:#2a7ab5;"><span class="label" style="color:#fff;">Cerulean Blue</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Atmosphere &mdash; overcast pressed low against the river corridor</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#c9a0a0;"></div><div><div class="name">Potter&rsquo;s Pink</div><div class="role">Atmospheric &mdash; flesh tone of spawned-out chum, ghostly</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; gravel bar silt where eagles drop carcasses</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; pewter sky glare off flat water</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Anchor &mdash; sword fern holdout, the only saturated life</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#b8860b;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Warm Accent &mdash; last cottonwood leaf, still clinging</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; eagle perch snag, bark split and blackened</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#1b3a5c;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Cool Accent &mdash; 4 PM dusk line creeping east</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#3d3d4a;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; river deepwater where chum hold in current seams</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#2a52be;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; distant Cascade silhouette, granulating into haze</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Primary &mdash; pewter sky anchor, the overcast itself</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#f0eff0; border:1px solid #d8d8d8;"></div><div><div class="name">Chinese White</div><div class="role">Light &mdash; fog lifting off the river at dawn</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Primary &mdash; cold blue-gray sky undertone</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c8a53a;"></div><div><div class="name">Yellow Ochre</div><div class="role">Warm Accent &mdash; eagle beak, dry winter grass</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#f5e6c8; border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Primary &mdash; silver-white light on flat water</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Warm Accent &mdash; eagle body feathers, warm brown</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#736357;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; mudflat tone, gravel bar silt</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#2b2b2b;"></div><div><div class="name">Ivory Black</div><div class="role">Dark &mdash; eagle wing and head contrast</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#4a4e5a;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; deep shadow in eagle plumage</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#2a7ab5;"></div><div><div class="name">Cerulean Blue</div><div class="role">Atmospheric &mdash; pale winter sky break</div></div></div>
     </div>
   </div>
 
@@ -500,56 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #536878, #6a5a50);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a5d52, #7a6e62);"></div>
         <div>
-          <h3>Chum River Pewter</h3>
-          <span class="ratio">3 Payne&rsquo;s Gray : 1 Raw Umber : trace Potter&rsquo;s Pink</span>
+          <h3>Raptor Mantle</h3>
+          <span class="ratio">2 Burnt Sienna : 1 Payne&rsquo;s Gray : touch Ivory Black</span>
         </div>
       </div>
-      <p class="mix-description">Silty current carrying salmon tannins past gravel bars &mdash; the river&rsquo;s color when it&rsquo;s doing the work of decay.</p>
+      <p class="mix-description">The dark chocolate-brown of an eagle&rsquo;s back feathers catching no light at all.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
-        <div class="mix-bar" style="flex:1; background:#826644; color:#fff;">Raw Umber</div>
-        <div class="mix-bar" style="flex:0.3; background:#c9a0a0; color:#fff;">Potter&rsquo;s Pink</div>
+        <div class="mix-bar" style="flex:2; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
+        <div class="mix-bar" style="flex:0.3; background:#2b2b2b; color:#fff;">Ivory Black</div>
       </div>
       <div class="mix-notes">
-        Lay Payne&rsquo;s Gray wet, drop Raw Umber in from the side to let granulation do the silt work. Add Potter&rsquo;s Pink while still damp &mdash; just a breath of it &mdash; for the organic warmth that distinguishes living river from plain gray. Tilt the paper to let the mix drift. More Pink shifts it toward spent-salmon water; less keeps it mineral.
+        Burnt Sienna is transparent and staining &mdash; it locks into the paper and won&rsquo;t lift. Payne&rsquo;s Gray cools it into that ashy brown that eagle plumage actually is (not the warm brown your brain assumes). The touch of Ivory Black deepens without shifting the hue. Mix on the palette first, then apply in single directional strokes following the feather lay. For lighter body areas, dilute more and skip the Ivory Black. For the dark mantle across the shoulders, load heavy and work wet on dry paper. The Burnt Sienna will granulate slightly against the Payne&rsquo;s Gray, giving feather texture without fussing.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5c3317, #3d3d4a);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8a9aa8, #a0adb8);"></div>
         <div>
-          <h3>Snag Bark Dark</h3>
-          <span class="ratio">2 Burnt Umber : 1 Neutral Tint</span>
+          <h3>River Tin</h3>
+          <span class="ratio">1 Cerulean Blue : 2 Buff Titanium : 1 Chinese White</span>
         </div>
       </div>
-      <p class="mix-description">Wet deadwood hosting eagle weight &mdash; the perch branch that&rsquo;s been dead longer than the bird has been alive.</p>
+      <p class="mix-description">The silver surface of flat water under a sky that refuses to commit to any color.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#5c3317; color:#fff;">Burnt Umber</div>
-        <div class="mix-bar" style="flex:1; background:#3d3d4a; color:#fff;">Neutral Tint</div>
+        <div class="mix-bar" style="flex:1; background:#2a7ab5; color:#fff;">Cerulean Blue</div>
+        <div class="mix-bar" style="flex:2; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:1; background:#f0eff0; color:#777;">Chinese White</div>
       </div>
       <div class="mix-notes">
-        Mix on the palette, not the paper. Burnt Umber gives the bark its organic warmth; Neutral Tint sinks it into shadow without turning it blue. Apply in a single confident stroke &mdash; this mix doesn&rsquo;t reward overworking. For the darkest crevices, load heavier on Neutral Tint. The granulation in Burnt Umber will do the texture for you.
+        Cerulean Blue granulates beautifully &mdash; it&rsquo;s a particulate pigment that settles into paper texture in a way that reads as light catching water. Buff Titanium is semi-opaque and warm, which keeps the mix from going dead. Chinese White adds body and that milky, foggy quality river surfaces get when the light is flat. Lay this as a broad wash on slightly damp paper and tilt &mdash; the Cerulean will separate from the opaques and settle in the valleys, creating the illusion of rippled metallic water with zero brushwork. For more pewter, add a whisper of Payne&rsquo;s Gray.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a3a2a, #5a5038);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8b7a3a, #9a8844);"></div>
         <div>
-          <h3>Fern Under Overcast</h3>
-          <span class="ratio">2 Perylene Green : 1 Raw Umber</span>
+          <h3>Cottonwood Straw</h3>
+          <span class="ratio">2 Yellow Ochre : 1 Raw Umber : trace Neutral Tint</span>
         </div>
       </div>
-      <p class="mix-description">Sword fern blade in zero direct light &mdash; still impossibly green, but earthed, grounded, refusing the spotlight it doesn&rsquo;t have.</p>
+      <p class="mix-description">Dead grass and bare cottonwood bark &mdash; the warm frequency the eye grabs onto when everything else is gray.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#1a3a2a; color:#fff;">Perylene Green</div>
-        <div class="mix-bar" style="flex:1; background:#826644; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:2; background:#c8a53a; color:#fff;">Yellow Ochre</div>
+        <div class="mix-bar" style="flex:1; background:#736357; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:0.3; background:#4a4e5a; color:#fff;">Neutral Tint</div>
       </div>
       <div class="mix-notes">
-        Perylene Green stains hard, so commit. Premix, then apply to dry paper for crisp frond edges. Raw Umber granulates against the smooth staining green &mdash; that texture difference is the fern&rsquo;s leathery surface. For deeper shadow between fronds, increase Raw Umber. For the newest growth at the crown, decrease it. This mix will not lift easily; plan your lights first.
+        Yellow Ochre is naturally opaque and granulating &mdash; an iron oxide pigment that settles with real mineral weight. Raw Umber pulls it down into earth without killing the warmth. The trace of Neutral Tint is the key: it adds just enough cool shadow to keep the mix from looking too sunny for a January scene. Use this for dry grass clumps along the riverbank, cottonwood bark, and the driftwood logs eagles perch on. Apply dry-brush for grass texture, or as a thin wash for distant fields. The granulation in both Yellow Ochre and Raw Umber will create natural irregularity.
       </div>
     </div>
   </div>
@@ -558,71 +202,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is built on transparency and granulation serving a single purpose: pewter light over living water. Payne&rsquo;s Gray and Raw Umber both granulate, which means every wash carries sediment texture without brushwork &mdash; the river paints itself. Perylene Green&rsquo;s staining power is the point: sword ferns hold their color against the prevailing gray the way the actual pigment holds against lifting. Potter&rsquo;s Pink and Buff Titanium are both opaque-leaning, which gives the sky and the salmon flesh a chalky materiality distinct from the transparent darks. Indanthrone Blue and French Ultramarine split the cool-accent duties &mdash; Indanthrone for the deep dusk, Ultramarine for the granulating mountain distance. Every pigment earns its place through behavior, not just hue.</p>
+      <p>This palette is built around a narrow value range on purpose. Payne&rsquo;s Gray, French Ultramarine, Neutral Tint, and Ivory Black all live in the cool-dark neighborhood, but they do different jobs: Payne&rsquo;s Gray is the atmospheric workhorse, French Ultramarine granulates for sky texture, Neutral Tint goes darker without shifting temperature, and Ivory Black provides the hard graphic punch an eagle silhouette needs. Buff Titanium and Chinese White handle the lights &mdash; Buff warm and semi-opaque for that tarnished-silver water glare, Chinese White cooler and chalky for fog and mist. The warm accents are deliberately scarce: Yellow Ochre and Burnt Sienna carry the entire burden of color, the way an eagle&rsquo;s beak and body carry all the warmth in a pewter landscape. Cerulean Blue sits between the cools and the lights, granulating into pale winter sky breaks that feel genuinely cold. Raw Umber grounds everything in mud and gravel. Ten pigments, most of them gray, because January on the Skagit is mostly gray &mdash; and the colors that aren&rsquo;t gray hit harder for it.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects from the first week of January on the Skagit &mdash; each one built to use these specific pigments and the cold, flat light that defines this week.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Eagle Perch on the Skagit</h3>
-      <p class="subject"><strong>Subject:</strong> A bald eagle hunched on a bare cottonwood snag over the chum-dark river, the pewter sky pressing down behind it. The bird is a dark shape; the scene is all atmosphere.</p>
-      <p class="palette-fit">The Snag Bark Dark mix (Burnt Umber + Neutral Tint) gives you the perch in one confident stroke, while Payne&rsquo;s Gray and Raw Umber build the river and sky with natural granulation. Buff Titanium handles the flat glare off the water.</p>
+      <h3>Eagle on Driftwood</h3>
+      <p class="subject"><strong>Subject:</strong> A single bald eagle hunched on a bleached driftwood log at the river&rsquo;s edge. Pewter sky, flat silver water behind it, dead grass in the foreground. The bird is the darkest thing in the scene.</p>
+      <p class="palette-fit">The Raptor Mantle mix (Burnt Sienna + Payne&rsquo;s Gray + Ivory Black) gives you the eagle&rsquo;s body in two or three loaded strokes. Buff Titanium and Chinese White handle the white head, and Yellow Ochre is the beak &mdash; the only spot of real warmth.</p>
       <div class="tips">
         <ul>
-          <li>Paint the sky first as a wet-in-wet wash of Payne&rsquo;s Gray with a trace of Potter&rsquo;s Pink &mdash; tilt the paper and let gravity do the grading</li>
-          <li>Reserve the eagle as white paper, then paint the bird last with Neutral Tint and Burnt Umber on dry paper for hard edges against the soft sky</li>
-          <li>Use Raw Umber dropped wet-into-wet into the Payne&rsquo;s Gray sky wash for the bare cottonwood branches &mdash; the granulation will make them look like real wood</li>
-          <li>Keep the value range narrow everywhere except the eagle itself; the bird should be the darkest shape in the painting</li>
+          <li>Paint the sky first: a wet-in-wet wash of Payne&rsquo;s Gray with a little French Ultramarine dropped in at the top for granulation texture</li>
+          <li>Reserve the eagle and driftwood as dry paper, masking if needed &mdash; the hard edges matter against that soft sky</li>
+          <li>The driftwood log is Raw Umber dry-brushed over Buff Titanium, keeping it lighter than the bird so the eagle reads as the focal point</li>
+          <li>Paint the white head last with Chinese White mixed into very dilute Cerulean Blue &mdash; eagle heads are never pure white, they carry reflected sky</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Sword Fern Bank</h3>
-      <p class="subject"><strong>Subject:</strong> A hillside of sword ferns under deep overcast, each frond impossibly green against the gray-brown forest floor. No direct light &mdash; just the ambient glow of a January afternoon at 3 PM.</p>
-      <p class="palette-fit">Perylene Green is built for this moment &mdash; it holds its saturation against any amount of gray. The Fern Under Overcast mix (Perylene Green + Raw Umber) gives you the leathery frond color, and Payne&rsquo;s Gray recedes behind it for the forest atmosphere.</p>
+      <h3>Skagit Flats, Dozens of Eagles</h3>
+      <p class="subject"><strong>Subject:</strong> The wide river flats from a distance. Bare cottonwood trees line the bank, and in every tree, dark shapes &mdash; eagles, ten or twenty of them, waiting. The river is a flat silver band; the sky is indistinguishable from the water at the horizon.</p>
+      <p class="palette-fit">This is a painting about value, not detail. Payne&rsquo;s Gray and Cerulean Blue build sky and water as nearly the same tone. The Cottonwood Straw mix (Yellow Ochre + Raw Umber + Neutral Tint) gives the bare trees warmth against the cold field. Eagles are just Ivory Black dots.</p>
       <div class="tips">
         <ul>
-          <li>Lay the background forest in Payne&rsquo;s Gray + Raw Umber first and let it dry completely before painting any ferns</li>
-          <li>Paint each frond with Perylene Green on dry paper for crisp pinnae edges &mdash; start from the tip and pull toward the rachis</li>
-          <li>Vary the Raw Umber proportion: more for older, lower fronds; less for the bright new growth at the crown</li>
-          <li>Leave thin slivers of unpainted paper between fronds where light catches the edges &mdash; Perylene Green stains, so plan these gaps before you start</li>
+          <li>Keep the entire painting within three values: light (Buff Titanium water glare), mid (Payne&rsquo;s Gray sky), and dark (Ivory Black eagle shapes)</li>
+          <li>Use the River Tin mix for the water, laid as one continuous horizontal wash &mdash; no brushstrokes, just tilt and let it settle</li>
+          <li>The cottonwoods are calligraphic: Raw Umber trunks painted with a rigger brush, branching upward in single strokes</li>
+          <li>Add the eagles last as confident Ivory Black marks with a small round brush &mdash; no detail, just dark comma shapes in the branches</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Chum Salmon Gravel Bar</h3>
-      <p class="subject"><strong>Subject:</strong> Spawned-out chum salmon visible through silty current over a gravel bar &mdash; ghostly pink-gray shapes in pewter water, cottonwood leaves caught on the rocks.</p>
-      <p class="palette-fit">The Chum River Pewter mix (Payne&rsquo;s Gray + Raw Umber + trace Potter&rsquo;s Pink) IS this water. Potter&rsquo;s Pink gives the salmon their spent, ghostly flesh tone. Quinacridone Gold provides the lone cottonwood leaf accent.</p>
+      <h3>Fog Lifting off the River</h3>
+      <p class="subject"><strong>Subject:</strong> Early morning, the Skagit still shrouded. Fog sits on the water like gauze. A single eagle is airborne above it, dark wings spread against the white. The far bank is barely visible &mdash; cottonwoods as gray ghosts.</p>
+      <p class="palette-fit">Chinese White and Buff Titanium dominate &mdash; this is their painting. Payne&rsquo;s Gray, heavily diluted, suggests the far bank. The eagle overhead is Neutral Tint and Ivory Black, hard-edged and sharp against all that softness.</p>
       <div class="tips">
         <ul>
-          <li>Wet the entire paper and lay the Chum River Pewter mix as a full-sheet wash, tilting to let the granulation settle into current patterns</li>
-          <li>While still damp, suggest the salmon shapes with Potter&rsquo;s Pink &mdash; keep them vague and half-dissolved, because that&rsquo;s what they are</li>
-          <li>Once dry, add the gravel bar in the foreground with Raw Umber dry-brushed on rough paper</li>
-          <li>Drop one or two Quinacridone Gold marks for cottonwood leaves caught on rocks &mdash; the warm accent hits harder for being rare</li>
+          <li>Wet the entire sheet and lay Chinese White mixed with a breath of Cerulean Blue as a full wash &mdash; this is the fog</li>
+          <li>While still damp, suggest the far bank cottonwoods with very dilute Payne&rsquo;s Gray, letting the edges bleed and disappear into the fog</li>
+          <li>Let everything dry completely before painting the eagle &mdash; the bird must have hard edges to read against the soft background</li>
+          <li>The water below the fog is the River Tin mix, but even paler; the point is that water and air are nearly the same thing at this hour</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Dusk on the River Corridor</h3>
-      <p class="subject"><strong>Subject:</strong> The Skagit at 4 PM, the last light a cold blue line along the Cascade silhouette to the east, the river already in shadow, bare alders lining the bank.</p>
-      <p class="palette-fit">Indanthrone Blue and French Ultramarine split the dusk perfectly &mdash; Indanthrone for the deep creeping shadow, Ultramarine for the granulating mountain distance. Buff Titanium is the last pale light at the horizon.</p>
+      <h3>Chum Salmon Run, Eagle Waiting</h3>
+      <p class="subject"><strong>Subject:</strong> Looking down at shallow water over a gravel bar. Dark shapes of chum salmon are visible beneath the surface. On the bank above, an eagle stands in the grass, watching. Mudflat, river stones, winter stubble.</p>
+      <p class="palette-fit">Raw Umber is the gravel bar &mdash; granulating over rough paper, it becomes river stones without any detail work. The salmon beneath the surface are Neutral Tint softened into a Payne&rsquo;s Gray wash. Yellow Ochre and the Cottonwood Straw mix handle the dry grass around the eagle.</p>
       <div class="tips">
         <ul>
-          <li>Work top to bottom: Indanthrone Blue at zenith grading to French Ultramarine at the mountain line, then a thin strip of Buff Titanium at the horizon</li>
-          <li>Let the sky dry, then paint the Cascade silhouette in French Ultramarine &mdash; its granulation will read as atmospheric haze at distance</li>
-          <li>Use Payne&rsquo;s Gray + Raw Umber for the river surface, reflecting the dark sky above</li>
-          <li>The bare alders along the bank are Burnt Umber + Neutral Tint, painted as single calligraphic strokes with a rigger &mdash; don&rsquo;t overwork the branches</li>
+          <li>Paint the shallow water as a wash of Payne&rsquo;s Gray over Buff Titanium, keeping it transparent enough to see the gravel bar beneath</li>
+          <li>Suggest salmon with Neutral Tint shapes dropped wet-into-wet &mdash; keep them soft-edged and submerged, not illustrated</li>
+          <li>Dry-brush Raw Umber for the gravel bar in the foreground, letting the paper texture do the work of individual stones</li>
+          <li>The standing eagle is Raptor Mantle mix for the body, Chinese White with a touch of Cerulean for the head, and one sharp stroke of Yellow Ochre for the beak</li>
         </ul>
       </div>
     </div>
@@ -630,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. This is a low-chroma palette by design &mdash; the only saturated note is Perylene Green, and it hits harder for being alone. Temperature range runs cool-neutral with Potter&rsquo;s Pink and Quinacridone Gold as the sole warm interruptions. Payne&rsquo;s Gray and Raw Umber are natural mixing partners; they won&rsquo;t mud out because they&rsquo;re already in mud&rsquo;s neighborhood. Buff Titanium is semi-opaque &mdash; use it for sky glare and reserved lights, not for mixing. The palette rewards restraint: fewer colors per passage, more granulation time on tilted paper.
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. <strong>Pigment numbers:</strong> Payne&rsquo;s Gray (PBk6, PB29, PV19), French Ultramarine (PB29), Buff Titanium (PW6:1), Raw Umber (PBr7), Neutral Tint (PBk6, PV19, PB29), Chinese White (PW4), Yellow Ochre (PY43), Burnt Sienna (PBr7), Ivory Black (PBk9), Cerulean Blue (PB35). This is a deliberately low-chroma palette &mdash; most of the ten pigments live in the gray-brown range, which means your warm accents (Yellow Ochre, Burnt Sienna) carry disproportionate visual weight. Use them sparingly. Cerulean Blue and French Ultramarine both granulate, which makes them ideal for skies on textured paper &mdash; they settle into the valleys and create atmospheric texture without brushwork. Buff Titanium is semi-opaque; use it for body in light washes rather than mixing. Chinese White is fully opaque and best used for fog effects and lightening, not for correcting mistakes. The palette rewards a limited approach: two or three pigments per passage, tilted paper, and patience with the granulation.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 51 — Solstice Ink</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(0,20,60,0.28) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(28,42,80,0.22) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(50,50,80,0.16) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(210,160,40,0.08) 0%, transparent 40%), linear-gradient(175deg, #e8eaf0 0%, #d0d4e0 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a06030; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 51 &mdash; PNW Watercolor Series</div>
+    <h1>Solstice Ink</h1>
+    <p class="mood">The darkest week spills across the Pacific Northwest like ink from a tipped bottle. By four o&rsquo;clock the sky is indistinguishable from the trees, and every surface &mdash; wet pavement, cedar shingles, the flat water of the Sound &mdash; holds the same blue-black stain. Candles appear in windows. A single flame becomes the brightest thing on the block. The world contracts to what firelight can reach, and everything beyond it is forest, shadow, water, night.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #283850 0%, #1e2e42 100%);"></div>
+        <div class="trio-info"><h3>Indigo</h3><p>Ink-dark evergreen blue, the color of Douglas fir boughs at dusk; deep staining pigment that settles into paper like winter itself</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #1c2a50 0%, #152040 100%);"></div>
+        <div class="trio-info"><h3>Indanthrone Blue</h3><p>The darkest blue in the palette &mdash; the 16-hour night sky, the deep water of Puget Sound at solstice, permanent and unyielding</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2a2a2e 0%, #1a1a20 100%);"></div>
+        <div class="trio-info"><h3>Lunar Black</h3><p>Granulating deep darkness &mdash; mineral particles separate on the paper like shadow finding its own texture; no other black behaves this way</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#283850;"><span class="label" style="color:#ddd;">Indigo</span></div>
+      <div class="swatch" style="background:#1c2a50;"><span class="label" style="color:#ddd;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#2a2a2e;"><span class="label" style="color:#ddd;">Lunar Black</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker&rsquo;s Green</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
+      <div class="swatch" style="background:#3a1450;"><span class="label" style="color:#ddd;">Carbazole Violet</span></div>
+      <div class="swatch" style="background:#263c8c;"><span class="label" style="color:#ddd;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#1a1a1e;"><span class="label" style="color:#ddd;">Lamp Black</span></div>
+      <div class="swatch" style="background:#1a3a28;"><span class="label" style="color:#ddd;">Perylene Green</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#283850;"></div><div><div class="name">Indigo</div><div class="role">Primary &mdash; ink-dark evergreen, staining and permanent</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#3a1450;"></div><div><div class="name">Carbazole Violet</div><div class="role">Dark &mdash; deep violet shadow, the bruise beneath twilight</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#1c2a50;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Primary &mdash; darkest blue, 16-hour night sky</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#263c8c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; night sky glow, granulating blue</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#2a2a2e;"></div><div><div class="name">Lunar Black</div><div class="role">Primary &mdash; granulating deep darkness, mineral shadow</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Warm Accent &mdash; candle warmth, windowsill glow</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Green &mdash; evergreen presence, cedar and fir</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#1a1a1e;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; ink quality, wet-road darkness</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Warm Accent &mdash; candle flame, the only bright note</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#1a3a28;"></div><div><div class="name">Perylene Green</div><div class="role">Dark &mdash; darkest green, deep forest at midnight</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1e2838, #141e2c);"></div>
+        <div><h3>Solstice Evergreen</h3><span class="ratio">2 Indigo : 1 Hooker&rsquo;s Green : &frac12; Lunar Black</span></div>
+      </div>
+      <p class="mix-description">The color of a Douglas fir at 4 PM on December 21st &mdash; not green, not blue, not black, but all three dissolving into each other.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#283850; color:#ddd;">Indigo</div>
+        <div class="mix-bar" style="flex:1; background:#355e3b; color:#fff;">Hooker&rsquo;s Green</div>
+        <div class="mix-bar" style="flex:0.5; background:#2a2a2e; color:#ddd;">Lunar Black</div>
+      </div>
+      <div class="mix-notes">Indigo is the backbone &mdash; its blue-black staining quality anchors the mix and gives the evergreen that inky depth that reads as &ldquo;winter conifer&rdquo; rather than &ldquo;summer forest.&rdquo; Hooker&rsquo;s Green keeps just enough green identity to say &ldquo;tree&rdquo; without brightening the value. Lunar Black is the magic: its granulation breaks the flat darkness into texture, the way real bark and needles break a silhouette at twilight. Apply wet-in-wet to damp paper and tilt the board &mdash; let Lunar Black&rsquo;s mineral particles settle into valleys while the Indigo stains the hills. The result is a dark with depth, not a dark that&rsquo;s dead.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c4882a, #b07020);"></div>
+        <div><h3>Single Flame</h3><span class="ratio">2 New Gamboge : 1 Burnt Sienna : &frac14; Carbazole Violet</span></div>
+      </div>
+      <p class="mix-description">One candle in a dark window &mdash; the warm center bleeding outward into the cold, the violet edge where firelight meets night.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#e8a820; color:#fff;">New Gamboge</div>
+        <div class="mix-bar" style="flex:1; background:#a0522d; color:#fff;">Burnt Sienna</div>
+        <div class="mix-bar" style="flex:0.25; background:#3a1450; color:#ddd;">Carbazole Violet</div>
+      </div>
+      <div class="mix-notes">New Gamboge is the flame itself &mdash; warm, transparent, and surprisingly strong at full concentration. Leave the very center of the flame as white paper with the thinnest wash of New Gamboge, then build outward. Burnt Sienna takes over at the mid-glow zone, where the light is still warm but losing its fight against the surrounding dark. The secret is Carbazole Violet at the outermost edge of the glow: it creates that exact transitional haze where warm light meets cold shadow, the violet fringe your eye registers but your brain can&rsquo;t name. Apply the violet while the Burnt Sienna edge is still damp so they bleed into each other &mdash; hard edges destroy the illusion of light diffusion.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a2244, #101838);"></div>
+        <div><h3>Sixteen-Hour Night</h3><span class="ratio">2 Indanthrone Blue : 1 French Ultramarine : &frac14; Lamp Black</span></div>
+      </div>
+      <p class="mix-description">The sky that refuses to lighten &mdash; deep enough to swallow streetlights, blue enough to still be sky and not void.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#1c2a50; color:#ddd;">Indanthrone Blue</div>
+        <div class="mix-bar" style="flex:1; background:#263c8c; color:#ddd;">French Ultramarine</div>
+        <div class="mix-bar" style="flex:0.25; background:#1a1a1e; color:#ddd;">Lamp Black</div>
+      </div>
+      <div class="mix-notes">Indanthrone Blue is the darkest transparent blue Daniel Smith makes &mdash; it holds depth without going opaque, which is critical for a night sky that needs to feel infinite rather than painted on. French Ultramarine adds granulation and a slightly warmer blue note, the way the real night sky shifts temperature near the horizon or around cloud edges. Lamp Black at a whisper darkens the zenith past where the blues can reach alone, but keep it subtle &mdash; too much kills the luminosity. Apply in a single graded wash from zenith (darkest, more Indanthrone) to horizon (lighter, more Ultramarine). Work fast and wet, one pass. A night sky reworked is a night sky ruined.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>The darkest week of the year demands the darkest palette in the series. Eight of the ten colors live below mid-value &mdash; this is deliberate. Indigo for the ink-dark evergreen silhouettes because its staining permanence is like winter itself: once it&rsquo;s down, it doesn&rsquo;t lift. Indanthrone Blue for the 16-hour night because it&rsquo;s the deepest transparent blue available, and transparency matters when you want darkness with depth, not darkness that&rsquo;s dead. Lunar Black earns its place through granulation &mdash; its mineral particles separate on wet paper like shadow finding its own texture, giving darkness a physical presence that Lamp Black alone cannot. Hooker&rsquo;s Green and Perylene Green maintain the evergreen identity that defines the PNW even in near-total darkness. Carbazole Violet fills the shadow spaces between blue and black, the bruised twilight color. French Ultramarine adds granulating warmth to the night sky. And then the two warm notes &mdash; just two, deliberately scarce. New Gamboge is the candle flame, the only true bright color in the palette, and its rarity makes it powerful. Burnt Sienna is the glow around the flame, the windowsill warmth. Everything else is ink, shadow, evergreen. That&rsquo;s solstice.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">The solstice palette is built for darkness with purpose &mdash; every prompt here uses the overwhelming dark to make a small warmth meaningful. Lean into the ink.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Candle in a Rain-Streaked Window</h3>
+      <p class="subject"><strong>Subject:</strong> A single candle seen through a window beaded with rain. The flame is a tiny warm core; the window glass distorts the glow into streaks. Beyond, evergreen silhouettes are barely distinguishable from the sky. Interior warmth versus exterior dark.</p>
+      <p class="palette-fit">The Single Flame mix (New Gamboge + Burnt Sienna + Carbazole Violet) builds the candle and its glow. The Solstice Evergreen mix (Indigo + Hooker&rsquo;s Green + Lunar Black) handles everything beyond the glass. Rain streaks are negative painting &mdash; lifting wet pigment with a thirsty brush.</p>
+      <div class="tips"><ul>
+        <li>Paint the candle glow first on dry paper &mdash; New Gamboge at the flame center fading to Burnt Sienna fading to Carbazole Violet at the edge. Let this dry completely before painting the surrounding dark</li>
+        <li>The rain-streaked glass is a layer of Indigo applied over the dried glow area and immediately scored with a palette knife or credit card edge &mdash; the lifted lines become refracted light streaks</li>
+        <li>Evergreen silhouettes beyond the window get the full Solstice Evergreen mix at maximum concentration &mdash; they should nearly disappear into the night. Lunar Black&rsquo;s granulation gives them just enough texture to read as trees</li>
+        <li>Leave the window frame as a thin strip of Burnt Sienna at mid-value &mdash; it bridges interior warmth and exterior cold, and its wooden warmth anchors the composition</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Evergreen Ridge at Dusk</h3>
+      <p class="subject"><strong>Subject:</strong> A ridge of Douglas fir and western red cedar silhouetted against the last gray light of a 4 PM sunset. The sky is Indanthrone Blue fading to a thin band of cold light at the horizon. No warmth anywhere &mdash; just the serrated line of treetops against dying light.</p>
+      <p class="palette-fit">The Sixteen-Hour Night mix (Indanthrone Blue + French Ultramarine + Lamp Black) for the sky. The Solstice Evergreen mix for the treeline. Perylene Green for the darkest foreground trees. This is the palette at its coldest &mdash; no warm pigments at all.</p>
+      <div class="tips"><ul>
+        <li>The sky is one graded wash &mdash; Indanthrone Blue at the zenith, thinning to French Ultramarine, then to nearly bare paper at the horizon where the last light clings. Work fast and do not rework; night skies die on the second pass</li>
+        <li>The treeline silhouette goes in while the sky wash is still barely damp at the bottom &mdash; the tops of the trees should bleed slightly upward into the sky, softening the ridge the way real dusk softens edges</li>
+        <li>Vary the treeline: taller Douglas firs as pointed spires, broader cedars as rounded masses. Use Perylene Green for the nearest trees and the Solstice Evergreen mix for trees further back on the ridge</li>
+        <li>The thin band of light at the horizon is unpainted paper with the faintest wash of French Ultramarine &mdash; it should feel cold and insufficient, the last breath of daylight before 16 hours of dark</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Wet Street, One Streetlight</h3>
+      <p class="subject"><strong>Subject:</strong> A residential street in the rain, late afternoon already full dark. One streetlight casts a cone of light on wet pavement. Parked cars are dark shapes. A row of evergreens lines one side. Reflections stretch across the wet road surface.</p>
+      <p class="palette-fit">Lamp Black and Indigo for the wet pavement base. New Gamboge for the streetlight cone. Burnt Sienna for warm reflections on the wet road. The Solstice Evergreen mix for the trees. Lunar Black granulates beautifully for textured asphalt.</p>
+      <div class="tips"><ul>
+        <li>Wet the entire road surface and apply Lamp Black with a touch of Indigo &mdash; while still wet, lift out the streetlight reflection area with a clean damp brush, creating a soft-edged pool of light on the pavement</li>
+        <li>The streetlight cone is New Gamboge applied while the surrounding Indigo is still damp, so the warm light bleeds into the cold dark with no hard edge &mdash; this is how light actually behaves in rain</li>
+        <li>Lunar Black for the parked cars &mdash; its granulation gives metal surfaces a convincing texture that smooth Lamp Black cannot. Leave tiny highlights of bare paper for wet reflections on roofs and hoods</li>
+        <li>Reflections on the wet road are vertical streaks: pull New Gamboge and Burnt Sienna downward from the light source with a damp flat brush, letting the colors blend into the dark pavement wash beneath</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Solstice Bonfire on the Beach</h3>
+      <p class="subject"><strong>Subject:</strong> A driftwood bonfire on a Puget Sound beach at the winter solstice. Figures huddle around the flames. The water is black. The sky is Indanthrone Blue. Sparks rise into darkness. Firelight catches the wet sand in streaks of gold.</p>
+      <p class="palette-fit">The full palette gets a workout: Single Flame mix for the fire, Sixteen-Hour Night for the sky, Lamp Black for the water, Burnt Sienna for firelit sand. The contrast between the two warm pigments and the eight dark ones is the entire painting.</p>
+      <div class="tips"><ul>
+        <li>Paint the fire zone first: New Gamboge at white-hot center, Burnt Sienna at the mid-flames, then leave it. The fire must dry completely before the surrounding dark goes in, or the warm colors will muddy</li>
+        <li>The figures are silhouettes &mdash; Indigo with a touch of Burnt Sienna on their fire-facing edges. Keep them simple: dark shapes with warm-rimmed edges are more evocative than detailed faces</li>
+        <li>The Sound is Lamp Black applied flat and left alone. No reflections, no texture &mdash; winter water at night is a void, and the flatness of Lamp Black conveys that emptiness</li>
+        <li>Sparks are the hardest part: spatter New Gamboge from a loaded brush by tapping the ferrule, then let the tiny dots dry. Some will be perfect. The imperfect ones read as sparks twisting in wind</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Indigo (PB15/PBk7) is a convenience mix that stains permanently &mdash; once down, it does not lift, which makes it ideal for the darkest values. Indanthrone Blue (PB60) is the deepest transparent blue available, darker than Prussian Blue with better lightfastness. Lunar Black is a PrimaTek pigment &mdash; ground mineral &mdash; and its dramatic granulation is unique; no synthetic black behaves this way. Carbazole Violet (PV23) is an intensely dark violet that reads as shadow rather than purple at low concentrations. New Gamboge (PY97) is a warm transparent yellow that replaces the fugitive historical pigment with excellent permanence.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

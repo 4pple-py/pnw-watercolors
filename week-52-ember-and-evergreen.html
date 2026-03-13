@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 52 — Ember &amp; Evergreen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(180,80,30,0.20) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(53,94,59,0.18) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(200,120,50,0.14) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(180,50,50,0.08) 0%, transparent 40%), linear-gradient(175deg, #f8efe8 0%, #f0e8e0 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a06030; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '—'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-text">
+    <div class="week-label">Week 52 &mdash; PNW Watercolor Series</div>
+    <h1>Ember &amp; Evergreen</h1>
+    <p class="mood">The year closes with fire against fir. Cedar boughs hang over mantels that glow with hearth light, and the whole house smells like resin and woodsmoke. Outside, the evergreens stand in their permanent dark. Inside, everything is warm: candles on the sill, embers in the grate, red ribbons on green branches. It&rsquo;s the oldest contrast &mdash; the one humans have been painting since the first solstice bonfire &mdash; warmth held against the cold, color held against the dark.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="trio-section">
+    <div class="section-label">Primary Trio</div>
+    <div class="trio">
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b85a20 0%, #a84e18 100%);"></div>
+        <div class="trio-info"><h3>Aussie Red Gold</h3><p>Red-gold ember glow &mdash; that distinctive metallic warmth where firelight meets its own reflection; like molten copper cooling at the edges</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #355e3b 0%, #2a4e30 100%);"></div>
+        <div class="trio-info"><h3>Hooker&rsquo;s Green</h3><p>The evergreen itself &mdash; cedar, fir, spruce. Dark, permanent, the green that stays when all other greens have gone. The foil to every warm note</p></div>
+      </div>
+      <div class="trio-card">
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c86830 0%, #b85a28 100%);"></div>
+        <div class="trio-info"><h3>Quinacridone Burnt Orange</h3><p>Hearth fire at its warmest, the color of coals that have been burning for hours; transparent, staining, intense without being aggressive</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="palette-section">
+    <div class="section-label">Full 10-Color Palette</div>
+    <div class="palette-strip">
+      <div class="swatch" style="background:#b85a20;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker&rsquo;s Green</span></div>
+      <div class="swatch" style="background:#c86830;"><span class="label" style="color:#fff;">Quin. Burnt Orange</span></div>
+      <div class="swatch" style="background:#c87028;"><span class="label" style="color:#fff;">Mayan Orange</span></div>
+      <div class="swatch" style="background:#d42a2a;"><span class="label" style="color:#fff;">Cad. Red Med. Hue</span></div>
+      <div class="swatch" style="background:#1a3a28;"><span class="label" style="color:#ddd;">Perylene Green</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
+      <div class="swatch" style="background:#1c2a50;"><span class="label" style="color:#ddd;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#1e1e1e;"><span class="label" style="color:#ddd;">Ivory Black</span></div>
+      <div class="swatch" style="background:#8a5070;"><span class="label" style="color:#fff;">Duo. Cactus Flower</span></div>
+    </div>
+    <div class="palette-list">
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#b85a20;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Primary &mdash; ember glow, red-gold metallic warmth</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#1a3a28;"></div><div><div class="name">Perylene Green</div><div class="role">Green &mdash; deep cedar shadow, darkest green</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Primary &mdash; evergreen, cedar boughs, fir</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Warm Accent &mdash; candlelight, star top</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#c86830;"></div><div><div class="name">Quinacridone Burnt Orange</div><div class="role">Primary &mdash; hearth fire, glowing coals</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#1c2a50;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Dark &mdash; winter night outside the window</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#c87028;"></div><div><div class="name">Mayan Orange</div><div class="role">Accent &mdash; warm ember, Primatek mineral fire</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#1e1e1e;"></div><div><div class="name">Ivory Black</div><div class="role">Dark &mdash; hearth shadow, chimney interior</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#d42a2a;"></div><div><div class="name">Cadmium Red Medium Hue</div><div class="role">Accent &mdash; holly berry, ribbon, ornament red</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#8a5070;"></div><div><div class="name">Duochrome Cactus Flower</div><div class="role">Specialty &mdash; ornament/candle color shift, celebration</div></div></div>
+    </div>
+  </div>
+
+  <div class="mixes-section">
+    <div class="section-label">Mixes &amp; Ratios</div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #b86028, #a8501c);"></div>
+        <div><h3>Hearth Glow</h3><span class="ratio">2 Quinacridone Burnt Orange : 1 Aussie Red Gold : &frac12; Mayan Orange</span></div>
+      </div>
+      <p class="mix-description">The radiant core of a fireplace that&rsquo;s been burning since morning &mdash; coals so hot they pulse, the air above them shimmering.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#c86830; color:#fff;">Quin. Burnt Orange</div>
+        <div class="mix-bar" style="flex:1; background:#b85a20; color:#fff;">Aussie Red Gold</div>
+        <div class="mix-bar" style="flex:0.5; background:#c87028; color:#fff;">Mayan Orange</div>
+      </div>
+      <div class="mix-notes">Quinacridone Burnt Orange is the structural fire color &mdash; transparent, staining, it builds heat through layers the way coals build heat through hours of burning. Aussie Red Gold pushes the mix toward that distinctive red-gold metallic warmth that separates ember glow from mere orange. Mayan Orange is the Primatek ingredient: ground mineral pigment that granulates subtly, giving the fire its mineral character &mdash; real embers have texture, and Mayan Orange&rsquo;s stone-ground particles provide it. Layer from light to dark: dilute Quinacridone Burnt Orange first, then float Aussie Red Gold into the hottest zones, then touch Mayan Orange into the coal beds last for granulated texture.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #2a4430, #1e3424);"></div>
+        <div><h3>Winter Cedar</h3><span class="ratio">2 Hooker&rsquo;s Green : 1 Perylene Green : &frac14; Ivory Black</span></div>
+      </div>
+      <p class="mix-description">Western red cedar in deep winter &mdash; the boughs that hang heavy with rain and never lose their green, dark as the season demands.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#355e3b; color:#fff;">Hooker&rsquo;s Green</div>
+        <div class="mix-bar" style="flex:1; background:#1a3a28; color:#ddd;">Perylene Green</div>
+        <div class="mix-bar" style="flex:0.25; background:#1e1e1e; color:#ddd;">Ivory Black</div>
+      </div>
+      <div class="mix-notes">Hooker&rsquo;s Green is the workhorse evergreen &mdash; it reads as &ldquo;conifer&rdquo; immediately and holds its green identity even at dark values. Perylene Green deepens the shadows between boughs, pushing toward that near-black green you see when looking up into a cedar canopy on an overcast December day. Ivory Black at a whisper anchors the deepest recesses where even green gives way to darkness. Apply Hooker&rsquo;s Green as a base wash for the boughs, then drop Perylene Green wet-in-wet into the undersides and interior spaces. Touch Ivory Black only into the deepest gaps between branch layers &mdash; too much kills the green identity, and these trees need to read as alive even in winter.</div>
+    </div>
+
+    <div class="mix-card">
+      <div class="mix-header">
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #c04828, #a83820);"></div>
+        <div><h3>Holly &amp; Ribbon</h3><span class="ratio">2 Cadmium Red Medium Hue : 1 Quinacridone Burnt Orange : &frac14; New Gamboge</span></div>
+      </div>
+      <p class="mix-description">The red that means celebration &mdash; holly berries clustered in green, satin ribbon catching firelight, a glass ornament turning slowly on its thread.</p>
+      <div class="mix-bars">
+        <div class="mix-bar" style="flex:2; background:#d42a2a; color:#fff;">Cad. Red Med. Hue</div>
+        <div class="mix-bar" style="flex:1; background:#c86830; color:#fff;">Quin. Burnt Orange</div>
+        <div class="mix-bar" style="flex:0.25; background:#e8a820; color:#fff;">New Gamboge</div>
+      </div>
+      <div class="mix-notes">Cadmium Red Medium Hue has the opacity and punch that holiday red demands &mdash; it&rsquo;s the red you see across a room, the one that pops against dark green without hesitation. Quinacridone Burnt Orange warms the shadow side of berries and ribbons, shifting the red toward the orange glow cast by nearby firelight. New Gamboge at a touch creates the highlight where light catches a glossy berry or the sheen of satin ribbon. For holly berries, apply Cadmium Red Medium Hue as a near-full-strength dot, leave a tiny white highlight, and add Quinacridone Burnt Orange to the underside while still damp. For ribbons, grade from New Gamboge highlight through Cadmium Red to Quinacridone Burnt Orange in the folds.</div>
+    </div>
+  </div>
+
+  <div class="why-section">
+    <div class="why-card">
+      <h2>Why These Colors?</h2>
+      <p>The year ends with the oldest story: warmth held against cold, fire against evergreen, light against the longest dark. Aussie Red Gold anchors the warm side with its distinctive red-gold metallic glow &mdash; no other pigment captures ember warmth this precisely. Quinacridone Burnt Orange is the hearth itself, transparent and staining, building heat through layers the way real coals build heat through hours. Cadmium Red Medium Hue adds the opaque punch of holly berry and ribbon red, celebration color that reads across a room. Mayan Orange&rsquo;s Primatek mineral quality gives fire its texture &mdash; real embers granulate, and so does this pigment. On the cool side, Hooker&rsquo;s Green and Perylene Green are the evergreen partnership: cedar, fir, spruce, the green that persists when all other color has drained from the landscape. Indanthrone Blue handles the winter night pressing against the windows. Ivory Black is hearth shadow and chimney interior. New Gamboge lights the candles and tops the star. And Duochrome Cactus Flower earns its place through behavior: its color-shifting quality &mdash; warm pink to cool green depending on angle &mdash; mimics the way candlelight plays across glass ornaments, adding a note of iridescent celebration that no single-hue pigment can replicate. This is the palette of arrival, of the year resting by the fire.</p>
+    </div>
+  </div>
+
+  <!-- Painting Prompts -->
+  <div class="prompts-section">
+    <div class="section-label">Painting Prompts</div>
+    <p class="prompts-intro">The final week of the series pairs fire with fir &mdash; every prompt here lives in the tension between warmth and evergreen, indoors and out. Paint the contrast. That&rsquo;s the whole year, distilled.</p>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 1</div>
+      <h3>Mantel Still Life &mdash; Cedar, Candles, Holly</h3>
+      <p class="subject"><strong>Subject:</strong> A fireplace mantel draped with cedar boughs, three candles of different heights, and a spray of holly with bright red berries. Firelight from below warms the underside of the greenery. A dark wall behind.</p>
+      <p class="palette-fit">The Winter Cedar mix (Hooker&rsquo;s Green + Perylene Green + Ivory Black) for the boughs. New Gamboge and Aussie Red Gold for the candle flames and their glow. The Holly &amp; Ribbon mix for the berries. Indanthrone Blue for the shadowed wall behind.</p>
+      <div class="tips"><ul>
+        <li>Paint the cedar boughs first with the Winter Cedar mix &mdash; use a fan brush or the side of a round brush to suggest the flat, layered spray pattern of western red cedar. Leave gaps where candles and berries will go</li>
+        <li>Candle flames are New Gamboge at the very tip fading to Aussie Red Gold at the base of the flame. Leave white paper at the flame&rsquo;s brightest point. The glow on surrounding cedar is a dilute wash of Quinacridone Burnt Orange, warming the green from below</li>
+        <li>Holly berries in clusters of three or five using the Holly &amp; Ribbon mix &mdash; each berry gets one highlight dot of bare paper. Holly leaves are Hooker&rsquo;s Green with sharp, pointed edges painted with the tip of a rigger</li>
+        <li>The wall behind is Indanthrone Blue at mid-value, darkening near the top and lightening where firelight reaches up from below. This dark background is what makes the warm colors sing</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 2</div>
+      <h3>Cabin Window &mdash; Inside Looking Out</h3>
+      <p class="subject"><strong>Subject:</strong> Looking through a cabin window at night. Inside, warm light from a fire paints the windowsill and curtain edges orange. Outside, snow-dusted evergreens stand against an Indanthrone Blue sky. A single ornament hangs in the window, catching both the interior fire and exterior moonlight.</p>
+      <p class="palette-fit">The Hearth Glow mix for the interior warm light. Winter Cedar for the trees outside. Indanthrone Blue for the night sky. Duochrome Cactus Flower for the ornament &mdash; its color-shifting quality captures both the warm firelight and the cool moonlight simultaneously.</p>
+      <div class="tips"><ul>
+        <li>Divide the painting into warm interior (bottom and sides) and cool exterior (through the window pane). Paint each zone separately and let them dry before adding the window frame that bridges them</li>
+        <li>The interior glow is the Hearth Glow mix graded from strong at the bottom (fire source) to fading at the window edges. The curtain catches this warmth on its inner face while its window-facing edge picks up reflected Indanthrone Blue</li>
+        <li>Trees outside are Winter Cedar mix applied over a dry Indanthrone Blue sky wash. Let some trees bleed slightly into the sky for atmospheric softness. Snow on branches is negative painting &mdash; leave the sky wash visible as snow color</li>
+        <li>The hanging ornament is the star: apply Duochrome Cactus Flower to a wet circle and let it settle. The duochrome pigment will shift from warm pink on the fire-facing side to cool green on the window-facing side, capturing the dual light source in a single wash</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 3</div>
+      <h3>Wreath on a Weathered Door</h3>
+      <p class="subject"><strong>Subject:</strong> A full cedar wreath on a dark wooden door, tied with a red ribbon. Holly berries and small pinecones punctuate the green. Late afternoon light rakes across from the side, catching the ribbon and leaving half the wreath in shadow. Rain-wet wood behind.</p>
+      <p class="palette-fit">Winter Cedar mix in two values &mdash; full light and deep shadow &mdash; for the wreath. Holly &amp; Ribbon mix for berries and the ribbon. Ivory Black with Quinacridone Burnt Orange for the rain-darkened wooden door. Mayan Orange for the pinecone details, its granulation perfect for cone-scale texture.</p>
+      <div class="tips"><ul>
+        <li>The wreath is a circle of Winter Cedar in two distinct values: the sunlit side uses more Hooker&rsquo;s Green (lighter), the shadow side uses more Perylene Green with Ivory Black (darker). The transition between them is where the wreath reads as three-dimensional</li>
+        <li>The red ribbon is the focal point &mdash; paint it with confident, single strokes of Cadmium Red Medium Hue. Add Quinacridone Burnt Orange in the folds. The ribbon&rsquo;s opacity against the transparent greens creates natural visual hierarchy</li>
+        <li>Pinecones are Mayan Orange with touches of Ivory Black &mdash; the Primatek granulation creates scale texture without detailed brushwork. Apply to damp paper and let the mineral particles do the drawing</li>
+        <li>The door behind is a wash of Ivory Black warmed with Quinacridone Burnt Orange, applied to wet paper so the colors mingle like stain on old wood. Leave a few vertical streaks of lighter value for wood grain</li>
+      </ul></div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-number">Prompt 4</div>
+      <h3>Year&rsquo;s End &mdash; Fireplace with Evergreen View</h3>
+      <p class="subject"><strong>Subject:</strong> A wide view: a stone fireplace with glowing embers on one side, a large window showing snow-touched evergreens on the other. The room bridges both. A decorated tree in the corner catches firelight on glass ornaments. The whole scene is the year closing &mdash; warmth and wild held in one frame.</p>
+      <p class="palette-fit">Every color in the palette earns its place here. Hearth Glow for the fireplace. Winter Cedar for the trees outside and the indoor garland. Holly &amp; Ribbon for ornaments and berries. Duochrome Cactus Flower for glass ornaments catching shifting light. Indanthrone Blue for the night through the window. New Gamboge for every point of light.</p>
+      <div class="tips"><ul>
+        <li>Block in the big shapes first: the warm fireplace wall (Aussie Red Gold and Quinacridone Burnt Orange washes), the cool window view (Indanthrone Blue sky, Winter Cedar trees), and the neutral floor/ceiling. Let the temperature contrast establish itself before adding any detail</li>
+        <li>The embers in the fireplace are the Hearth Glow mix at full strength with pure New Gamboge in the hottest spots. The stone surround is Ivory Black with granulation allowed to settle &mdash; touch Burnt Orange into the fire-facing stones for reflected warmth</li>
+        <li>Glass ornaments on the tree are tiny circles of Duochrome Cactus Flower, Cadmium Red Medium Hue, and New Gamboge, each with a white highlight dot. The duochrome ornaments will shift color naturally as the pigment settles, mimicking real glass catching complex light</li>
+        <li>This is the year&rsquo;s final painting &mdash; let it be atmospheric rather than precise. Soft edges, warm light bleeding into cool shadow, the whole room slightly hazy with fireplace warmth. Spray the paper lightly with water before the final details to soften everything</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="notes-section">
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Aussie Red Gold (PR101) is a distinctive red-gold earth tone with subtle metallic warmth. Quinacridone Burnt Orange (PO48) is a transparent synthetic organic with excellent layering properties. Cadmium Red Medium Hue (PR108) offers opaque punch without the toxicity concerns of true cadmium. Mayan Orange is a Primatek pigment &mdash; ground mineral stone &mdash; with subtle granulation that adds texture. Duochrome Cactus Flower is an interference pigment that shifts between warm pink and cool green depending on viewing angle and background, making it uniquely suited for depicting iridescent and reflective surfaces like glass ornaments.
+  </div>
+
+  <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
+</div>
+
+</body>
+</html>

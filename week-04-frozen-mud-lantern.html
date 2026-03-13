@@ -6,423 +6,65 @@
 <title>Week 4 — Frozen Mud Lantern</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #faf8f5;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 60%, rgba(232,184,0,0.35) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 40%, rgba(92,51,23,0.3) 0%, transparent 45%),
-      radial-gradient(ellipse at 75% 70%, rgba(83,104,120,0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at 35% 30%, rgba(232,184,0,0.15) 0%, transparent 40%),
-      linear-gradient(175deg, #faf8f5 0%, #f0ece6 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #b09840;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0ece6;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e8e4de;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0ece6;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #777;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #555;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #e8e4de;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 55%, rgba(200,165,58,0.35) 0%, transparent 50%), radial-gradient(ellipse at 60% 40%, rgba(40,68,102,0.3) 0%, transparent 45%), radial-gradient(ellipse at 70% 65%, rgba(160,82,45,0.2) 0%, transparent 50%), radial-gradient(ellipse at 40% 30%, rgba(232,168,32,0.15) 0%, transparent 40%), linear-gradient(175deg, #f8f4ee 0%, #f0ece6 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #c7955a; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '&mdash;'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f0e8e2; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 4 &mdash; PNW Watercolor Series</div>
     <h1>Frozen Mud Lantern</h1>
-    <p class="mood">Skunk cabbage spathes push through ice-skinned mud in a Snoqualmie bottomland, 10 AM, fog barely lifting. Great blue herons stand in flooded pasture like reluctant prophets. The tension: first eruption from below &mdash; warmth forcing through frozen ground.</p>
+    <p class="mood">The ground has been frozen solid for three mornings straight. Ice on the puddles thick enough to step on, cracking in clean lines under your boot. The porch light throws amber across frozen mud and you can see your breath in the cone of it &mdash; everything outside that glow is Indanthrone Blue darkness.</p>
   </div>
 </div>
 
@@ -442,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8b800 0%, #d4a600 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #c8a53a 0%, #b89430 100%);"></div>
         <div class="trio-info">
-          <h3>Hansa Yellow Deep</h3>
-          <p>Skunk cabbage spathe, the only warm light source in the scene; transparent, clean, high-key</p>
+          <h3>Yellow Ochre</h3>
+          <p>The lantern glow pooling on frozen ground &mdash; warm, opaque, the only hospitable color in the scene.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #5c3317 0%, #4a2810 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #736357 0%, #635549 100%);"></div>
         <div class="trio-info">
-          <h3>Burnt Umber</h3>
-          <p>Frozen mud cracked and heaved; granulating, opaque-leaning, the resistant surface</p>
+          <h3>Raw Umber</h3>
+          <p>Frozen mud itself &mdash; granulating, earthy, locked solid and holding the shapes of last week&rsquo;s boot prints.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #536878 0%, #455868 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #284466 0%, #1e3652 100%);"></div>
         <div class="trio-info">
-          <h3>Payne&rsquo;s Gray</h3>
-          <p>Heron silhouette and flooded field atmosphere; cool, transparent, receding</p>
+          <h3>Indanthrone Blue</h3>
+          <p>The deep cold darkness past the reach of any light &mdash; granulating, staining, absolute.</p>
         </div>
       </div>
     </div>
@@ -469,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#e8b800;"><span class="label" style="color:#777;">Hansa Yellow Deep</span></div>
-      <div class="swatch" style="background:#5c3317;"><span class="label" style="color:#fff;">Burnt Umber</span></div>
-      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#826644;"><span class="label" style="color:#fff;">Raw Umber</span></div>
-      <div class="swatch" style="background:#3d3d4a;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
-      <div class="swatch" style="background:#c9a0a0;"><span class="label" style="color:#fff;">Potter's Pink</span></div>
+      <div class="swatch" style="background:#c8a53a;"><span class="label" style="color:#555;">Yellow Ochre</span></div>
+      <div class="swatch" style="background:#736357;"><span class="label" style="color:#fff;">Raw Umber</span></div>
+      <div class="swatch" style="background:#284466;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#a0522d;"><span class="label" style="color:#fff;">Burnt Sienna</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#555;">New Gamboge</span></div>
+      <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne&rsquo;s Gray</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">French Ultramarine</span></div>
+      <div class="swatch" style="background:#8b5e3c;"><span class="label" style="color:#fff;">Transparent Brown Oxide</span></div>
       <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#5e6e3a;"><span class="label" style="color:#fff;">Olive Green</span></div>
-      <div class="swatch" style="background:#3d59ab;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
-      <div class="swatch" style="background:#1b3a5c;"><span class="label" style="color:#fff;">Indanthrone Blue</span></div>
+      <div class="swatch" style="background:#1a1a1e;"><span class="label" style="color:#fff;">Lamp Black</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e8b800;"></div><div><div class="name">Hansa Yellow Deep</div><div class="role">Light Source &mdash; skunk cabbage spathe glowing through fog</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#c9a0a0;"></div><div><div class="name">Potter&rsquo;s Pink</div><div class="role">Atmospheric &mdash; fog with warmth behind it, pink-gray</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#5c3317;"></div><div><div class="name">Burnt Umber</div><div class="role">Earth &mdash; frozen mud cracked by frost heave</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; ice skin on puddle, matte and fragile</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Atmosphere &mdash; heron silhouette in flooded pasture</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5e6e3a;"></div><div><div class="name">Olive Green</div><div class="role">Warm Accent &mdash; dead grass mat, winter-flattened</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#826644;"></div><div><div class="name">Raw Umber</div><div class="role">Earth &mdash; flooded field water, sediment-heavy</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Cool Accent &mdash; heron wing flash on lift-off</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#3d3d4a;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; standing water depth, no reflection</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#1b3a5c;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Cool Accent &mdash; distant treeline dissolving in fog</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#c8a53a;"></div><div><div class="name">Yellow Ochre</div><div class="role">Primary &mdash; lantern glow on frozen ground</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne&rsquo;s Gray</div><div class="role">Dark &mdash; frozen ground shadows</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#736357;"></div><div><div class="name">Raw Umber</div><div class="role">Primary &mdash; frozen mud, frost-heaved earth</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Cool Accent &mdash; ice blue, puddle surfaces</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#284466;"></div><div><div class="name">Indanthrone Blue</div><div class="role">Primary &mdash; deep cold darkness beyond the light</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#8b5e3c;"></div><div><div class="name">Transparent Brown Oxide</div><div class="role">Earth &mdash; transparent mud layers, glazing</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#a0522d;"></div><div><div class="name">Burnt Sienna</div><div class="role">Warm Accent &mdash; warm lantern halo</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5e6c8;border:1px solid #e0d4b8;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; ice surface reflection, frozen sheen</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Warm Accent &mdash; bright flame yellow, lantern core</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#1a1a1e;"></div><div><div class="name">Lamp Black</div><div class="role">Dark &mdash; deep surrounding darkness</div></div></div>
     </div>
   </div>
 
@@ -500,56 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8b800, #e2c870);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8a820, #c8a53a, #a0522d);"></div>
         <div>
-          <h3>Spathe Glow</h3>
-          <span class="ratio">3 Hansa Yellow Deep : 1 Buff Titanium</span>
+          <h3>Porch Light Halo</h3>
+          <span class="ratio">2 New Gamboge : 2 Yellow Ochre : 1 Burnt Sienna</span>
         </div>
       </div>
-      <p class="mix-description">Skunk cabbage catching weak sun through fog &mdash; a lantern with no flame, just chlorophyll and will.</p>
+      <p class="mix-description">The amber corona where lantern light meets frozen air &mdash; warm enough to melt the dark at its edges but not to warm your hands.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e8b800; color:#777;">Hansa Yellow Deep</div>
-        <div class="mix-bar" style="flex:1; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:2; background:#e8a820; color:#555;">New Gamboge</div>
+        <div class="mix-bar" style="flex:2; background:#c8a53a; color:#555;">Yellow Ochre</div>
+        <div class="mix-bar" style="flex:1; background:#a0522d; color:#fff;">Burnt Sienna</div>
       </div>
       <div class="mix-notes">
-        Hansa Yellow Deep is transparent and clean; Buff Titanium adds just enough body to suggest the waxy opacity of the spathe itself. Mix on the palette &mdash; don&rsquo;t let them mingle on paper or you&rsquo;ll lose the glow. Apply to dry paper in a single stroke shaped like the spathe&rsquo;s hood. Leave a hard edge on the light side, soften the shadow side with a damp brush. The Buff Titanium keeps the yellow from going shrill. For the spadix inside, use pure Hansa Yellow Deep, darker and more saturated.
+        New Gamboge is transparent and high-chroma &mdash; it provides the luminous core of the light source where the glow is brightest. Yellow Ochre is semi-opaque and granulating, which grounds the light as it spreads across the frozen surface, giving it a dusty warmth that reads as real lamplight rather than sunlight. Burnt Sienna enters at the halo&rsquo;s edge where the warmth starts to redden and die. Apply New Gamboge at the center on dry paper, then immediately blend outward into premixed Yellow Ochre + Burnt Sienna while the edge is still wet. The transition should be seamless. Don&rsquo;t go back in &mdash; one pass.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #5c3317, #687078);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #536878, #3a4a5e, #284466);"></div>
         <div>
-          <h3>Bottomland Freeze</h3>
-          <span class="ratio">2 Burnt Umber : 1 Payne&rsquo;s Gray : trace Buff Titanium</span>
+          <h3>Black Ice Glaze</h3>
+          <span class="ratio">1 French Ultramarine : 1 Payne&rsquo;s Gray : trace Buff Titanium</span>
         </div>
       </div>
-      <p class="mix-description">Cracked mud with ice &mdash; the surface of a bottomland field that froze mid-heave, each polygon rimmed in white.</p>
+      <p class="mix-description">The skin of ice on a frozen puddle &mdash; not white, not blue, but something between glass and sky that you only see when you crouch down.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#5c3317; color:#fff;">Burnt Umber</div>
+        <div class="mix-bar" style="flex:1; background:#2a3d9c; color:#fff;">French Ultramarine</div>
         <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
         <div class="mix-bar" style="flex:0.3; background:#f5e6c8; color:#777;">Buff Ti.</div>
       </div>
       <div class="mix-notes">
-        Apply Burnt Umber and Payne&rsquo;s Gray premixed for the mud polygons, using dry-brush technique on rough paper to catch the texture of frost-cracked earth. While still slightly damp, touch Buff Titanium into the cracks between polygons &mdash; it will bloom outward just enough to suggest ice crystal growth. Don&rsquo;t smooth it. The granulation in Burnt Umber handles the grit. For deeper cracks, increase the Payne&rsquo;s Gray. The Buff Titanium trace is structural &mdash; it&rsquo;s the ice, not decoration.
+        French Ultramarine granulates beautifully &mdash; its particles settle into the paper&rsquo;s valleys, creating a crystalline texture that mimics the mineral quality of ice. Payne&rsquo;s Gray cools and neutralizes the blue without killing it, pulling the mix toward that ambiguous gray-blue of actual ice rather than storybook blue. The trace of Buff Titanium adds the faintest opacity &mdash; ice isn&rsquo;t transparent when it&rsquo;s frozen hard, it&rsquo;s translucent, and that milky quality is what Buff provides. Apply as a single thin wash over dry paper. Let the granulation do the work. Where the ice is thickest, add a second pass of pure Buff Titanium while the first layer is still damp.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #536878, #6a5e50);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8b5e3c, #4a3828, #1a1a1e);"></div>
         <div>
-          <h3>Heron Field</h3>
-          <span class="ratio">2 Payne&rsquo;s Gray : 1 Raw Umber</span>
+          <h3>Rut Water at Midnight</h3>
+          <span class="ratio">2 Transparent Brown Oxide : 1 Lamp Black : 1 Indanthrone Blue</span>
         </div>
       </div>
-      <p class="mix-description">Standing water reflecting nothing &mdash; flooded pasture under fog, a great blue heron knee-deep and motionless.</p>
+      <p class="mix-description">The color of the tire rut puddle you almost step in on a dark rural road &mdash; not water anymore, not mud, just cold ground with depth.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#536878; color:#fff;">Payne&rsquo;s Gray</div>
-        <div class="mix-bar" style="flex:1; background:#826644; color:#fff;">Raw Umber</div>
+        <div class="mix-bar" style="flex:2; background:#8b5e3c; color:#fff;">Transp. Brown Oxide</div>
+        <div class="mix-bar" style="flex:1; background:#1a1a1e; color:#fff;">Lamp Black</div>
+        <div class="mix-bar" style="flex:1; background:#284466; color:#fff;">Indanthrone Blue</div>
       </div>
       <div class="mix-notes">
-        This is the color of water that has no sky to reflect &mdash; all information comes from the sediment in it. Both pigments granulate, producing a soft, silty wash ideal for flooded field water. Apply wet-in-wet for the water surface, letting the pigments settle and separate. For the heron, wait until the wash is bone dry, then paint the bird in pure Payne&rsquo;s Gray with a firm hand. The heron should be sharp against the soft field. One bird. One stroke for the neck. Don&rsquo;t fuss.
+        Transparent Brown Oxide is the key here &mdash; it&rsquo;s genuinely transparent, which means you can glaze it in layers that build depth the way actual muddy water has depth. Lamp Black is dense and opaque, so use it sparingly; it anchors the darkest areas where the rut is deepest. Indanthrone Blue granulates and stains, giving the mix a cold undertone that prevents it from reading as warm chocolate. Lay Transparent Brown Oxide first as a glaze. While still wet, drop Indanthrone Blue into the deepest areas and watch it bloom and granulate. Once dry, touch Lamp Black into only the very darkest points &mdash; the center of the rut, the shadow under a frozen lip of mud.
       </div>
     </div>
   </div>
@@ -558,71 +202,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is organized around a single thermal event: warmth erupting through cold. Hansa Yellow Deep is the eruption &mdash; transparent, stain-free, the cleanest warm yellow available, isolated against a field of granulating earth tones and atmospheric grays. Burnt Umber and Raw Umber both granulate, which gives every mud passage the particulate texture of frost-heaved ground without brushwork. Potter&rsquo;s Pink is the fog note &mdash; it&rsquo;s opaque and chalky, which is exactly what fog is. Payne&rsquo;s Gray and Neutral Tint split the cool darks between atmosphere (Payne&rsquo;s) and depth (Neutral Tint). Buff Titanium&rsquo;s opacity is structural here: ice is opaque. The palette places one transparent warm against nine pigments that range from cool to neutral, making the skunk cabbage impossible to ignore &mdash; which is the plant&rsquo;s entire reproductive strategy.</p>
+      <p>The palette is built on a thermal divide. Three pigments carry warmth &mdash; Yellow Ochre, New Gamboge, Burnt Sienna &mdash; and they&rsquo;re outnumbered by cold: Indanthrone Blue, French Ultramarine, Payne&rsquo;s Gray, Lamp Black. That&rsquo;s the ratio of a late January night. The warm pigments cluster near the lantern; the cold ones own everything else. Raw Umber and Transparent Brown Oxide hold the middle ground as frozen earth, neither warm nor cold, just present. Raw Umber granulates for surface texture; Transparent Brown Oxide is glassy and glazeable for depth. Buff Titanium is the ice &mdash; its opacity is structural, not decorative. It sits on top of whatever you put it over, the way ice sits on a puddle. Lamp Black provides a darkness that Indanthrone Blue can&rsquo;t: total, neutral, without any blue romance. The space between Lamp Black and New Gamboge is the full range of this week &mdash; from the flame in the lantern to the nothing past the tree line.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Late January in the PNW lowlands. The freeze has settled in. These four subjects live entirely within this palette&rsquo;s warm-cold tension &mdash; each one asks you to decide where the light ends and the dark begins.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Skunk Cabbage Lantern</h3>
-      <p class="subject"><strong>Subject:</strong> A single skunk cabbage spathe pushing through ice-skinned mud, glowing yellow against the frozen brown bottomland. Fog behind it. Nothing else in the scene is warm.</p>
-      <p class="palette-fit">The Spathe Glow mix (Hansa Yellow Deep + Buff Titanium) gives you the waxy, luminous hood. The Bottomland Freeze mix (Burnt Umber + Payne&rsquo;s Gray + trace Buff Titanium) handles the cracked mud around it. One warm shape against nine cool pigments &mdash; the palette is engineered for this exact drama.</p>
+      <h3>Porch Light on Frozen Mud</h3>
+      <p class="subject"><strong>Subject:</strong> A single porch light throwing an amber cone across a frozen mud yard. Boot prints frozen into the ground. Your breath visible in the light. Beyond the cone&rsquo;s edge, darkness.</p>
+      <p class="palette-fit">The Porch Light Halo mix (New Gamboge + Yellow Ochre + Burnt Sienna) gives you the gradient from bright core to warm edge. Indanthrone Blue and Lamp Black split the darkness &mdash; Indanthrone for the sky and middle distance, Lamp Black for the true void at the painting&rsquo;s edges.</p>
       <div class="tips">
         <ul>
-          <li>Paint the spathe first on dry paper &mdash; a single stroke shaped like the hood, using the Spathe Glow mix. Leave a hard edge on the light side, soften the shadow side with a damp brush</li>
-          <li>Build the frozen mud around the spathe with the Bottomland Freeze mix using dry-brush technique on rough paper &mdash; the granulation handles the frost-crack texture</li>
-          <li>Touch Buff Titanium into the mud cracks while still slightly damp for ice crystal blooms</li>
-          <li>The fog behind everything is Potter&rsquo;s Pink + Buff Titanium, barely there &mdash; keep it pale and chalky</li>
+          <li>Start with the light &mdash; paint the amber cone first on dry paper using the Porch Light Halo mix, brightest at top center and fading as it spreads downward and outward</li>
+          <li>Let the warm wash dry completely before painting the frozen mud beneath it with Raw Umber dry-brushed for granular texture, leaving the boot print shapes as negative space</li>
+          <li>Build the darkness around the cone with Indanthrone Blue first, then deepen the corners with Lamp Black &mdash; the transition from blue-dark to black-dark is what makes the night feel real</li>
+          <li>The breath is reserved white paper &mdash; just leave it unpainted within the amber cone, and it reads immediately</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Great Blue Heron in Flooded Pasture</h3>
-      <p class="subject"><strong>Subject:</strong> A great blue heron standing motionless in a flooded Snoqualmie bottomland field, knee-deep in silty water that reflects nothing. Fog barely lifting at 10 AM.</p>
-      <p class="palette-fit">The Heron Field mix (Payne&rsquo;s Gray + Raw Umber) is the water &mdash; granulating, sediment-heavy, no sky to reflect. Pure Payne&rsquo;s Gray gives you the heron&rsquo;s sharp silhouette against the soft field. Cobalt Blue appears only in the wing flash if the bird lifts off.</p>
+      <h3>Frozen Puddle Close-Up</h3>
+      <p class="subject"><strong>Subject:</strong> A frozen puddle in a gravel road, thick enough to be opaque at center, thin enough at the edges to see mud through the ice. Air bubbles trapped in layers. Late afternoon light catching the surface.</p>
+      <p class="palette-fit">The Black Ice Glaze mix (French Ultramarine + Payne&rsquo;s Gray + trace Buff Titanium) handles the ice itself. Transparent Brown Oxide beneath it gives the mud visible through thinner ice at the edges. Yellow Ochre provides the low-angle afternoon light catching the surface.</p>
       <div class="tips">
         <ul>
-          <li>Paint the flooded field first as a wet-in-wet wash of Payne&rsquo;s Gray + Raw Umber &mdash; tilt the paper and let the pigments settle and separate for five minutes minimum</li>
-          <li>Wait until the wash is bone dry before painting the heron &mdash; the bird must be sharp against the soft water</li>
-          <li>Paint the heron in pure Payne&rsquo;s Gray with a firm hand: one stroke for the neck, a few strokes for the body. Don&rsquo;t fuss</li>
-          <li>Add Cobalt Blue as a tiny flash at the wing bend &mdash; this is the only cool-bright note in the painting and it reads as potential movement</li>
+          <li>Paint the mud beneath the ice first with Transparent Brown Oxide as a light glaze &mdash; this is what shows through at the puddle&rsquo;s thin edges</li>
+          <li>Once dry, apply the Black Ice Glaze mix over the center, leaving the edges lighter where the ice is thin and the brown shows through</li>
+          <li>Scratch out air bubbles with a palette knife while the ice wash is still damp &mdash; they should be irregular, not perfectly round</li>
+          <li>Touch Yellow Ochre along the surface where afternoon light catches it &mdash; a thin line of warmth on a cold surface</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Frost-Heaved Mud Close-Up</h3>
-      <p class="subject"><strong>Subject:</strong> A close study of frozen bottomland mud &mdash; polygonal cracks rimmed in ice, dead grass flattened across the surface, everything mineral and geometric.</p>
-      <p class="palette-fit">Burnt Umber granulates for grit, Payne&rsquo;s Gray cools the shadows between polygons, and Buff Titanium &mdash; opaque and matte &mdash; IS the ice in the cracks. Olive Green handles the winter-flattened dead grass.</p>
+      <h3>Headlights on a Dark Rural Road</h3>
+      <p class="subject"><strong>Subject:</strong> A dark rural road at night, headlights approaching from a distance. The light catches frozen ruts and ice patches in the road surface. Trees line both sides as dark masses.</p>
+      <p class="palette-fit">New Gamboge at the headlight core, Yellow Ochre where the beams hit frozen ground. The Rut Water at Midnight mix (Transparent Brown Oxide + Lamp Black + Indanthrone Blue) handles the road surface. Payne&rsquo;s Gray builds the tree silhouettes.</p>
       <div class="tips">
         <ul>
-          <li>Sketch the crack pattern lightly in pencil first &mdash; these polygons are the painting&rsquo;s composition</li>
-          <li>Paint each mud polygon individually with the Bottomland Freeze mix, using dry-brush on rough paper and leaving thin white lines between them</li>
-          <li>Once dry, fill the crack lines with Buff Titanium &mdash; apply it opaquely so it sits on top, reading as ice rather than space</li>
-          <li>Lay dead grass across the mud with Olive Green in thin, flat strokes &mdash; the grass is winter-pressed, horizontal, defeated</li>
+          <li>Reserve two small areas of white paper for the headlights, then surround them with New Gamboge fading to Yellow Ochre as the beams spread across the road</li>
+          <li>Paint the road surface with the Rut Water at Midnight mix, working around the light areas &mdash; the Transparent Brown Oxide should be visible where headlights illuminate the frozen ruts</li>
+          <li>Build tree masses on both sides with Payne&rsquo;s Gray layered with Indanthrone Blue &mdash; don&rsquo;t try to paint individual trees, just the shape of the dark pressing in from both sides</li>
+          <li>Use Buff Titanium for ice patches catching headlight glare &mdash; a few opaque strokes on the road surface, flat and reflective</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Fog Lifting Over the Bottomland</h3>
-      <p class="subject"><strong>Subject:</strong> The moment the fog begins to lift at 10 AM &mdash; the distant treeline barely visible through Potter&rsquo;s Pink haze, the field still flooded, the sky a non-color.</p>
-      <p class="palette-fit">Potter&rsquo;s Pink is opaque and chalky, which is exactly what fog is. Indanthrone Blue dissolves the treeline into the distance &mdash; deep enough to register behind the fog without going black. Neutral Tint handles the standing water&rsquo;s depth.</p>
+      <h3>Lantern in a Barn Doorway</h3>
+      <p class="subject"><strong>Subject:</strong> An open barn door with a lantern hung just inside. Warm light spills out across frozen mud and straw. The barn interior is dark behind the lantern. The sky outside is Indanthrone Blue, starless.</p>
+      <p class="palette-fit">This prompt uses almost every pigment. The lantern core is New Gamboge, the light-on-mud is Yellow Ochre over Raw Umber, the barn interior behind the lantern is Lamp Black. Burnt Sienna warms the doorframe. Indanthrone Blue holds the sky.</p>
       <div class="tips">
         <ul>
-          <li>Wet the top half of the paper and lay Potter&rsquo;s Pink + Buff Titanium as the fog &mdash; keep it milky and even</li>
-          <li>While the fog wash is still damp, touch Indanthrone Blue along the bottom edge for the treeline dissolving into mist &mdash; let it bleed upward</li>
-          <li>Paint the flooded field below with Payne&rsquo;s Gray + Raw Umber on dry paper for a hard horizon line where land meets fog</li>
-          <li>Use Neutral Tint in the deepest water foreground &mdash; it&rsquo;s transparent and cool, giving the standing water depth without reflection</li>
+          <li>Paint the lantern as a small shape of pure New Gamboge &mdash; transparent and glowing, the brightest point in the painting</li>
+          <li>Build the warm light spilling outward with Yellow Ochre, grading into Burnt Sienna at the edges where warmth meets cold &mdash; the Porch Light Halo mix works here</li>
+          <li>The frozen mud in the light should be Raw Umber with Yellow Ochre glazed over it &mdash; two separate layers, not premixed, so the warmth sits on top of the earth</li>
+          <li>Paint the barn interior behind the lantern in Lamp Black &mdash; dense, opaque, no detail. The sky is Indanthrone Blue, granulating and deep, and it should wrap around the barn and meet the Lamp Black at the roofline</li>
         </ul>
       </div>
     </div>
@@ -630,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Temperature runs cold except for the Hansa Yellow Deep and its immediate neighbors &mdash; Olive Green, Potter&rsquo;s Pink. The two Umbers are close in hue but different in behavior: Burnt Umber is darker and more opaque, Raw Umber is lighter and more transparent. Use Burnt for the mud surface, Raw for the water over it. Cobalt Blue appears only in the heron&rsquo;s wing flash &mdash; a tiny note of pure cool that reads as movement against the stillness. Indanthrone Blue handles the distant treeline because it&rsquo;s deep enough to sit behind fog without going black. Reserve your whites aggressively &mdash; ice and spathe highlights are the architecture of this painting.
+    <strong>Notes:</strong> All ten pigments are Daniel Smith watercolors. Yellow Ochre (PY43) is natural iron oxide &mdash; semi-opaque and granulating. Raw Umber (PBr7) granulates heavily on cold-pressed paper, which gives frozen mud its texture for free. Indanthrone Blue (PB60) is a staining, granulating blue with extraordinary depth &mdash; it goes darker than you expect and stays blue doing it. New Gamboge (PY97) is fully transparent and non-granulating, which is why it reads as light rather than substance. French Ultramarine (PB29) granulates with a coarser grain than Indanthrone Blue, making it better for ice surfaces. Transparent Brown Oxide (PR101) is the glazing earth &mdash; build depth with layers rather than concentration. Buff Titanium (PW6:1) is the palette&rsquo;s only true opaque light, and here it plays ice: a surface that sits on top of things. Lamp Black (PBk6) is carbon-based, dense, and neutral &mdash; no blue bias, no warm bias, just dark. The warm-cold contrast in this palette works because it&rsquo;s numerically lopsided: three warm pigments against seven cool and neutral ones, which is the actual ratio of warmth to cold on a January night.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

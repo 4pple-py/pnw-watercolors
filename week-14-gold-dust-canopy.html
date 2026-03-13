@@ -6,423 +6,65 @@
 <title>Week 14 — Gold Dust Canopy</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(232,163,23,0.2) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(80,125,42,0.16) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(193,112,40,0.12) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(65,105,200,0.1) 0%, transparent 40%),
-      linear-gradient(175deg, #faf6ee 0%, #eef0e8 100%);
-    filter: blur(20px);
-  }
-
-  .hero-text {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #8a7030;
-    margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #5a5a5a;
-    max-width: 640px;
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 40px 60px;
-  }
-
-  /* Primary Trio */
-  .trio-section {
-    margin-top: 48px;
-  }
-
-  .section-label {
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 20px;
-  }
-
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .trio-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .trio-swatch {
-    height: 120px;
-    position: relative;
-  }
-
-  .trio-swatch::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
-  }
-
-  .trio-info {
-    padding: 16px 18px;
-  }
-
-  .trio-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .trio-info p {
-    font-size: 13px;
-    color: #777;
-    line-height: 1.5;
-  }
-
-  /* Full Palette */
-  .palette-section {
-    margin-top: 56px;
-  }
-
-  .palette-strip {
-    display: flex;
-    border-radius: 12px;
-    overflow: hidden;
-    height: 72px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
-  }
-
-  .palette-strip .swatch {
-    flex: 1;
-    position: relative;
-    cursor: default;
-    transition: flex 0.3s ease;
-  }
-
-  .palette-strip .swatch:hover {
-    flex: 2.5;
-  }
-
-  .palette-strip .swatch .label {
-    position: absolute;
-    bottom: 6px;
-    left: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .palette-strip .swatch:hover .label {
-    opacity: 1;
-  }
-
-  .palette-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 24px;
-  }
-
-  .palette-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #ecedf0;
-  }
-
-  .palette-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  }
-
-  .palette-item .name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .palette-item .role {
-    font-size: 12px;
-    color: #888;
-  }
-
-  .palette-item .num {
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 600;
-    width: 16px;
-    flex-shrink: 0;
-  }
-
-  /* Mixes */
-  .mixes-section {
-    margin-top: 56px;
-  }
-
-  .mix-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .mix-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .mix-preview {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
-  }
-
-  .mix-header h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-  }
-
-  .mix-header .ratio {
-    font-size: 13px;
-    color: #999;
-    font-weight: 400;
-  }
-
-  .mix-description {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .mix-bars {
-    display: flex;
-    gap: 4px;
-    height: 28px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
-
-  .mix-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-
-  .mix-notes {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  /* Why Section */
-  .why-section {
-    margin-top: 56px;
-  }
-
-  .why-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .why-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  .why-card p {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* Painting Prompts */
-  .prompts-section {
-    margin-top: 56px;
-  }
-
-  .prompt-card {
-    background: white;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-
-  .prompt-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .prompt-card .prompt-number {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 4px;
-  }
-
-  .prompt-card .subject {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .prompt-card .subject strong {
-    color: #333;
-  }
-
-  .prompt-card .palette-fit {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 16px;
-    line-height: 1.6;
-  }
-
-  .prompt-card .tips {
-    border-left: 3px solid #e0e2e8;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .prompt-card .tips ul li {
-    font-size: 13.5px;
-    color: #555;
-    line-height: 1.75;
-    padding: 4px 0;
-    position: relative;
-    padding-left: 16px;
-  }
-
-  .prompt-card .tips ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #ccc;
-  }
-
-  .prompts-intro {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #777;
-    margin-bottom: 24px;
-    line-height: 1.6;
-  }
-
-  /* Notes */
-  .notes-section {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: #f0eddf;
-    border-radius: 12px;
-    font-size: 13px;
-    color: #666;
-    line-height: 1.7;
-  }
-
-  .notes-section strong {
-    color: #444;
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid #dde0e5;
-    font-size: 12px;
-    color: #bbb;
-    letter-spacing: 1px;
-  }
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(232,200,32,0.24) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(184,173,58,0.2) 0%, transparent 45%), radial-gradient(ellipse at 50% 50%, rgba(184,134,11,0.16) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(80,125,42,0.12) 0%, transparent 40%), linear-gradient(175deg, #faf6e0 0%, #eef0e2 100%); filter: blur(20px); }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #a09030; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
+  .trio-section { margin-top: 48px; }
+  .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .trio-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .trio-swatch { height: 120px; position: relative; }
+  .trio-swatch::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4)); }
+  .trio-info { padding: 16px 18px; }
+  .trio-info h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 4px; }
+  .trio-info p { font-size: 13px; color: #777; line-height: 1.5; }
+  .palette-section { margin-top: 56px; }
+  .palette-strip { display: flex; border-radius: 12px; overflow: hidden; height: 72px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 16px; }
+  .palette-strip .swatch { flex: 1; position: relative; cursor: default; transition: flex 0.3s ease; }
+  .palette-strip .swatch:hover { flex: 2.5; }
+  .palette-strip .swatch .label { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; opacity: 0; transition: opacity 0.3s ease; white-space: nowrap; }
+  .palette-strip .swatch:hover .label { opacity: 1; }
+  .palette-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 24px; }
+  .palette-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #ecedf0; }
+  .palette-dot { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .palette-item .name { font-weight: 600; font-size: 14px; }
+  .palette-item .role { font-size: 12px; color: #888; }
+  .palette-item .num { font-size: 11px; color: #bbb; font-weight: 600; width: 16px; flex-shrink: 0; }
+  .mixes-section { margin-top: 56px; }
+  .mix-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .mix-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .mix-preview { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; box-shadow: inset 0 2px 6px rgba(0,0,0,0.1); }
+  .mix-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .mix-header .ratio { font-size: 13px; color: #999; font-weight: 400; }
+  .mix-description { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .mix-bars { display: flex; gap: 4px; height: 28px; border-radius: 6px; overflow: hidden; margin-bottom: 16px; }
+  .mix-bar { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
+  .mix-notes { font-size: 13.5px; color: #555; line-height: 1.75; border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .why-section { margin-top: 56px; }
+  .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
+  .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
+  .prompts-section { margin-top: 56px; }
+  .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
+  .prompt-card .prompt-number { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .prompt-card .subject { font-size: 14.5px; color: #555; line-height: 1.7; margin-bottom: 12px; }
+  .prompt-card .subject strong { color: #333; }
+  .prompt-card .palette-fit { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #666; margin-bottom: 16px; line-height: 1.6; }
+  .prompt-card .tips { border-left: 3px solid #e0e2e8; padding-left: 16px; }
+  .prompt-card .tips ul { list-style: none; padding: 0; }
+  .prompt-card .tips ul li { font-size: 13.5px; color: #555; line-height: 1.75; padding: 4px 0; position: relative; padding-left: 16px; }
+  .prompt-card .tips ul li::before { content: '\2014'; position: absolute; left: 0; color: #ccc; }
+  .prompts-intro { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: #777; margin-bottom: 24px; line-height: 1.6; }
+  .notes-section { margin-top: 40px; padding: 20px 24px; background: #f5f0da; border-radius: 12px; font-size: 13px; color: #666; line-height: 1.7; }
+  .notes-section strong { color: #444; }
+  .footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #dde0e5; font-size: 12px; color: #bbb; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -431,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 14 &mdash; PNW Watercolor Series</div>
     <h1>Gold Dust Canopy</h1>
-    <p class="mood">Mid-April morning, bigleaf maples shutting the sky in one furious week. Cedar pollen drifts gold through shafts of light hitting calypso orchids on the forest floor. Spring is greedy now &mdash; closing its fist around every gap. The canopy isn't growing so much as conquering, leaf over leaf, while the understory races to bloom before the light runs out.</p>
+    <p class="mood">Your car is yellow. The puddles have yellow film. The air itself is gold-green. Bigleaf maples, alders, and Doug firs are all releasing pollen at once and the world looks like it&rsquo;s been shot through a gold filter. Four yellows in this palette and none of them redundant &mdash; each one doing a different job in the haze.</p>
   </div>
 </div>
 
@@ -442,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8a317 0%, #d09010 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8c820 0%, #d4b418 100%);"></div>
         <div class="trio-info">
-          <h3>New Gamboge</h3>
-          <p>The pollen itself, suspended and sun-caught; transparent, non-granulating, builds warm glazes that feel airborne</p>
+          <h3>Hansa Yellow Medium</h3>
+          <p>Pure pollen gold &mdash; PY97 is transparent, non-granulating, and builds clean glazes without muddying. The bright center of the week&rsquo;s palette.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #e63e62 0%, #cc2850 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b8ad3a 0%, #a09828 100%);"></div>
         <div class="trio-info">
-          <h3>Quinacridone Rose</h3>
-          <p>Calypso orchid throats glowing off the forest floor; transparent and staining, pushes violet when it meets the blue</p>
+          <h3>Green Gold</h3>
+          <p>The gold-green filter everything&rsquo;s seen through &mdash; PY129 straddles yellow and green without committing to either. Canopy light incarnate.</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #4169c8 0%, #2a52a8 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #b8860b 0%, #a07008 100%);"></div>
         <div class="trio-info">
-          <h3>Cobalt Blue</h3>
-          <p>Sky through closing canopy, broken into fragments; granulating and luminous, settles into paper texture like light through leaves</p>
+          <h3>Quinacridone Gold</h3>
+          <p>Rich amber light pooling in bark furrows and puddle edges &mdash; PO49 is transparent and staining, warmer and deeper than any yellow here. The anchor.</p>
         </div>
       </div>
     </div>
@@ -469,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#e8a317;"><span class="label" style="color:#fff;">New Gamboge</span></div>
-      <div class="swatch" style="background:#e63e62;"><span class="label" style="color:#fff;">Quin. Rose</span></div>
-      <div class="swatch" style="background:#4169c8;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#e8c820;"><span class="label" style="color:#fff;">Hansa Yellow Med.</span></div>
+      <div class="swatch" style="background:#b8ad3a;"><span class="label" style="color:#fff;">Green Gold</span></div>
+      <div class="swatch" style="background:#b8860b;"><span class="label" style="color:#fff;">Quin. Gold</span></div>
       <div class="swatch" style="background:#507d2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
-      <div class="swatch" style="background:#1a3a2a;"><span class="label" style="color:#fff;">Perylene Green</span></div>
-      <div class="swatch" style="background:#6b6b8a;"><span class="label" style="color:#fff;">Moonglow</span></div>
-      <div class="swatch" style="background:#c17028;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
-      <div class="swatch" style="background:#5b8a72;"><span class="label" style="color:#fff;">Cascade Green</span></div>
-      <div class="swatch" style="background:#e8dcc8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#c5a44a;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
+      <div class="swatch" style="background:#355e3b;"><span class="label" style="color:#fff;">Hooker&rsquo;s Green</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#2a3d9c;"><span class="label" style="color:#fff;">Fr. Ultramarine</span></div>
+      <div class="swatch" style="background:#c8b830;"><span class="label" style="color:#fff;">Nickel Azo Yellow</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e8a317;"></div><div><div class="name">New Gamboge</div><div class="role">Primary &mdash; pollen cloud at eye level, warm and weightless</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#6b6b8a;"></div><div><div class="name">Moonglow</div><div class="role">Atmospheric &mdash; overcast between pollen shafts, granulating gray with hidden violet</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#e63e62;"></div><div><div class="name">Quinacridone Rose</div><div class="role">Primary &mdash; calypso orchid throat, the understory's last argument for attention</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c17028;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Warm Accent &mdash; cedar bark catching side-light, warm enough to taste</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#4169c8;"></div><div><div class="name">Cobalt Blue</div><div class="role">Primary &mdash; sky through closing canopy, seen in pieces</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#5b8a72;"></div><div><div class="name">Cascade Green</div><div class="role">Cool Accent &mdash; moss on branch undersides, quiet green that never sees direct sun</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; explosive maple leaf unfurling, the green that's doing the conquering</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8dcc8; border:1px solid #ddd;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; diffused canopy glow, opaque warmth where sunlight scatters</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#1a3a2a;"></div><div><div class="name">Perylene Green</div><div class="role">Dark &mdash; conifer trunk shadow, nearly black but still alive with color</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c5a44a;"></div><div><div class="name">Yellow Ochre</div><div class="role">Earth &mdash; trail dust kicked gold by boots, settled and ancient</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#e8c820;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Primary &mdash; pollen gold, the bright transparent center of every shaft of light</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#355e3b;"></div><div><div class="name">Hooker&rsquo;s Green</div><div class="role">Canopy shadow &mdash; the dark underneath where Douglas fir blocks everything</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b8ad3a;"></div><div><div class="name">Green Gold</div><div class="role">Primary &mdash; gold-green canopy filter, the color the whole world is tinted</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#f5e6c8; border:1px solid #ddd;"></div><div><div class="name">Buff Titanium</div><div class="role">Hazy bright sky &mdash; semi-opaque warmth where diffused light scatters above the canopy</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#b8860b;"></div><div><div class="name">Quinacridone Gold</div><div class="role">Primary &mdash; rich amber light, deepest of the four golds, pools in every crease</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Raw Sienna</div><div class="role">Warm ground &mdash; trail dust and duff, granulating warmth underfoot</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#507d2a;"></div><div><div class="name">Sap Green</div><div class="role">Canopy structure &mdash; the living green framework the pollen drifts through</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#2a3d9c;"></div><div><div class="name">French Ultramarine</div><div class="role">Sky glimpse &mdash; rare blue seen through canopy gaps, granulating and distant</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Deep pollen gold &mdash; warmer, heavier, the concentrated stuff at the bottom of the cloud</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c8b830;"></div><div><div class="name">Nickel Azo Yellow</div><div class="role">Green-gold shimmer &mdash; PY150&rsquo;s green bias gives the acid edge where pollen catches backlight</div></div></div>
     </div>
   </div>
 
@@ -500,58 +142,59 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #e8c050, #d4a830);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d4c040, #baa828);"></div>
         <div>
-          <h3>Pollen Drift</h3>
-          <span class="ratio">3 New Gamboge : 1 Buff Titanium : &frac12; Yellow Ochre</span>
+          <h3>Pollen Cloud</h3>
+          <span class="ratio">3 Hansa Yellow Medium : 1 Nickel Azo Yellow : &frac12; Buff Titanium</span>
         </div>
       </div>
-      <p class="mix-description">Cedar pollen suspended in still air between trunks, gold dust hanging where no breeze reaches.</p>
+      <p class="mix-description">The airborne gold itself &mdash; suspended between trees, too thick to be light and too light to be substance.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#e8a317; color:#fff;">New Gamboge</div>
-        <div class="mix-bar" style="flex:1; background:#e8dcc8; color:#777; border: 1px solid #ddd;">Buff Titanium</div>
-        <div class="mix-bar" style="flex:0.5; background:#c5a44a; color:#fff;">Yellow Ochre</div>
+        <div class="mix-bar" style="flex:3; background:#e8c820; color:#333;">Hansa Yellow Med.</div>
+        <div class="mix-bar" style="flex:1; background:#c8b830; color:#333;">Nickel Azo Yellow</div>
+        <div class="mix-bar" style="flex:0.5; background:#f5e6c8; color:#777; border: 1px solid #ddd;">Buff Titanium</div>
       </div>
       <div class="mix-notes">
-        Wet-in-wet on damp paper. Let New Gamboge lead &mdash; it's transparent enough to glow. Buff Titanium adds body without killing the light. Touch Yellow Ochre in last to ground the mix. Don't over-stir; let the ochre granulate where it lands.
+        Wet-in-wet on damp paper. Hansa Yellow Medium leads with pure transparent gold while Nickel Azo Yellow&rsquo;s green bias pushes the mix toward that sickly-beautiful pollen shimmer. Buff Titanium adds just enough body to suggest particulate matter without killing the glow. Don&rsquo;t over-mix &mdash; let the two yellows separate on the paper. The shift between warm gold and acid green-gold is the whole point.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #a04068, #883858);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #6a7830, #506020);"></div>
         <div>
-          <h3>Orchid Floor</h3>
-          <span class="ratio">2 Quinacridone Rose : 1 Cobalt Blue : &frac12; Perylene Green</span>
+          <h3>Canopy Filter</h3>
+          <span class="ratio">2 Green Gold : 2 Sap Green : 1 Quinacridone Gold</span>
         </div>
       </div>
-      <p class="mix-description">Calypso orchids dark-pink and improbable against brown duff, petals like dropped jewelry.</p>
+      <p class="mix-description">Sunlight strained through three layers of new leaves, gold turned green turned gold again on the way down.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#e63e62; color:#fff;">Quin. Rose</div>
-        <div class="mix-bar" style="flex:1; background:#4169c8; color:#fff;">Cobalt Blue</div>
-        <div class="mix-bar" style="flex:0.5; background:#1a3a2a; color:#fff;">Perylene Green</div>
+        <div class="mix-bar" style="flex:2; background:#b8ad3a; color:#333;">Green Gold</div>
+        <div class="mix-bar" style="flex:2; background:#507d2a; color:#fff;">Sap Green</div>
+        <div class="mix-bar" style="flex:1; background:#b8860b; color:#fff;">Quin. Gold</div>
       </div>
       <div class="mix-notes">
-        Mix on the palette, not the paper. Quinacridone Rose stains immediately &mdash; commit to your stroke. The Cobalt Blue pushes it toward violet; Perylene Green darkens without muddying, giving you the shadow side of the petal. This mix granulates beautifully at higher dilution.
+        Layer this, don&rsquo;t puddle it. Green Gold and Sap Green together make the translucent yellow-green of backlit bigleaf maple leaves. Quinacridone Gold warms the mix from underneath &mdash; apply it to the first wash while still damp and watch it bloom into amber veins. Each layer adds canopy depth. Three washes and you&rsquo;ve got the full filtered-light effect: bright gold-green at the edges thinning to deep amber-green at the center.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7aa030, #608820);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #a09050, #887840);"></div>
         <div>
-          <h3>Canopy Shut</h3>
-          <span class="ratio">3 Sap Green : 2 New Gamboge : 1 Moonglow</span>
+          <h3>Pollen Water</h3>
+          <span class="ratio">2 New Gamboge : 1 Raw Sienna : 1 Hooker&rsquo;s Green : touch French Ultramarine</span>
         </div>
       </div>
-      <p class="mix-description">Bigleaf maples racing to close the light out, leaves oversaturated and almost too green to believe.</p>
+      <p class="mix-description">Standing puddle with that distinctive yellow-green film, part mirror, part pollen trap, part sky.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#507d2a; color:#fff;">Sap Green</div>
-        <div class="mix-bar" style="flex:2; background:#e8a317; color:#fff;">New Gamboge</div>
-        <div class="mix-bar" style="flex:1; background:#6b6b8a; color:#fff;">Moonglow</div>
+        <div class="mix-bar" style="flex:2; background:#e8a820; color:#333;">New Gamboge</div>
+        <div class="mix-bar" style="flex:1; background:#c8a050; color:#fff;">Raw Sienna</div>
+        <div class="mix-bar" style="flex:1; background:#355e3b; color:#fff;">Hooker&rsquo;s Green</div>
+        <div class="mix-bar" style="flex:0.3; background:#2a3d9c; color:#fff;">Fr. Ultra.</div>
       </div>
       <div class="mix-notes">
-        Layer, don't puddle. Sap Green and New Gamboge together make the radioactive yellow-green of new maple leaves in full sun. Moonglow tempers the mix &mdash; adds atmospheric distance and a faint granulation that suggests depth in the canopy. Apply in overlapping washes to build density.
+        This one works best as a controlled wet-in-wet. Lay New Gamboge first for the pollen film, then drop Raw Sienna at the puddle edges where it meets the ground. Hooker&rsquo;s Green drifts in from one side &mdash; the reflection of canopy above. The French Ultramarine touch is sky reflected through a gap: just a fleck, applied last, and it granulates against the warm surround in a way that reads as distance. Let everything mingle but don&rsquo;t stir.
       </div>
     </div>
   </div>
@@ -560,86 +203,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>This palette is engineered for transparency and glow. New Gamboge and Quinacridone Rose are both fully transparent and staining &mdash; they make light feel like it originates from the paper itself, which is exactly what pollen-shaft light does. Cobalt Blue's granulation breaks up washes the way canopy gaps break up sky. Perylene Green and Moonglow handle the darks and atmospherics without deadening the luminosity that the primary trio establishes. Aussie Red Gold and Yellow Ochre are the earth anchors &mdash; warm, opaque enough to feel solid, grounding a palette that could otherwise float away in gold dust.</p>
+      <p>Four yellows, and every one earns its place. Hansa Yellow Medium is pure pollen gold &mdash; transparent, clean, the brightest thing in the palette. Green Gold shifts it toward the canopy filter that tints everything this week, yellow that&rsquo;s already halfway to green. Quinacridone Gold goes the other direction, into amber and warmth, the deep pooling light in bark crevices and puddle edges. Nickel Azo Yellow brings PY150&rsquo;s green bias &mdash; that acid shimmer when pollen catches backlight. Together they cover the full spectrum of gold without a single redundancy. Sap Green and Hooker&rsquo;s Green give the canopy its structure and shadow. New Gamboge bridges the yellows and greens with its warm transparent body. Buff Titanium scatters the sky into a hazy bright wash. Raw Sienna grounds everything in warm earth. And French Ultramarine &mdash; used sparingly &mdash; is the rare glimpse of actual sky through the canopy, granulating and distant, a reminder that blue still exists somewhere above all this gold.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Early April, everything dusted. These four subjects lean into the gold-green haze and the palette&rsquo;s four-yellow architecture &mdash; each prompt uses a different gold as its anchor.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>Pollen Shaft Through the Canopy</h3>
-      <p class="subject"><strong>Subject:</strong> A single shaft of morning light cutting diagonally through a closed maple canopy, gold pollen suspended in the beam, the forest floor dark on either side with one or two calypso orchids glowing where the light hits.</p>
-      <p class="palette-fit">The Pollen Drift mix (3 New Gamboge : 1 Buff Titanium : 1/2 Yellow Ochre) is the light beam itself &mdash; transparent gold with just enough body to feel airborne. Perylene Green and Moonglow build the dark forest flanking the shaft. The Orchid Floor mix places the calypso orchids exactly where the light lands.</p>
+      <h3>Pollen-Dusted Windshield</h3>
+      <p class="subject"><strong>Subject:</strong> A car windshield coated in yellow-green pollen &mdash; wiper arcs visible as darker crescents, the world beyond blurred to abstract color, a side mirror catching a gold reflection. The dashboard is a warm dark rectangle below.</p>
+      <p class="palette-fit">Hansa Yellow Medium and Nickel Azo Yellow own this prompt. The Pollen Cloud mix is the windshield coating itself &mdash; thick, airborne, almost opaque. Buff Titanium diffuses the background into bright nothing. The wiper arcs are negative space where you see through to Green Gold and Sap Green beyond.</p>
       <div class="tips">
         <ul>
-          <li>Paint the dark forest first: Perylene Green for conifer trunks, Moonglow for the atmospheric murk between them &mdash; leave the light shaft as untouched white paper</li>
-          <li>Once the darks are fully dry, glaze the Pollen Drift mix into the shaft area on damp paper &mdash; New Gamboge&rsquo;s transparency lets the paper glow from within</li>
-          <li>Touch Buff Titanium into the shaft while damp for the diffused scatter where pollen is thickest</li>
-          <li>The calypso orchids at the base are small, precise: Orchid Floor mix (Quin Rose + Cobalt Blue + Perylene Green) on dry paper, each bloom a committed stroke</li>
+          <li>Lay the full windshield area with the Pollen Cloud mix (3 Hansa Yellow Med. : 1 Nickel Azo Yellow : &frac12; Buff Titanium) on damp paper &mdash; thick enough to feel like a coating, not a glaze</li>
+          <li>While still damp, lift two crescent arcs with a damp brush for the wiper paths &mdash; these cleared areas get a wash of Green Gold and Sap Green to suggest the blurred world beyond</li>
+          <li>The side mirror is a small rectangle of New Gamboge reflection with a Quinacridone Gold edge &mdash; warm and metallic</li>
+          <li>Dashboard below is Hooker&rsquo;s Green darkened with French Ultramarine &mdash; a cool dark anchor that makes all that yellow sing by contrast</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Bigleaf Maple Canopy From Below</h3>
-      <p class="subject"><strong>Subject:</strong> A worm&rsquo;s-eye view looking straight up through unfurling bigleaf maple leaves &mdash; oversaturated green layered three and four deep, with fragments of Cobalt Blue sky visible through the gaps, and gold pollen drifting across the frame.</p>
-      <p class="palette-fit">The Canopy Shut mix (3 Sap Green : 2 New Gamboge : 1 Moonglow) gives you that radioactive yellow-green of new maple leaves in full sun. Cobalt Blue granulates into the sky fragments, breaking up naturally the way light through leaves actually behaves. New Gamboge pollen drifts across everything.</p>
+      <h3>Canopy From Below</h3>
+      <p class="subject"><strong>Subject:</strong> Looking straight up through bigleaf maple canopy &mdash; new leaves backlit gold-green, three or four layers deep, with fragments of bright sky between them. Pollen drifts visibly through shafts of light. A Douglas fir branch intrudes from one side, dark and sharp against the soft maple.</p>
+      <p class="palette-fit">The Canopy Filter mix (2 Green Gold : 2 Sap Green : 1 Quinacridone Gold) is the entire upper structure. French Ultramarine fills the sky gaps. Hooker&rsquo;s Green gives the fir branch its darkness. Hansa Yellow Medium drifts across everything as pollen.</p>
       <div class="tips">
         <ul>
-          <li>Build the canopy in overlapping washes &mdash; first layer Sap Green alone, second layer the full Canopy Shut mix, each pass adding density</li>
-          <li>Reserve irregular shapes of bare paper for the sky gaps, then fill them with Cobalt Blue &mdash; its granulation mimics the way sky shimmers through moving leaves</li>
-          <li>The leaves closest to the viewer (lowest in the canopy) should be darkest: add Moonglow to the mix for these</li>
-          <li>Pollen is a final glaze of very dilute New Gamboge drifted across the whole painting after everything else has dried</li>
+          <li>Reserve irregular shapes of bare paper for the sky gaps first, then build the canopy around them with overlapping washes of the Canopy Filter mix &mdash; each layer adds depth</li>
+          <li>Fill the reserved sky gaps with French Ultramarine on dry paper &mdash; its granulation reads as atmospheric distance and makes the gold-green canopy feel close by contrast</li>
+          <li>The Douglas fir branch is Hooker&rsquo;s Green applied on dry paper with a rigger brush &mdash; sharp, angular, a geometric intrusion into all those soft maple curves</li>
+          <li>Final pass: very dilute Hansa Yellow Medium glazed across the whole painting for the pollen-in-air effect &mdash; it unifies everything under the gold filter</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Calypso Orchids on the Forest Floor</h3>
-      <p class="subject"><strong>Subject:</strong> A cluster of three to five calypso orchids growing from brown duff and moss, dappled gold light hitting them from above, a dark cedar trunk rising behind.</p>
-      <p class="palette-fit">Quinacridone Rose is transparent and staining &mdash; one committed stroke and the orchid glows like dropped jewelry. Cobalt Blue pushes it toward the violet these orchids actually are. Yellow Ochre and Aussie Red Gold build the forest-floor duff. Perylene Green gives you the cedar trunk shadow that makes the pink pop.</p>
+      <h3>Pollen on Standing Water</h3>
+      <p class="subject"><strong>Subject:</strong> A trail puddle with that distinctive yellow-green pollen film on its surface &mdash; iridescent, slightly broken where a leaf fell through. Reflected canopy and one crack of sky visible beneath the film. Gravel and duff at the puddle edge.</p>
+      <p class="palette-fit">The Pollen Water mix is purpose-built for this. New Gamboge gives the yellow film its warmth while Hooker&rsquo;s Green and Raw Sienna handle the reflected canopy and muddy edges. French Ultramarine is the sky glimpse. Quinacridone Gold concentrates at the puddle rim where pollen is thickest.</p>
       <div class="tips">
         <ul>
-          <li>Paint the forest floor first: Yellow Ochre for the duff, Cascade Green for the moss patches, let them dry</li>
-          <li>Each orchid is the Orchid Floor mix applied in a single decisive stroke &mdash; Quinacridone Rose stains immediately, so no second chances</li>
-          <li>The orchid&rsquo;s distinctive pouch is darker: add more Perylene Green to the shadow side of each bloom while the first stroke is still damp</li>
-          <li>The cedar trunk behind is Aussie Red Gold for the bark catching side-light, with Perylene Green in the deep shadow &mdash; nearly black but still chromatic</li>
+          <li>Start with the puddle as a single wet shape &mdash; lay New Gamboge across the top for the pollen film, then drop Hooker&rsquo;s Green and Raw Sienna from opposite sides for the reflected canopy and ground</li>
+          <li>While still wet, touch French Ultramarine into one small area for the sky reflection &mdash; it granulates against the warm surround and reads as depth beneath the film</li>
+          <li>The break in the pollen film where the leaf fell through is a lifted area revealing the dark water beneath: Hooker&rsquo;s Green with a touch of French Ultramarine</li>
+          <li>Puddle edges get concentrated Quinacridone Gold and Raw Sienna on dry paper &mdash; the pollen collects thickest where water meets shore</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Gold Dust Trail</h3>
-      <p class="subject"><strong>Subject:</strong> A forest trail in mid-April &mdash; boot-kicked dust hanging gold in the air, bigleaf maple canopy closing overhead, a warbler (Wilson&rsquo;s or yellow-rumped) perched on a trailside branch at eye level.</p>
-      <p class="palette-fit">Yellow Ochre is the settled trail dust, New Gamboge is the kicked-up gold cloud. The Canopy Shut mix arches overhead. Aussie Red Gold warms the cedar bark on trailside trees. The warbler is a tiny burst of New Gamboge and Cobalt Blue &mdash; a bird-shaped exclamation point.</p>
+      <h3>Forest Path in Gold Light</h3>
+      <p class="subject"><strong>Subject:</strong> A forest trail in early April, shafts of gold light angling through the canopy, the air visibly thick with pollen. Alder trunks pale on either side. The path itself is warm and dusty, disappearing into a gold-green haze where the light is thickest.</p>
+      <p class="palette-fit">All four golds work together here. Hansa Yellow Medium is the bright shaft centers. Green Gold is the tinted air. Quinacridone Gold pools in the warm foreground path. Nickel Azo Yellow catches the backlit pollen at the vanishing point. Raw Sienna grounds the trail. Buff Titanium hazes the distance.</p>
       <div class="tips">
         <ul>
-          <li>Lay in the trail with Yellow Ochre on dry paper &mdash; it&rsquo;s opaque enough to feel solid underfoot</li>
-          <li>The dust cloud is New Gamboge wet-into-wet on damp paper above the trail surface &mdash; transparent, weightless, catching light</li>
-          <li>Build the canopy overhead with the Canopy Shut mix in overlapping washes, leaving a few Cobalt Blue sky fragments</li>
-          <li>The warbler is three strokes: New Gamboge body, Cobalt Blue cap (if Wilson&rsquo;s) or Cobalt Blue with Perylene Green (if yellow-rumped), and a Perylene Green eye dot</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-number">Prompt 5</div>
-      <h3>Cedar Trunk and Moss in Side-Light</h3>
-      <p class="subject"><strong>Subject:</strong> A close-up study of a western red cedar trunk &mdash; bark lit warm by side-light, moss on the shaded side, pollen dust settled into the bark furrows, canopy leaves framing the top of the composition.</p>
-      <p class="palette-fit">Aussie Red Gold is the cedar bark in warm light &mdash; a pigment warm enough to taste. Cascade Green handles the moss on the shaded side, quiet green that never sees direct sun. The Pollen Drift mix settles into bark furrows. Perylene Green deepens the shadow side without going dead.</p>
-      <div class="tips">
-        <ul>
-          <li>Block in the trunk with Aussie Red Gold for the lit side and Perylene Green for the shadow side &mdash; one continuous vertical stroke with a flat brush, warm to cool</li>
-          <li>Bark furrows are dry-brushed Perylene Green over the dried Aussie Red Gold &mdash; use the texture of rough watercolor paper to catch the ridges</li>
-          <li>Moss on the shaded side is Cascade Green applied wet-into-wet into the still-damp Perylene Green shadow</li>
-          <li>Dust the Pollen Drift mix (very dilute) across the lit bark surface as a final glaze &mdash; the gold settles into furrows naturally</li>
+          <li>Paint the dark canopy flanks first &mdash; Sap Green and Hooker&rsquo;s Green for the trees on either side, leaving the central path and light shafts as white paper</li>
+          <li>Once dry, glaze the path with Raw Sienna at your feet transitioning to Quinacridone Gold in the middle distance &mdash; warm earth becoming warm light</li>
+          <li>The gold-green haze at the vanishing point is Buff Titanium and Green Gold wet-in-wet, with Nickel Azo Yellow dropped in for that acid-yellow backlit pollen shimmer</li>
+          <li>Light shafts are Hansa Yellow Medium on damp paper, angled diagonally &mdash; transparent enough to glow without obscuring the canopy structure behind them</li>
         </ul>
       </div>
     </div>
@@ -647,7 +275,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Moonglow is a convenience mix (Ultramarine Blue, Phthalo Blue, Pyrrol Crimson) that granulates unpredictably &mdash; test it before committing to large washes. Buff Titanium is semi-opaque; use it for body and diffusion, not glazing. Perylene Green reads almost black in mass tone but lifts to a dark forest green &mdash; useful for shadows that stay chromatic.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Four yellows, four different golds: Hansa Yellow Medium (PY97) is pure and transparent, Green Gold (PY129) has inherent green bias, Quinacridone Gold (PO49) goes deep amber, and Nickel Azo Yellow (PY150) brings an acid green-gold shimmer. None are redundant &mdash; swap any one out and you lose a dimension of the pollen haze. Buff Titanium is semi-opaque; use it for diffusion and body, not glazing. French Ultramarine granulates beautifully against all four yellows, which is why it earns its spot as the sole cool pigment here.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>

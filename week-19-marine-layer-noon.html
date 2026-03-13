@@ -6,59 +6,14 @@
 <title>Week 19 — Marine Layer Noon</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: #f5f6f8;
-    color: #2a2a2a;
-    line-height: 1.6;
-    padding: 0;
-  }
-
-  .hero {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 40px;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 20%, rgba(91,164,207,0.18) 0%, transparent 50%),
-      radial-gradient(ellipse at 30% 70%, rgba(240,200,48,0.14) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(83,104,120,0.12) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(176,38,74,0.1) 0%, transparent 40%),
-      linear-gradient(175deg, #f4f6f8 0%, #eef2f6 100%);
-    filter: blur(20px);
-  }
-
+  body { font-family: 'Source Sans 3', sans-serif; background: #f5f6f8; color: #2a2a2a; line-height: 1.6; padding: 0; }
+  .hero { position: relative; height: 320px; overflow: hidden; display: flex; align-items: flex-end; padding: 40px; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 30%, rgba(42,122,181,0.22) 0%, transparent 50%), radial-gradient(ellipse at 30% 60%, rgba(245,230,200,0.3) 0%, transparent 45%), radial-gradient(ellipse at 75% 70%, rgba(232,168,32,0.16) 0%, transparent 40%), radial-gradient(ellipse at 45% 45%, rgba(83,104,120,0.14) 0%, transparent 40%), linear-gradient(175deg, #f5f5f5 0%, #dbe6ef 40%, #f5e6c8 70%, #e8c850 100%); filter: blur(20px); }
   .hero-text { position: relative; z-index: 1; }
-
-  .hero-text .week-label {
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600; font-size: 13px; letter-spacing: 3px;
-    text-transform: uppercase; color: #536878; margin-bottom: 8px;
-  }
-
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px; font-weight: 700; color: #1a1a1a;
-    line-height: 1.1; margin-bottom: 16px;
-  }
-
-  .hero-text .mood {
-    font-family: 'Playfair Display', serif;
-    font-style: italic; font-size: 16px; color: #5a5a5a;
-    max-width: 640px; line-height: 1.7;
-  }
-
+  .hero-text .week-label { font-family: 'Source Sans 3', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: #5a8aaa; margin-bottom: 8px; }
+  .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; color: #1a1a1a; line-height: 1.1; margin-bottom: 16px; }
+  .hero-text .mood { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a5a5a; max-width: 640px; line-height: 1.7; }
   .container { max-width: 900px; margin: 0 auto; padding: 0 40px 60px; }
   .trio-section { margin-top: 48px; }
   .section-label { font-weight: 600; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #999; margin-bottom: 20px; }
@@ -95,7 +50,6 @@
   .why-card { background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .why-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 16px; }
   .why-card p { font-size: 14.5px; color: #555; line-height: 1.8; }
-  /* Painting Prompts */
   .prompts-section { margin-top: 56px; }
   .prompt-card { background: white; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   .prompt-card h3 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 8px; }
@@ -119,7 +73,7 @@
   <div class="hero-text">
     <div class="week-label">Week 19 &mdash; PNW Watercolor Series</div>
     <h1>Marine Layer Noon</h1>
-    <p class="mood">Morning fog sits like a lid. Swainson's thrushes spiral their song upward through salal. By noon the marine layer burns off and everything underneath is suddenly, violently green. The tension between concealment and reveal &mdash; fog as curtain, sun as stagehand. The same landscape twice in one day.</p>
+    <p class="mood">At eight the fog is a wall &mdash; Buff Titanium from beach to sky, the ocean erased. By ten, Cerulean Blue cracks through like a bruise healing in reverse. At noon the curtain pulls offshore and suddenly everything is Phthalo Blue water and New Gamboge sun. Two hours from colorless to saturated. May on the PNW coast turns muted into bright while you&rsquo;re still holding your coffee.</p>
   </div>
 </div>
 
@@ -130,24 +84,24 @@
     <div class="section-label">Primary Trio</div>
     <div class="trio">
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #f0c830 0%, #d8b420 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #2a7ab5 0%, #1e6a9f 100%);"></div>
         <div class="trio-info">
-          <h3>Hansa Yellow Medium</h3>
-          <p>Noon light hitting wet leaves, the shock of color after gray; transparent, clean, medium-warm</p>
+          <h3>Cerulean Blue</h3>
+          <p>The marine layer itself &mdash; granulating, opaque, settling into paper valleys like fog settling into hollows</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #b0264a 0%, #981e3e 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #f5e6c8 0%, #ecdbb8 100%);"></div>
         <div class="trio-info">
-          <h3>Alizarin Crimson</h3>
-          <p>Salal flower interior, urn-shaped and secret; transparent, cool-leaning red that mixes violet easily</p>
+          <h3>Buff Titanium</h3>
+          <p>Fog body &mdash; the opaque warm nothing that replaces the world at eight in the morning</p>
         </div>
       </div>
       <div class="trio-card">
-        <div class="trio-swatch" style="background: linear-gradient(135deg, #5ba4cf 0%, #4890b8 100%);"></div>
+        <div class="trio-swatch" style="background: linear-gradient(135deg, #e8a820 0%, #d49818 100%);"></div>
         <div class="trio-info">
-          <h3>Cerulean Blue Chromium</h3>
-          <p>Marine layer breaking apart, chalky and granulating; opaque, it sits on the paper like fog sits on the land</p>
+          <h3>New Gamboge</h3>
+          <p>Noon sun breaking through &mdash; transparent, warm, the color of relief after a gray week</p>
         </div>
       </div>
     </div>
@@ -157,28 +111,28 @@
   <div class="palette-section">
     <div class="section-label">Full 10-Color Palette</div>
     <div class="palette-strip">
-      <div class="swatch" style="background:#f0c830;"><span class="label" style="color:#777;">Hansa Yellow Med</span></div>
-      <div class="swatch" style="background:#b0264a;"><span class="label" style="color:#fff;">Alizarin Crimson</span></div>
-      <div class="swatch" style="background:#5ba4cf;"><span class="label" style="color:#fff;">Cerulean Blue Chr.</span></div>
-      <div class="swatch" style="background:#5a8c2a;"><span class="label" style="color:#fff;">Sap Green</span></div>
-      <div class="swatch" style="background:#3a3a42;"><span class="label" style="color:#fff;">Neutral Tint</span></div>
+      <div class="swatch" style="background:#2a7ab5;"><span class="label" style="color:#fff;">Cerulean Blue</span></div>
+      <div class="swatch" style="background:#f5e6c8;"><span class="label" style="color:#777;">Buff Titanium</span></div>
+      <div class="swatch" style="background:#e8a820;"><span class="label" style="color:#fff;">New Gamboge</span></div>
+      <div class="swatch" style="background:#3d59ab;"><span class="label" style="color:#fff;">Cobalt Blue</span></div>
+      <div class="swatch" style="background:#c8a050;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#0a4a6a;"><span class="label" style="color:#fff;">Phthalo Blue GS</span></div>
+      <div class="swatch" style="background:#5a8a6a;"><span class="label" style="color:#fff;">Cascade Green</span></div>
       <div class="swatch" style="background:#536878;"><span class="label" style="color:#fff;">Payne's Gray</span></div>
-      <div class="swatch" style="background:#c87830;"><span class="label" style="color:#fff;">Aussie Red Gold</span></div>
-      <div class="swatch" style="background:#00838f;"><span class="label" style="color:#fff;">Cobalt Teal Blue</span></div>
-      <div class="swatch" style="background:#e8d8b4;"><span class="label" style="color:#777;">Buff Titanium</span></div>
-      <div class="swatch" style="background:#c88a3e;"><span class="label" style="color:#fff;">Raw Sienna</span></div>
+      <div class="swatch" style="background:#f5f5f5;"><span class="label" style="color:#777;">Titanium White</span></div>
+      <div class="swatch" style="background:#c8a53a;"><span class="label" style="color:#fff;">Yellow Ochre</span></div>
     </div>
     <div class="palette-list">
-      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#f0c830;"></div><div><div class="name">Hansa Yellow Medium</div><div class="role">Primary &mdash; noon light hitting wet leaves, violent green catalyst</div></div></div>
-      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Atmospheric &mdash; marine layer before burn-off, the whole morning in one color</div></div></div>
-      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#b0264a;"></div><div><div class="name">Alizarin Crimson</div><div class="role">Primary &mdash; salal flower interior, the color you have to part branches to see</div></div></div>
-      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#c87830;"></div><div><div class="name">Aussie Red Gold</div><div class="role">Warm Accent &mdash; madrone bark revealed by new sun, first warmth of the day</div></div></div>
-      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#5ba4cf;"></div><div><div class="name">Cerulean Blue Chromium</div><div class="role">Primary &mdash; marine layer breaking apart, granulating into patches</div></div></div>
-      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#00838f;"></div><div><div class="name">Cobalt Teal Blue</div><div class="role">Cool Accent &mdash; tide pool revealed as fog lifts, metallic and startling</div></div></div>
-      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#5a8c2a;"></div><div><div class="name">Sap Green</div><div class="role">Earth &mdash; salal hedge mass, dense and impenetrable</div></div></div>
-      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#e8d8b4;"></div><div><div class="name">Buff Titanium</div><div class="role">Light &mdash; fog diffusion, the color of visibility at fifty feet</div></div></div>
-      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#3a3a42;"></div><div><div class="name">Neutral Tint</div><div class="role">Dark &mdash; fog shadow on wet trunk, colorless depth</div></div></div>
-      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c88a3e;"></div><div><div class="name">Raw Sienna</div><div class="role">Earth &mdash; exposed trail in noon heat, drying fast</div></div></div>
+      <div class="palette-item"><span class="num">1</span><div class="palette-dot" style="background:#2a7ab5;"></div><div><div class="name">Cerulean Blue</div><div class="role">Primary &mdash; marine layer blue, granulating and opaque</div></div></div>
+      <div class="palette-item"><span class="num">6</span><div class="palette-dot" style="background:#0a4a6a;"></div><div><div class="name">Phthalo Blue GS</div><div class="role">Ocean water &mdash; staining intensity revealed when fog lifts</div></div></div>
+      <div class="palette-item"><span class="num">2</span><div class="palette-dot" style="background:#f5e6c8;"></div><div><div class="name">Buff Titanium</div><div class="role">Primary &mdash; fog body, the color of fifty-foot visibility</div></div></div>
+      <div class="palette-item"><span class="num">7</span><div class="palette-dot" style="background:#5a8a6a;"></div><div><div class="name">Cascade Green</div><div class="role">Coastal vegetation &mdash; salal and shore pine, constant under both conditions</div></div></div>
+      <div class="palette-item"><span class="num">3</span><div class="palette-dot" style="background:#e8a820;"></div><div><div class="name">New Gamboge</div><div class="role">Primary &mdash; noon sun breaking through, transparent and warm</div></div></div>
+      <div class="palette-item"><span class="num">8</span><div class="palette-dot" style="background:#536878;"></div><div><div class="name">Payne's Gray</div><div class="role">Fog shadow &mdash; the underside of the marine layer</div></div></div>
+      <div class="palette-item"><span class="num">4</span><div class="palette-dot" style="background:#3d59ab;"></div><div><div class="name">Cobalt Blue</div><div class="role">Sky emerging &mdash; the real blue that was hiding above the fog</div></div></div>
+      <div class="palette-item"><span class="num">9</span><div class="palette-dot" style="background:#f5f5f5;"></div><div><div class="name">Titanium White</div><div class="role">Thick fog &mdash; genuine opacity for fog that erases the landscape</div></div></div>
+      <div class="palette-item"><span class="num">5</span><div class="palette-dot" style="background:#c8a050;"></div><div><div class="name">Raw Sienna</div><div class="role">Coastal bluff &mdash; sandstone and dried grass above the tideline</div></div></div>
+      <div class="palette-item"><span class="num">10</span><div class="palette-dot" style="background:#c8a53a;"></div><div><div class="name">Yellow Ochre</div><div class="role">Sand and dry grass &mdash; warm earth tones the sun hits first</div></div></div>
     </div>
   </div>
 
@@ -188,58 +142,58 @@
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #7ab0c8, #6aa0b8);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #8ab5cc, #7aa8c0);"></div>
         <div>
-          <h3>Fog Lift</h3>
-          <span class="ratio">3 Cerulean Blue Chromium : 2 Buff Titanium : 1 Payne's Gray</span>
+          <h3>Fog Wall</h3>
+          <span class="ratio">3 Buff Titanium : 2 Cerulean Blue : 1 Titanium White</span>
         </div>
       </div>
-      <p class="mix-description">Marine layer thinning, light pushing through &mdash; the moment you see blue for the first time since yesterday.</p>
+      <p class="mix-description">Eight a.m. fog &mdash; opaque, featureless, thick enough to lose the ocean in. Not atmospheric haze. A wall.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:3; background:#5ba4cf; color:#fff;">Cerulean Blue Chr.</div>
-        <div class="mix-bar" style="flex:2; background:#e8d8b4; color:#777;">Buff Titanium</div>
-        <div class="mix-bar" style="flex:1; background:#536878; color:#fff;">Payne's Gray</div>
+        <div class="mix-bar" style="flex:3; background:#f5e6c8; color:#777;">Buff Titanium</div>
+        <div class="mix-bar" style="flex:2; background:#2a7ab5; color:#fff;">Cerulean Blue</div>
+        <div class="mix-bar" style="flex:1; background:#f5f5f5; color:#777;">Titanium White</div>
       </div>
       <div class="mix-notes">
-        This is fog becoming sky. Cerulean Blue Chromium's granulation is the texture of breaking cloud &mdash; heavy particles settling into paper valleys while light areas read as openings. Buff Titanium is the milky diffusion that isn't quite cloud and isn't quite clear. Payne's Gray holds the underside of what's left. Apply to wet paper and tilt the board; let gravity separate the pigments the way wind separates fog.
+        Three opaque pigments doing what opaque pigments do best: blocking light. Buff Titanium dominates because early marine layer fog isn&rsquo;t blue &mdash; it&rsquo;s the color of nothing, warm and flat. Cerulean Blue provides the faintest cool shift that keeps it from reading as beige. Titanium White (not Chinese White &mdash; you need real opacity here) thickens the mix to the point where it sits on the paper like fog sits on the coast: heavy, immovable, with zero transparency. Apply in a single confident wash. Fog doesn&rsquo;t have brushstrokes.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #3a5828, #2a4818);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #1a5a88, #0e4a72);"></div>
         <div>
-          <h3>Salal Thicket</h3>
-          <span class="ratio">2 Sap Green : 1 Neutral Tint : &frac12; Alizarin Crimson</span>
+          <h3>Ocean Reveal</h3>
+          <span class="ratio">2 Phthalo Blue GS : 1 Cobalt Blue : &frac12; Cascade Green</span>
         </div>
       </div>
-      <p class="mix-description">Dense shrub mass with urn-shaped flowers barely visible &mdash; the green wall that lines every PNW trail.</p>
+      <p class="mix-description">The ocean that was there all along &mdash; suddenly visible, staining blue-green, deeper than you remembered.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#5a8c2a; color:#fff;">Sap Green</div>
-        <div class="mix-bar" style="flex:1; background:#3a3a42; color:#fff;">Neutral Tint</div>
-        <div class="mix-bar" style="flex:0.5; background:#b0264a; color:#fff;">Alizarin Crimson</div>
+        <div class="mix-bar" style="flex:2; background:#0a4a6a; color:#fff;">Phthalo Blue GS</div>
+        <div class="mix-bar" style="flex:1; background:#3d59ab; color:#fff;">Cobalt Blue</div>
+        <div class="mix-bar" style="flex:0.5; background:#5a8a6a; color:#fff;">Cascade Green</div>
       </div>
       <div class="mix-notes">
-        Sap Green alone is too cheerful for salal. Neutral Tint darkens it without adding any hue &mdash; the salal interior is genuinely lightless. Alizarin Crimson is the surprise: half a part shifts the green subtly warm and accounts for the tiny urn-flowers hiding inside the hedge. Build in layers. The first wash is the surface; the second is the depth; the third is where the thrushes live.
+        Phthalo Blue GS is a stainer &mdash; once it touches paper, it lives there. That permanence is the point. The ocean doesn&rsquo;t politely appear; it announces itself. Cobalt Blue warms and granulates the mix slightly, keeping it from going clinical. Cascade Green is the half-part that makes this read as Pacific Northwest water rather than Caribbean &mdash; cold, kelp-fed, serious. Lay it into dry paper beside the Fog Wall mix with a hard edge between them. That hard edge is the fog line retreating.
       </div>
     </div>
 
     <div class="mix-card">
       <div class="mix-header">
-        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d8b038, #c8a028);"></div>
+        <div class="mix-preview" style="background: radial-gradient(circle at 40% 40%, #d8a830, #c89820);"></div>
         <div>
-          <h3>Noon Scald</h3>
-          <span class="ratio">2 Hansa Yellow Medium : 1 Raw Sienna : &frac12; Aussie Red Gold</span>
+          <h3>Burn-Off Gold</h3>
+          <span class="ratio">2 New Gamboge : 1 Yellow Ochre : &frac12; Raw Sienna</span>
         </div>
       </div>
-      <p class="mix-description">The shock of full sun after a week of gray &mdash; sudden warmth on everything, almost aggressive.</p>
+      <p class="mix-description">The first warm light after the fog retreats &mdash; everything gilded, sand drying, grass going gold.</p>
       <div class="mix-bars">
-        <div class="mix-bar" style="flex:2; background:#f0c830; color:#777;">Hansa Yellow Med</div>
-        <div class="mix-bar" style="flex:1; background:#c88a3e; color:#fff;">Raw Sienna</div>
-        <div class="mix-bar" style="flex:0.5; background:#c87830; color:#fff;">Aussie Red Gold</div>
+        <div class="mix-bar" style="flex:2; background:#e8a820; color:#fff;">New Gamboge</div>
+        <div class="mix-bar" style="flex:1; background:#c8a53a; color:#fff;">Yellow Ochre</div>
+        <div class="mix-bar" style="flex:0.5; background:#c8a050; color:#fff;">Raw Sienna</div>
       </div>
       <div class="mix-notes">
-        This mix is about the temperature change. Hansa Yellow Medium is the light itself &mdash; transparent and clean. Raw Sienna grounds it in earth, the trail drying in real time. Aussie Red Gold adds the madrone bark warmth, the first tree to glow when the fog lifts. Glaze this over dried cool washes (Payne's Gray, Cerulean) to create the sensation of sun arriving. The layering tells the story.
+        New Gamboge is transparent, so this mix glows rather than covers &mdash; the opposite of the Fog Wall in every way. Yellow Ochre grounds the gold in earth, the sand and dry grass that the sun hits first. Raw Sienna adds depth and a red-lean that keeps the mix from reading as lemon. Glaze this over the dried Fog Wall mix to create the transition moment: warm transparent light arriving on top of cool opaque fog. The layering sequence is the whole narrative of this palette.
       </div>
     </div>
   </div>
@@ -248,86 +202,71 @@
   <div class="why-section">
     <div class="why-card">
       <h2>Why These Colors?</h2>
-      <p>Two palettes in one: the fog half and the sun half. Cerulean Blue Chromium, Payne's Gray, and Buff Titanium handle the marine layer &mdash; all opaque or semi-opaque, all cool, all built to sit on the paper like weather. Hansa Yellow Medium, Raw Sienna, and Aussie Red Gold handle the reveal &mdash; all transparent or semi-transparent, all warm, all designed to glow through and over the fog-half's washes. Sap Green and Neutral Tint are the constants, the salal that exists in both conditions. Alizarin Crimson and Cobalt Teal Blue are the hidden details you only notice when the fog is gone.</p>
+      <p>This palette is built around a phase change. The fog half &mdash; Cerulean Blue, Buff Titanium, Titanium White, Payne&rsquo;s Gray &mdash; is opaque, granulating, cool. Pigments that sit on the paper and block light, the way a marine layer sits on the coast and blocks the sun. The reveal half &mdash; New Gamboge, Phthalo Blue GS, Cobalt Blue &mdash; is transparent and staining, pigments that glow through layers and announce themselves permanently. Raw Sienna, Yellow Ochre, and Cascade Green are the constants: the bluff, the grass, the shore pine that exist in both conditions but change temperature when the light shifts. The whole story of a May morning on the Oregon coast &mdash; muted to saturated in two hours &mdash; is encoded in the opacity and transparency of ten pigments.</p>
     </div>
   </div>
 
   <!-- Painting Prompts -->
   <div class="prompts-section">
     <div class="section-label">Painting Prompts</div>
-    <p class="prompts-intro">Stuck staring at a blank page? These subjects are tailor-made for this week&rsquo;s palette &mdash; each one leans into the colors you already have mixed and the PNW moment happening right outside.</p>
+    <p class="prompts-intro">Four subjects built for this week&rsquo;s transition palette &mdash; each one asks you to paint the shift from hidden to revealed, muted to saturated, fog to sun.</p>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 1</div>
-      <h3>The Same View, Two Hours Apart</h3>
-      <p class="subject"><strong>Subject:</strong> A diptych (or a single painting split by a soft edge): the same coastal scene in morning fog, then in noon sun. Everything changes except the salal.</p>
-      <p class="palette-fit">This palette was literally designed as two palettes in one &mdash; fog half and sun half. Cerulean Blue Chromium, Payne&rsquo;s Gray, and Buff Titanium for the left panel; Hansa Yellow Medium, Raw Sienna, and Aussie Red Gold for the right.</p>
+      <h3>Fog Wall From the Beach</h3>
+      <p class="subject"><strong>Subject:</strong> Standing on wet sand at eight a.m., facing a fog wall so thick the ocean is gone. Driftwood at your feet. The world ends at fifty feet.</p>
+      <p class="palette-fit">The Fog Wall mix (Buff Titanium + Cerulean Blue + Titanium White) is this painting &mdash; three opaque pigments making a wall of nothing. Payne&rsquo;s Gray for the driftwood. Raw Sienna for the sand underfoot.</p>
       <div class="tips">
         <ul>
-          <li>Paint the fog version first: wet the left half and drop in the Fog Lift mix (Cerulean Blue Chromium + Buff Titanium + Payne&rsquo;s Gray), letting it granulate undisturbed</li>
-          <li>The salal hedge runs across both halves &mdash; paint it continuously with the Salal Thicket mix so it connects the two moments</li>
-          <li>For the sun version on the right, let the fog half dry completely, then glaze the Noon Scald mix (Hansa Yellow Medium + Raw Sienna + Aussie Red Gold) over the right side</li>
-          <li>The transition between the two halves can be a soft wet-into-wet bleed &mdash; fog doesn&rsquo;t end at a hard line</li>
+          <li>Wet the top two-thirds of the paper and apply the Fog Wall mix in a single horizontal wash &mdash; no second passes, no fussing. Fog is featureless; your brush should be too</li>
+          <li>While the fog wash is still damp, touch concentrated Payne&rsquo;s Gray at the bottom edge for driftwood shapes dissolving into the mist &mdash; lost edges only, nothing sharp</li>
+          <li>The sand is dry-brushed Raw Sienna and Yellow Ochre on the lower third, the only textured area in the painting</li>
+          <li>Leave the fog wash completely alone while it dries. Cerulean Blue&rsquo;s granulation will separate on its own, creating subtle fog texture without your help</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 2</div>
-      <h3>Salal Thicket With Hidden Flowers</h3>
-      <p class="subject"><strong>Subject:</strong> A dense wall of salal along a trail, dark and impenetrable, with tiny urn-shaped flowers barely visible if you look carefully.</p>
-      <p class="palette-fit">The Salal Thicket mix (Sap Green + Neutral Tint + Alizarin Crimson) handles the whole shrub mass. The Alizarin Crimson does double duty as the flowers hiding inside.</p>
+      <h3>The Moment the Fog Lifts</h3>
+      <p class="subject"><strong>Subject:</strong> Ten a.m., the marine layer cracking open. A band of Cobalt Blue sky visible for the first time. Below it, the fog is still thick. The horizon line appears like a secret.</p>
+      <p class="palette-fit">This is the transition painting. Cobalt Blue sky above, the Fog Wall mix below, and a sliver of Phthalo Blue GS ocean between them where the horizon reappears.</p>
       <div class="tips">
         <ul>
-          <li>Build the salal in three layers, drying between each: first wash of Sap Green, second wash of Sap Green + Neutral Tint in the interior, third layer of concentrated Neutral Tint in the deepest recesses</li>
-          <li>The urn flowers are tiny touches of Alizarin Crimson applied with a rigger brush into the still-damp second layer &mdash; they should blur slightly, like something you&rsquo;re not quite sure you saw</li>
-          <li>Leave the top edge of the salal hedge crisp against the sky or fog to give the dense mass a readable silhouette</li>
-          <li>A few leaves at the foreground edge can be individual Sap Green strokes on dry paper, giving scale to the mass behind</li>
+          <li>Paint the sky crack first: a strip of Cobalt Blue at the top, grading down to Cerulean Blue where the fog begins &mdash; the shift from transparent to granulating blue tells the story</li>
+          <li>Leave a thin line of white paper for the horizon, then paint a narrow band of Phthalo Blue GS below it &mdash; the ocean appearing for the first time</li>
+          <li>The remaining lower half is the Fog Wall mix, still thick, still opaque, but now with a visible bottom edge for the first time</li>
+          <li>A single stroke of New Gamboge at the top edge of the sky crack suggests the sun that&rsquo;s doing the work of burning this fog off</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 3</div>
-      <h3>Tide Pool Revealed</h3>
-      <p class="subject"><strong>Subject:</strong> A rocky tide pool emerging as the fog burns off &mdash; Cobalt Teal Blue water, dark wet rocks, maybe an anemone or sea star catching the first sun.</p>
-      <p class="palette-fit">Cobalt Teal Blue is the metallic, startling color of a tide pool that&rsquo;s been hidden under fog all morning. Neutral Tint handles the wet basalt. Aussie Red Gold gives you the ochre sea star.</p>
+      <h3>Coastal Bluff at Noon</h3>
+      <p class="subject"><strong>Subject:</strong> The fog is gone. Full sun on a coastal bluff &mdash; dry grass, shore pine, sandstone edge, the Pacific spread out below in deep blue. Everything saturated.</p>
+      <p class="palette-fit">The reveal half of the palette takes over. New Gamboge and the Burn-Off Gold mix for sun-baked grass. Phthalo Blue GS ocean. Cascade Green shore pine. Raw Sienna sandstone. No fog pigments at all &mdash; the gray morning is a memory.</p>
       <div class="tips">
         <ul>
-          <li>Paint the rocks first with Neutral Tint at varying concentrations &mdash; wet rocks are darker than dry rocks, so keep the ones closest to the water at full strength</li>
-          <li>The tide pool water is Cobalt Teal Blue applied in a single flat stroke to dry paper &mdash; its opacity gives the water that opaque, mineral-rich look</li>
-          <li>A sea star is a small star shape of Aussie Red Gold &mdash; its slight granulation on cold-pressed paper mimics the bumpy texture of the animal</li>
-          <li>Add wisps of the Fog Lift mix at the top of the composition for the last marine layer burning off above</li>
+          <li>Start with the ocean: a flat wash of the Ocean Reveal mix (Phthalo Blue GS + Cobalt Blue + Cascade Green) across the lower half, darkening toward the horizon</li>
+          <li>The bluff edge is Raw Sienna and Yellow Ochre dry-brushed onto dry paper &mdash; rough, crumbling sandstone catching full sun</li>
+          <li>Shore pine silhouettes are Cascade Green with a touch of Payne&rsquo;s Gray, wind-shaped and leaning inland</li>
+          <li>Glaze the Burn-Off Gold mix over the dry grass areas &mdash; the transparency of New Gamboge makes the grass glow rather than just sit there</li>
         </ul>
       </div>
     </div>
 
     <div class="prompt-card">
       <div class="prompt-number">Prompt 4</div>
-      <h3>Madrone Trunk in New Sun</h3>
-      <p class="subject"><strong>Subject:</strong> A madrone tree trunk catching the first noon sun after fog lifts &mdash; warm bark suddenly glowing against the cool green of everything else.</p>
-      <p class="palette-fit">Aussie Red Gold is this exact tree in this exact moment. Glazing the Noon Scald mix over a cool Payne&rsquo;s Gray underpainting creates the sensation of sun arriving on bark.</p>
+      <h3>Tide Pools Revealed by Clearing</h3>
+      <p class="subject"><strong>Subject:</strong> Rocky intertidal zone emerging from the fog &mdash; tide pools suddenly visible, dark wet basalt, anemones and sea stars in cold water. The last wisps of fog trailing over the rocks.</p>
+      <p class="palette-fit">Payne&rsquo;s Gray for wet basalt. Phthalo Blue GS and Cascade Green for tide pool water. The last Fog Wall mix wisps trailing across the top. New Gamboge for an ochre sea star catching the first sun.</p>
       <div class="tips">
         <ul>
-          <li>Underpaint the trunk with dilute Payne&rsquo;s Gray and let it dry &mdash; this is the fog-morning version of the bark</li>
-          <li>Glaze Aussie Red Gold over the dried Payne&rsquo;s Gray on the sun-facing side; the cool underpainting glowing through the warm glaze is the whole effect</li>
-          <li>The background salal stays in the Salal Thicket mix, still cool, still in shade &mdash; the madrone is the only warm thing in the frame</li>
-          <li>Use dry brush with Raw Sienna for the peeling bark edges where the outer layer curls away from the smooth trunk beneath</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prompt-card">
-      <div class="prompt-number">Prompt 5</div>
-      <h3>Swainson&rsquo;s Thrush (Heard But Not Seen)</h3>
-      <p class="subject"><strong>Subject:</strong> A dense salal and fern understory in fog, the spiral song of a Swainson&rsquo;s thrush implied by the composition&rsquo;s upward energy but the bird completely invisible.</p>
-      <p class="palette-fit">This is a painting about absence and atmosphere. Payne&rsquo;s Gray fog, Sap Green salal, Neutral Tint shadows &mdash; the cool half of the palette doing quiet, patient work.</p>
-      <div class="tips">
-        <ul>
-          <li>Wet the entire paper and lay in Payne&rsquo;s Gray at the top grading to Buff Titanium at mid-height for the fog</li>
-          <li>While still damp, touch in Sap Green salal shapes at the bottom third, letting the edges blur upward into the fog</li>
-          <li>Add Neutral Tint vertically for tree trunks dissolving into the mist &mdash; lost edges everywhere, nothing fully resolved</li>
-          <li>The thrush is absent from the painting. That&rsquo;s the point. The fog and the composition imply the upward spiral of its song without showing the bird. Sometimes the best subject is the one you leave out.</li>
+          <li>Paint the rocks first with Payne&rsquo;s Gray at full concentration &mdash; wet basalt is nearly black. Leave small pools of white paper between rock shapes for the tide pools</li>
+          <li>Fill the tide pools with dilute Phthalo Blue GS tinted with Cascade Green &mdash; the staining quality makes them look deep even at small scale</li>
+          <li>A sea star is a small shape of New Gamboge with a touch of Raw Sienna &mdash; the first warm color in the painting, catching the arriving sun</li>
+          <li>Drag dilute Buff Titanium and Titanium White across the top of the dried composition for the last fog wisps retreating &mdash; opaque pigment over dark rocks reads as fog over landscape</li>
         </ul>
       </div>
     </div>
@@ -335,7 +274,7 @@
 
   <!-- Notes -->
   <div class="notes-section">
-    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Neutral Tint is a convenience mix &mdash; it's designed to darken without shifting hue, making it ideal for value adjustments in green mixes. Cerulean Blue Chromium is genuinely opaque; it will cover underlying washes rather than glazing over them, so sequence your layers accordingly. Aussie Red Gold is a uniquely warm, slightly granulating pigment that feels like it was made for madrone bark.
+    <strong>Notes:</strong> All pigments are Daniel Smith watercolors. Cerulean Blue (PB35) granulates heavily &mdash; it settles into paper texture in a way that perfectly mimics breaking fog. Use Titanium White (PW6) rather than Chinese White (PW4) for fog passages; Chinese White is too transparent to create genuine opacity. Phthalo Blue GS (PB15:3) is a powerful stainer &mdash; once it touches paper, it&rsquo;s permanent. That staining quality is exactly what you want for the ocean reveal: the sea doesn&rsquo;t arrive tentatively. Layer sequence matters in this palette: opaque fog pigments first, transparent sun pigments glazed on top. Reversing the order defeats the physics.
   </div>
 
   <div class="footer">52-WEEK PNW WATERCOLOR PALETTE SERIES &middot; DANIEL SMITH PIGMENTS</div>
